@@ -14,4 +14,4 @@ scoop --version
 4- Installer sympfony pour de bon: scoop install symfony-cli
 
 5- Démarrer le serveur:
-scoop install symfony-cli
+symfony server:start
