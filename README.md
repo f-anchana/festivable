@@ -5,14 +5,14 @@ Comment set up symfony
 
 2- composer create-project symfony/skeleton quick_tour
 
-3- Ibstaller scoop pour installer sympfony cli: 
+3- Installer scoop pour installer sympfony cli: 
+
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 iwr -useb get.scoop.sh | iex
 
-scoop --version
+scoop -v
 
 4- Installer sympfony pour de bon: scoop install symfony-cli
 
-5- Démarrer le serveur:
-symfony server:start
+5- Démarrer le serveur: symfony server:start
