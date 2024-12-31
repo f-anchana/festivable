@@ -23,3 +23,21 @@ scoop -v
 
 ## POSTMAN
 Pour tester l'API en cours de développement utilisez postman ça sauve 👍
+
+### BDD Doctrine
+Installation:
+composer require orm
+
+
+### Insérer des tables / colonnes dans la BDD
+
+Installer MakerBundle: composer require symfony/maker-bundle --dev
+(Ca sert à faciliter la création des tables au lieu de taper tt le code à la main on fait tt dans le terminal)
+
+Comment l'utiliser:
+1. Pour créer une nouvelle table dans le terminal taper: php bin/console make:entity
+2. On donne un nom à la table 
+3. On choisit les proprietés: nom de la colonne, type(string, number), length, nullable(si elle peut etre vide), la colonne id est generé automatiquement
+Ca va créer un fichier {Nom}.php dans Entity avec tout ce qu'il faut
+
+... A voir pour la base de données MySQL comment ça marche
