@@ -24,10 +24,14 @@ scoop -v
 ## POSTMAN
 Pour tester l'API en cours de développement utilisez postman ça sauve 👍
 
-### BDD Doctrine
+### SET UP BDD Doctrine
 Installation:
 composer require orm
 
+-Pour set up la connexion à la bdd aller dans .env et modifier cette ligne :
+DATABASE_URL="..."
+pour qu'elle corresponde à l'URL et les mdp de connexion de votre BDD
+J'utilise WAMP avec phpMyADmin j'ai crée une bdd mon url ressemble à ça: DATABASE_URL="mysql://root:@127.0.0.1:3306/festivable?serverVersion=8.0.32&charset=utf8mb4"
 
 ### Insérer des tables / colonnes dans la BDD
 
@@ -40,4 +44,12 @@ Comment l'utiliser:
 3. On choisit les proprietés: nom de la colonne, type(string, number), length, nullable(si elle peut etre vide), la colonne id est generé automatiquement
 Ca va créer un fichier {Nom}.php dans Entity avec tout ce qu'il faut
 
+-------------------------------------------------------------------------------------------------------------------------
+
+Pour push les tables dans la bdd faire:
+php bin/console make:migration 
+php bin/console doctrine:migrations:migrate
+
 ... A voir pour la base de données MySQL comment ça marche
+
+... Problème symfony ne reconnait pas autimatiquement php je suis obligé de mettre <php? ?> jsp si c normal...
