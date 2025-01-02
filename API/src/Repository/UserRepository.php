@@ -16,6 +16,20 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+      // Méthode pour récupérer tous les utilisateurs
+      public function findAllUsers(): array
+      {
+          return $this->findAll();
+      }
+
+       // Méthode pour insérer un utilisateur
+    public function saveUser(User $user): void
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($user); // Prépare l'utilisateur pour insertion
+        $entityManager->flush();       // Enregistre les modifications dans la base
+    }
+    
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */

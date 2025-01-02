@@ -50,6 +50,6 @@ Pour push les tables dans la bdd faire:
 php bin/console make:migration 
 php bin/console doctrine:migrations:migrate
 
-... A voir pour la base de données MySQL comment ça marche
+... Erreur quand j'utilise postman, voir controller
 
 ... Problème symfony ne reconnait pas autimatiquement php je suis obligé de mettre <php? ?> jsp si c normal...
