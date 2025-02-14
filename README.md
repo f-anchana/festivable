@@ -1,3 +1,9 @@
+#LANCER API NODE
+
+
+POUR LANCER L'API, FAITES node server.js
+
+
 # Symfony Set-Up
 Comment set up symfony
 
@@ -53,3 +59,7 @@ php bin/console doctrine:migrations:migrate
 ... Erreur quand j'utilise postman, voir controller
 
 ... Problème symfony ne reconnait pas autimatiquement php je suis obligé de mettre <php? ?> jsp si c normal...
+
+
+
+
