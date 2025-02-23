@@ -5,9 +5,9 @@ import LoginForm from "@/components/LoginForm/LoginForm";
 
 export default function FormulairePage() {
   return (
-<div className={styles.container}>
-        <AuthContainer />
-        <SignupForm />
+    <div className={styles.container}>
+      <AuthContainer />
+      <SignupForm />
     </div>
 
   );
