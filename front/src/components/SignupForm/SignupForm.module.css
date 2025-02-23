@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 70%;
+    gap: 38px;
+}
+
+.container button {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 9px;
+    border: 1px solid #B2B2B2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container h2 {
+    font-family: 'poppins', sans-serif;
+    text-transform: none;
+}
+
+.buttoncontainer {
+    display: flex;
+    gap: 20px;
+}

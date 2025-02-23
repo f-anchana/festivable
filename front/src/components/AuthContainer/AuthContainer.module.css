@@ -1,0 +1,64 @@
+.background {
+    position: relative;
+    background: linear-gradient(180deg, rgba(17, 85, 107, 1) 0%, rgba(0, 109, 145, 1) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 45%;
+    max-width: 600px;
+    min-width: 400px;
+}
+
+.background img{
+    position: absolute;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 38px;
+    width: 80%;
+    z-index: 1;
+}
+
+.container h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    height: fit-content;
+}
+
+.highlight {
+    background-color: black;
+    padding: 3px;
+    width: fit-content;
+}
+
+.container button {
+    width: fit-content;
+    padding: 10px 30px;
+    border-radius: 49px;
+    border: none;
+}
+
+.decor1 {
+    right: 10px;
+    bottom: 10px;
+}
+
+.decor2 {
+    left: 0;
+    bottom: 50px;
+}
+
+.decor3 {
+    left: 25px;
+    top: 25px;
+}
