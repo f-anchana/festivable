@@ -1,5 +1,7 @@
 import { gsap } from "gsap";
 
+//------------------------------------------------------- Animation Authcontainer --------------------------------
+
 export const animateForm = () => {
     const screenWidth = window.innerWidth; // Récupère la largeur de l'écran
     const authContainer = document.querySelector(".auth-container");
@@ -28,21 +30,19 @@ export const animateForm = () => {
         gsap.set(".signup-button", { display: "none" });
         gsap.set(".login-button", { display: "block" });
 
-        gsap.to(".decor-one", { x: "100%", duration: 1, ease: "power2.out", });
+        gsap.to(".decor-one", { x: "120%", duration: 1, ease: "power2.out", });
         gsap.to(".decor-two", { right: "", left: "0",scaleX: -1, duration: 1, ease: "power2.out", });
         gsap.to(".decor-three", { right: "", left: "25px", duration: 1, ease: "power2.out", });
     }
 };
 
 export const animateFormBack = () => {
-    const authContainer = document.querySelector(".auth-container");
 
     const title1 = document.querySelector(".span-one");
     const title2 = document.querySelector(".span-two");
     const paragraph = document.querySelector(".auth-container p");
 
-    if (authContainer) {
-        gsap.to(authContainer, { x: 0, duration: 1, ease: "power2.out" });
+        gsap.to(".auth-container", { x: 0, duration: 1, ease: "power2.out" });
 
         gsap.to(".signup-form", {
             opacity: 0, width: "40%", duration: 1, ease: "power2.out",
@@ -61,5 +61,36 @@ export const animateFormBack = () => {
         gsap.to(".decor-one", { x: 0, duration: 1, ease: "power2.out", });
         gsap.to(".decor-two", { right: "0", left: "", scaleX: 1, duration: 1, ease: "power2.out", });
         gsap.to(".decor-three", { right: "25px", left: "", duration: 1, ease: "power2.out", });
-    }
+};
+
+//---------------------------------------------------------- Animation Hover ----------------------------------------
+
+export const gradientFestivalierEffect = () => {
+    gsap.to(".auth-container", { 
+        backgroundImage: "var(--gradient-orange)", 
+    });
+    gsap.to(".btn-festivalier", { 
+        backgroundImage: "var(--gradient-orange)", 
+    });
+}
+
+export const gradientOrganismeEffect = () => {
+    gsap.to(".auth-container", { 
+        backgroundImage: "var(--gradient-light-blue)", 
+    });
+    gsap.to(".btn-organisme", { 
+        backgroundImage: "var(--gradient-light-blue)", 
+    });
+}
+
+export const resetGradient = () => {
+    gsap.to(".auth-container", { 
+        backgroundImage: "var(--gradient-dark-blue)", 
+    });
+    gsap.to(".btn-festivalier", { 
+        background: "transparent", 
+    });
+    gsap.to(".btn-organisme", { 
+        background: "transparent", 
+    });
 };
