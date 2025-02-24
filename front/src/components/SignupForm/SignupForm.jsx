@@ -2,7 +2,7 @@ import styles from "./SignupForm.module.css";
 
 export default function SignupForm() {
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} signup-form`}>
             <h2>Créer mon compte</h2>
             <div className={styles.buttoncontainer}>
                 <button>
