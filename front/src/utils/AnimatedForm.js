@@ -111,3 +111,12 @@ export const fadeInForm = (element) => {
         ease: "power2.out",
     });    
 };
+
+//---------------------------------------------------------- Animation Inscription Organizer Steps ----------------------------------------
+
+export const nextStepAnimation = (currentStep) => {
+    gsap.to(".organizer-signup-form", { 
+        x: `-${currentStep * 100}%`,
+        ease: "circ"
+    });    
+};
