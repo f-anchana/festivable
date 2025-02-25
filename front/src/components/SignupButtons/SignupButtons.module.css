@@ -3,13 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 38px;
+    gap: 20px;
     /* flex-basis: 60%; */
     width: 40%;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 }
 
-.container button {
+.btnFestivalier, .btnOrganisme {
     position: relative;
     font-weight: 700;
     background-color: transparent;

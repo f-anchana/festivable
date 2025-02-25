@@ -1,6 +1,6 @@
 import styles from "./Form.module.css";
 import AuthContainer from "@/components/AuthContainer/AuthContainer";
-import SignupForm from "@/components/SignupForm/SignupForm";
+import SignupButtons from "@/components/SignupButtons/SignupButtons";
 import LoginForm from "@/components/LoginForm/LoginForm";
 
 export default function FormulairePage() {
@@ -8,7 +8,7 @@ export default function FormulairePage() {
     <div className={styles.container}>
       <LoginForm />
       <AuthContainer />
-      <SignupForm />
+        <SignupButtons />
     </div>
 
   );

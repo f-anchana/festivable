@@ -1,0 +1,17 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+
+.container form {
+    width: 80%;
+}
+
+.flex {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}

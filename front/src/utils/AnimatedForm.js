@@ -16,7 +16,7 @@ export const animateForm = () => {
 
         gsap.to(authContainer, { x: -distanceToMove, duration: 1, ease: "power2.out" });
 
-        gsap.to(".signup-form", {
+        gsap.to(".signup-buttons", {
             opacity: 1, width: "60%", duration: 1, ease: "power2.out",
             onStart: () => {
                 title1.innerHTML = "De retour ?";
@@ -44,7 +44,7 @@ export const animateFormBack = () => {
 
         gsap.to(".auth-container", { x: 0, duration: 1, ease: "power2.out" });
 
-        gsap.to(".signup-form", {
+        gsap.to(".signup-buttons", {
             opacity: 0, width: "40%", duration: 1, ease: "power2.out",
             onStart: () => {
                 title1.innerHTML = "Plongez au cœur";
@@ -83,11 +83,31 @@ export const gradientOrganismeEffect = () => {
     });
 }
 
-export const resetGradient = () => {
-    gsap.to([".auth-orange", ".auth-light-blue"], { 
+export const resetFestivalierGradient = () => {
+    gsap.to(".auth-orange", { 
         opacity: 0,
     });    
-    gsap.to([".btn-orange", ".btn-light-blue"], { 
+    gsap.to(".btn-orange", { 
         opacity: 0,
     });
+};
+
+export const resetOrganizerGradient = () => {
+    gsap.to(".auth-light-blue", { 
+        opacity: 0,
+    });    
+    gsap.to(".btn-light-blue", { 
+        opacity: 0,
+    });
+};
+
+//---------------------------------------------------------- Animation Click Inscription ----------------------------------------
+
+export const fadeInForm = (element) => {
+    if (!element) return; // Sécurité pour éviter les erreurs si l'élément est null
+    gsap.to(element, { 
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out",
+    });    
 };

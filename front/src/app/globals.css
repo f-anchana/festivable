@@ -57,3 +57,28 @@ a {
     color-scheme: dark;
   }
 }
+
+input {
+  width: 100%;
+  padding: 20px 10px;
+  border-radius: 9px;
+  border: 1px solid #B2B2B2;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 35px;
+}
+
+form button {
+  background-color: black;
+  color: white;
+  width: fit-content;
+  padding: 10px 30px;
+  border-radius: 49px;
+  border: none;
+}
