@@ -44,7 +44,7 @@ export default function Header(){
 
         {/* BOUTONS AUTH (Desktop) */}
         <div className="hidden md:flex gap-5 text-sm">
-          <Link href="/formulaire" className="bg-[var(--foreground)] text-white rounded-full px-6 py-3">
+          <Link href="/form" className="bg-[var(--foreground)] text-white rounded-full px-6 py-3">
             Se connecter
           </Link>
           <Link href="/login" className="bg-[var(--background)] text-black rounded-full px-6 py-3">
@@ -74,7 +74,7 @@ export default function Header(){
         {/* BOUTONS AUTH (Mobile) */}
         <div className="flex flex-col items-center gap-3 pb-5">
           <Link 
-            href="/formulaire" 
+            href="/form" 
             className="bg-[var(--foreground)] text-white rounded-full px-6 py-3 w-4/5 text-center"
           >
             Se connecter
