@@ -1,3 +1,4 @@
+
 *, *::after, *::before {
   box-sizing: border-box;
   margin: 0;
@@ -6,10 +7,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-
   --font-poppins: var(--font-poppins);
-  --font-oswald: var(--font-oswald);
-  
+  --font-oswald: var(--font-oswald);  
   --gradient-orange: linear-gradient(90deg, rgba(253,178,70,1) 0%, rgba(254,111,2,1) 100%);
   --gradient-dark-blue: linear-gradient(180deg, rgba(17, 85, 107, 1) 0%, rgba(0, 109, 145, 1) 100%);
   --gradient-light-blue: linear-gradient(215deg, rgba(41,156,193,1) 0%, rgba(155,229,253,1) 100%);
