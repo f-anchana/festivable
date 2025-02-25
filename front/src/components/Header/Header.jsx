@@ -2,10 +2,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const Header = () => {
+export default function Header(){
   return (
-    <nav className="font-[Poppins] w-full px-5 py-3 fixed top-0 left-0 z-50 h-[150px]">
-      <div className="flex justify-between items-center ml-[50px]">
+    <nav className="font-[Poppins] w-full px-5 py-3 fixed top-0 left-0 z-50 ">
+<div className="flex justify-between items-center mx-12 h-[100px]">
         {/* LOGO */}
         <Link href="/" >
           <Image 
@@ -29,13 +29,13 @@ export const Header = () => {
         </button>
 
         {/* MENU DESKTOP */}
-        <ul className="hidden md:flex items-center gap-10 ml-[50px] mr-[20px] text-sm">
-          <li className="flex">
+        <ul className="hidden md:flex items-center gap-10 ml-[70px]  text-sm">
+          <li className="flex gap-2">
             <a href="#">Accessibilité</a>
             <img className="ml-2" src="/icones/menu-roll.svg" alt="" />
           </li>
           <li><Link href="#">Festivals</Link></li>
-          <li className="flex">
+          <li className="flex  gap-2">
             <a href="#">À propos</a>
             <img className="ml-2" src="/icones/menu-roll.svg" alt="" />
           </li>
@@ -43,7 +43,7 @@ export const Header = () => {
         </ul>
 
         {/* BOUTONS AUTH (Desktop) */}
-        <div className="hidden md:flex gap-5 mr-[50px] text-sm">
+        <div className="hidden md:flex gap-5 text-sm">
           <Link href="/formulaire" className="bg-[var(--foreground)] text-white rounded-full px-6 py-3">
             Se connecter
           </Link>
