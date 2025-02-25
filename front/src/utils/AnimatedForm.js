@@ -66,31 +66,28 @@ export const animateFormBack = () => {
 //---------------------------------------------------------- Animation Hover ----------------------------------------
 
 export const gradientFestivalierEffect = () => {
-    gsap.to(".auth-container", { 
-        backgroundImage: "var(--gradient-orange)", 
+    gsap.to(".auth-orange", { 
+        opacity: 1,
     });
-    gsap.to(".btn-festivalier", { 
-        backgroundImage: "var(--gradient-orange)", 
+    gsap.to(".btn-orange", { 
+        opacity: 1,
     });
 }
 
 export const gradientOrganismeEffect = () => {
-    gsap.to(".auth-container", { 
-        backgroundImage: "var(--gradient-light-blue)", 
+    gsap.to(".auth-light-blue", { 
+        opacity: 1,
     });
-    gsap.to(".btn-organisme", { 
-        backgroundImage: "var(--gradient-light-blue)", 
+    gsap.to(".btn-light-blue", { 
+        opacity: 1,
     });
 }
 
 export const resetGradient = () => {
-    gsap.to(".auth-container", { 
-        backgroundImage: "var(--gradient-dark-blue)", 
-    });
-    gsap.to(".btn-festivalier", { 
-        background: "transparent", 
-    });
-    gsap.to(".btn-organisme", { 
-        background: "transparent", 
+    gsap.to([".auth-orange", ".auth-light-blue"], { 
+        opacity: 0,
+    });    
+    gsap.to([".btn-orange", ".btn-light-blue"], { 
+        opacity: 0,
     });
 };

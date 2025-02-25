@@ -8,6 +8,8 @@ export default function AuthContainer() {
 
     return (
         <div className={`${styles.background} auth-container`}>
+            <div className={`${styles.orange} auth-orange`}></div>
+            <div className={`${styles.lightBlue} auth-light-blue`}></div>
             <div className={styles.container}>
                 <h1><span className={`${styles.highlight} span-one`}>Plongez au cœur</span><span className={`${styles.highlight} span-two`}>des festivals accessibles !</span></h1>
                 <p>Vous souhaitez vivre une expérience unique et découvrir des festivals accessibles ? Rejoignez notre communauté !</p>

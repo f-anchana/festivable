@@ -15,6 +15,21 @@
     z-index: 1;
 }
 
+.orange, .lightBlue {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+
+.orange {
+    background: var(--gradient-orange);
+}
+
+.lightBlue {
+    background: var(--gradient-light-blue);
+}
+
 .background img{
     position: absolute;
 }
