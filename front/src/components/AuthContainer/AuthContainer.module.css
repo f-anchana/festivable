@@ -1,0 +1,97 @@
+.background {
+    /* opacity: 0; */
+    position: absolute;
+    right: 0;
+    height: 100vh;
+    background: var(--gradient-dark-blue);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-width: 400px;
+    width: 40%;
+    z-index: 10;
+}
+
+.orange, .lightBlue {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: -1;
+}
+
+.orange {
+    background: var(--gradient-orange);
+}
+
+.lightBlue {
+    background: var(--gradient-light-blue);
+}
+
+.background img{
+    position: absolute;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 38px;
+    width: 80%;
+    max-width: 500px;
+    z-index: 1;
+    font-size: 1.25rem;
+}
+
+.container h1 {
+    font-size: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    height: fit-content;
+}
+
+.highlight {
+    background-color: #1D1D1D;
+    padding: 5px;
+    width: fit-content;
+}
+
+.container button {
+    width: fit-content;
+    padding: 10px 30px;
+    border-radius: 49px;
+    border: none;
+}
+
+.decor1 {
+    left: 0;
+    bottom: 10px;
+    width: 40%;
+    height: auto;
+}
+
+.decor2 {
+    right: 0;
+    bottom: 100px;
+    width: 20%;
+    height: auto;
+    transform: scaleX(-1); 
+}
+
+.decor3 {
+    right: 25px;
+    top: 50px;
+    width: 15%;
+    height: auto;
+}
+
+.loginbutton {
+    display: none;
+}
