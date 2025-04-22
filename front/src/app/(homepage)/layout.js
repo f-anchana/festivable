@@ -1,5 +1,6 @@
-import "./globals.css";
+import "../globals.css";
 import { Poppins, Oswald } from "next/font/google";
+import Header from "@/components/Header/Header.jsx";
 
 const poppins = Poppins({ 
   subsets: ["latin"], 
@@ -20,10 +21,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${poppins.variable} ${oswald.variable}`}>
-        {children}
-      </body>
-    </html>
+    <html lang="fr">
+  <body 
+    className={`${poppins.variable} ${oswald.variable}`} 
+    style={{
+      paddingTop: "100px", 
+      background: "linear-gradient(to right, #FDB246, #FE6F02)"
+    }} 
+  >
+    <Header />
+    {children}
+  </body>
+</html>
+
   );
 }

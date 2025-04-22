@@ -1,0 +1,67 @@
+/* Hero Section */
+.hero {
+    position: relative;
+    background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ 
+  
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;  /* Espace entre le texte et l'image */
+    align-items: center;             /* Centrer verticalement les éléments */
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  .text {
+    max-width: 600px;  /* Limiter la largeur du texte */
+    text-align: left;  /* Assurez-vous que le texte soit aligné à gauche */
+    margin-left: auto;
+
+  }
+  
+  .text h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    background-color: #1D1D1D;
+    border-radius: 5px;
+    padding: 12 12;
+    font-family: "Oswald";
+    padding: 10px 20px;
+
+  }
+  
+  .text h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    background-color: #1D1D1D;
+    border-radius: 5px;
+    font-family: "Poppins";
+    padding: 10px 20px;
+
+
+
+  }
+
+  .highlight{
+    color: #FDB74C;
+  }
+  
+  .image {
+    width: 50%;  /* La largeur de l'image prendra 50% de la section */
+    margin-left: 30px;
+  }
+  
+  .image img {
+    width: 70%;  /* L'image prend toute la largeur de son conteneur */
+    height: auto;
+  }
+  

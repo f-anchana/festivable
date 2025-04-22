@@ -63,14 +63,14 @@ a {
   }
 }
 
-/* input {
+input {
   width: 100%;
   padding: 20px 10px;
   border-radius: 9px;
   border: 1px solid #B2B2B2;
 }
 
-/* form, fieldset {
+ form, fieldset {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,16 +78,16 @@ a {
   width: 100%;
   gap: 25px;
   border: none;
-} */
+} 
 
-/* form button {
+ form button {
   background-color: black;
   color: white;
   width: fit-content;
   padding: 10px 30px;
   border-radius: 49px;
   border: none;
-} */
+}
 button {
   cursor: pointer;
 }
