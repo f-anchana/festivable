@@ -8,21 +8,29 @@ const Festivals = [
     title: 'Zeyzey Presents: Sister Sledge',
     date: '28 juin 2025 - 21:00',
     price: '42€ ',
-    image: '/images/festival-1.jpg',
+    image: '/images/festival-1.svg',
   },
   {
     id: 2,
     title: 'Rock en Seine Access',
     date: '15 juillet 2025 - 19:30',
     price: '35€ ',
-    image: '/images/festival-2.jpg',
+    image: '/images/festival-2.svg',
   },
   {
     id: 3,
     title: 'Jazz’libre Festival',
     date: '1 août 2025 - 20:00',
     price: '29€ ',
-    image: '/images/festival-3.jpg',
+    image: '/images/festival-3.svg',
+  },
+
+  {
+    id: 4,
+    title: 'Jazz’libre Festival',
+    date: '1 août 2025 - 20:00',
+    price: '29€ ',
+    image: '/images/festival-3.svg',
   },
 ];
 
@@ -32,8 +40,8 @@ export default function FestivalsSection() {
       <div className={styles.titleWrapper}>
         <h2 className={styles.title}>LES FESTIVALS CERTIFIÉS</h2>
         <p className={styles.subtitle}>
-          Des événements pensés pour être accueillants et adaptés à tous.
-        </p>
+        Parce que chacun mérite de vivre l'expérience unique d'un festival, <br/>
+        explorez les événements conçus pour être accueillants et adaptés à tous.        </p>
       </div>
 
       <div className={styles.cardsWrapper}>

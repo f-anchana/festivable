@@ -1,4 +1,12 @@
 .festivalsSection{
-    background-color: aliceblue;
+    background-color: rgb(255, 255, 255);
     padding: 50px;
 }
+
+
+.cardsWrapper {
+    display: flex;
+    flex-direction:row;  
+    gap: 20px;             
+  }
+
