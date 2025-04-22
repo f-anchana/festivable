@@ -17,7 +17,7 @@ export const animateForm = () => {
         gsap.to(authContainer, { x: -distanceToMove, duration: 1, ease: "power2.out" });
 
         gsap.to(".signup-buttons", {
-            opacity: 1, width: "60%", duration: 1, ease: "power2.out",
+            opacity: 1, width: "100%", duration: 1, ease: "power2.out", paddingLeft:"40%",
             onStart: () => {
                 title1.innerHTML = "De retour ?";
                 title2.innerHTML = "Laissez-vous guider !";
@@ -25,7 +25,7 @@ export const animateForm = () => {
             }
         });
 
-        gsap.to(".login-form", { opacity: 0, width: "40%", duration: 1, ease: "power2.out", });
+        gsap.to(".login-form", { opacity: 0, width: "0%", duration: 1, ease: "power2.out", padding: 0 });
 
         gsap.set(".signup-button", { display: "none" });
         gsap.set(".login-button", { display: "block" });
@@ -45,7 +45,7 @@ export const animateFormBack = () => {
     gsap.to(".auth-container", { x: 0, duration: 1, ease: "power2.out" });
 
     gsap.to(".signup-buttons", {
-        opacity: 0, width: "40%", duration: 1, ease: "power2.out",
+        opacity: 0, width: "0%", duration: 1, ease: "power2.out", padding: 0,
         onStart: () => {
             title1.innerHTML = "Plongez au cœur";
             title2.innerHTML = "des festivals accessibles !";
@@ -53,7 +53,7 @@ export const animateFormBack = () => {
         }
     });
 
-    gsap.to(".login-form", { opacity: 1, width: "60%", duration: 1, ease: "power2.out", });
+    gsap.to(".login-form", { opacity: 1, width: "100%", duration: 1, ease: "power2.out", paddingRight:"40%", });
 
     gsap.set(".signup-button", { display: "block" });
     gsap.set(".login-button", { display: "none" });
@@ -162,27 +162,3 @@ export const centerForm = (step) => {
         });
     }
 };
-// export const centerForm = (step) => {
-//     if (step === 2) {
-//         // Cache les éléments
-//         gsap.to([".auth-container", ".login-form, .btn-container"], {
-//             autoAlpha: 0, // Opacité à 0 + visibility: hidden
-//             onComplete: () => {
-//                 document.querySelectorAll(".auth-container, .login-form, .btn-container").forEach(el => {
-//                     el.style.display = "none"; // Cache complètement après l'animation
-//                 });
-//             }
-//         });
-//     } else if (step === 1) {
-//         // Affiche les éléments avant l'animation
-//         document.querySelectorAll(".auth-container, .login-form, .btn-container").forEach(el => {
-//             autoAlpha: 0,
-//             el.style.display = "block";
-//         });
-
-//         // Réanime avec GSAP
-//         gsap.to([".auth-container", ".login-form, .btn-container"], {
-//             autoAlpha: 1, // Opacité à 1 + visibility: visible
-//         });
-//     }
-// };

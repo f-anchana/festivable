@@ -1,3 +1,5 @@
+'use client';
+import { useState } from "react";
 import styles from "./LoginForm.module.css";
 import formStyles from "../../styles/Form.module.css";
 
