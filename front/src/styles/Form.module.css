@@ -2,7 +2,8 @@
     width: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
+    border: 1px solid #B2B2B2;
+    border-radius: 9px;
 }
 
 .input {
@@ -11,8 +12,28 @@
     outline: none;
     background: transparent;
     padding: 20px 10px;
+    border: none;
+}
+
+.inputfile {
+    border: none;
+}
+
+.inputContainerfile {
+    width: 100%;
+    position: relative;
+    display: flex;
+    border: 1px dashed #B2B2B2;
+    color: #6a6a6a;
     border-radius: 9px;
-    border: 1px solid #B2B2B2;
+}
+
+.inputfile::-webkit-file-upload-button {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .label {
@@ -25,17 +46,21 @@
     transition: all 0.2s ease-in-out;
     background: white;
     padding: 0 5px;
-    pointer-events: none;/* Permet d'éviter que le label gêne le clic sur l'input */
+    pointer-events: none;
+    /* Permet d'éviter que le label gêne le clic sur l'input */
 }
 
 .input:focus+.label,
-.input:not(:placeholder-shown)+.label {
+.input:not(:placeholder-shown)+.label,
+.inputfile:focus+.label,
+.inputfile:not(:placeholder-shown)+.label {
     top: 5px;
     font-size: 12px;
     color: #333;
 }
 
-.form, .form fieldset {
+.form,
+.form fieldset {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,4 +77,13 @@
     padding: 10px 30px;
     border-radius: 49px;
     border: none;
+}
+
+.showpassword {
+    padding: 0 8px 0 8px !important;
+    background-color: transparent !important;
+}
+
+.showpassword img {
+    max-width: 30px;
 }

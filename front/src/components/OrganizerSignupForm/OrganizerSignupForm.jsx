@@ -63,9 +63,9 @@ export default function OrganizerSignupForm() {
                             <label htmlFor="lien-contact" className={formStyles.label}>Lien de contact (optionnel)</label>
                         </div>
                     </div>
-                    <div className={formStyles.inputContainer}>
-                        <input type="file" className={formStyles.input} id="file-upload" required />
-                        <label htmlFor="file-upload" className={formStyles.label}>Téléversement fichier</label>
+                    <div className={formStyles.inputContainerfile}>
+                        <input type="file" className={formStyles.inputfile} id="file-upload" required />
+                        <label htmlFor="file-upload" className={formStyles.label}>Joindre une image ou un PDF</label>
                     </div>
                     <button type="button" onClick={nextStep}>Suivant</button>
                 </fieldset>

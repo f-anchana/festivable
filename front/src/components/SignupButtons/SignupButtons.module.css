@@ -57,7 +57,7 @@
 
 @media (max-width: 767px) {
     .container {
-        padding: 0 !important;
+        padding: 22px 0 0 0 !important;
         height: 95%;
         align-self: flex-end;
         border-radius: 35px 35px 0 0;
@@ -71,5 +71,9 @@
     .activeMobile {
         height: 50px;
         flex-direction: row;
+    }
+
+    .container h2 {
+        font-size: 1.5rem;
     }
 }
