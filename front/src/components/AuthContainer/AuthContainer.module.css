@@ -10,7 +10,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-width: 400px;
     width: 40%;
     z-index: 10;
 }
@@ -101,7 +100,9 @@
 
     .background h1,
     .background p,
-    .background img {
+    .background img,
+    .orange,
+    .lightBlue {
         display: none;
     }
 
@@ -109,5 +110,12 @@
         align-self: flex-end;
         height: 10%;
         width: 100%;
+        background: white;
+    }
+
+    .container button {
+        background-color: transparent;
+        text-decoration: underline;
+        font-weight: 700;
     }
 }

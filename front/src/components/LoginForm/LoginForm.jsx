@@ -15,6 +15,9 @@ export default function LoginForm() {
                 <div className={formStyles.inputContainer}>
                     <input type="password" className={formStyles.input} id="password" placeholder=" " required />
                     <label htmlFor="password" className={formStyles.label}>Mot de passe</label>
+                    <button type="button" aria-label="Afficher ou masquer le mot de passe" className={formStyles.showpassword}>
+                        <img src="/icones/open-eye.svg" />
+                    </button>
                 </div>
                 <button>Se connecter</button>
             </form>
