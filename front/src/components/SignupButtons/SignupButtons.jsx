@@ -41,7 +41,8 @@ export default function SignupButtons() {
     return (
         <div className={`${styles.container} signup-buttons`}>
             <h2>Créer mon compte</h2>
-            <div className={`${styles.buttoncontainer} btn-container`}>
+            <div className={`${styles.buttoncontainer} btn-container ${selectedRole === "festivalier" || selectedRole === "organisme" ? styles.activeMobile : ""}
+`}>
                 <button className={`${styles.btnFestivalier} btn-festivalier`}
                     onMouseEnter={() => handleMouseEnter("festivalier")}
                     onMouseLeave={() => handleMouseLeave("festivalier")}

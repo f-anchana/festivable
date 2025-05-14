@@ -67,4 +67,9 @@
         width: 80%;
         flex-direction: column;
     }
+
+    .activeMobile {
+        height: 50px;
+        flex-direction: row;
+    }
 }
