@@ -1,67 +1,195 @@
-/* Hero Section */
 .hero {
-    position: relative;
-    background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  position: relative;
+  background-color: var(--gradient-orange);
+  width: 100%;
+  padding-left: 160px; 
+  height: 100vh;
  
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 180px;
+  flex-wrap: wrap;
+  position: relative;
+
+}
+.text {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+  z-index: 2;
+}
+
+
+.title {
+  background-color: #1D1D1D;
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  background-color: #1D1D1D;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 4px;
+  width: 100%;
+  display: block;
+  margin-bottom: 50px;
+  line-height: 1.4;
+}
+
+.highlight {
+  color: #FDB74C;
+}
+
+.description {
+  font-size: 1rem;
+  color: #1D1D1D;
+  margin-bottom: 50px;
+  line-height: 1.7;
+  max-width: 550px;
+}
+
+
+.boutons_homepage{
   
-  .content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;  /* Espace entre le texte et l'image */
-    align-items: center;             /* Centrer verticalement les éléments */
-    padding: 0 20px;
-    width: 100%;
+  display: flex;
+  gap: 10px; 
+  flex-wrap: wrap; 
+
+
+}
+
+.boutons_homepage a {
+  padding: 12px 22px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.boutons_homepage a:first-child {
+  background-color: white;
+  color: #1D1D1D;
+  
+}
+
+.boutons_homepage a:last-child {
+  border: 2px solid #1D1D1D;
+  color: #1D1D1D;
+  background-color: transparent;
+}
+
+.boutons_homepage a:hover {
+  background-color: #FDB74C;
+  color: black;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+.image img {
+  max-width: 600px;
+  width: 100%;
+}
+
+
+.decor1,
+.decor2,
+.decor3 {
+  position: absolute;
+  z-index: 0;
+  animation: slowRotate 20s linear infinite;
+}
+
+@keyframes slowRotate {
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.decor1 {
+  bottom: 20px;
+  left: 20px;
+}
+
+.decor2 {
+  top: 20px;
+  right: 30px;
+}
+
+.decor3{
+  bottom: 10px;
+  right: 170px;
+}
+
+@media screen and (max-width: 768px) {
+
+  .hero{
+    padding-left: 0;
+    margin-top: 30px;
+  }
+    .content {
+    flex-direction: column;
+    padding: 0 20px;
+    text-align: center;
+    margin-left:10px ;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+.image {
+  display:none;
+}
+
   
   .text {
-    max-width: 600px;  /* Limiter la largeur du texte */
-    text-align: left;  /* Assurez-vous que le texte soit aligné à gauche */
-    margin-left: auto;
+  position: static;
+  width: 100%;
+  transform: none;
+  margin-bottom: 30px;
+}
 
-  }
-  
-  .text h1 {
-    font-size: 5rem;
-    margin-bottom: 20px;
-    background-color: #1D1D1D;
-    border-radius: 5px;
-    padding: 12 12;
-    font-family: "Oswald";
-    padding: 10px 20px;
-
-  }
-  
-  .text h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    background-color: #1D1D1D;
-    border-radius: 5px;
-    font-family: "Poppins";
-    padding: 10px 20px;
-
-
-
+  .boutons_homepage {
+    flex-direction: row;
+    align-items: center;
   }
 
-  .highlight{
-    color: #FDB74C;
+  .boutons_homepage a {
+    width: 100%;
+    text-align: center;
   }
-  
-  .image {
-    width: 50%;  /* La largeur de l'image prendra 50% de la section */
-    margin-left: 30px;
-  }
-  
+
   .image img {
-    width: 70%;  /* L'image prend toute la largeur de son conteneur */
-    height: auto;
+    transform: none;
+    margin-left: 0;
   }
-  
+}
