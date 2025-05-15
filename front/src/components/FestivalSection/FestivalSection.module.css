@@ -1,17 +1,47 @@
 .festivalsSection{
     background-color: rgb(255, 255, 255);
     padding: 50px;
-    height: 100vh;
+
     border-radius: 60px;
 }
 
 
 .cardsWrapper {
-    display: flex;
-    flex-direction:row;  
-    gap: 20px; 
-            
+  display: flex;
+  gap: 60px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
+
+  scroll-snap-type: x mandatory; 
+
+}
+.cardsWrapper::-webkit-scrollbar {
+  display: none; 
+}
+
+.cardsWrapper > * {
+  flex: 0 0 auto;
+  width: 280px;
+  scroll-snap-align: start; 
+}
+
+/* Desktop : revenir à la grille classique */
+@media (min-width: 900px) {
+  .cardsWrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: visible;
   }
+
+  .cardsWrapper > * {
+    width: 30%;
+    max-width: 300px;
+    scroll-snap-align: unset;
+  }
+}
+
+
 
 .title{
     font-size: 2.2rem;
@@ -31,6 +61,122 @@
 
 .viewAll{
     text-align: center;
-    margin-top: 30px;
+    margin-top: 50px;
     text-decoration: underline;
+}
+
+/* partie engagement */
+
+.accessibilitySection {
+  padding: 4rem 2rem;
+  background-color: #fff;
+  position: relative;
+  top: 50px;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem;
+  margin: 0 auto;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 500px;
+  aspect-ratio: 1/1;
+  outline-offset: 10px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.image {
+  object-fit: cover;
+  border-radius: 0;
+  width: 500px;
+}
+
+.textContent {
+  max-width: 550px;
+}
+
+.heading {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heading span {
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  margin-bottom: 5px;
+}
+
+.paragraph {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.button {
+  padding: 0.8rem 1.4rem;
+  border-radius: 30px;
+  background-color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+}
+
+
+.decor {
+  position: absolute;
+  z-index: 0;
+  animation: slowRotate 20s linear infinite;
+}
+
+@keyframes slowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.decor {
+  top: 40px;
+  right:40px;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .textContent {
+    max-width: 100%;
+  }
+
+  .imageWrapper {
+    margin-bottom: 1rem;
+  }
+
+  .triangle {
+    display: none;
+  }
 }
