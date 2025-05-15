@@ -1,7 +1,7 @@
 import styles from "./Form.module.css";
-import AuthContainer from "@/components/AuthContainer/AuthContainer";
-import SignupButtons from "@/components/SignupButtons/SignupButtons";
-import LoginForm from "@/components/LoginForm/LoginForm";
+import AuthContainer from "@/components/FormPage/AuthContainer/AuthContainer";
+import SignupButtons from "@/components/FormPage/SignupButtons/SignupButtons";
+import LoginForm from "@/components/FormPage/LoginForm/LoginForm";
 import Image from "next/image";
 
 export default function FormulairePage() {

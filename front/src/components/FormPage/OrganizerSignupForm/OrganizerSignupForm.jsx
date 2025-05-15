@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./OrganizerSignupForm.module.css";
-import formStyles from "../../styles/Form.module.css";
+import formStyles from "../../../styles/Form.module.css";
 import Image from "next/image";
 
 import { fadeInForm, nextStepAnimation, centerForm } from "@/utils/AnimatedForm";

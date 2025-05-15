@@ -140,7 +140,6 @@ export const nextStepAnimation = (currentStep) => {
     });
     gsap.to(".signup-buttons", {
         paddingLeft: (currentStep === 1 || currentStep === 2) ? 0 : "40%",
-            maxWidth: (currentStep === 1 || currentStep === 2) ? "850px" : "none",
     });
 };
 

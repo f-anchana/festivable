@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./FestivalierSignupForm.module.css";
-import formStyles from "../../styles/Form.module.css"
+import formStyles from "../../../styles/Form.module.css";
 
 import { fadeInForm } from "@/utils/AnimatedForm";
 
