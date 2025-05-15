@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './FestivalSection.module.css';
 import FestivalCard from '../FestivalCard/FestivalCard';
-
+import Image from 'next/image';
+          
 const Festivals = [
   {
     id: 1,
@@ -52,6 +53,10 @@ export default function FestivalsSection() {
 
       <div className={styles.viewAll}>
         <a href="#">Voir tous nos festivals</a>
+        <Image src="/icones/menu-roll.svg" alt="" width={12} height={12} 
+    style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }} 
+/>
+        
       </div>
     </section>
   );

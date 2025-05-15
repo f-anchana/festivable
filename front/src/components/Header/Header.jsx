@@ -37,7 +37,7 @@ export default function Header() {
         {/* BOUTONS AUTH (Desktop) */}
         <div className={styles.authButtons}>
           <Link href="/form" className={styles.btnBlack}>Se connecter</Link>
-          <Link href="/login" className={styles.btnWhite}>S'inscrire</Link>
+          <Link href="/form" className={styles.btnWhite}>S'inscrire</Link>
         </div>
       </div>
 
@@ -58,7 +58,7 @@ export default function Header() {
         {/* BOUTONS AUTH (Mobile) */}
         <div className={styles.mobileAuthButtons}>
           <Link href="/form" className={styles.btnBlack}>Se connecter</Link>
-          <Link href="/login" className={styles.btnWhite}>S'inscrire</Link>
+          <Link href="/form" className={styles.btnWhite}>S'inscrire</Link>
         </div>
       </div>
     </nav>
