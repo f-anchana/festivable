@@ -1,10 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./FestivalierSignupForm.module.css";
 import formStyles from "../../styles/Form.module.css"
 
 import { fadeInForm } from "@/utils/AnimatedForm";
 
 export default function FestivalierSignupForm() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePassword = () => {
+        setShowPassword(prev => !prev);
+    };
+
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -33,8 +39,11 @@ export default function FestivalierSignupForm() {
                     <label htmlFor="telephone" className={formStyles.label}>Numéro de téléphone</label>
                 </div>
                 <div className={formStyles.inputContainer}>
-                    <input type="password" className={formStyles.input} id="password" placeholder=" " required />
+                    <input type={showPassword ? "text" : "password"} className={formStyles.input} id="password" placeholder=" " required />
                     <label htmlFor="password" className={formStyles.label}>Mot de passe</label>
+                    <button type="button" aria-label="Afficher ou masquer le mot de passe" className={formStyles.showpassword} onClick={togglePassword}>
+                        <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
+                    </button>
                 </div>
                 <button type="submit" className={formStyles.button}>S'inscrire</button>
             </form>

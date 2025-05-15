@@ -101,9 +101,3 @@ form button {
 button {
   cursor: pointer;
 }
-
-@media (max-width: 767px) {
-  input {
-    padding: 10px 10px !important;
-  }
-}

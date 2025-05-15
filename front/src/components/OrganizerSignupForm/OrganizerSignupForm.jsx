@@ -8,6 +8,11 @@ import { fadeInForm, nextStepAnimation, centerForm } from "@/utils/AnimatedForm"
 export default function OrganizerSignupForm() {
     const formRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(1);
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePassword = () => {
+        setShowPassword(prev => !prev);
+    };
 
     const nextStep = () => {
         setCurrentStep(prev => prev + 1); // Mise à jour de l'état
@@ -62,6 +67,13 @@ export default function OrganizerSignupForm() {
                             <input type="text" className={formStyles.input} id="lien-contact" placeholder=" " />
                             <label htmlFor="lien-contact" className={formStyles.label}>Lien de contact (optionnel)</label>
                         </div>
+                    </div>
+                    <div className={formStyles.inputContainer}>
+                        <input type={showPassword ? "text" : "password"} className={formStyles.input} id="password" placeholder=" " required />
+                        <label htmlFor="password" className={formStyles.label}>Mot de passe</label>
+                        <button type="button" aria-label="Afficher ou masquer le mot de passe" className={formStyles.showpassword} onClick={togglePassword}>
+                            <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
+                        </button>
                     </div>
                     <div className={formStyles.inputContainerfile}>
                         <input type="file" className={formStyles.inputfile} id="file-upload" required />

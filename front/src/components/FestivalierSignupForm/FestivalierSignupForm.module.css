@@ -2,12 +2,14 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     opacity: 0;
 }
 
 .container form {
     width: 80%;
+    overflow-y: auto;
+    justify-content: start;
 }
 
 .flex {
