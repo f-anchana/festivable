@@ -2,14 +2,32 @@
     background-color: rgb(255, 255, 255);
     padding: 50px;
     height: 100vh;
+    border-radius: 60px;
 }
 
 
 .cardsWrapper {
     display: flex;
     flex-direction:row;  
-    gap: 20px;             
+    gap: 20px; 
+            
   }
+
+.title{
+    font-size: 2.2rem;
+    background-color: var(--foreground);
+    color: var(--background);
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top:60px;
+
+}
+
+.subtitle{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
 .viewAll{
     text-align: center;

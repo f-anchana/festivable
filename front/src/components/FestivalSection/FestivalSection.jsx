@@ -20,7 +20,7 @@ const Festivals = [
   },
   {
     id: 3,
-    title: 'Jazz’libre Festival',
+    title: 'Jazz libre Festival',
     date: '1 août 2025 - 20:00',
     price: '29€ ',
     image: '/images/festival-3.svg',
@@ -28,7 +28,7 @@ const Festivals = [
 
   {
     id: 4,
-    title: 'Jazz’libre Festival',
+    title: 'Jazz libre Festival',
     date: '1 août 2025 - 20:00',
     price: '29€ ',
     image: '/images/festival-3.svg',
