@@ -1,0 +1,45 @@
+.festivaldescription {
+  &__title {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    font-size: 45px;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    transform: rotate(-2deg);
+  }
+
+  &__text {
+    font-size: 16px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & .festivaldescription__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      & .festivaldescription__itemtext {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #b2b2b2;
+
+        p {
+          margin: 0;
+        }
+
+        // Supprime la bordure si un badge est présent
+        &:has(.festivaldescription__itemBadge) {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+}
