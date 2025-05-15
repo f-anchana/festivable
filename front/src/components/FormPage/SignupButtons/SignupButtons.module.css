@@ -61,6 +61,7 @@
         height: 95%;
         align-self: flex-end;
         border-radius: 35px 35px 0 0;
+        justify-content: start;
     }
 
     .buttoncontainer {
