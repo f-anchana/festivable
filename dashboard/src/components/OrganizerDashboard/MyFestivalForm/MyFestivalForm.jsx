@@ -60,7 +60,6 @@ export default function MyFestivalForm() {
                         <fieldset className={styles.fieldset}>
                             <h2>Tarifs</h2>
                             {priceInputs.map((priceInput, index) => (
-                                <div key={priceInput.id} className={styles.inputGroup}>
                                     <PriceInput
                                         id={`type${index + 1}`}
                                         id_price={priceInput.id_price}
@@ -68,7 +67,6 @@ export default function MyFestivalForm() {
                                         type="text"
                                         required
                                     />
-                                </div>
                             ))}
 
                             <div className={styles.buttons}>
@@ -90,7 +88,7 @@ export default function MyFestivalForm() {
                         </fieldset>
                     </div>
                 </div>
-                <input type="submit" name="" id="" />
+                <input type="submit" name="Valider" value="Valider" id="" />
             </form>
         </div>
     )

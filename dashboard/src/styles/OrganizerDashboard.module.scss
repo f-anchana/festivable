@@ -1,17 +1,22 @@
 .flex {
     display: flex;
+    width: 90%;
+    gap: 52px;
 }
 
-.inputContainer, .textareaContainer {
+.inputContainer,
+.textareaContainer {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .fullWidth {
     width: 100%;
 }
 
-.inputContainer input, .textareaContainer textarea {
+.inputContainer input,
+.textareaContainer textarea {
     border: 1px solid #B2B2B2;
     border-radius: 9px;
     font-size: 16px;
@@ -24,7 +29,9 @@
     border: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: start;
+    justify-content: start;
+    gap: 12px;
 }
 
 .priceContainer {
@@ -33,7 +40,8 @@
     gap: 8px;
 }
 
-.type, .price {
+.type,
+.price {
     display: flex;
     flex-direction: column;
 }
@@ -49,6 +57,16 @@
 .buttons {
     display: flex;
     gap: 8px;
+    width: 100%;
+}
+
+.myFestivalForm button {
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 2px 8px;
+    cursor: pointer;
+    width: 100%;
 }
 
 .myFestivalForm button {
@@ -60,11 +78,11 @@
     width: 100%;
 }
 
-.myFestivalForm button {
-    background-color: black;
+.myFestivalForm input[type="submit"] {
+    background-color: blue;
     color: white;
-    border-radius: 15px;
-    padding: 2px 8px;
+    width: 90%;
+    border-radius: 9px;
+    padding: 4px 8px;
     cursor: pointer;
-    width: 100%;
 }
