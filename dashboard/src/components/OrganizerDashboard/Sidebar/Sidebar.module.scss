@@ -1,5 +1,5 @@
 .sidebar {
-  background: linear-gradient(to bottom, #155e75, #164e63);
+  background: var(--gradient-dark-blue);
   color: white;
   width: 250px;
   height: 100vh;
@@ -37,7 +37,7 @@
 
     &:hover {
       background-color: #fff;
-      color: #155e75;
+      color: var(--dark-blue);
 
       .sidebar__iconDefault {
         display: none;
@@ -47,18 +47,6 @@
         display: inline;
       }
     }
-  }
-
-  .active {
-    background-color: white;
-    color: #0f172a;
-  }
-
-  &__icon {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    fill: #fff;
   }
 
   &__bottom {
