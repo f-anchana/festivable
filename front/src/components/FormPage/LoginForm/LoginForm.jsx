@@ -1,7 +1,7 @@
 'use client';
 import { useState } from "react";
 import styles from "./LoginForm.module.css";
-import formStyles from "../../../styles/Form.module.css";
+import formStyles from "@/styles/Form.module.css";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
