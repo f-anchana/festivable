@@ -25,8 +25,7 @@ export default function RootLayout({ children }) {
   <body 
     className={`${poppins.variable} ${oswald.variable}`} 
     style={{
-      paddingTop: "100px", 
-      background: "linear-gradient(to right, #FDB246, #FE6F02)"
+      paddingTop: "100px"
     }} 
   >
     <Header />

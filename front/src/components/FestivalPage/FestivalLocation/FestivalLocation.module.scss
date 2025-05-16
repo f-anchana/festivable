@@ -1,18 +1,18 @@
 .location {
-    margin: 2rem 0;
+    margin:20px;
   
     &__title {
       display: inline-block;
       background-color: #1a1a1a;
       color: white;
       padding: 0.4rem 1.2rem;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 900;
       text-transform: uppercase;
       border-radius: 0.6rem;
       transform: rotate(-2deg);
       margin-bottom: 1.2rem;
-      font-family: 'Arial Black', Impact, sans-serif;
+      font-family: 'Oswald';
     }
   
     &__info {
@@ -24,7 +24,7 @@
     }
   
     &__map {
-      border-radius: 0.8rem;
+      border-radius: 4px;
       overflow: hidden;
     }
   }

@@ -1,0 +1,56 @@
+.festivalGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    grid-template-areas:
+      "left right"
+      "full full";
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile {
+    display: none;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    grid-area: left;
+    gap: 2rem;
+  }
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    grid-area: right;
+  }
+  @media (max-width: 1024px) {
+    .pc {
+        display: none;
+    }
+  }
+}
+
+.fullWidth {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media (min-width: 1024px) {
+    grid-area: full;
+  }
+}
