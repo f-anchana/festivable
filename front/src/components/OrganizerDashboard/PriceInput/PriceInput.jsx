@@ -3,7 +3,6 @@ import formStyles from "./PriceInput.module.scss";
 export default function PriceInput({
   id,
   label,
-  type = "text",
   required = false,
   placeholder = " ",
   value,
@@ -15,7 +14,15 @@ export default function PriceInput({
         {label}
       </label>
       <input
-        type={type}
+        type="text"
+        id={id}
+        placeholder={placeholder}
+        required={required}
+        value={value}
+        onChange={onChange}
+      />
+      <input
+        type="number"
         id={id}
         placeholder={placeholder}
         required={required}
