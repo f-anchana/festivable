@@ -7,6 +7,7 @@ export default function PriceInput({
   placeholder = " ",
   value,
   onChange,
+  id_price
 }) {
   return (
     <div className={formStyles.inputContainer}>
@@ -21,9 +22,13 @@ export default function PriceInput({
         value={value}
         onChange={onChange}
       />
+
+      <label htmlFor={id_price}>
+        Prix
+      </label>
       <input
         type="number"
-        id={id}
+        id={id_price}
         placeholder={placeholder}
         required={required}
         value={value}

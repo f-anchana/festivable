@@ -1,4 +1,5 @@
 import ClassicInput from "@/components/OrganizerDashboard/ClassicInput/ClassicInput";
+import PriceInput from "@components/PriceInput/PriceInput";
 
 export default function MyFestivalForm() {
     return (
@@ -20,6 +21,16 @@ export default function MyFestivalForm() {
                     />
                     <ClassicInput
                         id="lieu"
+                        label="Lieu"
+                        type="text"
+                        required
+                    />
+                </fieldset>
+                <fieldset>
+                    <h2>Tarifs</h2>
+                    <PriceInput
+                        id="price"
+                        id_price="price"
                         label="Lieu"
                         type="text"
                         required
