@@ -1,4 +1,4 @@
-import formStyles from "./EventForm.module.scss";
+import formStyles from "@/styles/OrganizerDashboard.module.scss";
 
 export default function ClassicInput({
   id,

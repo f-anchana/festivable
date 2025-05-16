@@ -57,12 +57,12 @@ a {
   text-decoration: none;
 }
 
-input {
+/* input {
   width: 100%;
   padding: 20px 10px;
   border-radius: 9px;
   border: 1px solid #B2B2B2;
-}
+} */
 
 /* input[type="file"] {
   border: 1px dashed #B2B2B2;

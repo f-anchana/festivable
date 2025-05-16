@@ -5,7 +5,7 @@ import MyFestivalForm from "@/components/OrganizerDashboard/MyFestivalForm/MyFes
 export default function MyFestival() {
     return (
         <div>
-            <h1>Hello</h1>
+            <h1>Mon Festival</h1>
             <MyFestivalForm />
         </div>
     );
