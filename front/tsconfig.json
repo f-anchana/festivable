@@ -28,6 +28,6 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/(with-nav)/(festivalpage)/festival/page.jsx"  ],
   "exclude": ["node_modules"]
 }

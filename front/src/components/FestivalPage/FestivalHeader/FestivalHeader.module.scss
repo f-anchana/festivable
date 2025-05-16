@@ -8,16 +8,36 @@
     .festival__title {
       font-size: 24px;
       text-align: center;
+      font-family: 'Oswald';
+
+      @media (min-width: 1024px) {
+        text-align: left;
+      }
     }
 
     .festival__subtitle {
       font-size: 16px;
       text-align: center;
+      margin: 10px 0px;
+      color: #8F8F8F;
+      text-transform: math-auto;
+      @media (min-width: 1024px) {
+        text-align: left;
+      }
+
+      span{
+        color: #FF9A00;
+      }
     }
 
     .festival__info {
       display: flex;
       flex-direction: column;
+      gap: 15px;
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
 
       .festival__infoItem {
         display: flex;
@@ -41,7 +61,7 @@
             border:1px solid #B2B2B2;
             padding: 0.4rem 0.8rem;
             border-radius: 999px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
           }
         }

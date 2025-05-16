@@ -1,0 +1,45 @@
+.gallery {
+  &__main {
+    
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  &__thumb {
+    width: 24%;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+
+  &__clickable {
+    cursor: pointer;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .gallery__grid {
+    display: none;
+  }
+}
