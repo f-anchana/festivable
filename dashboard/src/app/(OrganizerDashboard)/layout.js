@@ -1,4 +1,4 @@
-import "../../../../front/src/app/globals.css";
+import "../../../../dashboard/src/app/globals.css";
 import Sidebar from "@/components/OrganizerDashboard/Sidebar/Sidebar";
 import { Poppins, Oswald } from "next/font/google";
 

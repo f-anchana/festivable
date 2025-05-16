@@ -1,6 +1,5 @@
 .gallery {
   &__main {
-    
     img {
       width: 100%;
       height: auto;
@@ -19,6 +18,11 @@
 
   &__thumb {
     width: 24%;
+
+    &:nth-child(n + 5) {
+      display: none;
+    }
+    
     img {
       width: 100%;
       height: auto;
@@ -36,7 +40,6 @@
     cursor: pointer;
   }
 }
-
 
 @media (max-width: 768px) {
   .gallery__grid {
