@@ -12,14 +12,18 @@ export default function MyFestivalForm() {
         { id: 1, id_price: "price1" }
     ]);
 
-    const handleAddPriceInput = () => {
+    const handleAddInput = () => {
         if (priceInputs.length >= 5) return;
-        const newId = priceInputs.length + 1;
+        const uniqueId = Date.now(); // ou crypto.randomUUID() si tu veux
         setPriceInputs([
             ...priceInputs,
-            { id: newId, id_price: `price${newId}` }
+            {
+                id: uniqueId,
+                id_price: `price${priceInputs.length + 1}`
+            }
         ]);
     };
+
 
     const handleRemoveLastInput = () => {
         if (priceInputs.length > 1) {
@@ -55,22 +59,20 @@ export default function MyFestivalForm() {
                         </fieldset>
                         <fieldset className={styles.fieldset}>
                             <h2>Tarifs</h2>
-                            {priceInputs.map((priceInput) => (
-                                <div className={styles.inputGroup}>
+                            {priceInputs.map((priceInput, index) => (
+                                <div key={priceInput.id} className={styles.inputGroup}>
                                     <PriceInput
-                                        key={priceInput.id}
-                                        id={`type${priceInput.id}`}
+                                        id={`type${index + 1}`}
                                         id_price={priceInput.id_price}
-                                        label={`Type ${priceInput.id}`}
+                                        label={`Type ${index + 1}`}
                                         type="text"
                                         required
                                     />
                                 </div>
-
                             ))}
 
                             <div className={styles.buttons}>
-                                <button type="button" onClick={handleAddPriceInput} disabled={priceInputs.length >= 5}>
+                                <button type="button" onClick={handleAddInput} disabled={priceInputs.length >= 5}>
                                     Ajouter un tarif +
                                 </button>
                                 {priceInputs.length > 1 && (
