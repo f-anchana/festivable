@@ -1,7 +1,7 @@
 .festivalsSection{
     background-color: rgb(255, 255, 255);
     padding: 50px;
-    border-radius: 60px;
+    border-radius: 35px;
 }
 
 .titleWrapper{
@@ -40,8 +40,17 @@
     max-width: 300px;
     scroll-snap-align: unset;
   }
+
+  
 }
 
+
+@media(max-width:900px){
+  .titleWrapper{
+  margin-left: 0px;
+}
+
+}
 
 
 .title{
@@ -138,8 +147,9 @@
 }
 
 .button:hover {
-  background-color: #f0f0f0;
-}
+background-color: #FDB74C;
+  color: #1D1D1D;
+  border-color: #FDB74C;}
 
 
 .decor,
@@ -309,7 +319,7 @@
 
 @media(max-width:900px){
   .recruitImageWrapper img {
-    width: 300px;
+    width: 400px;
   }
 }
 
