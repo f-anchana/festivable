@@ -42,8 +42,8 @@ export default function Header() {
             </button>
             <div className={`${styles.dropdownWrapper} ${isAccessibilityOpen ? styles.dropdownVisible : ''}`}>
               <ul className={styles.dropdownMenu}>
-                <li><Link href="/accessibilite/handicap">Handicap</Link></li>
-                <li><Link href="/accessibilite/mobilite">Mobilité</Link></li>
+                 <li><Link href="#">PictoAccess</Link></li>
+                <li><Link href="#">Référentiel</Link></li>
               </ul>
             </div>
           </li>
@@ -64,8 +64,9 @@ export default function Header() {
             </button>
             <div className={`${styles.dropdownWrapper} ${isAboutOpen ? styles.dropdownVisible : ''}`}>
               <ul className={styles.dropdownMenu}>
-                <li><Link href="/a-propos/equipe">Notre équipe</Link></li>
-                <li><Link href="/a-propos/mission">Notre mission</Link></li>
+                <li><Link href="#">Nos missions</Link></li>
+                <li><Link href="#">Nos partenaires</Link></li>
+                <li><Link href="#">Recrutement</Link></li>
               </ul>
             </div>
           </li>
@@ -104,8 +105,8 @@ export default function Header() {
             </button>
             {isMobileAccessibilityOpen && (
               <ul className={styles.mobileDropdownMenu}>
-                <li><Link href="/accessibilite/handicap">Handicap</Link></li>
-                <li><Link href="/accessibilite/mobilite">Mobilité</Link></li>
+                <li><Link href="#">PictoAccess</Link></li>
+                <li><Link href="#">Référentiel</Link></li>
               </ul>
             )}
           </li>
@@ -129,8 +130,10 @@ export default function Header() {
             </button>
             {isMobileAboutOpen && (
               <ul className={styles.mobileDropdownMenu}>
-                <li><Link href="/a-propos/equipe">Notre équipe</Link></li>
-                <li><Link href="/a-propos/mission">Notre mission</Link></li>
+                <li><Link href="#">Nos missions</Link></li>
+                <li><Link href="#">Nos partenaires</Link></li>
+                <li><Link href="#">Recrutement</Link></li>
+
               </ul>
             )}
           </li>

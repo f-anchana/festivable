@@ -55,7 +55,7 @@
   position: relative;
   width: 55%;
   z-index: 2;
-  transform: translateX(90px); /* ✅ On pousse tout le bloc un peu vers l'image */
+  transform: translateX(90px); 
 }
 
 
@@ -82,7 +82,6 @@
   line-height: 1.4;
   position: relative;
   z-index: 2;
-  /* ✅ Supprime cette ligne : right: -40px; */
 }
 
 .highlight {
