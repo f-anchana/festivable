@@ -5,28 +5,17 @@ import styles from "./HeroSection.module.css";
 const HeroSection = () => {
   return (
     <section className={styles.hero}>
-      {/* Images décoratives */}
-      <Image
-        src="/decor/homepage-deco1.png"
-        alt=""
-        className={styles.decor1}
-        width={200}
-        height={200}
-      />
-      <Image
-        src="/decor/homepage-deco.png"
-        alt=""
-        className={styles.decor2}
-        width={80}
-        height={80}
-      />
-      <Image
-        src="/decor/homepage-deco.png"
-        alt=""
-        className={styles.decor3}
-        width={80}
-        height={80}
-      />
+      
+  <Image src="/decor/homepage-deco.png" alt="" width={80} height={80} className={styles.decor1} />
+
+
+     
+  {/* <Image src="/decor/homepage-deco.png" alt="" width={80} height={80} className={styles.decor2}/> */}
+
+
+
+  <Image src="/decor/homepage-deco1.png" alt="" width={200} height={200} className={styles.decor3}/>
+
 
       <div className={styles.content}>
         <div className={styles.text}>

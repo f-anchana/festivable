@@ -2,10 +2,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import styles from './Header.module.css'; // Import du fichier CSS
+import styles from './Header.module.css'; 
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
+  // Nouveaux états pour dropdown mobile
+  const [isMobileAccessibilityOpen, setIsMobileAccessibilityOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
 
   return (
     <nav className={styles.navbar}>
@@ -22,15 +28,49 @@ export default function Header() {
 
         {/* MENU DESKTOP */}
         <ul className={styles.navLinks}>
-          <li>
-            <Link href="#">Accessibilité</Link>
-            <Image src="/icones/menu-roll.svg" alt="" width={12} height={12} />
+          {/* Accessibilité desktop */}
+          <li className={styles.dropdown}>
+            <button onClick={() => setIsAccessibilityOpen(prev => !prev)} className={styles.dropdownToggle}>
+              Accessibilité
+              <Image
+                src="/icones/menu-roll.svg"
+                alt="Flèche"
+                width={12}
+                height={12}
+                className={`${styles.arrowIcon} ${isAccessibilityOpen ? styles.rotate : ''}`}
+              />
+            </button>
+            <div className={`${styles.dropdownWrapper} ${isAccessibilityOpen ? styles.dropdownVisible : ''}`}>
+              <ul className={styles.dropdownMenu}>
+                 <li><Link href="#">PictoAccess</Link></li>
+                <li><Link href="#">Référentiel</Link></li>
+              </ul>
+            </div>
           </li>
+
           <li><Link href="#">Festivals</Link></li>
-          <li>
-            <Link href="#">À propos</Link>
-            <Image src="/icones/menu-roll.svg" alt="" width={12} height={12} />
+
+          {/* À propos desktop */}
+          <li className={styles.dropdown}>
+            <button onClick={() => setIsAboutOpen(prev => !prev)} className={styles.dropdownToggle}>
+              À propos
+              <Image
+                src="/icones/menu-roll.svg"
+                alt="Flèche"
+                width={12}
+                height={12}
+                className={`${styles.arrowIcon} ${isAboutOpen ? styles.rotate : ''}`}
+              />
+            </button>
+            <div className={`${styles.dropdownWrapper} ${isAboutOpen ? styles.dropdownVisible : ''}`}>
+              <ul className={styles.dropdownMenu}>
+                <li><Link href="#">Nos missions</Link></li>
+                <li><Link href="#">Nos partenaires</Link></li>
+                <li><Link href="#">Recrutement</Link></li>
+              </ul>
+            </div>
           </li>
+
           <li><Link href="#">Forum</Link></li>
         </ul>
 
@@ -43,15 +83,61 @@ export default function Header() {
 
       {/* MENU MOBILE */}
       <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.show : ''}`}>
-        {/* Bouton de fermeture */}
         <button className={styles.closeButton} onClick={() => setIsMenuOpen(false)}>
           <Image src="/icones/close-btn-menu.svg" alt="Fermer" width={24} height={24} />
         </button>
 
-        <ul>
-          <li><Link href="#">Accessibilité</Link></li>
+        <ul className={styles.mobileNavLinks}>
+          {/* Dropdown Accessibilité mobile */}
+          <li>
+            <button
+              className={styles.mobileDropdownToggle}
+              onClick={() => setIsMobileAccessibilityOpen(prev => !prev)}
+            >
+              Accessibilité
+              <Image
+                src="/icones/menu-roll.svg"
+                alt="Flèche"
+                width={12}
+                height={12}
+                className={`${styles.arrowIcon} ${isMobileAccessibilityOpen ? styles.rotate : ''}`}
+              />
+            </button>
+            {isMobileAccessibilityOpen && (
+              <ul className={styles.mobileDropdownMenu}>
+                <li><Link href="#">PictoAccess</Link></li>
+                <li><Link href="#">Référentiel</Link></li>
+              </ul>
+            )}
+          </li>
+
           <li><Link href="#">Festivals</Link></li>
-          <li><Link href="#">À propos</Link></li>
+
+          {/* Dropdown À propos mobile */}
+          <li>
+            <button
+              className={styles.mobileDropdownToggle}
+              onClick={() => setIsMobileAboutOpen(prev => !prev)}
+            >
+              À propos
+              <Image
+                src="/icones/menu-roll.svg"
+                alt="Flèche"
+                width={12}
+                height={12}
+                className={`${styles.arrowIcon} ${isMobileAboutOpen ? styles.rotate : ''}`}
+              />
+            </button>
+            {isMobileAboutOpen && (
+              <ul className={styles.mobileDropdownMenu}>
+                <li><Link href="#">Nos missions</Link></li>
+                <li><Link href="#">Nos partenaires</Link></li>
+                <li><Link href="#">Recrutement</Link></li>
+
+              </ul>
+            )}
+          </li>
+
           <li><Link href="#">Forum</Link></li>
         </ul>
 

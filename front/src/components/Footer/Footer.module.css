@@ -1,0 +1,129 @@
+.footer {
+  background-color: #161616;
+  color: white;
+  padding: 60px 20px 30px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  flex: 1 1 200px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.socials h2 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.icons a {
+  background: white;
+  padding: 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icons img {
+  width: 30px;
+  height: 30px;
+}
+
+.right {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.links h2,
+.contact h2 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links li {
+  margin-bottom: 8px;
+}
+
+.links a,
+.contact a {
+  color: white;
+  text-decoration: none;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  max-width: 1200px;
+  margin: 40px auto 0;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+  gap: 10px;
+}
+
+/* lien du bas */
+.bottom a {
+  color: white;
+  text-decoration: none;
+}
+
+/* --------------------
+   RESPONSIVE 
+-------------------- */
+@media (max-width: 768px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .right {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+  }
+
+  .icons img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer {
+    padding: 40px 20px 20px;
+  }
+}
