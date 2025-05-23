@@ -1,7 +1,13 @@
-import React from 'react';
+'use client';
 import styles from './FestivalSection.module.css';
 import FestivalCard from '../FestivalCard/FestivalCard';
 import Image from 'next/image';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+import {FestivalSectionAnimation} from '@/components/FestivalSection/FestivalSectionAnimation';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Festivals = [
   {
@@ -39,8 +45,13 @@ const Festivals = [
 ];
 
 export default function FestivalsSection() {
+  const sectionRef = useRef(null);
+
+  FestivalSectionAnimation(sectionRef);
+
   return (
-    <section id="festivals" className={styles.festivalsSection}>
+    
+    <section id="festival-section" className={styles.festivalsSection}  ref={sectionRef}>
       <div className={styles.titleWrapper}>
         <h2 className={styles.title}>LES FESTIVALS CERTIFIÉS</h2>
         <p className={styles.subtitle}>
