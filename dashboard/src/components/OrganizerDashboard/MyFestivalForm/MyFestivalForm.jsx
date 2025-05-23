@@ -76,6 +76,7 @@ export default function MyFestivalForm() {
                             <h2>Détails de l'événement</h2>
                             <ClassicTextarea
                                 label="Description*"
+                                placeholder="Donnez envie aux gens de venir à votre festival et mettez en avant l'accéssibilité"
                             ></ClassicTextarea>
                         </fieldset>
                     </div>
