@@ -40,23 +40,46 @@ export default function MyFestivalForm() {
                             <h2>Événement</h2>
                             <ClassicInput
                                 id="titre"
-                                label="Titre"
+                                label="Titre*"
                                 type="text"
+                                placeholder="Nom de l'événement"
                                 required
                             />
                             <ClassicInput
-                                id="date"
-                                label="Date"
+                                id="start_date"
+                                label="Date de début*"
                                 type="date"
                                 required
                             />
                             <ClassicInput
-                                id="lieu"
-                                label="Lieu"
-                                type="text"
+                                id="end_date"
+                                label="Date de fin*"
+                                type="date"
                                 required
                             />
+                            <ClassicInput
+                                id="place"
+                                label="Lieu*"
+                                type="text"
+                                placeholder="52 Rue General Moutarde Nantes"
+                                required
+                            />
+                            <ClassicInput
+                                id="link"
+                                label="Votre site web"
+                                type="text"
+                                placeholder="www.festival.com"
+                            />
                         </fieldset>
+
+                        <fieldset className={styles.fieldset}>
+                            <h2>Détails de l'événement</h2>
+                            <ClassicTextarea
+                                label="Description*"
+                            ></ClassicTextarea>
+                        </fieldset>
+                    </div>
+                    <div className={styles.secondContainer}>
                         <fieldset className={styles.fieldset}>
                             <h2>Tarifs</h2>
                             {priceInputs.map((priceInput, index) => (
@@ -66,7 +89,8 @@ export default function MyFestivalForm() {
                                     id_price={priceInput.id_price}
                                     label={`Type ${index + 1}`}
                                     type="text"
-                                    required
+                                    placeholderType="Ex: Pass 1 jour"
+                                    placeholderPrice="Ex: 80€"
                                 />
                             ))}
 
@@ -82,14 +106,6 @@ export default function MyFestivalForm() {
                                     </button>
                                 )}
                             </div>
-                        </fieldset>
-                    </div>
-                    <div className={styles.secondContainer}>
-                        <fieldset className={styles.fieldset}>
-                            <h2>Détails de l'événement</h2>
-                            <ClassicTextarea
-                            label="Description"
-                            ></ClassicTextarea>
                         </fieldset>
                     </div>
                 </div>
