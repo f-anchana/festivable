@@ -139,6 +139,9 @@
   height: auto;
 }
 
+
+
+
 /* Responsive */
 
 
@@ -184,7 +187,6 @@
   }
 
   .boutons_homepage a {
-    min-width: 200px;
     text-align: center;
     font-size: 1rem;
   }
