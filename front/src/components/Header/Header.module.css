@@ -138,6 +138,23 @@
   
 
 
+  /* pour le switch */
+
+.logoWrapper {
+  background-color: white; /* ou noir, ou transparent, selon le test */
+  padding: 0.5rem;
+}
+
+.textBlack {
+  color: black !important;
+}
+
+.textWhite {
+  color: white !important;
+}
+
+
+
   /* RESPONSIVE DESIGN */
 
 
