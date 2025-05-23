@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-// Schéma et modèle de user
-const userSchema = new mongoose.Schema({
+const accessibilitySchema = new mongoose.Schema({
   pseudo: String,
   email: String,
   password: String,
@@ -12,4 +11,4 @@ const userSchema = new mongoose.Schema({
   lastname: String
 });
 
-module.exports = mongoose.model('User', userSchema, 'users');
+module.exports = mongoose.model('Accessibility', accessibilitySchema, 'accessibility');

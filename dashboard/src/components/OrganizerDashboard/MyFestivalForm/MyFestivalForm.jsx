@@ -14,7 +14,7 @@ export default function MyFestivalForm() {
 
     const handleAddInput = () => {
         if (priceInputs.length >= 5) return;
-        const uniqueId = Date.now(); // ou crypto.randomUUID() si tu veux
+        const uniqueId = Date.now();
         setPriceInputs([
             ...priceInputs,
             {
@@ -35,7 +35,7 @@ export default function MyFestivalForm() {
         <div>
             <form action="" className={styles.myFestivalForm}>
                 <div className={styles.flex}>
-                    <div className={styles.fullWidth}>
+                    <div className={styles.firstContainer}>
                         <fieldset className={styles.fieldset}>
                             <h2>Événement</h2>
                             <ClassicInput
@@ -60,31 +60,36 @@ export default function MyFestivalForm() {
                         <fieldset className={styles.fieldset}>
                             <h2>Tarifs</h2>
                             {priceInputs.map((priceInput, index) => (
-                                    <PriceInput
-                                        id={`type${index + 1}`}
-                                        id_price={priceInput.id_price}
-                                        label={`Type ${index + 1}`}
-                                        type="text"
-                                        required
-                                    />
+                                <PriceInput
+                                    key={priceInput.id}
+                                    id={`type${index + 1}`}
+                                    id_price={priceInput.id_price}
+                                    label={`Type ${index + 1}`}
+                                    type="text"
+                                    required
+                                />
                             ))}
 
                             <div className={styles.buttons}>
-                                <button type="button" onClick={handleAddInput} disabled={priceInputs.length >= 5}>
-                                    Ajouter un tarif +
-                                </button>
+                                {priceInputs.length < 5 && (
+                                    <button type="button" onClick={handleAddInput}>
+                                        Ajouter +
+                                    </button>
+                                )}
                                 {priceInputs.length > 1 && (
                                     <button type="button" onClick={handleRemoveLastInput}>
-                                        Retier un tarif -
+                                        Suprimer -
                                     </button>
                                 )}
                             </div>
                         </fieldset>
                     </div>
-                    <div className={styles.fullWidth}>
+                    <div className={styles.secondContainer}>
                         <fieldset className={styles.fieldset}>
                             <h2>Détails de l'événement</h2>
-                            <ClassicTextarea></ClassicTextarea>
+                            <ClassicTextarea
+                            label="Description"
+                            ></ClassicTextarea>
                         </fieldset>
                     </div>
                 </div>

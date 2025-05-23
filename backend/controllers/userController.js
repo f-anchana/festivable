@@ -1,34 +1,52 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs'); // ← bcryptjs ici
 
 exports.getUsers = async (req, res) => {
     try {
-        console.log('Tentative de récupération des utilisateurs...');
         const users = await User.find();
-        console.log('Données récupérées:', users); // Log les utilisateurs récupérés
         res.json(users);
     } catch (err) {
-        console.log('Erreur:', err);
-        res.status(500).send('Erreur lors de la récupération des users');
+        console.error("Erreur lors de la récupération :", err);
+        res.status(500).send("Erreur lors de la récupération des users");
     }
 };
 
 exports.createUser = async (req, res) => {
     try {
-        const { pseudo, email, password } = req.body; // Récupérer les données envoyées
+        const {
+            pseudo,
+            email,
+            password,
+            disability,
+            type_user,
+            pictoacess,
+            firstname,
+            lastname
+        } = req.body;
 
-        // Vérifier si toutes les données nécessaires sont présentes
         if (!pseudo || !email || !password) {
-            return res.status(400).json({ error: "Tous les champs sont requis." });
+            return res.status(400).json({ error: "Tous les champs requis ne sont pas remplis." });
         }
 
-        // Créer une nouvelle instance du modèle User
-        const newUser = new User({ pseudo, email, password });
+        // Hash du mot de passe avec bcryptjs
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt); // ← hashSync de bcryptjs
 
-        // Sauvegarder dans la base de données
+        const newUser = new User({
+            pseudo,
+            email,
+            password: hashedPassword,
+            disability,
+            type_user,
+            pictoacess,
+            firstname,
+            lastname
+        });
+
         await newUser.save();
-
         res.status(201).json({ message: "User enregistré avec succès !" });
     } catch (err) {
+        console.error("Erreur lors de l'enregistrement :", err);
         res.status(500).json({ error: "Erreur lors de l'enregistrement du user." });
     }
-}
+};

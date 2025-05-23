@@ -1,17 +1,12 @@
 .flex {
     display: flex;
-    width: 90%;
-    gap: 52px;
+    // gap: 100px;
 }
 
 .inputContainer,
 .textareaContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
-}
-
-.fullWidth {
     width: 100%;
 }
 
@@ -23,15 +18,17 @@
     outline: none;
     background: transparent;
     padding: 5px 10px;
+    width: 100%;
 }
 
 .fieldset {
     border: none;
     display: flex;
     flex-direction: column;
-    align-items: start;
-    justify-content: start;
+    // align-items: start;
+    // justify-content: start;
     gap: 12px;
+    margin-top: 32px;
 }
 
 .priceContainer {
@@ -47,7 +44,7 @@
 }
 
 .type {
-    width: 100%;
+    width: 75%;
 }
 
 .price {
@@ -61,28 +58,31 @@
 }
 
 .myFestivalForm button {
-    background-color: black;
+    background-color: var(--dark-blue);
     color: white;
-    border-radius: 15px;
-    padding: 2px 8px;
+    border-radius: 10px;
+    padding: 4px 8px;
     cursor: pointer;
     width: 100%;
-}
-
-.myFestivalForm button {
-    background-color: black;
-    color: white;
-    border-radius: 15px;
-    padding: 2px 8px;
-    cursor: pointer;
-    width: 100%;
+    border: none;
 }
 
 .myFestivalForm input[type="submit"] {
-    background-color: blue;
+    background-color: black;
     color: white;
-    width: 90%;
-    border-radius: 9px;
-    padding: 4px 8px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 12px;
     cursor: pointer;
+    margin-top: 40px;
+    border: none;
+}
+
+.firstContainer {
+    width: 35%;
+    margin-right: 8%;
+}
+
+.secondContainer {
+    width: 65%;
 }

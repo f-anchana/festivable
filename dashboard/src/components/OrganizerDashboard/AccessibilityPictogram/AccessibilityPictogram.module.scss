@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+    width: fit-content;
+}
+
+.container img {
+    border: 1px solid #B2B2B2;
+    border-radius: 9px;
+    padding: 4px;
+    width: 75px;
+}
+
+.container p {
+    text-align: center;
+    max-width: 100px;
+}
