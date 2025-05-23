@@ -31,11 +31,24 @@
     text-decoration: none;
     transition: background 0.2s;
 
-    div{
-        height: fit-content;
+    div {
+      height: fit-content;
     }
 
     &:hover {
+      background-color: #fff;
+      color: var(--dark-blue);
+
+      .sidebar__iconDefault {
+        display: none;
+      }
+
+      .sidebar__iconHover {
+        display: inline;
+      }
+    }
+
+    &.active {
       background-color: #fff;
       color: var(--dark-blue);
 
