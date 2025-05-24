@@ -11,6 +11,11 @@
   margin-left: 65px;
 }
 
+
+/* .scrollWrapper{
+width: 100px;
+} */
+
 .cardsWrapper {
   display: flex;
   gap: 30px;
@@ -31,6 +36,7 @@
 }
 
 /* Desktop : revenir à la grille classique */
+
 @media (min-width: 900px) {
   .cardsWrapper {
     flex-wrap: wrap;
@@ -78,6 +84,8 @@
     text-decoration: underline;
 }
 
+
+
 /* partie engagement */
 
 .accessibilitySection {
@@ -92,9 +100,7 @@
 .accessibilitySection span{
   border-radius: 4px;
   text-align: left;
-
 }
-
 
 
 .container {
@@ -123,6 +129,7 @@
 
 .textContent {
   max-width: 550px;
+  text-align: left;
 }
 
 .heading {
@@ -202,6 +209,7 @@ background-color: #FDB74C;
     max-width: 100%;
   }
 
+  
   .imageWrapper {
     margin-bottom: 1rem;
   }
@@ -224,7 +232,6 @@ background-color: #FDB74C;
 .sectionAction {
   margin-top: 100px;
   text-align: center;
-  padding: 40px 20px;
   position: relative;
   
 }
@@ -289,6 +296,7 @@ background-color: #FDB74C;
   position: absolute;
   right: 0;
 }
+
 /* Card colors */
 .blue {
     background: var(--gradient-light-blue);
@@ -308,7 +316,7 @@ background-color: #FDB74C;
 .recruitSection {
   background-color: #f8f8f8;
   padding: 70px 10px;
-  margin-top: 100px;
+  margin-top: 200px;
 }
 
 .recruitContent {
@@ -330,8 +338,10 @@ background-color: #FDB74C;
 }
 
 @media(max-width:900px){
-  .recruitImageWrapper img {
+  .recruitImageWrapper.desktopOnly {
     width: 400px;
+    height: 400px;
+    display: none;
   }
 }
 
@@ -368,6 +378,35 @@ background-color: #FDB74C;
   display: flex;
   justify-content: center;
 }
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .mobileOnly {
+    display: block;
+    text-align: left; 
+  }
+
+
+
+  .recruitSection {
+  background-color: transparent;
+
+  
+}
+
+.mobileOnly img {
+  width: 100%; 
+  max-width: 600px; 
+  height: auto; 
+  object-fit: contain; 
+  border-radius: 8px;
+}
+}
+
+
 
 
 
@@ -429,20 +468,21 @@ background-color: #FDB74C;
     font-size: 2rem;
   }
 
+  
+.decor,
+.decor4 {
+    display: none;
+  }
+
   .partenaireContent p {
     font-size: 0.95rem;
     margin-bottom: 30px;
   }
 .partenaireImages {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    
     gap: 20px;
     padding-left: 10px;
     padding-bottom: 10px;
-    justify-content: flex-start;
   }
 
   .partenaireImage {

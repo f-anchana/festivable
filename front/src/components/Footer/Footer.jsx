@@ -40,8 +40,8 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p>©2025 Festivable</p>
-        <p><a href="#">Mentions légales</a></p>
-        <p><a href="#">Politique de confidentialité</a></p>
+        <p><a href="/LegalPages/mentionLegale">Mentions légales</a></p>
+        <p><a href="/LegalPages/politiqueConfidentialite">Politique de confidentialité</a></p>
       </div>
     </footer>
   );

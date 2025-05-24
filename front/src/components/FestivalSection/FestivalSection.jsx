@@ -150,31 +150,36 @@ export default function FestivalsSection() {
         </div>
       </div>
 
-     {/* recrutement */}
-<div className={styles.recruitSection}>
+   <div className={styles.recruitSection}>
   <div className={styles.recruitContent}>
     <div className={styles.recruitText}>
       <h2 className={styles.recruitTitle}>
         <span>FACILITEZ LE RECRUTEMENT</span><br />
         <span>POUR VOTRE FESTIVAL</span>
       </h2>
-      <p>
-        Avec Festivable, les organisateurs ont la possibilité d’inclure directement leurs besoins en recrutement lors de l’inscription de leur événement.
-      </p>
-      <p>
-        En cochant simplement l’option dédiée dans notre formulaire, vous pouvez préciser les postes à pourvoir (bénévoles, techniciens, accompagnateurs, etc.) ainsi que les conditions éventuelles (rémunération, missions). Ces informations seront mises en avant pour faciliter la mise en relation avec les personnes intéressées.
-      </p>
-      <button className={styles.button}>
-              S'inscrire 🡥
-            </button>
+
+      {/* IMAGE version mobile */}
+      <div className={`${styles.recruitImageWrapper} ${styles.mobileOnly}`}>
+        <Image
+          src="/images/recruitment.svg"
+          alt="Jeunes bénévoles assis"
+          width={600}
+          height={600}
+        />
+      </div>
+
+      <p>Avec Festivable, les organisateurs ont la possibilité d’inclure directement leurs besoins en recrutement lors de l’inscription de leur événement.</p>
+      <p> En cochant simplement l’option dédiée dans notre formulaire, vous pouvez préciser les postes à pourvoir (bénévoles, techniciens, accompagnateurs, etc.) ainsi que les conditions éventuelles (rémunération, missions). Ces informations seront mises en avant pour faciliter la mise en relation avec les personnes intéressées.</p>
+      <button className={styles.button}>S'inscrire 🡥</button>
     </div>
-    <div className={styles.recruitImageWrapper}>
+
+    {/* IMAGE version desktop */}
+    <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}>
       <Image
         src="/images/recruitment.svg"
         alt="Jeunes bénévoles assis"
         width={600}
         height={600}
-        className={styles.recruitImage}
       />
     </div>
   </div>
