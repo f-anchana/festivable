@@ -19,6 +19,7 @@
     background: transparent;
     padding: 5px 10px;
     width: 100%;
+    resize: vertical;
 }
 
 .fieldset {
@@ -79,10 +80,10 @@
 }
 
 .firstContainer {
-    width: 35%;
+    width: 50%;
     margin-right: 8%;
 }
 
 .secondContainer {
-    width: 65%;
+    width: 35%;
 }

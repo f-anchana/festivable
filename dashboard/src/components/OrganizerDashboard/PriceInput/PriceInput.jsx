@@ -4,7 +4,8 @@ export default function PriceInput({
   id,
   label,
   required = false,
-  placeholder = " ",
+  placeholderType = " ",
+  placeholderPrice = " ",
   value,
   onChange,
   id_price
@@ -18,7 +19,7 @@ export default function PriceInput({
         <input
           type="text"
           id={id}
-          placeholder={placeholder}
+          placeholder={placeholderType}
           required={required}
           value={value}
           onChange={onChange}
@@ -32,7 +33,7 @@ export default function PriceInput({
         <input
           type="number"
           id={id_price}
-          placeholder={placeholder}
+          placeholder={placeholderPrice}
           required={required}
           value={value}
           onChange={onChange}

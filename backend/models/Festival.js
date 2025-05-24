@@ -28,7 +28,14 @@ const FestivalSchema = new mongoose.Schema({
     link: String,
     prices: [PricesSchema],
     recruitments: [RecruitmentSchema],
-    accessibility: AccessibilitySchema
+    accessibility: AccessibilitySchema,
+    organizer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Organizateur',
+        required: true
+    },
+    valid: Boolean,
+    pictoaccess: Boolean
 });
 
 // Ajouter images
