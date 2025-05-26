@@ -9,7 +9,6 @@ function MyFestival() {
     return (
             <div className={styles.page}>
                 <MyFestivalForm />
-                <AccessibilityFeatures />
             </div>
     );
 }

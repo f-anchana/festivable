@@ -2,15 +2,18 @@
 import ClassicInput from "@/components/OrganizerDashboard/ClassicInput/ClassicInput";
 import PriceInput from "@/components/OrganizerDashboard/PriceInput/PriceInput";
 import ClassicTextarea from "@/components/OrganizerDashboard/classicTextarea/ClassicTextarea";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 import styles from "@/styles/OrganizerDashboard.module.scss";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MyFestivalForm() {
+
     const [priceInputs, setPriceInputs] = useState([
         { id: 1, id_price: "price1" }
     ]);
+    const [festival, setFestival] = useState(null);
 
     const handleAddInput = () => {
         if (priceInputs.length >= 5) return;
@@ -24,6 +27,21 @@ export default function MyFestivalForm() {
         ]);
     };
 
+    const formatDate = (dateString) => {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        return isNaN(date) ? "" : date.toISOString().split("T")[0];
+    };
+
+
+    const handlePriceInputChange = (index, field, value) => {
+        const newPriceInputs = [...priceInputs];
+        newPriceInputs[index] = {
+            ...newPriceInputs[index],
+            [field]: value,
+        };
+        setPriceInputs(newPriceInputs);
+    };
 
     const handleRemoveLastInput = () => {
         if (priceInputs.length > 1) {
@@ -31,52 +49,154 @@ export default function MyFestivalForm() {
         }
     };
 
+    //RECUPERATION DES DONNEES DU FESTIVAL EN FONCTION DU COMPTE CONNECTE
+    useEffect(() => {
+        const fetchFestival = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+
+            try {
+                const res = await fetch(`${API_URL}/my-festival`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                if (!res.ok) throw new Error("Erreur lors de la récupération du festival");
+
+                const data = await res.json();
+                setFestival(data);
+
+                // Remplir priceInputs depuis la BDD
+                if (data.prices && Array.isArray(data.prices)) {
+                    const formattedPrices = data.prices.map((price, index) => ({
+                        id: Date.now() + index,
+                        id_price: `price${index + 1}`,
+                        type: price.type || "",
+                        amount: price.amount || ""
+                    }));
+                    setPriceInputs(formattedPrices);
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchFestival();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        // e.preventDefault(); // Empêche le rechargement de la page
+
+        // Prépare les données à envoyer
+        const payload = {
+            ...festival,
+            prices: priceInputs.map(({ type, amount }) => ({
+                type,
+                amount
+            })),
+        };
+
+        try {
+            const token = localStorage.getItem("token");
+            const res = await fetch(`${API_URL}/my-festival/update`, {
+                method: "PUT", // ou POST selon ton API
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) {
+                throw new Error("Erreur lors de la mise à jour du festival");
+            }
+
+            const updatedFestival = await res.json();
+            setFestival(updatedFestival); // met à jour avec les données renvoyées
+
+            alert("Festival mis à jour avec succès !\n\nRequête envoyée :\n" + JSON.stringify(payload, null, 2));
+        } catch (error) {
+            console.error(error);
+            alert("Erreur lors de la mise à jour, veuillez réessayer.");
+        }
+    };
+
+    if (!festival) {
+        return (
+            <div className={styles.errorContainer}>
+                <h2>Festival introuvable</h2>
+                <p>
+                    Il semble que votre compte ne soit associé à aucun festival pour le moment.
+                    <br />
+                    Si vous pensez qu’il s’agit d’une erreur, veuillez nous contacter à l’adresse : <strong>support@monfestival.com</strong>.
+                </p>
+            </div>
+        );
+    }
+
+
     return (
         <div>
-            <form action="" className={styles.myFestivalForm}>
+            <h1>Dashboard</h1>
+            <form className={styles.myFestivalForm} onSubmit={handleSubmit}>
                 <div className={styles.flex}>
                     <div className={styles.firstContainer}>
                         <fieldset className={styles.fieldset}>
                             <h2>Événement</h2>
                             <ClassicInput
-                                id="titre"
+                                id="title"
                                 label="Titre*"
                                 type="text"
                                 placeholder="Nom de l'événement"
                                 required
+                                value={festival.title}
+                                onChange={e => setFestival({ ...festival, title: e.target.value })}
                             />
                             <ClassicInput
                                 id="start_date"
                                 label="Date de début*"
                                 type="date"
                                 required
+                                value={formatDate(festival.start_date)}
+                                onChange={e => setFestival({ ...festival, start_date: e.target.value })}
                             />
                             <ClassicInput
                                 id="end_date"
                                 label="Date de fin*"
                                 type="date"
                                 required
+                                value={formatDate(festival.end_date)}
+                                onChange={e => setFestival({ ...festival, end_date: e.target.value })}
                             />
                             <ClassicInput
-                                id="place"
+                                id="address"
                                 label="Lieu*"
                                 type="text"
-                                placeholder="52 Rue General Moutarde Nantes"
+                                placeholder="11 rue de ..."
                                 required
+                                value={festival.address}
+                                onChange={e => setFestival({ ...festival, address: e.target.value })}
                             />
                             <ClassicInput
                                 id="link"
                                 label="Votre site web"
                                 type="text"
                                 placeholder="www.festival.com"
+                                value={festival.link}
+                                onChange={e => setFestival({ ...festival, link: e.target.value })}
                             />
                         </fieldset>
 
                         <fieldset className={styles.fieldset}>
                             <h2>Détails de l'événement</h2>
                             <ClassicTextarea
+                                id="description"
                                 label="Description*"
                                 placeholder="Donnez envie aux gens de venir à votre festival et mettez en avant l'accéssibilité"
+                                value={festival.description}
+                                onChange={e => setFestival({ ...festival, description: e.target.value })}
                             ></ClassicTextarea>
                         </fieldset>
                     </div>
@@ -92,6 +212,10 @@ export default function MyFestivalForm() {
                                     type="text"
                                     placeholderType="Ex: Pass 1 jour"
                                     placeholderPrice="Ex: 80€"
+                                    valueType={priceInput.type}
+                                    valueAmmount={priceInput.amount}
+                                    onChangeType={(e) => handlePriceInputChange(index, 'type', e.target.value)}
+                                    onChangeAmount={(e) => handlePriceInputChange(index, 'amount', e.target.value)}
                                 />
                             ))}
 

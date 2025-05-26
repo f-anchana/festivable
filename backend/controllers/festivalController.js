@@ -43,3 +43,59 @@ exports.createFestival = async (req, res) => {
         res.status(500).json({ error: "Erreur lors de l'enregistrement du festival." });
     }
 };
+
+exports.getFestivalByOrganizerId = async (req, res) => {
+  try {
+    // L'id de l'organisateur est dans req.user.id (voir middleware verifyToken)
+    const organizerId = req.user.id;
+
+    // Recherche le festival lié à cet organisateur
+    const festival = await Festival.findOne({ organizer: organizerId });
+
+    if (!festival) {
+      return res.status(404).json({ message: "Aucun festival trouvé pour cet organisateur" });
+    }
+
+    res.json(festival);
+  } catch (err) {
+    console.error("Erreur lors de la récupération du festival :", err);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+};
+
+exports.updateFestival = async (req, res) => {
+    try {
+        const organizerId = req.user.id; // ou récupère-le selon ta logique d'auth
+        const festival = await Festival.findOne({ organizer: organizerId });
+
+        if (!festival) {
+            return res.status(404).json({ error: "Festival non trouvé." });
+        }
+
+        // Met à jour uniquement les champs présents dans req.body
+        const updatableFields = [
+            "title",
+            "start_date",
+            "end_date",
+            "address",
+            "description",
+            "link",
+            "prices",
+            "recruitments",
+            "accessibility"
+        ];
+
+        updatableFields.forEach(field => {
+            if (req.body[field] !== undefined) {
+                festival[field] = req.body[field];
+            }
+        });
+
+        await festival.save();
+
+        res.status(200).json({ message: "Festival mis à jour avec succès !" });
+    } catch (err) {
+        console.error("Erreur lors de la mise à jour du festival :", err);
+        res.status(500).json({ error: "Erreur lors de la mise à jour du festival." });
+    }
+};

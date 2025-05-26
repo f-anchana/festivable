@@ -19,7 +19,7 @@ export default function ClassicInput({
         id={id}
         placeholder={placeholder}
         required={required}
-        value={value}
+        value={value ? value : ""}
         onChange={onChange}
       />
     </div>

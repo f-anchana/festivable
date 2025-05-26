@@ -1,4 +1,5 @@
 const Dashboard = require('../models/Dashboard');
+const Festival = require('../models/Festival');
 const bcrypt = require('bcryptjs'); // ← bcryptjs ici
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -21,6 +22,7 @@ exports.createOrganization = async (req, res) => {
             email,
             phone_number,
             password,
+            role,
         } = req.body;
 
         // Hash du mot de passe avec bcryptjs
@@ -33,9 +35,27 @@ exports.createOrganization = async (req, res) => {
             email,
             phone_number,
             password: hashedPassword,
+            role,
         });
 
         await newOrganization.save();
+
+        // Création du festival lié à cet organisateur
+        const newFestival = new Festival({
+            title: `${organization_name} Festival`, // par ex un titre par défaut
+            start_date: null,
+            end_date: null,
+            address: '',            // à compléter si besoin
+            description: '',
+            link: '',
+            prices: [],
+            recruitments: [],
+            accessibility: {},
+            organizer: newOrganization._id,  // lien vers l'organisateur
+        });
+
+        await newFestival.save();
+
         res.status(201).json({ message: "Organization enregistré avec succès !" });
     } catch (err) {
         console.error("Erreur lors de l'enregistrement :", err);

@@ -31,11 +31,16 @@ const FestivalSchema = new mongoose.Schema({
     accessibility: AccessibilitySchema,
     organizer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Organizateur',
         required: true
     },
-    valid: Boolean,
-    pictoaccess: Boolean
+    valid: {
+        type: Boolean,
+        default: false
+    },
+    pictoaccess: {
+        type: Boolean,
+        default: false
+    }
 });
 
 // Ajouter images

@@ -6,8 +6,10 @@ export default function PriceInput({
   required = false,
   placeholderType = " ",
   placeholderPrice = " ",
-  value,
-  onChange,
+  valueType,
+  valueAmmount,
+  onChangeType,
+  onChangeAmount,
   id_price
 }) {
   return (
@@ -21,8 +23,8 @@ export default function PriceInput({
           id={id}
           placeholder={placeholderType}
           required={required}
-          value={value}
-          onChange={onChange}
+          value={valueType}
+          onChange={onChangeType}
         />
       </div>
 
@@ -35,8 +37,8 @@ export default function PriceInput({
           id={id_price}
           placeholder={placeholderPrice}
           required={required}
-          value={value}
-          onChange={onChange}
+          value={valueAmmount}
+          onChange={onChangeAmount}
         />
       </div>
 
