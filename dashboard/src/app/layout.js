@@ -1,4 +1,4 @@
-import "../../../../dashboard/src/app/globals.css";
+import "./globals.css";
 import { Poppins, Oswald } from "next/font/google";
 
 const poppins = Poppins({

@@ -81,12 +81,14 @@
 }
 
 .form button {
-    background-color: black;
+    background: #11556B;
+    background: linear-gradient(180deg, rgba(17, 85, 107, 1) 0%, rgba(0, 109, 145, 1) 100%);
     color: white;
     width: fit-content;
     padding: 10px 30px;
-    border-radius: 49px;
+    border-radius: 10px;
     border: none;
+    width: 100%;
 }
 
 .showpassword {

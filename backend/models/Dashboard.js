@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Schéma et modèle de user
-const organizationSchema = new mongoose.Schema({
+const dashboardSchema = new mongoose.Schema({
     organization_name: String,
     name: String,
     email: String,
@@ -9,4 +9,4 @@ const organizationSchema = new mongoose.Schema({
     password: String
 });
 
-module.exports = mongoose.model('Organization', organizationSchema, 'organizations');
+module.exports = mongoose.model('Dashboard', dashboardSchema, 'dashboards');
