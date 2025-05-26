@@ -23,7 +23,7 @@ export default function Header() {
     if (!navbar) return;
 
     ScrollTrigger.create({
-      trigger: "#festival-section", 
+      trigger: "#festival-section", // section déclenchante
       start: "top top",
       end: "bottom top",
       onEnter: () => {
@@ -76,7 +76,7 @@ export default function Header() {
             </div>
           </li>
 
-          <li><Link href="#">Festivals</Link></li>
+          <li><Link href="/festival">Festivals</Link></li>
 
           <li className={styles.dropdown}>
             <button onClick={() => setIsAboutOpen(prev => !prev)} className={styles.dropdownToggle}>
@@ -132,7 +132,7 @@ export default function Header() {
             )}
           </li>
 
-          <li><Link href="#">Festivals</Link></li>
+          <li><Link href="/festival">Festivals</Link></li>
 
           <li>
             <button className={styles.mobileDropdownToggle} onClick={() => setIsMobileAboutOpen(prev => !prev)}>

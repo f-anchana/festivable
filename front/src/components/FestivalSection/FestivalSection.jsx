@@ -52,6 +52,7 @@ export default function FestivalsSection() {
   return (
     
     <section id="festival-section" className={styles.festivalsSection}  ref={sectionRef}>
+    <div className={styles.festivalIntro}>
       <div className={styles.titleWrapper}>
         <h2 className={styles.title}>LES FESTIVALS CERTIFIÉS</h2>
         <p className={styles.subtitle}>
@@ -65,6 +66,8 @@ export default function FestivalsSection() {
           <FestivalCard key={festival.id} {...festival} />
         ))}
       </div>
+
+    </div>
 
       <div className={styles.viewAll}>
         <a href="#">Voir tous nos festivals</a>

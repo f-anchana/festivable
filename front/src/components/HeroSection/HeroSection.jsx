@@ -27,7 +27,7 @@ const HeroSection = () => {
           </h2>
           <p className={styles.description}>
             Ce site, réalisé en partenariat avec le ministère de la Culture,<br />
-            vous propose un panorama complet des festivals en France.<br />
+            vous propose un panorama complet des festivals  en France.<br />
             Explorez, découvrez et partagez la culture dans toutes ses formes.
           </p>
           <div className={styles.boutons_homepage}>

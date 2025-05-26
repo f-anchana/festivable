@@ -28,6 +28,8 @@ export default function politiqueConfidentialite() {
         personnelles, conformément au Règlement Général sur la Protection des Données (RGPD).
       </p>
 
+      <br/>
+
       <h2>Qui sommes-nous ?</h2>
       <p>
         Festivallible est une plateforme qui recense des festivals accessibles aux personnes en situation de handicap,
@@ -48,6 +50,8 @@ export default function politiqueConfidentialite() {
         <li>Données de navigation (cookies, pages visitées, etc.)</li>
       </ul>
 
+      <br/>
+
       <h2>Comment utilisons-nous vos données ?</h2>
       <p>Nous utilisons vos données uniquement dans les cas suivants :</p>
       <ul>
@@ -56,6 +60,9 @@ export default function politiqueConfidentialite() {
         <li>Envoi d’emails d’information ou de suivi</li>
       </ul>
       <p>Vos données ne sont jamais vendues ni cédées à des tiers sans votre consentement explicite.</p>
+
+            <br/>
+
 
       <h2>Cookies</h2>
       <p>
@@ -68,6 +75,8 @@ export default function politiqueConfidentialite() {
         <li>Comptes inactifs : suppression après 2 ans sans connexion</li>
         <li>Cookies : 13 mois maximum</li>
       </ul>
+            <br/>
+
 
       <h2>Vos droits</h2>
       <p>Conformément au RGPD, vous disposez des droits suivants :</p>
@@ -78,9 +87,12 @@ export default function politiqueConfidentialite() {
         <li>Droit d’opposition et limitation</li>
         <li>Pour exercer ces droits : [adresse email de contact RGPD]</li>
       </ul>
+            <br/>
+
 
       <h2>Sécurité</h2>
       <p>Nous mettons en place toutes les mesures techniques et organisationnelles nécessaires pour garantir la sécurité de vos données personnelles.</p>
+       <br/>
 
       <h2>Modifications</h2>
       <p>Nous nous réservons le droit de modifier cette politique. Toute modification sera affichée sur cette page avec la date de mise à jour.</p>

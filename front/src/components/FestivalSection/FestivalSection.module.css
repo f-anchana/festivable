@@ -7,14 +7,10 @@
     margin-top: -30px;
 }
 
-.titleWrapper{
-  margin-left: 65px;
+
+.festivalIntro{
+margin-left: 30px;
 }
-
-
-/* .scrollWrapper{
-width: 100px;
-} */
 
 .cardsWrapper {
   display: flex;
@@ -40,7 +36,7 @@ width: 100px;
 @media (min-width: 900px) {
   .cardsWrapper {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     overflow-x: visible;
   }
 

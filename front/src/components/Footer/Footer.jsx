@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Footer.module.css";
+
 
 export default function Footer() {
   return (
@@ -7,7 +9,9 @@ export default function Footer() {
       <div className={styles.top}>
         <div className={styles.left}>
           <div className={styles.logo}>
-            <p>LOGO + BASELINE</p>
+            
+          <Image src="/logo/Logo_Festivable_white.svg" alt="Accueil" width={80} height={60} />
+            
           </div>
           <div className={styles.socials}>
             <h2>NOS RÉSEAUX</h2>
@@ -40,8 +44,8 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <p>©2025 Festivable</p>
-        <p><a href="/LegalPages/mentionLegale">Mentions légales</a></p>
-        <p><a href="/LegalPages/politiqueConfidentialite">Politique de confidentialité</a></p>
+        <p><Link href="/LegalPages/mentionLegale">Mentions légales</Link></p>
+        <p><Link href="/LegalPages/politiqueConfidentialite">Politique de confidentialité</Link></p>
       </div>
     </footer>
   );
