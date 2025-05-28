@@ -5,11 +5,21 @@ import { useState } from "react";
 import AddressSearch from "../../../components/OrganizerDashboard/AddressSearch/AddressSearch";
 import CoordinatesSearch from "../../../components/OrganizerDashboard/CoordinatesSearch/CoordinatesSearch";
 import MapCanvas from "../../../components/OrganizerDashboard/MapCanvas/MapCanvas";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import IconPalette from "../../../components/OrganizerDashboard/IconPalette/IconPalette";
 import styles from "./MapBuilder.module.scss";
 
 export default function MapSetupPage() {
-  const [center, setCenter] = useState([48.8566, 2.3522]); // Paris par défaut
-  const [polygon, setPolygon] = useState([]);
+  const [center, setCenter] = useState(null);
+  const [polygonStyle, setPolygonStyle] = useState({
+    color: "#1e88e5",
+    fillColor: "transparent",
+    fillOpacity: 0.1,
+  });
+
+  const [polygons, setPolygons] = useState([]);
+  const [selectedPolygonIndex, setSelectedPolygonIndex] = useState(null);
 
   return (
     <div className={styles.container}>
@@ -31,7 +41,25 @@ export default function MapSetupPage() {
           onSelect={(coords /* [lat,lng] */) => setCenter(coords)}
         />
       </div>
-      <MapCanvas center={center} polygon={polygon} setPolygon={setPolygon} />
+      <DndProvider backend={HTML5Backend}>
+        <div style={{ display: "flex" }}>
+          <MapCanvas
+            center={center}
+            polygons={polygons}
+            setPolygons={setPolygons}
+            selectedPolygonIndex={selectedPolygonIndex}
+            setSelectedPolygonIndex={setSelectedPolygonIndex}
+          />
+          {center && (
+            <IconPalette
+              center={center}
+              polygonStyle={polygonStyle}
+              setPolygonStyle={setPolygonStyle}
+            />
+          )}
+        </div>
+      </DndProvider>
+
       <div>
         <h2>Ajoutez les points d’intérêt : </h2>
         <p>

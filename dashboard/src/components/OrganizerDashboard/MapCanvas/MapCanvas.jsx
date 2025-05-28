@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+// Importation des hooks React, composants Leaflet et styles nécessaires
+import { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -12,21 +13,22 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
+import { useDrop } from "react-dnd";
 import styles from "../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
 
-/* Patch icônes défaut (Next JS) */
+// Gestion des icônes Leaflet avec Next.js
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import icon from "leaflet/dist/images/marker-icon.png";
 import shadow from "leaflet/dist/images/marker-shadow.png";
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: iconRetina.src ?? iconRetina,
-  iconUrl:       icon.src       ?? icon,
-  shadowUrl:     shadow.src     ?? shadow,
+  iconUrl: icon.src ?? icon,
+  shadowUrl: shadow.src ?? shadow,
 });
 
-
-
+// Composant de recentrage de la carte sur les nouvelles coordonnées
 function RecenterOnChange({ center }) {
   const map = useMap();
   useEffect(() => {
@@ -35,11 +37,43 @@ function RecenterOnChange({ center }) {
   return null;
 }
 
-function DrawControls({ polygon, setPolygon }) {
-  const map   = useMap();
+// Gestion du drop des icônes personnalisées sur la carte
+function DropHandler({ onDrop }) {
+  const map = useMap();
+  const ref = useRef(null);
+
+  const [, drop] = useDrop(
+    () => ({
+      accept: "ICON",
+      drop: (item, monitor) => {
+        const offset = monitor.getClientOffset();
+        if (!offset || !ref.current) return;
+        const bounds = ref.current.getBoundingClientRect();
+        const x = offset.x - bounds.left;
+        const y = offset.y - bounds.top;
+        const latlng = map.containerPointToLatLng([x, y]);
+        onDrop(item.type, latlng);
+      },
+    }),
+    [map]
+  );
+
+  useEffect(() => {
+    const container = map.getContainer();
+    if (container) {
+      drop(container);
+      ref.current = container;
+    }
+  }, [drop, map]);
+
+  return null;
+}
+
+// Contrôles de dessin de polygones avec gestion du clic et tooltip
+function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
+  const map = useMap();
   const fgRef = useRef(null);
 
-  /* 2-a. installer les boutons */
   useEffect(() => {
     const fg = fgRef.current;
     if (!fg) return;
@@ -49,63 +83,253 @@ function DrawControls({ polygon, setPolygon }) {
         polygon: {
           allowIntersection: false,
           showArea: false,
-          shapeOptions: { color: "#1e88e5" },
+          shapeOptions: {
+            color: "#1e88e5",
+            fillColor: "#1e88e5",
+            fillOpacity: 0.3,
+            weight: 2,
+          },
         },
         rectangle: false,
         circle: false,
         polyline: false,
         marker: false,
         circlemarker: false,
-      },
-      edit: { featureGroup: fg, remove: true, edit: false },
+      }
     });
+
     map.addControl(draw);
 
-    /* Création d’un nouveau polygone */
-    map.on("draw:created", (e) => {
+    const handleCreated = (e) => {
       if (e.layerType !== "polygon") return;
-      fg.clearLayers();                 // garder un seul polygone
-      fg.addLayer(e.layer);
       const coords = e.layer.getLatLngs()[0].map((p) => [p.lat, p.lng]);
-      setPolygon(coords);
-    });
+      setPolygons((prev) => [
+        ...prev,
+        {
+          coords,
+          style: {
+            color: "#1e88e5",
+            fillColor: "#1e88e5",
+            fillOpacity: 0.3,
+            weight: 2,
+          },
+          name: "",
+        },
+      ]);
+    };
 
-    /* Suppression */
-    map.on("draw:deleted", () => setPolygon([]));
+    map.on("draw:created", handleCreated);
 
     return () => {
-      map.off();
+      map.off("draw:created", handleCreated);
       map.removeControl(draw);
     };
-  }, [map, setPolygon]);
+  }, [map, setPolygons]);
 
   useEffect(() => {
     const fg = fgRef.current;
     if (!fg) return;
     fg.clearLayers();
-    if (polygon.length >= 3) {
-      fg.addLayer(L.polygon(polygon, { color: "#1e88e5" }));
-    }
-  }, [polygon]);
+
+    polygons.forEach((polygon, i) => {
+      const layer = L.polygon(polygon.coords, polygon.style);
+      layer.on("click", () => setSelectedPolygonIndex(i));
+      if (polygon.name) {
+        const center = L.polygon(polygon.coords).getBounds().getCenter();
+        const tooltip = L.tooltip(center, {
+          permanent: true,
+          direction: "center",
+          className: "polygon-label",
+          offset: [0, 0],
+        }).setContent(polygon.name);
+        layer.bindTooltip(tooltip);
+      }
+      fg.addLayer(layer);
+    });
+  }, [polygons, setSelectedPolygonIndex]);
 
   return <FeatureGroup ref={fgRef} />;
 }
 
-export default function MapCanvas({ center, polygon, setPolygon }) {
+// Composant principal de la carte
+export default function MapCanvas({
+  center,
+  polygons,
+  setPolygons,
+  selectedPolygonIndex,
+  setSelectedPolygonIndex,
+}) {
+  const [icons, setIcons] = useState([]);
+
+  const handleDrop = (type, latlng) => {
+    setIcons((prev) => [...prev, { type, latlng }]);
+  };
+
+  const getIcon = (type) =>
+    new L.Icon({
+      iconUrl: `/icones/map-builder/${type}.svg`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+    });
+
+  const handleStyleChange = (key, value) => {
+    if (selectedPolygonIndex === null) return;
+    setPolygons((prev) =>
+      prev.map((poly, i) =>
+        i === selectedPolygonIndex
+          ? {
+              ...poly,
+              style: { ...poly.style, [key]: value },
+            }
+          : poly
+      )
+    );
+  };
+
+  const handleNameChange = (value) => {
+    if (selectedPolygonIndex === null) return;
+    setPolygons((prev) =>
+      prev.map((poly, i) =>
+        i === selectedPolygonIndex ? { ...poly, name: value } : poly
+      )
+    );
+  };
+
+  const handleDeletePolygon = () => {
+    if (selectedPolygonIndex === null) return;
+    setPolygons((prev) => prev.filter((_, i) => i !== selectedPolygonIndex));
+    setSelectedPolygonIndex(null);
+  };
+
+  if (!center) {
+    return (
+      <div
+        style={{
+          height: 400,
+          width: "100%",
+          background: "#f9f9f9",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 16,
+          color: "#333",
+          borderRadius: 6,
+        }}
+      >
+        Veuillez renseigner l’adresse ou les coordonnées GPS du lieu
+      </div>
+    );
+  }
+
   return (
-    <MapContainer
-      center={center}
-      zoom={15}
-      scrollWheelZoom
-      className={styles.map}   /* flex:1; min-width:0; height:600px */
-    >
-      <RecenterOnChange center={center} />
+    <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+      <MapContainer
+        center={center}
+        zoom={15}
+        scrollWheelZoom
+        className={styles.map}
+      >
+        <RecenterOnChange center={center} />
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <Marker position={center} />
+        <DrawControls
+          polygons={polygons}
+          setPolygons={setPolygons}
+          setSelectedPolygonIndex={setSelectedPolygonIndex}
+        />
+        <DropHandler onDrop={handleDrop} />
+        {icons.map((m, i) => (
+          <Marker
+            key={i}
+            position={m.latlng}
+            icon={getIcon(m.type)}
+            draggable={true}
+            eventHandlers={{
+              dragend: (e) => {
+                const newLatLng = e.target.getLatLng();
+                setIcons((prev) =>
+                  prev.map((icon, index) =>
+                    index === i ? { ...icon, latlng: newLatLng } : icon
+                  )
+                );
+              },
+              contextmenu: () => {
+                setIcons((prev) => prev.filter((_, index) => index !== i));
+              },
+            }}
+          />
+        ))}
+      </MapContainer>
 
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-      <Marker position={center} />
-
-      <DrawControls polygon={polygon} setPolygon={setPolygon} />
-    </MapContainer>
+      {/* Panneau d'édition du polygone sélectionné */}
+      {selectedPolygonIndex !== null && (
+        <div
+          style={{
+            marginTop: 8,
+            background: "#fff",
+            padding: "8px 12px",
+            border: "1px solid #ccc",
+            borderRadius: 4,
+            fontSize: 14,
+          }}
+        >
+          <p style={{ marginBottom: 4 }}>
+            🎨 Modifier le polygone sélectionné :
+          </p>
+          <label>
+            Nom :
+            <input
+              type="text"
+              value={polygons[selectedPolygonIndex]?.name || ""}
+              onChange={(e) => handleNameChange(e.target.value)}
+              placeholder="Nom de la zone (optionnel)"
+              style={{ marginLeft: 8 }}
+            />
+          </label>
+          <br />
+          <label>
+            Couleur :
+            <input
+              type="color"
+              value={polygons[selectedPolygonIndex]?.style?.fillColor || "#1e88e5"}
+              onChange={(e) => {
+                handleStyleChange("fillColor", e.target.value);
+                handleStyleChange("color", e.target.value);
+              }}
+              style={{ marginLeft: 8 }}
+            />
+          </label>
+          <br />
+          <label>
+            Opacité :
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={polygons[selectedPolygonIndex]?.style?.fillOpacity ?? 0.3}
+              onChange={(e) =>
+                handleStyleChange("fillOpacity", parseFloat(e.target.value))
+              }
+              style={{ marginLeft: 8 }}
+            />
+          </label>
+          <br />
+          <button
+            onClick={handleDeletePolygon}
+            style={{
+              marginTop: 8,
+              color: "white",
+              background: "red",
+              border: "none",
+              padding: "4px 8px",
+              borderRadius: 4,
+            }}
+          >
+            Supprimer ce polygone
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
