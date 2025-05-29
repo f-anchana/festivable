@@ -10,6 +10,22 @@ exports.getFestivals = async (req, res) => {
     }
 };
 
+exports.getFestivalById = async (req, res) => {
+    try {
+        const id = req.params.id; // récupère l'id depuis l'URL (ex: /festivals/:id)
+        const festival = await Festival.findById(id);
+
+        if (!festival) {
+            return res.status(404).json({ message: "Festival non trouvé" });
+        }
+
+        res.json(festival);
+    } catch (err) {
+        console.error("Erreur lors de la récupération :", err);
+        res.status(500).send("Erreur lors de la récupération du festival");
+    }
+};
+
 exports.createFestival = async (req, res) => {
     try {
         const {
