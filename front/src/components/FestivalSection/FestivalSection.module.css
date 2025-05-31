@@ -111,16 +111,16 @@ margin-left: 30px;
 .imageWrapper {
   position: relative;
   width: 500px;
-  aspect-ratio: 1/1;
   outline-offset: 10px;
   box-sizing: border-box;
   flex-shrink: 0;
 }
 
 .image {
-  object-fit: cover;
+  object-fit: fill;
   border-radius: 0;
-  width: 500px;
+  width: 600px;
+  height: 500px;
 }
 
 .textContent {
