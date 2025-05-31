@@ -70,7 +70,7 @@ export default function Header() {
             </button>
             <div className={`${styles.dropdownWrapper} ${isAccessibilityOpen ? styles.dropdownVisible : ''}`}>
               <ul className={styles.dropdownMenu}>
-                <li><Link href="#">PictoAccess</Link></li>
+                <li><Link href="/PictoAccess">PictoAccess</Link></li>
                 <li><Link href="#">Référentiel</Link></li>
               </ul>
             </div>
@@ -93,7 +93,7 @@ export default function Header() {
               <ul className={styles.dropdownMenu}>
                 <li><Link href="#">Nos missions</Link></li>
                 <li><Link href="#">Nos partenaires</Link></li>
-                <li><Link href="#">Recrutement</Link></li>
+                <li><Link href="/Recrutement">Recrutement</Link></li>
               </ul>
             </div>
           </li>
@@ -126,7 +126,7 @@ export default function Header() {
             </button>
             {isMobileAccessibilityOpen && (
               <ul className={styles.mobileDropdownMenu}>
-                <li><Link href="#">PictoAccess</Link></li>
+                <li><Link href="/PictoAccess">PictoAccess</Link></li>
                 <li><Link href="#">Référentiel</Link></li>
               </ul>
             )}
@@ -149,7 +149,7 @@ export default function Header() {
               <ul className={styles.mobileDropdownMenu}>
                 <li><Link href="#">Nos missions</Link></li>
                 <li><Link href="#">Nos partenaires</Link></li>
-                <li><Link href="#">Recrutement</Link></li>
+                <li><Link href="/Recrutement">Recrutement</Link></li>
               </ul>
             )}
           </li>
