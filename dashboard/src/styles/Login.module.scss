@@ -80,7 +80,7 @@
     width: 40%;
 }
 
-.form button {
+.submitButton {
     background: #11556B;
     background: linear-gradient(180deg, rgba(17, 85, 107, 1) 0%, rgba(0, 109, 145, 1) 100%);
     color: white;
@@ -94,6 +94,7 @@
 .showpassword {
     padding: 0 8px 0 8px !important;
     background-color: transparent !important;
+    border: none;
 }
 
 .showpassword img {

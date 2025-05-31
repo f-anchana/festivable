@@ -1,11 +1,19 @@
 'use client';
 import styles from "@/styles/Login.module.scss";
 import Image from "next/image";
+import { jwtDecode } from 'jwt-decode';
+import { useState } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 
 export default function Login() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePassword = () => {
+        setShowPassword(prev => !prev);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -24,7 +32,12 @@ export default function Login() {
 
             if (response.ok) {
                 localStorage.setItem("token", data.token);
-                window.location.href = "/myfestival";
+                const decodedToken = jwtDecode(data.token);
+                if (decodedToken.role === 'organizer') {
+                    window.location.href = "/myfestival";
+                } else if (decodedToken.role === 'admin') {
+                    window.location.href = "/admin-dashboard";
+                }
             } else {
                 alert("Identifiants incorrects");
             }
@@ -42,13 +55,13 @@ export default function Login() {
                     <label htmlFor="email" className={styles.label}>E-mail</label>
                 </div>
                 <div className={styles.inputContainer}>
-                    <input type={"password"} className={styles.input} id="password" placeholder=" " name="password" required />
+                    <input type={showPassword ? "text" : "password"} className={styles.input} id="password" placeholder=" " required />
                     <label htmlFor="password" className={styles.label}>Mot de passe</label>
-                    {/* <button type="button" aria-label="Afficher ou masquer le mot de passe" className={styles.showpassword} onClick={togglePassword}>
-                        <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
-                    </button> */}
+                    <button type="button" aria-label="Afficher ou masquer le mot de passe" className={styles.showpassword} onClick={togglePassword}>
+                        <img src={showPassword ? "/icones/dashboard/closed-eye.svg" : "/icones/dashboard/open-eye.svg"} alt="" />
+                    </button>
                 </div>
-                <button>Se connecter</button>
+                <button type="submit" className={styles.submitButton}>Se connecter</button>
             </form>
             <div className={styles.mentions}>
                 <Image

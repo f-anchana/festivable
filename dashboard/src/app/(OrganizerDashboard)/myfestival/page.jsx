@@ -13,4 +13,4 @@ function MyFestival() {
     );
 }
 
-export default securePage(MyFestival);
+export default securePage(MyFestival, ["organizer"]);
