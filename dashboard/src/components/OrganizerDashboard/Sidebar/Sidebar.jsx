@@ -25,7 +25,7 @@ const navItems = [
   },
   {
     label: "Carte",
-    href: "/map",
+    href: "/map-builder",
     icon: "/icones/dashboard/pindashboard.svg",
     iconHover: "/icones/dashboard/pindashboard_blue.svg",
   },
