@@ -139,7 +139,6 @@ export default function MyFestivalForm() {
 
     return (
         <div>
-            <h1>Dashboard</h1>
             <form className={styles.myFestivalForm} onSubmit={handleSubmit}>
                 <div className={styles.flex}>
                     <div className={styles.firstContainer}>
