@@ -1,5 +1,11 @@
 .pricing {
     margin: 20px;
+
+    @media (min-width: 768px) {
+      background-color: #F7F7F7;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
   
     &__title {
       display: inline-block;
@@ -23,6 +29,10 @@
         text-align: left;
         font-weight: 700;
         padding: 0.5rem 0;
+
+        &:nth-child(2) {
+          text-align: right;
+        }
       }
   
       td {
