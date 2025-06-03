@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 const festivalController = require('../controllers/festivalController');
 const dashboardController = require('../controllers/dashboardController');
 const mapController = require('../controllers/mapController');
+const accessibilityController = require('../controllers/accessibilityController');
 const verifyToken = require('../middlewares/verifyToken');
 
 router.get('/users', userController.getUsers);
@@ -24,5 +25,10 @@ router.get('/maps', mapController.getMaps);
 router.post('/map', mapController.createMap);
 router.get('/map/:id', mapController.getMapByFestivalId); //Pour afficher la map sur le site
 router.get('/my-map',verifyToken, mapController.getMapByOrganizer); //Pour afficher la map dans le dashboard
+
+router.get('/answers', accessibilityController.getAnswers);
+router.post('/answer',verifyToken, accessibilityController.createAnswer);
+router.get('/answer/:id', accessibilityController.getAnswerByFestivalId); //Pour afficher les réponses sur le site
+router.get('/my-answers',verifyToken, accessibilityController.getAnswerByOrganizer); //Pour afficher les réponses dans le dashboard
 
 module.exports = router;
