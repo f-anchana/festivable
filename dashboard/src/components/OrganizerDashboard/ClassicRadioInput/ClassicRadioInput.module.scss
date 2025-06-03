@@ -1,0 +1,44 @@
+.inputContainer {
+    background-color: #F7F7F7;
+    border-radius: 15px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.radioGroup {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+}
+
+.inputContainer input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--dark-blue);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputContainer input[type="radio"]:checked {
+  background: var(--gradient-dark-blue);
+}
+
+.inputContainer label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainer p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -13,12 +13,6 @@ const RecruitmentSchema = new mongoose.Schema({
     contact_email: String
 });
 
-const AccessibilitySchema = new mongoose.Schema({
-    wheelchair_accessible: Boolean,
-    disabled_parking_available: Boolean
-    // Ajouter d'autres champs ici
-});
-
 const FestivalSchema = new mongoose.Schema({
     title: String,
     start_date: Date,
@@ -28,7 +22,6 @@ const FestivalSchema = new mongoose.Schema({
     link: String,
     prices: [PricesSchema],
     recruitments: [RecruitmentSchema],
-    accessibility: AccessibilitySchema,
     organizer: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
