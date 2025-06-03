@@ -2,19 +2,19 @@ import Head from 'next/head';
 import styles from '@/app/(with-nav)/Homepage.module.css';
 import FestivalVolunteer from '@/components/FestivalPage/FestivalVolunteer/FestivalVolunteer';
 
-export default function Recrutement() {
+export default function Apropos() {
   return (
     <>
       <Head>
-        <title>Recrutement | Festivable</title>
+        <title> À propos | Festivable</title>
         <meta
           name="description"
-          content="Découvrez nos offres de bénévolat et rejoignez l'équipe Festivable pour rendre les festivals plus accessibles."
+          content="presentation de festivable "
         />
       </Head>
 
       <main className={styles.container}>
-        <h1 className={styles.title}>Rejoignez l'aventure Festivable</h1>
+        <h1 className={styles.title}>à PROPOS DE FESTIV’ABLE</h1>
 
         <p className={styles.intro}>
           Vous avez envie de participer à un projet humain et engagé ?  

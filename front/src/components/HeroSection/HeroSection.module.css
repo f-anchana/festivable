@@ -151,6 +151,10 @@
     min-height: auto;
   }
 
+  .decor3 {
+     display: none;
+  }
+
   .content {
     flex-direction: column-reverse;
     align-items: center;
@@ -165,7 +169,7 @@
 
   .text {
     width: 100%;
-    transform: none; /* on annule le chevauchement sur mobile */
+    transform: none; 
   }
 
  

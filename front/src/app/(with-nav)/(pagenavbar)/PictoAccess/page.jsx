@@ -5,15 +5,15 @@ export default function PictoAccess() {
   return (
     <>
       <Head>
-        <title>PictoAccess & Festivable - Accessibilité dans les festivals</title>
+        <title>Picto Access & Festivable - Accessibilité dans les festivals</title>
         <meta
           name="description"
-          content="Découvrez PictoAccess, son rôle dans l'accessibilité des festivals via Festivable et comment les organisateurs peuvent certifier leurs événements."
+          content="Découvrez Picto Access, son rôle dans l'accessibilité des festivals via Festivable et comment les organisateurs peuvent certifier leurs événements."
         />
       </Head>
 
       <main className={styles.container}>
-        <h1 className={styles.title}>PictoAccess : Accessibilité dans les festivals</h1>
+        <h1 className={styles.title}>Picto Access : Accessibilité dans les festivals</h1>
 
         <section className={styles.section}>
           <div className={styles.text}>

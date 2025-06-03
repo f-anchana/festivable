@@ -9,8 +9,10 @@ export default function Footer() {
       <div className={styles.top}>
         <div className={styles.left}>
           <div className={styles.logo}>
-            
-          <Image src="/logo/Logo_Festivable_white.svg" alt="Accueil" width={80} height={60} />
+            <a href="/festival">
+              <Image src="/logo/Logo_Festivable_white.svg" alt="Accueil" width={80} height={60} />
+            </a>
+          
             
           </div>
           <div className={styles.socials}>
@@ -30,7 +32,6 @@ export default function Footer() {
               <li><a href="#">Accessibilité</a></li>
               <li><a href="#">Festivals</a></li>
               <li><a href="#">À propos</a></li>
-              <li><a href="#">Forum</a></li>
             </ul>
           </div>
           <div className={styles.contact}>
