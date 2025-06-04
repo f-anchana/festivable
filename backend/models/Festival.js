@@ -29,6 +29,4 @@ const FestivalSchema = new mongoose.Schema({
 
 // Ajouter images
 
-// Ajouter map
-
 module.exports = mongoose.model('Festival', FestivalSchema, 'festivals');
