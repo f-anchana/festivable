@@ -16,6 +16,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Connexion à MongoDB 
 connectDB();
 
+// Dis à Express que tu veux utiliser EJS
+app.set('view engine', 'ejs');
+
+// Indique le dossier des vues
+app.set('views', path.join(__dirname, 'views'));
+
 // Middleware pour parser les requêtes JSON
 app.use(express.json());
 

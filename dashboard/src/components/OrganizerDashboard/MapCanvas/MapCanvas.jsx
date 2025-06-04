@@ -1,6 +1,5 @@
 "use client";
 
-// Importation des hooks React, composants Leaflet et styles nécessaires
 import { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
@@ -15,8 +14,8 @@ import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
 import { useDrop } from "react-dnd";
 import styles from "../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
+import CopyMapLinkButton from "../../OrganizerDashboard/CopyMapLinkButton/CopyMapLinkButton";
 
-// Gestion des icônes Leaflet avec Next.js
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import icon from "leaflet/dist/images/marker-icon.png";
 import shadow from "leaflet/dist/images/marker-shadow.png";
@@ -28,7 +27,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: shadow.src ?? shadow,
 });
 
-// Composant de recentrage de la carte sur les nouvelles coordonnées
 function RecenterOnChange({ center }) {
   const map = useMap();
   useEffect(() => {
@@ -37,7 +35,6 @@ function RecenterOnChange({ center }) {
   return null;
 }
 
-// Gestion du drop des icônes personnalisées sur la carte
 function DropHandler({ onDrop }) {
   const map = useMap();
   const ref = useRef(null);
@@ -69,7 +66,6 @@ function DropHandler({ onDrop }) {
   return null;
 }
 
-// Contrôles de dessin de polygones avec gestion du clic et tooltip
 function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
   const map = useMap();
   const fgRef = useRef(null);
@@ -82,7 +78,6 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
       draw: {
         polygon: {
           allowIntersection: false,
-          showArea: false,
           shapeOptions: {
             color: "#1e88e5",
             fillColor: "#1e88e5",
@@ -95,7 +90,7 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
         polyline: false,
         marker: false,
         circlemarker: false,
-      }
+      },
     });
 
     map.addControl(draw);
@@ -151,13 +146,13 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
   return <FeatureGroup ref={fgRef} />;
 }
 
-// Composant principal de la carte
 export default function MapCanvas({
   center,
   polygons,
   setPolygons,
   selectedPolygonIndex,
   setSelectedPolygonIndex,
+  festivalId,
 }) {
   const [icons, setIcons] = useState([]);
 
@@ -177,10 +172,7 @@ export default function MapCanvas({
     setPolygons((prev) =>
       prev.map((poly, i) =>
         i === selectedPolygonIndex
-          ? {
-              ...poly,
-              style: { ...poly.style, [key]: value },
-            }
+          ? { ...poly, style: { ...poly.style, [key]: value } }
           : poly
       )
     );
@@ -201,11 +193,38 @@ export default function MapCanvas({
     setSelectedPolygonIndex(null);
   };
 
+  const saveMap = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/map`, {
+        method: "PUT", // ou POST si tu veux toujours recréer
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          festivalId,
+          center,
+          zoom: 15,
+          polygons,
+          icons,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Erreur inconnue");
+      }
+
+      alert("✅ Carte enregistrée avec succès !");
+    } catch (err) {
+      alert("❌ Erreur lors de la sauvegarde : " + err.message);
+    }
+  };
+
   if (!center) {
     return (
       <div
         style={{
-          height: 400,
+          height: 300,
           width: "100%",
           background: "#f9f9f9",
           display: "flex",
@@ -261,7 +280,6 @@ export default function MapCanvas({
         ))}
       </MapContainer>
 
-      {/* Panneau d'édition du polygone sélectionné */}
       {selectedPolygonIndex !== null && (
         <div
           style={{
@@ -291,7 +309,9 @@ export default function MapCanvas({
             Couleur :
             <input
               type="color"
-              value={polygons[selectedPolygonIndex]?.style?.fillColor || "#1e88e5"}
+              value={
+                polygons[selectedPolygonIndex]?.style?.fillColor || "#1e88e5"
+              }
               onChange={(e) => {
                 handleStyleChange("fillColor", e.target.value);
                 handleStyleChange("color", e.target.value);
@@ -330,6 +350,24 @@ export default function MapCanvas({
           </button>
         </div>
       )}
+
+      <button
+        onClick={saveMap}
+        style={{
+          marginTop: 12,
+          backgroundColor: "#1e88e5",
+          color: "#fff",
+          padding: "10px 16px",
+          fontSize: 14,
+          border: "none",
+          borderRadius: 6,
+          cursor: "pointer",
+          alignSelf: "flex-start",
+        }}
+      >
+        💾 Sauvegarder la carte
+      </button>
+      <CopyMapLinkButton festivalId={festivalId} />
     </div>
   );
 }

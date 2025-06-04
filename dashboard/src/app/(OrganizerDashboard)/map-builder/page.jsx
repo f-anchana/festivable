@@ -4,7 +4,7 @@
 import { useState } from "react";
 import AddressSearch from "../../../components/OrganizerDashboard/AddressSearch/AddressSearch";
 import CoordinatesSearch from "../../../components/OrganizerDashboard/CoordinatesSearch/CoordinatesSearch";
-import MapCanvas from "../../../components/OrganizerDashboard/MapCanvas/MapCanvas";
+import MapCanvas from '../../../components/OrganizerDashboard/MapCanvasWrapper/MapCanvasWrapper';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import IconPalette from "../../../components/OrganizerDashboard/IconPalette/IconPalette";
@@ -24,7 +24,7 @@ export default function MapSetupPage() {
   return (
     <div className={styles.container}>
       <div>
-        <h1>Paramétrez la carte de votre festival</h1>
+        <h2>Paramétrez la carte de votre festival</h2>
         <p>
           Pour afficher correctement votre événement sur la carte, veuillez
           renseigner <strong>l’adresse exacte</strong> ou{" "}
@@ -49,7 +49,8 @@ export default function MapSetupPage() {
             setPolygons={setPolygons}
             selectedPolygonIndex={selectedPolygonIndex}
             setSelectedPolygonIndex={setSelectedPolygonIndex}
-          />
+            festivalId={"6834665b8bc5ab4c29413d39"}
+            />
           {center && (
             <IconPalette
               center={center}
@@ -61,7 +62,7 @@ export default function MapSetupPage() {
       </DndProvider>
 
       <div>
-        <h2>Ajoutez les points d’intérêt : </h2>
+        <h3>Ajoutez les points d’intérêt : </h3>
         <p>
           Sur le côté de la carte, vous trouverez plusieurs icônes représentant
           des équipements clés :
