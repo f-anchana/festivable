@@ -31,8 +31,8 @@ const HeroSection = () => {
             Explorez, découvrez et partagez la culture dans toutes ses formes.
           </p>
           <div className={styles.boutons_homepage}>
-            <a href="">Découvrir la programmation culturelle 🡥</a>
-            <a href="">Faire certifier mon festival 🡥</a>
+            <a href="">Découvrir la programmation culturelle →</a>
+            <a href="">Faire certifier mon festival →</a>
           </div>
         </div>
 

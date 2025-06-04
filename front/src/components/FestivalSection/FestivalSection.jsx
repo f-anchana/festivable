@@ -121,7 +121,7 @@ export default function FestivalsSection() {
               Ensemble, nous œuvrons pour que chaque événement soit une expérience inclusive et
               inoubliable !
             </p>
-            <button className={styles.button}>En savoir plus 🡥</button>
+            <button className={styles.button}>En savoir plus →</button>
           </div>
           <div className={styles.triangle}></div>
         </div>
@@ -204,7 +204,7 @@ export default function FestivalsSection() {
               conditions éventuelles (rémunération, missions). Ces informations seront mises en
               avant pour faciliter la mise en relation avec les personnes intéressées.
             </p>
-            <button className={styles.button}>S'inscrire 🡥</button>
+            <button className={styles.button}>S'inscrire →</button>
           </div>
 
           <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}>

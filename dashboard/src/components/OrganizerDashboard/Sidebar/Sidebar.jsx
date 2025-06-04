@@ -31,13 +31,13 @@ const navItems = [
   },
   {
     label: "Pictoaccess",
-    href: "/pictoaccess",
+    href: "/pictoAccess",
     icon: "/icones/dashboard/meteor.svg",
     iconHover: "/icones/dashboard/meteor_blue.svg",
   },
   {
     label: "Recrutement",
-    href: "/recruitment",
+    href: "/recrutement",
     icon: "/icones/dashboard/work.svg",
     iconHover: "/icones/dashboard/work_blue.svg",
   },

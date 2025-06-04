@@ -312,7 +312,7 @@ background-color: #FDB74C;
 .recruitSection {
   background-color: #f8f8f8;
   padding: 70px 10px;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 .recruitContent {
@@ -417,7 +417,7 @@ background-color: #FDB74C;
 .partenaireContent {
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .partenaireContent h2 {

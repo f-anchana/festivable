@@ -14,16 +14,16 @@ export default function Header() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMobileAccessibilityOpen, setIsMobileAccessibilityOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
-
+  const accessibilityRef = useRef(null);
+  const aboutRef = useRef(null);
   const navbarRef = useRef(null);
 
   useEffect(() => {
     const navbar = navbarRef.current;
-
     if (!navbar) return;
 
-    ScrollTrigger.create({
-      trigger: "#festival-section", // section déclenchante
+    const scrollTriggerInstance = ScrollTrigger.create({
+      trigger: "#festival-section",
       start: "top top",
       end: "bottom top",
       onEnter: () => {
@@ -42,7 +42,28 @@ export default function Header() {
       }
     });
 
-    return () => ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    const handleClickOutside = (event) => {
+      if (
+        accessibilityRef.current &&
+        !accessibilityRef.current.contains(event.target)
+      ) {
+        setIsAccessibilityOpen(false);
+      }
+
+      if (
+        aboutRef.current &&
+        !aboutRef.current.contains(event.target)
+      ) {
+        setIsAboutOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   return (
@@ -57,7 +78,7 @@ export default function Header() {
         </button>
 
         <ul className={styles.navLinks}>
-          <li className={styles.dropdown}>
+          <li className={styles.dropdown} ref={accessibilityRef}>
             <button onClick={() => setIsAccessibilityOpen(prev => !prev)} className={styles.dropdownToggle}>
               Accessibilité
               <Image
@@ -78,27 +99,9 @@ export default function Header() {
 
           <li><Link href="/AllFestivals">Festivals</Link></li>
 
-          <li className={styles.dropdown}>
-            <button onClick={() => setIsAboutOpen(prev => !prev)} className={styles.dropdownToggle}>
-              À propos
-              <Image
-                src="/icones/menu-roll.svg"
-                alt="Flèche"
-                width={12}
-                height={12}
-                className={`${styles.arrowIcon} ${isAboutOpen ? styles.rotate : ''}`}
-              />
-            </button>
-            <div className={`${styles.dropdownWrapper} ${isAboutOpen ? styles.dropdownVisible : ''}`}>
-              <ul className={styles.dropdownMenu}>
-                <li><Link href="#">Nos missions</Link></li>
-                <li><Link href="#">Nos partenaires</Link></li>
-                <li><Link href="/Recrutement">Recrutement</Link></li>
-              </ul>
-            </div>
-          </li>
+           <li><Link href='/Apropos'>À propos</Link></li>
 
-          <li><Link href="#">Forum</Link></li>
+
         </ul>
 
         <div className={styles.authButtons}>
@@ -134,27 +137,9 @@ export default function Header() {
 
           <li><Link href="/AllFestivals">Festivals</Link></li>
 
-          <li>
-            <button className={styles.mobileDropdownToggle} onClick={() => setIsMobileAboutOpen(prev => !prev)}>
-              À propos
-              <Image
-                src="/icones/menu-roll.svg"
-                alt="Flèche"
-                width={12}
-                height={12}
-                className={`${styles.arrowIcon} ${isMobileAboutOpen ? styles.rotate : ''}`}
-              />
-            </button>
-            {isMobileAboutOpen && (
-              <ul className={styles.mobileDropdownMenu}>
-                <li><Link href="#">Nos missions</Link></li>
-                <li><Link href="#">Nos partenaires</Link></li>
-                <li><Link href="/Recrutement">Recrutement</Link></li>
-              </ul>
-            )}
-          </li>
+          <li><Link href='/Apropos'>À propos</Link></li>
+          
 
-          <li><Link href="#">Forum</Link></li>
         </ul>
 
         <div className={styles.mobileAuthButtons}>

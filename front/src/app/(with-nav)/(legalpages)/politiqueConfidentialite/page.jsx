@@ -9,16 +9,9 @@ export default function politiqueConfidentialite() {
         marginTop:'6rem',
       }}
     >
-      <h2
-        style={{
-          fontSize: '2rem',
-          fontWeight: 'bold',
-          marginBottom: '1rem',
-          textTransform: 'uppercase',
-        }}
-      >
+      <h1>
         POLITIQUE DE CONFIDENTIALITÉ
-      </h2>
+      </h1>
 
       <p><strong>Dernière mise à jour : 16/05/2025</strong></p>
 
@@ -30,7 +23,7 @@ export default function politiqueConfidentialite() {
 
       <br/>
 
-      <h2>Qui sommes-nous ?</h2>
+      <h1>Qui sommes-nous ?</h1>
       <p>
         Festivallible est une plateforme qui recense des festivals accessibles aux personnes en situation de handicap,
         et facilite la mise en relation entre festivaliers, organisateurs et partenaires.
