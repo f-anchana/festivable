@@ -1,6 +1,9 @@
+'use client';
 import styles from "./accessibility.module.scss";
 import RadioSection from "@/components/OrganizerDashboard/RadioSection/RadioSection";
 import AccessibilityFeatures from "@/components/OrganizerDashboard/AccessibilityFeatures/AccessibilityFeatures";
+
+import { useState, useEffect } from "react";
 
 const outdoorQuestions = [
     {
@@ -23,7 +26,54 @@ const outdoorQuestions = [
     },
 ];
 
+const questions = [
+    {
+        name: "ramp",
+        question: "Rampe présente ?",
+    },
+    {
+        name: "wideEntrance",
+        question: "Entrée large ?",
+    },
+    {
+        name: "BigDoor",
+        question: "Grosse porte ?",
+    },
+    {
+        name: "BigDooor",
+        question: "Grosse porte ?",
+    },
+];
+
 function Accessibility() {
+
+    const [answers, setAnswers] = useState(null);
+
+    //RECUPERATION DES REPONSES EN FONCTION DU COMPTE CONNECTE
+    useEffect(() => {
+        const fetchAnswers = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+
+            try {
+                const res = await fetch(`${API_URL}/my-answers`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                if (!res.ok) throw new Error("Erreur lors de la récupération des réponses");
+
+                const data = await res.json();
+                setAnswers(data);
+
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchAnswers();
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -46,14 +96,12 @@ function Accessibility() {
                 </div>
 
             </div>
-            <div className={styles.flex}>
-                <RadioSection title="Accès extérieur" questions={outdoorQuestions} />
-                <AccessibilityFeatures data={outdoorQuestions} />
-            </div>
-                        <div className={styles.flex}>
-                <RadioSection title="Accès extérieur" questions={outdoorQuestions} />
-                <AccessibilityFeatures data={outdoorQuestions} />
-            </div>
+            <form action="">
+                <div className={styles.flex}>
+                    <RadioSection title="Accès extérieur" questions={questions} />
+                    <AccessibilityFeatures data={outdoorQuestions} />
+                </div>
+            </form>
         </div>
     );
 }

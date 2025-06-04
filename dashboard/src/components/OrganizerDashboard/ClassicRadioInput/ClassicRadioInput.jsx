@@ -4,7 +4,8 @@ export default function ClassicRadioInput({
     id,
     name,
     onChange,
-    question
+    question,
+    checked = false
 }) {
     return (
         <div className={styles.inputContainer}>
@@ -13,12 +14,12 @@ export default function ClassicRadioInput({
             <div className={styles.radioGroup}>
                 <label>
                     Oui
-                    <input type="radio" value="true" name={name} />
+                    <input type="radio" value="true" name={name} defaultChecked={checked}/>
                 </label>
 
                 <label>
                     Non
-                    <input type="radio" value="false" name={name} />
+                    <input type="radio" value="false" name={name} defaultChecked={checked} />
                 </label>
             </div>
 

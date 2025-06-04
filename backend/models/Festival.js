@@ -5,14 +5,6 @@ const PricesSchema = new mongoose.Schema({
     amount: Number
 });
 
-const RecruitmentSchema = new mongoose.Schema({
-    position: String,
-    start_date: Date,
-    end_date: Date,
-    paid: Boolean,
-    contact_email: String
-});
-
 const FestivalSchema = new mongoose.Schema({
     title: String,
     start_date: Date,
@@ -21,7 +13,6 @@ const FestivalSchema = new mongoose.Schema({
     description: String,
     link: String,
     prices: [PricesSchema],
-    recruitments: [RecruitmentSchema],
     organizer: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
@@ -37,8 +28,6 @@ const FestivalSchema = new mongoose.Schema({
 });
 
 // Ajouter images
-
-
 
 // Ajouter map
 
