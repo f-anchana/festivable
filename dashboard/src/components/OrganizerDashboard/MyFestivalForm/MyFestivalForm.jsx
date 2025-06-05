@@ -130,7 +130,7 @@ export default function MyFestivalForm() {
                 <p>
                     Il semble que votre compte ne soit associé à aucun festival pour le moment.
                     <br />
-                    Si vous pensez qu’il s’agit d’une erreur, veuillez nous contacter à l’adresse : <strong>support@monfestival.com</strong>.
+                    Si vous pensez qu’il s’agit d’une erreur, veuillez nous contacter à l’adresse : <strong>contact@festivable.fr</strong>.
                 </p>
             </div>
         );
