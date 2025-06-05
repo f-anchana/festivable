@@ -1,6 +1,5 @@
 "use client";
 
-// Importation des hooks React, composants Leaflet et styles nécessaires
 import { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
@@ -14,9 +13,9 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
 import { useDrop } from "react-dnd";
-import styles from "../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
+import styles from "../../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
+import CopyMapLinkButton from "../CopyMapLinkButton/CopyMapLinkButton";
 
-// Gestion des icônes Leaflet avec Next.js
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import icon from "leaflet/dist/images/marker-icon.png";
 import shadow from "leaflet/dist/images/marker-shadow.png";
@@ -28,7 +27,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: shadow.src ?? shadow,
 });
 
-// Composant de recentrage de la carte sur les nouvelles coordonnées
 function RecenterOnChange({ center }) {
   const map = useMap();
   useEffect(() => {
@@ -37,7 +35,6 @@ function RecenterOnChange({ center }) {
   return null;
 }
 
-// Gestion du drop des icônes personnalisées sur la carte
 function DropHandler({ onDrop }) {
   const map = useMap();
   const ref = useRef(null);
@@ -69,7 +66,6 @@ function DropHandler({ onDrop }) {
   return null;
 }
 
-// Contrôles de dessin de polygones avec gestion du clic et tooltip
 function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
   const map = useMap();
   const fgRef = useRef(null);
@@ -82,7 +78,6 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
       draw: {
         polygon: {
           allowIntersection: false,
-          showArea: false,
           shapeOptions: {
             color: "#1e88e5",
             fillColor: "#1e88e5",
@@ -95,7 +90,7 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
         polyline: false,
         marker: false,
         circlemarker: false,
-      }
+      },
     });
 
     map.addControl(draw);
@@ -151,15 +146,43 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
   return <FeatureGroup ref={fgRef} />;
 }
 
-// Composant principal de la carte
 export default function MapCanvas({
   center,
+  setCenter,
   polygons,
   setPolygons,
   selectedPolygonIndex,
   setSelectedPolygonIndex,
+  festivalId,
 }) {
   const [icons, setIcons] = useState([]);
+
+  // ✅ Récupérer la carte existante
+  useEffect(() => {
+    const fetchMap = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-map`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Erreur d'accès à la carte");
+
+        const data = await res.json();
+        if (data.center) setCenter(data.center);
+        if (data.polygons) setPolygons(data.polygons);
+        if (data.icons) setIcons(data.icons);
+      } catch (err) {
+        console.error("Erreur récupération map :", err);
+      }
+    };
+
+    fetchMap();
+  }, []);
 
   const handleDrop = (type, latlng) => {
     setIcons((prev) => [...prev, { type, latlng }]);
@@ -177,10 +200,7 @@ export default function MapCanvas({
     setPolygons((prev) =>
       prev.map((poly, i) =>
         i === selectedPolygonIndex
-          ? {
-              ...poly,
-              style: { ...poly.style, [key]: value },
-            }
+          ? { ...poly, style: { ...poly.style, [key]: value } }
           : poly
       )
     );
@@ -201,11 +221,37 @@ export default function MapCanvas({
     setSelectedPolygonIndex(null);
   };
 
+  const saveMap = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/map`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          festivalId,
+          center,
+          zoom: 15,
+          polygons,
+          icons,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erreur lors de la sauvegarde");
+
+      alert("✅ Carte enregistrée !");
+    } catch (err) {
+      alert("❌ " + err.message);
+    }
+  };
+
   if (!center) {
     return (
       <div
         style={{
-          height: 400,
+          height: 300,
           width: "100%",
           background: "#f9f9f9",
           display: "flex",
@@ -223,15 +269,9 @@ export default function MapCanvas({
 
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-      <MapContainer
-        center={center}
-        zoom={15}
-        scrollWheelZoom
-        className={styles.map}
-      >
+      <MapContainer center={center} zoom={15} scrollWheelZoom className={styles.map}>
         <RecenterOnChange center={center} />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={center} />
         <DrawControls
           polygons={polygons}
           setPolygons={setPolygons}
@@ -243,7 +283,7 @@ export default function MapCanvas({
             key={i}
             position={m.latlng}
             icon={getIcon(m.type)}
-            draggable={true}
+            draggable
             eventHandlers={{
               dragend: (e) => {
                 const newLatLng = e.target.getLatLng();
@@ -261,28 +301,14 @@ export default function MapCanvas({
         ))}
       </MapContainer>
 
-      {/* Panneau d'édition du polygone sélectionné */}
       {selectedPolygonIndex !== null && (
-        <div
-          style={{
-            marginTop: 8,
-            background: "#fff",
-            padding: "8px 12px",
-            border: "1px solid #ccc",
-            borderRadius: 4,
-            fontSize: 14,
-          }}
-        >
-          <p style={{ marginBottom: 4 }}>
-            🎨 Modifier le polygone sélectionné :
-          </p>
+        <div style={{ marginTop: 8, padding: 12, background: "#fff", borderRadius: 4 }}>
           <label>
             Nom :
             <input
               type="text"
               value={polygons[selectedPolygonIndex]?.name || ""}
               onChange={(e) => handleNameChange(e.target.value)}
-              placeholder="Nom de la zone (optionnel)"
               style={{ marginLeft: 8 }}
             />
           </label>
@@ -315,21 +341,28 @@ export default function MapCanvas({
             />
           </label>
           <br />
-          <button
-            onClick={handleDeletePolygon}
-            style={{
-              marginTop: 8,
-              color: "white",
-              background: "red",
-              border: "none",
-              padding: "4px 8px",
-              borderRadius: 4,
-            }}
-          >
+          <button onClick={handleDeletePolygon} style={{ marginTop: 8, background: "red", color: "#fff", padding: 6, border: "none", borderRadius: 4 }}>
             Supprimer ce polygone
           </button>
         </div>
       )}
+
+      <button
+        onClick={saveMap}
+        style={{
+          marginTop: 12,
+          backgroundColor: "#1e88e5",
+          color: "#fff",
+          padding: "10px 16px",
+          fontSize: 14,
+          border: "none",
+          borderRadius: 6,
+          cursor: "pointer",
+        }}
+      >
+        💾 Sauvegarder la carte
+      </button>
+      <CopyMapLinkButton festivalId={festivalId} />
     </div>
   );
 }

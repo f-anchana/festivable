@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import styles from "../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
+import styles from "../../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
 
 // Regex pour format décimal : ex. "47.0958, -1.2681"
 const decimalReg = /^\s*([+-]?\d+(?:[.,]\d+)?)\s*[,; ]\s*([+-]?\d+(?:[.,]\d+)?)\s*$/i;

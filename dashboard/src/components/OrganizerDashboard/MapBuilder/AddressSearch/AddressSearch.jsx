@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import styles from "../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
+import styles from "../../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
 
 export default function AddressSearch({ onSelect }) {
   const [query, setQuery] = useState("");
