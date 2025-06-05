@@ -81,7 +81,7 @@ exports.getFestivalByOrganizerId = async (req, res) => {
 
 exports.updateFestival = async (req, res) => {
     try {
-        const organizerId = req.user.id; // ou récupère-le selon ta logique d'auth
+        const organizerId = req.user.id; // ou récupère-le selon ta logique d'authentification
         const festival = await Festival.findOne({ organizer: organizerId });
 
         if (!festival) {

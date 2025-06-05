@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const bcrypt = require('bcryptjs'); // ← bcryptjs ici
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -32,7 +32,7 @@ exports.createUser = async (req, res) => {
 
         // Hash du mot de passe avec bcryptjs
         const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt); // ← hashSync de bcryptjs
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
         const newUser = new User({
             pseudo,
