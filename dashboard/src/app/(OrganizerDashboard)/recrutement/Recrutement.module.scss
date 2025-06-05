@@ -1,15 +1,16 @@
 .container {
   max-width: 700px;
-  margin: 3rem ;
-
+  margin: 3rem;
 }
 
 .poste {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid #ccc;
-      margin-top: 30px;
+  width: 1000px;
+}
 
+.poste h2 {
+  margin-bottom: 30px;
 }
 
 .lineTop {
@@ -24,18 +25,15 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
 }
-
-
 
 .dateRow {
   display: flex;
   gap: 1rem;
+}
 
-  > * {
-    flex: 1;
-  }
+.dateRow > * {
+  flex: 1;
 }
 
 .selectContainer {
@@ -43,12 +41,8 @@
   display: flex;
   flex-direction: column;
   min-width: 200px;
-      align-self: flex-end;  
+  align-self: flex-end;
 }
-
-
-
-
 
 .select {
   padding: 0.6rem;
@@ -64,17 +58,62 @@
   gap: 1rem;
 }
 
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
 .addButton {
-  align-self: flex-start;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  background-color: #222;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background-color: var(--dark-blue);
+  color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+  background-color: #ddd;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: var(--foreground);
   color: white;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
 
-  &:hover {
-    background-color: #444;
-  }
+
+
+.deleteButton {
+  background: transparent;
+  border: none;
+  color: #e00;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: auto;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.deleteButton:hover {
+  color: #b52b27;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

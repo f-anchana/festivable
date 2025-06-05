@@ -29,9 +29,6 @@
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
-    // Affiche le marker central
-    L.marker(mapData.center).addTo(map);
-
     // Polygones
     mapData.polygons.forEach(p => {
       const polygon = L.polygon(p.coords, p.style).addTo(map);

@@ -3,7 +3,7 @@
 import s from './FestivalLocation.module.scss';
 
 export default function FestivalLocation({ id }) {
-  const embedUrl = `${process.env.NEXT_PUBLIC_FRONT_URL}/embed-map/${id}`;
+  const embedUrl = `${process.env.NEXT_PUBLIC_API_URL}/embed-map/${id}`;
   console.log("Embed URL:", embedUrl);
 
 

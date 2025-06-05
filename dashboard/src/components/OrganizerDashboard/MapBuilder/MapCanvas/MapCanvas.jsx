@@ -13,8 +13,8 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw";
 import "leaflet-draw/dist/leaflet.draw.css";
 import { useDrop } from "react-dnd";
-import styles from "../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
-import CopyMapLinkButton from "../../OrganizerDashboard/CopyMapLinkButton/CopyMapLinkButton";
+import styles from "../../../../app/(OrganizerDashboard)/map-builder/MapBuilder.module.scss";
+import CopyMapLinkButton from "../CopyMapLinkButton/CopyMapLinkButton";
 
 import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
 import icon from "leaflet/dist/images/marker-icon.png";
@@ -148,6 +148,7 @@ function DrawControls({ polygons, setPolygons, setSelectedPolygonIndex }) {
 
 export default function MapCanvas({
   center,
+  setCenter,
   polygons,
   setPolygons,
   selectedPolygonIndex,
@@ -155,6 +156,33 @@ export default function MapCanvas({
   festivalId,
 }) {
   const [icons, setIcons] = useState([]);
+
+  // ✅ Récupérer la carte existante
+  useEffect(() => {
+    const fetchMap = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-map`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Erreur d'accès à la carte");
+
+        const data = await res.json();
+        if (data.center) setCenter(data.center);
+        if (data.polygons) setPolygons(data.polygons);
+        if (data.icons) setIcons(data.icons);
+      } catch (err) {
+        console.error("Erreur récupération map :", err);
+      }
+    };
+
+    fetchMap();
+  }, []);
 
   const handleDrop = (type, latlng) => {
     setIcons((prev) => [...prev, { type, latlng }]);
@@ -195,10 +223,12 @@ export default function MapCanvas({
 
   const saveMap = async () => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/map`, {
-        method: "PUT", // ou POST si tu veux toujours recréer
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           festivalId,
@@ -209,14 +239,11 @@ export default function MapCanvas({
         }),
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Erreur inconnue");
-      }
+      if (!response.ok) throw new Error("Erreur lors de la sauvegarde");
 
-      alert("✅ Carte enregistrée avec succès !");
+      alert("✅ Carte enregistrée !");
     } catch (err) {
-      alert("❌ Erreur lors de la sauvegarde : " + err.message);
+      alert("❌ " + err.message);
     }
   };
 
@@ -242,15 +269,9 @@ export default function MapCanvas({
 
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-      <MapContainer
-        center={center}
-        zoom={15}
-        scrollWheelZoom
-        className={styles.map}
-      >
+      <MapContainer center={center} zoom={15} scrollWheelZoom className={styles.map}>
         <RecenterOnChange center={center} />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={center} />
         <DrawControls
           polygons={polygons}
           setPolygons={setPolygons}
@@ -262,7 +283,7 @@ export default function MapCanvas({
             key={i}
             position={m.latlng}
             icon={getIcon(m.type)}
-            draggable={true}
+            draggable
             eventHandlers={{
               dragend: (e) => {
                 const newLatLng = e.target.getLatLng();
@@ -281,26 +302,13 @@ export default function MapCanvas({
       </MapContainer>
 
       {selectedPolygonIndex !== null && (
-        <div
-          style={{
-            marginTop: 8,
-            background: "#fff",
-            padding: "8px 12px",
-            border: "1px solid #ccc",
-            borderRadius: 4,
-            fontSize: 14,
-          }}
-        >
-          <p style={{ marginBottom: 4 }}>
-            🎨 Modifier le polygone sélectionné :
-          </p>
+        <div style={{ marginTop: 8, padding: 12, background: "#fff", borderRadius: 4 }}>
           <label>
             Nom :
             <input
               type="text"
               value={polygons[selectedPolygonIndex]?.name || ""}
               onChange={(e) => handleNameChange(e.target.value)}
-              placeholder="Nom de la zone (optionnel)"
               style={{ marginLeft: 8 }}
             />
           </label>
@@ -309,9 +317,7 @@ export default function MapCanvas({
             Couleur :
             <input
               type="color"
-              value={
-                polygons[selectedPolygonIndex]?.style?.fillColor || "#1e88e5"
-              }
+              value={polygons[selectedPolygonIndex]?.style?.fillColor || "#1e88e5"}
               onChange={(e) => {
                 handleStyleChange("fillColor", e.target.value);
                 handleStyleChange("color", e.target.value);
@@ -335,17 +341,7 @@ export default function MapCanvas({
             />
           </label>
           <br />
-          <button
-            onClick={handleDeletePolygon}
-            style={{
-              marginTop: 8,
-              color: "white",
-              background: "red",
-              border: "none",
-              padding: "4px 8px",
-              borderRadius: 4,
-            }}
-          >
+          <button onClick={handleDeletePolygon} style={{ marginTop: 8, background: "red", color: "#fff", padding: 6, border: "none", borderRadius: 4 }}>
             Supprimer ce polygone
           </button>
         </div>
@@ -362,7 +358,6 @@ export default function MapCanvas({
           border: "none",
           borderRadius: 6,
           cursor: "pointer",
-          alignSelf: "flex-start",
         }}
       >
         💾 Sauvegarder la carte

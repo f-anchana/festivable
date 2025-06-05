@@ -5,7 +5,7 @@ export default function CopyMapLinkButton({ festivalId }) {
   const [copied, setCopied] = useState(false);
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
-  const embedUrl = `${baseUrl}/embed-map/${festivalId}`;
+  const embedUrl = `${process.env.NEXT_PUBLIC_API_URL}/embed-map/${festivalId}`;
 
   const handleCopy = async () => {
     try {

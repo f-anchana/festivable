@@ -1,0 +1,73 @@
+.container {
+    width: 100%;
+    border: solid 1px #CAC3DF;
+    border-radius: 15px;
+    padding: 6px 24px;
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 2fr 2fr;
+    gap: 16px;
+    justify-content: center;
+}
+
+.group {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container p,
+.container a,
+.container h2 {
+    align-self: center;
+    font-size: 14px
+}
+
+.container h2 {
+    font-weight: 600;
+}
+
+.organizer {
+    color: #686988;
+}
+
+.active {
+    background-color: #CAFFF4;
+    color: #038D25;
+    border-radius: 15px;
+    padding: 2px 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.inactive {
+    background-color: #FFC0C9;
+    color: #FF0000;
+    border-radius: 15px;
+    padding: 2px 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.container button,
+.container select,
+.container option {
+    background-color: white;
+    border: solid 1px #CAC3DF;
+    padding: 4px 8px;
+    border-radius: 15px;
+    color: #4000FF;
+    text-align: center;
+    cursor: pointer;
+}
+
+.container button img {
+    width: 10px;
+}
