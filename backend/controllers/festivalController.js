@@ -2,7 +2,7 @@ const Festival = require('../models/Festival');
 
 exports.getFestivals = async (req, res) => {
     try {
-        const festivals = await Festival.find();
+        const festivals = await Festival.find().populate('organizer', 'organization_name');
         res.json(festivals);
     } catch (err) {
         console.error("Erreur lors de la récupération :", err);

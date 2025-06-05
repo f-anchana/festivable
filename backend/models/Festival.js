@@ -15,6 +15,7 @@ const FestivalSchema = new mongoose.Schema({
     prices: [PricesSchema],
     organizer: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Dashboard',
         required: true
     },
     valid: {
