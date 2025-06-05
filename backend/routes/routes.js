@@ -27,8 +27,7 @@ router.post('/login-dashboard', dashboardController.loginDashboard);
 router.get('/maps', mapController.getMaps);
 router.post('/map', mapController.createMap);
 router.put('/map', mapController.updateMap);
-router.get('/embed/:festivalId', mapController.renderEmbedMap);
-router.get('/map/:id', mapController.getMapByFestivalId); //Pour afficher la map sur le site
+router.get('/embed-map/:festivalId', mapController.renderEmbedMap);
 router.get('/my-map',verifyToken, mapController.getMapByOrganizer); //Pour afficher la map dans le dashboard
 
 router.get('/answers', accessibilityController.getAnswers);
