@@ -1,38 +1,80 @@
+import React from "react";
+import Image from "next/image";
+
+
+
 export default function politiqueConfidentialite() {
   return (
     <main
-      style={{
-        padding: '2rem',
-        maxWidth: '1500px',
-        margin: 'auto',
-        lineHeight: '1.6',
-        marginTop:'6rem',
-      }}
-    >
-      <h1>
+         style={{
+           position: "relative",
+           padding: "2rem",
+           maxWidth: "1500px",
+           margin: "auto",
+           lineHeight: "1.6",
+           marginTop: "6rem",
+         }}
+       >
+         {/* Image bottom-right */}
+         <div
+           style={{
+             position: "absolute",
+             bottom: "20px",
+             right: "20px",
+             zIndex: -1,
+           }}
+         >
+           <Image src="/decor/homepage-deco.png" alt="" width={80} height={80} />
+         </div>
+   
+         {/* Image top-right */}
+         <div
+           style={{
+             position: "absolute",
+             top: "20px",
+             right: "20px",
+             zIndex: -1,
+           }}
+         >
+           <Image src="/decor/homepage-deco1.png" alt="" width={200} height={200} />
+         </div>
+     
+      <h1
+        style={{
+          backgroundColor: "#1D1D1D",
+          fontSize: "2rem",
+          fontWeight: 800,
+          color: "white",
+          padding: "6px 14px",
+          borderRadius: "4px",
+          display: "inline-block",
+          marginBottom: "40px",
+        }}
+      >
         POLITIQUE DE CONFIDENTIALITÉ
       </h1>
 
       <p><strong>Dernière mise à jour : 16/05/2025</strong></p>
 
       <p>
-        Chez Festivallible, la protection de vos données personnelles est une priorité.
+        Chez Festiv'able, la protection de vos données personnelles est une priorité.
         Cette politique vous informe de la manière dont nous collectons, utilisons, stockons et protégeons vos données
         personnelles, conformément au Règlement Général sur la Protection des Données (RGPD).
       </p>
 
       <br/>
 
-      <h1>Qui sommes-nous ?</h1>
+      <h2>Qui sommes-nous ?</h2>
       <p>
-        Festivallible est une plateforme qui recense des festivals accessibles aux personnes en situation de handicap,
+        Festiv'able est une plateforme qui recense des festivals accessibles aux personnes en situation de handicap,
         et facilite la mise en relation entre festivaliers, organisateurs et partenaires.
       </p>
       <ul>
-        <li><strong>Responsable du traitement :</strong> Festivallible – APF France handicap</li>
+        <li><strong>Responsable du traitement :</strong> Festiv'able – APF France handicap</li>
         <li><strong>Contact :</strong> [adresse email de contact RGPD]</li>
       </ul>
 
+ <br />
       <h2>Quelles données collectons-nous ?</h2>
       <p>Selon votre utilisation du site, nous pouvons collecter les données suivantes :</p>
       <ul>

@@ -23,7 +23,7 @@ export default function Header() {
     if (!navbar) return;
 
     const scrollTriggerInstance = ScrollTrigger.create({
-      trigger: "#festival-section",
+      trigger: "#festivalSection",
       start: "top top",
       end: "bottom top",
       onEnter: () => {

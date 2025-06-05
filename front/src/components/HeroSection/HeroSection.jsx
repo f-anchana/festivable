@@ -10,7 +10,7 @@ const HeroSection = () => {
 
 
      
-  {/* <Image src="/decor/homepage-deco.png" alt="" width={80} height={80} className={styles.decor2}/> */}
+  <Image src="decor/apfbadge.svg" alt="" width={170} height={170} className={styles.decor2}/>
 
 
 
@@ -22,9 +22,11 @@ const HeroSection = () => {
           <h1 className={styles.title}>
             FESTIV'<span className={styles.highlight}>ABLE</span>
           </h1>
-          <h2 className={styles.subtitle}>
-            CÉLÉBRONS LA RICHESSE DES FESTIVALS <span className={styles.highlight}>EN FRANCE</span>
-          </h2>
+          <div className={styles.titleContainer}>
+  <h2 className={styles.titleBox}>CÉLÉBRONS LA RICHESSE DES FESTIVALS</h2>
+  <h2 className={styles.titleBox}>EN FRANCE.</h2>
+</div>
+
           <p className={styles.description}>
             Ce site, réalisé en partenariat avec le ministère de la Culture,<br />
             vous propose un panorama complet des festivals  en France.<br />

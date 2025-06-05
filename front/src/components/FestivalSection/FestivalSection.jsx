@@ -88,7 +88,7 @@ export default function FestivalsSection() {
           <div className={styles.imageWrapper}>
             <Image
               src="/images/engagement-info-photo.svg"
-              alt="Jeune fille en fauteuil"
+              alt=" "
               className={styles.image}
               width={400} // ajouter une largeur/hauteur pour Next.js Image
               height={300}
@@ -121,7 +121,7 @@ export default function FestivalsSection() {
               Ensemble, nous œuvrons pour que chaque événement soit une expérience inclusive et
               inoubliable !
             </p>
-            <button className={styles.button}>En savoir plus →</button>
+            <button className={styles.button}>En savoir plus </button>
           </div>
           <div className={styles.triangle}></div>
         </div>
@@ -187,7 +187,7 @@ export default function FestivalsSection() {
             <div className={`${styles.recruitImageWrapper} ${styles.mobileOnly}`}>
               <Image
                 src="/images/recruitment.svg"
-                alt="Jeunes bénévoles assis"
+                alt=""
                 width={600}
                 height={600}
                 priority
@@ -204,13 +204,13 @@ export default function FestivalsSection() {
               conditions éventuelles (rémunération, missions). Ces informations seront mises en
               avant pour faciliter la mise en relation avec les personnes intéressées.
             </p>
-            <button className={styles.button}>S'inscrire →</button>
+            <button className={styles.button}>S'inscrire </button>
           </div>
 
           <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}>
             <Image
               src="/images/recruitment.svg"
-              alt="Jeunes bénévoles assis"
+              alt=""
               width={600}
               height={600}
               priority
