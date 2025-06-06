@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./FestivalierSignupForm.module.css";
 import formStyles from "../../../styles/Form.module.css";
+import InscriptionSuccess from "../InscriptionSuccess/InscriptionSuccess";
 
 import { fadeInForm } from "@/utils/AnimatedForm";
 
@@ -8,6 +9,8 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function FestivalierSignupForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [pseudo, setPseudo] = useState("");
 
     const togglePassword = () => {
         setShowPassword(prev => !prev);
@@ -45,8 +48,8 @@ export default function FestivalierSignupForm() {
                 throw new Error(err.message || "Erreur lors de l'inscription");
             }
 
-            alert("Inscription réussie !");
-            window.location.href = "/";
+            setPseudo(payload.pseudo);
+            setShowSuccess(true);
         } catch (error) {
             alert(`Erreur lors de l'inscription : ${error.message}\n\nRequête envoyée :\n${JSON.stringify(payload, null, 2)}`);
         }
@@ -54,38 +57,45 @@ export default function FestivalierSignupForm() {
 
     return (
         <div ref={formRef} className={`${styles.container} festivalier-signup-form`}>
-            <form onSubmit={handleSubmit} className={formStyles.form}>
-                <div className={styles.flex}>
-                    <div className={formStyles.inputContainer}>
-                        <input type="text" className={formStyles.input} id="nom" name="nom" placeholder=" " required />
-                        <label htmlFor="nom" className={formStyles.label}>Nom</label>
+            {showSuccess ? (
+                <InscriptionSuccess
+                    pseudo={pseudo}
+                    role="user"
+                />
+            ) : (
+                <form onSubmit={handleSubmit} className={formStyles.form}>
+                    <div className={styles.flex}>
+                        <div className={formStyles.inputContainer}>
+                            <input type="text" className={formStyles.input} id="nom" name="nom" placeholder=" " required />
+                            <label htmlFor="nom" className={formStyles.label}>Nom</label>
+                        </div>
+                        <div className={formStyles.inputContainer}>
+                            <input type="text" className={formStyles.input} id="prenom" name="prenom" placeholder=" " required />
+                            <label htmlFor="prenom" className={formStyles.label}>Prénom</label>
+                        </div>
                     </div>
                     <div className={formStyles.inputContainer}>
-                        <input type="text" className={formStyles.input} id="prenom" name="prenom" placeholder=" " required />
-                        <label htmlFor="prenom" className={formStyles.label}>Prénom</label>
+                        <input type="email" className={formStyles.input} id="email" name="email" placeholder=" " required />
+                        <label htmlFor="email" className={formStyles.label}>E-mail</label>
                     </div>
-                </div>
-                <div className={formStyles.inputContainer}>
-                    <input type="email" className={formStyles.input} id="email" name="email" placeholder=" " required />
-                    <label htmlFor="email" className={formStyles.label}>E-mail</label>
-                </div>
-                <div className={formStyles.inputContainer}>
-                    <input type="text" className={formStyles.input} id="pseudo" name="pseudo" placeholder=" " required />
-                    <label htmlFor="pseudo" className={formStyles.label}>pseudo</label>
-                </div>
-                <div className={formStyles.inputContainer}>
-                    <input type="number" className={formStyles.input} id="telephone" name="telephone" placeholder=" " required />
-                    <label htmlFor="telephone" className={formStyles.label}>Numéro de téléphone</label>
-                </div>
-                <div className={formStyles.inputContainer}>
-                    <input type={showPassword ? "text" : "password"} className={formStyles.input} id="password" name="password" placeholder=" " required />
-                    <label htmlFor="password" className={formStyles.label}>Mot de passe</label>
-                    <button type="button" aria-label="Afficher ou masquer le mot de passe" className={formStyles.showpassword} onClick={togglePassword}>
-                        <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
-                    </button>
-                </div>
-                <button type="submit" className={formStyles.button}>S'inscrire</button>
-            </form>
+                    <div className={formStyles.inputContainer}>
+                        <input type="text" className={formStyles.input} id="pseudo" name="pseudo" placeholder=" " required />
+                        <label htmlFor="pseudo" className={formStyles.label}>pseudo</label>
+                    </div>
+                    <div className={formStyles.inputContainer}>
+                        <input type="number" className={formStyles.input} id="telephone" name="telephone" placeholder=" " required />
+                        <label htmlFor="telephone" className={formStyles.label}>Numéro de téléphone</label>
+                    </div>
+                    <div className={formStyles.inputContainer}>
+                        <input type={showPassword ? "text" : "password"} className={formStyles.input} id="password" name="password" placeholder=" " required />
+                        <label htmlFor="password" className={formStyles.label}>Mot de passe</label>
+                        <button type="button" aria-label="Afficher ou masquer le mot de passe" className={formStyles.showpassword} onClick={togglePassword}>
+                            <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
+                        </button>
+                    </div>
+                    <button type="submit" className={formStyles.button}>S'inscrire</button>
+                </form>
+            )}
         </div>
     );
 }
