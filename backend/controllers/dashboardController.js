@@ -3,6 +3,7 @@ const Festival = require('../models/Festival');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
+const transporter = require('../middlewares/emailTransporter');
 
 exports.getDashboards = async (req, res) => {
     try {
@@ -56,14 +57,27 @@ exports.createOrganization = async (req, res) => {
 
         await newFestival.save();
 
+        // Envoi d'un email de confirmation
+        await transporter.sendMail({
+        from: `"Festivable" <${process.env.MAIL_HOST}>`,
+        to: email,
+        subject: "🎉 Bienvenue sur Festivable !",
+        text: `Bonjour ${name},\n\nVotre inscription à l'organisation "${organization_name}" a bien été prise en compte.\n\nÀ très vite sur Festivable !`
+});
+
+        await transporter.sendMail({
+        from: `"Festivable" <${process.env.MAIL_HOST}>`,
+        to: process.env.MAIL_HOST, // ton mail contact
+        subject: "📥 Nouvelle organisation inscrite",
+        text: `Une nouvelle organisation vient de créer un compte :\n\nNom de l'organisation : ${organization_name}\nNom : ${name}\nEmail : ${email}`
+});
+
+
         res.status(201).json({ message: "Organization enregistré avec succès !" });
     } catch (err) {
         console.error("Erreur lors de l'enregistrement :", err);
         res.status(500).json({ error: "Erreur lors de l'enregistrement du Organization." });
     }
-
-    //envoie de mail à l'utilisateur
-    
 };
 
 exports.loginDashboard = async (req, res) => {
