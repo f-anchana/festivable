@@ -61,6 +61,9 @@ exports.createOrganization = async (req, res) => {
         console.error("Erreur lors de l'enregistrement :", err);
         res.status(500).json({ error: "Erreur lors de l'enregistrement du Organization." });
     }
+
+    //envoie de mail à l'utilisateur
+    
 };
 
 exports.loginDashboard = async (req, res) => {
