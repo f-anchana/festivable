@@ -12,7 +12,7 @@ export default function FestivalPage({ params }) {
   return (
     <div className={styles.festivalGrid}>
       <div className={styles.mobile}>
-        <FestivalGallery />
+        <FestivalGallery id={id} />
       </div>
       <div className={styles.left}>
         <FestivalHeader id={id} />
@@ -21,7 +21,7 @@ export default function FestivalPage({ params }) {
 
       <div className={styles.right}>
         <div className={styles.pc}>
-          <FestivalGallery />
+          <FestivalGallery id={id}/>
         </div>
         <FestivalPricing id={id} />
       </div>
