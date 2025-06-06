@@ -1,5 +1,5 @@
 .hero {
-  background: var(--gradient-orange);
+  background: var(--gradient-light-blue);
   width: 100%;
  height: 100vh;
   box-sizing: border-box;
@@ -14,6 +14,15 @@
   position: absolute;
   top: 90px;
   right: 20px;
+  animation: slowRotate 20s linear infinite;
+
+}
+
+.decor2{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 12;
   animation: slowRotate 20s linear infinite;
 
 }
@@ -36,7 +45,20 @@
   }
 }
 
+.titleContainer {
+  text-align: left;
+}
 
+.titleBox {
+  display: inline-block;
+  background-color: var(--foreground); 
+  color: white;
+  font-weight: 600;
+  font-size: 2rem;
+  padding: 0.1rem 0.1rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
 
 
 .content {
@@ -49,6 +71,7 @@
   gap: 40px;
   z-index: 1;
   position: relative;
+  margin-top: 40px;
 }
 
 .text {
@@ -71,18 +94,6 @@
   line-height: 1.2;
 }
 
-.subtitle {
-  background-color: #1D1D1D;
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
-  padding: 6px 14px;
-  border-radius: 4px;
-  margin-bottom: 40px;
-  line-height: 1.4;
-  position: relative;
-  z-index: 2;
-}
 
 .highlight {
   color: #FDB74C;
@@ -116,8 +127,8 @@
 
 .boutons_homepage a:last-child {
   border: 2px solid #1D1D1D;
-  background-color: transparent;
-  color: #1D1D1D;
+  background-color: var(--foreground);
+  color: #ffffff;
 }
 
 .boutons_homepage a:hover {
@@ -127,7 +138,7 @@
 }
 
 .image {
-  width: 45%;
+  width: 60%;
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -135,7 +146,7 @@
 }
 
 .image img {
-  max-width: 100%;
+  max-width: 106%;
   height: auto;
 }
 
@@ -151,9 +162,41 @@
     min-height: auto;
   }
 
+.titleContainer {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.titleBox {
+  display: inline-block;
+  background-color: var(--foreground); 
+  color: white;
+  font-weight: 600;
+  font-size: 1.7rem;
+  padding: 0.2rem 0.4rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
+
   .decor3 {
-     display: none;
+     animation: none;
   }
+
+  .decor1{
+    animation: none;
+    top:0;
+    right: 0;
+  }
+
+
+  .description{
+    display: none;
+  }
+.decor2{
+  width: 130px;
+  bottom: 0;
+
+}
 
   .content {
     flex-direction: column-reverse;
