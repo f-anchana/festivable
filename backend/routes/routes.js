@@ -49,6 +49,7 @@ router.get('/my-recruitments',verifyToken, recruitmentController.getRecruitement
 // Routes pour la gestion de la galerie
 router.get('/gallery', galleryController.getImages);
 router.post('/gallery',verifyToken, upload.array('images'), galleryController.createImages);
+router.delete('/gallery/:imageName', verifyToken, galleryController.deleteImage);
 router.get('/gallery/:id', galleryController.getGalleryByFestivalId); //Pour afficher les réponses sur le site
 router.get('/my-gallery',verifyToken, galleryController.getGalleryByOrganizer); //Pour afficher les réponses dans le dashboard
 
