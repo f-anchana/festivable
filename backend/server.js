@@ -8,7 +8,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-app.use(cors()); //autoriser les requetes de par tout (mauvaise securité)
+app.use(cors()); //autoriser les requêtes de partout (mauvaise securité)
 
 // Sert le dossier "uploads" en tant que dossier public
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

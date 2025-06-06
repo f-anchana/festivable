@@ -29,7 +29,7 @@ exports.createImages = async (req, res) => {
             gallery = new Gallery({ festivalId, images: [] });
         }
 
-        const filePaths = req.files.map(file => file.path.replace(/\\/g, '/')); // remplace \ par /
+        const filePaths = req.files.map(file => file.path.replace(/\\/g, '/'));
         gallery.images.push(...filePaths);
 
         await gallery.save();
@@ -45,14 +45,14 @@ exports.getGalleryByOrganizer = async (req, res) => {
     try {
         const organizerId = req.user.id;
 
-        // Étape 1 : Récupérer le festival lié à l'organizer
+        // Étape 1 : Récupérer le festival lié à l'organisateur
         const festival = await Festival.findOne({ organizer: organizerId });
 
         if (!festival) {
             return res.status(404).json({ message: "Aucun festival trouvé pour cet organisateur" });
         }
 
-        // Étape 2 : Récupérer la answer liée à ce festival
+        // Étape 2 : Récupérer la réponse liée à ce festival
         const gallery = await Gallery.findOne({ festivalId: festival._id });
 
         if (!gallery) {

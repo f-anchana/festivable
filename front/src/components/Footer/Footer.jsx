@@ -9,7 +9,7 @@ export default function Footer() {
       <div className={styles.top}>
         <div className={styles.left}>
           <div className={styles.logo}>
-            <a href="/festival">
+            <a href="/">
               <Image src="/logo/Logo_Festivable_white.svg" alt="Accueil" width={80} height={60} />
             </a>
           

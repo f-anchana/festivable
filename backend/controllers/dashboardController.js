@@ -1,6 +1,6 @@
 const Dashboard = require('../models/Dashboard');
 const Festival = require('../models/Festival');
-const bcrypt = require('bcryptjs'); // ← bcryptjs ici
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -27,7 +27,7 @@ exports.createOrganization = async (req, res) => {
 
         // Hash du mot de passe avec bcryptjs
         const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt); // ← hashSync de bcryptjs
+        const hashedPassword = bcrypt.hashSync(password, salt);
 
         const newOrganization = new Dashboard({
             organization_name,
@@ -61,6 +61,9 @@ exports.createOrganization = async (req, res) => {
         console.error("Erreur lors de l'enregistrement :", err);
         res.status(500).json({ error: "Erreur lors de l'enregistrement du Organization." });
     }
+
+    //envoie de mail à l'utilisateur
+    
 };
 
 exports.loginDashboard = async (req, res) => {

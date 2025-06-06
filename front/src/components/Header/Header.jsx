@@ -23,7 +23,7 @@ export default function Header() {
     if (!navbar) return;
 
     const scrollTriggerInstance = ScrollTrigger.create({
-      trigger: "#festival-section",
+      trigger: "#festivalSection",
       start: "top top",
       end: "bottom top",
       onEnter: () => {
@@ -105,8 +105,7 @@ export default function Header() {
         </ul>
 
         <div className={styles.authButtons}>
-          <Link href="/form" className={styles.btnBlack}>Se connecter</Link>
-          <Link href="/form" className={styles.btnWhite}>S'inscrire</Link>
+          <Link href="/form" className={styles.btnBlack}>S'authentifier</Link>
         </div>
       </div>
 
@@ -143,8 +142,7 @@ export default function Header() {
         </ul>
 
         <div className={styles.mobileAuthButtons}>
-          <Link href="/form" className={styles.btnBlack}>Se connecter</Link>
-          <Link href="/form" className={styles.btnWhite}>S'inscrire</Link>
+          <Link href="/form" className={styles.btnBlack}>S'authentifier</Link>
         </div>
       </div>
     </nav>

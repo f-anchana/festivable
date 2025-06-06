@@ -10,7 +10,7 @@ const dashboardSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['organizer', 'admin'],  // Liste des valeurs possibles, ça limite les erreurs
-        required: true,         // Ce champ doit obligatoirement être rempli
+        required: true,         // Ce champ doit obligatoirement être remplit
         default: 'organizer'    // Si tu ne précises pas, la valeur par défaut sera 'organizer'
     }
 });

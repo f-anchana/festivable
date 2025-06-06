@@ -46,7 +46,7 @@ exports.getRecruitementsByOrganizer = async (req, res) => {
     try {
         const organizerId = req.user.id;
 
-        // Étape 1 : Récupérer le festival lié à l'organizer
+        // Étape 1 : Récupérer le festival lié à l'organisateur
         const festival = await Festival.findOne({ organizer: organizerId });
 
         if (!festival) {
