@@ -1,5 +1,6 @@
 const Accessibility = require('../models/Accessibility');
 const Festival = require('../models/Festival');
+const calculatePictograms = require("../utils/calculatePictograms");
 
 exports.getAnswers = async (req, res) => {
     try {
@@ -11,9 +12,9 @@ exports.getAnswers = async (req, res) => {
     }
 };
 
-exports.createAnswer = async (req, res) => {
+exports.createOrUpdateAnswer = async (req, res) => {
   try {
-    const organizerId = req.user.id; // récupéré depuis le middleware de vérification du token
+    const organizerId = req.user.id;
 
     if (!organizerId) {
       return res.status(401).json({ message: "Non autorisé" });
@@ -25,19 +26,23 @@ exports.createAnswer = async (req, res) => {
       return res.status(400).json({ message: "answers est requis et doit être un objet" });
     }
 
-    // On récupère le festival lié à cet organisateur
     const festival = await Festival.findOne({ organizer: organizerId });
 
     if (!festival) {
       return res.status(404).json({ message: "Festival non trouvé pour cet utilisateur" });
     }
 
-    const newEntry = new Accessibility({
-      festivalId: festival._id,
-      answers
-    });
+    // Calcul automatique des pictogrammes
+    const pictograms = calculatePictograms(answers);
 
-    res.status(201).json({ message: "Réponses enregistrés avec succès !" });
+    const updatedDoc = await Accessibility.findOneAndUpdate(
+      { festivalId: festival._id },
+      { answers, pictograms, festivalId: festival._id },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+
+    res.status(201).json({ message: "Réponses enregistrées avec succès !", data: updatedDoc });
+
   } catch (err) {
     console.error("Erreur lors de l'enregistrement :", err);
     res.status(500).json({ message: "Erreur serveur" });

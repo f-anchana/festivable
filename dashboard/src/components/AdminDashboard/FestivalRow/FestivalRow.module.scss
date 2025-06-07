@@ -1,19 +1,13 @@
 .container {
     width: 100%;
-    border: solid 1px #CAC3DF;
+    outline: solid 1px #CAC3DF;
     border-radius: 15px;
     padding: 6px 24px;
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 2fr 2fr;
-    gap: 16px;
-    justify-content: center;
+    gap: 24px;
 }
 
-.group {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    align-items: center;
+.title {
+    font-weight: 700;
 }
 
 .actions {
@@ -23,15 +17,14 @@
     align-items: center;
 }
 
-.container p,
-.container a,
-.container h2 {
-    align-self: center;
-    font-size: 14px
+.container td {
+    text-align: start;
+    font-size: 14px;
+    padding: 15px;
 }
 
-.container h2 {
-    font-weight: 600;
+.container a {
+   text-decoration: underline;
 }
 
 .organizer {
@@ -68,6 +61,6 @@
     cursor: pointer;
 }
 
-.container button img {
-    width: 10px;
-}
+// .container button img {
+//     width: 10px;
+// }

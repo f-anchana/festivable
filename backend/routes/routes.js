@@ -36,7 +36,7 @@ router.get('/my-map',verifyToken, mapController.getMapByOrganizer); //Pour affic
 
 // Routes pour la gestion de l'accessibilité
 router.get('/answers', accessibilityController.getAnswers);
-router.post('/answer',verifyToken, accessibilityController.createAnswer);
+router.post('/answer',verifyToken, accessibilityController.createOrUpdateAnswer);//crée ou mets à jours les réponses
 router.get('/answer/:id', accessibilityController.getAnswerByFestivalId); //Pour afficher les réponses sur le site
 router.get('/my-answers',verifyToken, accessibilityController.getAnswerByOrganizer); //Pour afficher les réponses dans le dashboard
 

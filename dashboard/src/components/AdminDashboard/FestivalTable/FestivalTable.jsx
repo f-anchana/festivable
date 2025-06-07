@@ -5,7 +5,7 @@ import FestivalRow from "../FestivalRow/FestivalRow";
 import { useState, useEffect } from "react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function FestivalTable() {
+export default function FestivalTable({ filter }) {
 
     const [festivals, setFestivals] = useState([]);
 
@@ -14,8 +14,14 @@ export default function FestivalTable() {
             try {
                 const res = await fetch(`${API_URL}/festivals`);
                 if (!res.ok) throw new Error("Erreur de récupération");
-                const data = await res.json();
-                setFestivals(data);
+                const filteredFestivals = festivals.filter(festival => {
+                    if (filter === "valid") return festival.valid === true;
+                    if (filter === "invalid") return festival.valid === false;
+                    return true;
+                });
+
+                // const data = await res.json();
+                // setFestivals(data);
             } catch (err) {
                 console.error(err);
             }
@@ -33,35 +39,32 @@ export default function FestivalTable() {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.head}>
-                <div className={styles.group}>
-                    <h2>Nom</h2>
-                    <h2>Organisation</h2>
-                </div>
-                <h2>Etat</h2>
-                <div className={styles.group}>
-                    <h2>Date début</h2>
-                    <h2>Date fin</h2>
-                    <h2>Lien</h2>
-                </div>
-                <div className={styles.group}>
-                    <h2>Actions</h2>
-                </div>
-
-            </div>
-            {festivals.map((festival) => (
-                <FestivalRow
-                    key={festival._id}
-                    title={festival.title}
-                    organizer={festival.organizer.organization_name}
-                    start_date={formatDate(festival.start_date)}
-                    end_date={formatDate(festival.end_date)}
-                    state={festival.valid}
-                    link={festival.link}
-                    pictoaccess={festival.pictoaccess}
-                />
-            ))}
-        </div>
+        <table className={styles.container}>
+            <thead className={styles.head}>
+                <tr>
+                    <th>Nom</th>
+                    <th>Organisation</th>
+                    <th>Etat</th>
+                    <th>Date début</th>
+                    <th>Date fin</th>
+                    <th>Lien</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {festivals.map((festival) => (
+                    <FestivalRow
+                        key={festival._id}
+                        title={festival.title}
+                        organizer={festival.organizer.organization_name}
+                        start_date={formatDate(festival.start_date)}
+                        end_date={formatDate(festival.end_date)}
+                        state={festival.valid}
+                        link={festival.link}
+                        pictoaccess={festival.pictoaccess}
+                    />
+                ))}
+            </tbody>
+        </table >
     );
 }

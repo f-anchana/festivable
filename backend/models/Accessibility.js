@@ -8,6 +8,11 @@ const accessibilitySchema = new Schema({
     of: Boolean,
     default: {},
   },
+  pictograms: {
+    type: Map,
+    of: Boolean,
+    default: {},
+  },
 });
 
 module.exports = mongoose.model('Accessibility', accessibilitySchema, 'accessibility');
