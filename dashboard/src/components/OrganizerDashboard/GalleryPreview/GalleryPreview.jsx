@@ -1,22 +1,92 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+import { useEffect, useRef, useState } from 'react';
 import styles from './GalleryPreview.module.scss';
-import Image from 'next/image';
+
+const getImageUrl = (img) => {
+  if (!img) return '';
+  if (img.startsWith('blob:') || img.startsWith('http')) return img;
+  return `${process.env.NEXT_PUBLIC_API_URL}/${img.replace(/\\/g, '/')}`;
+};
+
+function SortableImage({ id, src, onDelete }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className={styles.gallery__imageWrapper}
+    >
+      {/* Pas de {...listeners} ici pour éviter conflit avec le bouton */}
+      <img
+        src={getImageUrl(src)}
+        alt="Image"
+        width={150}
+        height={100}
+        className={styles.gallery__thumb}
+        {...listeners} // sur img uniquement
+      />
+      <button
+        className={styles.gallery__deleteButton}
+        onClick={(e) => {
+          e.stopPropagation(); // important !
+          e.preventDefault();  // sécurité supplémentaire
+          onDelete(src);
+        }}
+        aria-label="Supprimer l'image"
+      >
+        🗑
+      </button>
+    </div>
+  );
+}
+
 
 export default function GalleryPreview({ images = [], onImagesChange }) {
   const totalSlots = 17;
+  const [items, setItems] = useState(images);
   const [currentIndex, setCurrentIndex] = useState(null);
   const fileInputRef = useRef(null);
 
-  const paddedImages = [...images];
-  while (paddedImages.length < totalSlots) {
-    paddedImages.push(null);
-  }
+  useEffect(() => {
+    setItems(images);
+  }, [images]);
 
-  const mainImage = paddedImages[0];
-  const sideImages = paddedImages.slice(1, 10);
-  const galleryImages = paddedImages.slice(10);
+  const sensors = useSensors(useSensor(PointerSensor));
+  const paddedItems = [...items];
+  while (paddedItems.length < totalSlots) paddedItems.push(null);
+
+  const mainImage = paddedItems[0];
+  const sideImages = paddedItems.slice(1, 10);
+  const galleryImages = paddedItems.slice(10);
 
   const handlePlaceholderClick = (index) => {
     setCurrentIndex(index);
@@ -39,75 +109,99 @@ export default function GalleryPreview({ images = [], onImagesChange }) {
         body: formData,
       });
 
-      if (!res.ok) throw new Error('Erreur lors de l’envoi de l’image');
+      if (!res.ok) throw new Error('Erreur lors de l’envoi');
 
-      // Ajout visuel immédiat (prévisualisation)
-      const imageUrl = URL.createObjectURL(file);
-      const updatedImages = [...paddedImages];
-      updatedImages[currentIndex] = imageUrl;
-      onImagesChange(updatedImages.filter(Boolean));
+      const data = await res.json();
+      const newImagePath = data.paths?.[0] || data.path;
+      if (!newImagePath) throw new Error('Chemin d’image manquant');
+
+      const updated = [...paddedItems];
+      updated[currentIndex] = newImagePath;
+
+      const newList = updated.filter(Boolean);
+      setItems(newList);
+      onImagesChange(newList);
+
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/gallery/reorder`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ images: newList }),
+      });
     } catch (err) {
-      console.error('Erreur lors de l’envoi :', err);
+      console.error(err);
     }
 
     setCurrentIndex(null);
   };
 
-  const handleDeleteImage = async (index) => {
-    const imgToDelete = paddedImages[index];
-    if (!imgToDelete) return;
-  
-    const token = localStorage.getItem('token');
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  
+  const handleDeleteImage = async (imgPath) => {
+    if (!imgPath) return;
+
     try {
-      // Extraire le nom du fichier (ex: "uploads/image123.jpg" → "image123.jpg")
-      const imageName = imgToDelete.split('/').pop().replace(/\\/g, '');
-  
-      const res = await fetch(`${apiUrl}/gallery/${imageName}`, {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+      const imageName = imgPath.split('/').pop();
+
+      const res = await fetch(`${baseUrl}/gallery/${imageName}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-  
-      if (!res.ok) throw new Error('Erreur suppression');
-  
-      const updatedImages = [...paddedImages];
-      updatedImages[index] = null;
-      onImagesChange(updatedImages.filter(Boolean));
+
+      if (!res.ok) {
+        console.error('Erreur suppression :', await res.text());
+        throw new Error('Échec suppression');
+      }
+
+      const updated = items.filter((img) => img !== imgPath);
+      setItems(updated);
+      onImagesChange(updated);
+
+      await fetch(`${baseUrl}/gallery/reorder`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ images: updated }),
+      });
     } catch (err) {
       console.error('Erreur lors de la suppression :', err);
     }
   };
-  
 
-  // 🔧 Nettoie et construit une URL utilisable par <Image />
-  const getImageUrl = (img) => {
-    if (!img) return '';
-    if (img.startsWith('blob:')) return img;
-    if (img.startsWith('http')) return img;
-    return `${process.env.NEXT_PUBLIC_API_URL}/${img.replace(/\\/g, '/')}`;
+  const handleDragEnd = async (event) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = items.findIndex((img) => img === active.id);
+    const newIndex = items.findIndex((img) => img === over.id);
+
+    const reordered = arrayMove(items, oldIndex, newIndex);
+    setItems(reordered);
+    onImagesChange(reordered);
+
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/gallery/reorder`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({ images: reordered }),
+    });
   };
 
-  const renderImageBlock = (img, index) => {
-    return img ? (
-      <div key={`img-${index}`} className={styles.gallery__imageWrapper}>
-        <Image
-          src={getImageUrl(img)}
-          alt={`Image ${index + 1}`}
-          width={150}
-          height={100}
-          className={styles.gallery__thumb}
-        />
-        <button
-          className={styles.gallery__deleteButton}
-          onClick={() => handleDeleteImage(index)}
-          aria-label="Supprimer l'image"
-        >
-          🗑
-        </button>
-      </div>
+  const renderImageBlock = (img, index) =>
+    img ? (
+      <SortableImage
+        key={`img-${index}`}
+        id={img}
+        src={img}
+        onDelete={handleDeleteImage}
+      />
     ) : (
       <div
         key={`placeholder-${index}`}
@@ -121,29 +215,37 @@ export default function GalleryPreview({ images = [], onImagesChange }) {
         +
       </div>
     );
-  };
 
   return (
-    <div className={styles.gallery}>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        onChange={handleImageUpload}
-        style={{ display: 'none' }}
-      />
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext
+        items={items.filter(Boolean)}
+        strategy={verticalListSortingStrategy}
+      >
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleImageUpload}
+          style={{ display: 'none' }}
+        />
 
-      <div className={styles.gallery__main}>
-        {renderImageBlock(mainImage, 0)}
-      </div>
-
-      <div className={styles.gallery__sideGrid}>
-        {sideImages.map((img, i) => renderImageBlock(img, i + 1))}
-      </div>
-
-      <div className={styles.gallery__galleryGrid}>
-        {galleryImages.map((img, i) => renderImageBlock(img, i + 10))}
-      </div>
-    </div>
+        <div className={styles.gallery}>
+          <div className={styles.gallery__main}>
+            {renderImageBlock(mainImage, 0)}
+          </div>
+          <div className={styles.gallery__sideGrid}>
+            {sideImages.map((img, i) => renderImageBlock(img, i + 1))}
+          </div>
+          <div className={styles.gallery__galleryGrid}>
+            {galleryImages.map((img, i) => renderImageBlock(img, i + 10))}
+          </div>
+        </div>
+      </SortableContext>
+    </DndContext>
   );
 }

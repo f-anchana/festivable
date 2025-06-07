@@ -46,45 +46,19 @@ export default function GalleryPage() {
     fetchGallery();
   }, [API_URL]);
 
-  // 📤 Upload depuis ImageInput
-  const handleImageUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+// 📤 Upload depuis ImageInput
+const handleImageUpload = async (imagePath) => {
+  if (!imagePath) return;
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.warn('Token non trouvé, impossible d’envoyer l’image');
-      return;
-    }
+  if (images.length >= totalSlots) {
+    console.warn('Nombre maximal d’images atteint');
+    return;
+  }
 
-    if (images.length >= totalSlots) {
-      console.warn('Nombre maximal d’images atteint');
-      return;
-    }
+  // Ajoute l’image envoyée depuis le backend
+  setImages((prev) => [...prev, imagePath]);
+};
 
-    const formData = new FormData();
-    formData.append('images', file);
-
-    try {
-      const res = await fetch(`${API_URL}/gallery`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Erreur lors de l’envoi : ${res.status} - ${text}`);
-      }
-
-      const imageUrl = URL.createObjectURL(file); // Pour affichage immédiat
-      setImages((prev) => [...prev, imageUrl]);
-    } catch (err) {
-      console.error('Erreur lors de l’envoi de l’image :', err.message);
-    }
-  };
 
   return (
     <div className={styles.container}>
