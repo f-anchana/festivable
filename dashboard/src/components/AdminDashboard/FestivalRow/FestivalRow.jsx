@@ -12,32 +12,30 @@ export default function FestivalRow({
 }) {
 
     return (
-        <div className={styles.container}>
-            <div className={styles.group}>
-                <h2>{title}</h2>
-                <p className={styles.organizer}>{organizer}</p>
-            </div>
-            <p className={state ? styles.active : styles.inactive}>
-                {state ? "Validé" : "En attente de validation"} </p>
-            <div className={styles.group}>
-                <p>{start_date}</p>
-                <p>{end_date}</p>
-                <a href={link}>{link}</a>
-            </div>
-            <div className={styles.actions}>
+        <tr className={styles.container}>
+            {/* <td className={styles.group}> */}
+                <td className={styles.title}>{title}</td>
+                <td className={styles.organizer}>{organizer}</td>
+            {/* </td> */}
+            <td><p className={state ? styles.active : styles.inactive}>
+                {state ? "Validé" : "En attente de validation"} </p></td>
+                <td>{start_date}</td>
+                <td>{end_date}</td>
+                <td><a href={link}>{link}</a></td>
+            <td className={styles.actions}>
                 <button>Gérer</button>
                 <select
                     className={styles.pictoaccess}
                     id="pictoaccess"
-                    onChange={(e) => handlePictoaccessChange(e.target.value === "true")}
+                    // onChange={(e) => handlePictoaccessChange(e.target.value === "true")}
                     defaultValue={pictoaccess ? "true" : "false"}
                 >
                     <option value="true">Certifié Pictoaccess</option>
                     <option value="false">Non certifié Pictoaccess</option>
                 </select>
 
-            </div>
+            </td>
 
-        </div>
+        </tr>
     );
 }

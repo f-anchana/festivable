@@ -2,54 +2,15 @@
 import styles from "./accessibility.module.scss";
 import RadioSection from "@/components/OrganizerDashboard/RadioSection/RadioSection";
 import AccessibilityFeatures from "@/components/OrganizerDashboard/AccessibilityFeatures/AccessibilityFeatures";
+import { pmrQuestions, sensorialQuestions, mentalQuestions, pmrPictograms, sensorialPictograms, mentalPictograms } from "./accessibilityQuestions";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 import { useState, useEffect } from "react";
 
-const outdoorQuestions = [
-    {
-        name: "ramp",
-        question: "Rampe présente ?",
-        title: "Accès PMR",
-        pictogram: "/pictograms/inactive/Wheelchair.png",
-    },
-    {
-        name: "wideEntrance",
-        question: "Entrée large ?",
-        title: "Entrée large",
-        pictogram: "/pictograms/inactive/Blind.png",
-    },
-    {
-        name: "BigDoor",
-        question: "Grosse porte ?",
-        title: "Grande porte",
-        pictogram: "/pictograms/inactive/Deaf.png",
-    },
-];
-
-const questions = [
-    {
-        name: "ramp",
-        question: "Rampe présente ?",
-    },
-    {
-        name: "wideEntrance",
-        question: "Entrée large ?",
-    },
-    {
-        name: "BigDoor",
-        question: "Grosse porte ?",
-    },
-    {
-        name: "BigDooor",
-        question: "Grosse porte ?",
-    },
-];
-
 function Accessibility() {
 
-    const [answers, setAnswers] = useState(null);
+    const [answers, setAnswers] = useState({});
 
-    //RECUPERATION DES REPONSES EN FONCTION DU COMPTE CONNECTE
     useEffect(() => {
         const fetchAnswers = async () => {
             const token = localStorage.getItem("token");
@@ -65,7 +26,9 @@ function Accessibility() {
                 if (!res.ok) throw new Error("Erreur lors de la récupération des réponses");
 
                 const data = await res.json();
-                setAnswers(data);
+
+                // Ici on stocke uniquement les vraies réponses dans le state
+                setAnswers(data.answers || {});
 
             } catch (err) {
                 console.error(err);
@@ -74,6 +37,38 @@ function Accessibility() {
 
         fetchAnswers();
     }, []);
+
+    const handleAnswerChange = async (questionId, value) => {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
+        try {
+            const newAnswers = {
+                ...answers,
+                [questionId]: value,
+            };
+
+    console.log("Requête envoyée au backend :", JSON.stringify({ answers: newAnswers }, null, 2));
+
+            const res = await fetch(`${API_URL}/answer`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ answers: newAnswers }),
+            });
+
+            if (!res.ok) throw new Error("Échec de la mise à jour");
+
+            await res.json();
+
+            setAnswers(newAnswers);
+
+        } catch (err) {
+            console.error("Erreur update réponse:", err);
+        }
+    };
 
     return (
         <div className={styles.container}>
@@ -91,15 +86,40 @@ function Accessibility() {
                     <p>Les illustrations surlignées ci-dessous répondent aux critères définis par votre festival, sur la base des informations que vous avez fournies lors de son inscription.
                     </p>
                     <p>
-                        Pour modifier ces données, contactez le XX XX XX XX ou écrivez à l’adresse suivante : [adresse e-mail].
+                        Pour modifier ces données, contactez le XX XX XX XX ou écrivez à l’adresse suivante : contact@festivable.fr
                     </p>
                 </div>
 
             </div>
             <form action="">
                 <div className={styles.flex}>
-                    <RadioSection title="Accès extérieur" questions={questions} />
-                    <AccessibilityFeatures data={outdoorQuestions} />
+                    <RadioSection
+                        title="Pour les handicaps moteurs, personnes à mobilité réduite et maladies invalidantes :
+"
+                        questions={pmrQuestions}
+                        answers={answers}
+                        onAnswerChange={handleAnswerChange}
+                    />
+                    <AccessibilityFeatures data={pmrPictograms} answers={answers} />
+                </div>
+                <div className={styles.flex}>
+                    <RadioSection
+                        title="Pour les déficiences sensorielles (malentendants / sourds ; malvoyants / aveugles) :
+"
+                        questions={sensorialQuestions}
+                        answers={answers}
+                        onAnswerChange={handleAnswerChange} />
+                    <AccessibilityFeatures data={sensorialPictograms} answers={answers} />
+                </div>
+                <div className={styles.flex}>
+                    <RadioSection
+                        title="Pour les handicaps psychiques / intellectuels ou mentaux / cognitifs :
+"
+                        questions={mentalQuestions}
+                        answers={answers}
+                        onAnswerChange={handleAnswerChange}
+                    />
+                    <AccessibilityFeatures data={mentalPictograms} answers={answers}/>
                 </div>
             </form>
         </div>

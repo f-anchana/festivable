@@ -1,11 +1,10 @@
 import styles from "./ClassicRadioInput.module.scss";
 
 export default function ClassicRadioInput({
-    id,
     name,
     onChange,
     question,
-    checked = false
+    value = null
 }) {
     return (
         <div className={styles.inputContainer}>
@@ -14,15 +13,26 @@ export default function ClassicRadioInput({
             <div className={styles.radioGroup}>
                 <label>
                     Oui
-                    <input type="radio" value="true" name={name} defaultChecked={checked}/>
+                    <input
+                        type="radio"
+                        value="true"
+                        name={name}
+                        checked={value === true}
+                        onChange={() => onChange(true)}
+                    />
                 </label>
 
                 <label>
                     Non
-                    <input type="radio" value="false" name={name} defaultChecked={checked} />
+                    <input
+                        type="radio"
+                        value="false"
+                        name={name}
+                        checked={value === false}
+                        onChange={() => onChange(false)}
+                    />
                 </label>
             </div>
-
         </div>
     );
 }
