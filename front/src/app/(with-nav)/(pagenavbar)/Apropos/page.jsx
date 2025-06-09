@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import styles from '@/app/(with-nav)/Homepage.module.css';
 import PresentationFestivable from '@/components/Apropos/PresentationFestivable/PresentationFestivable';
-
-
+import MissionFestivable from '@/components/Apropos/Mission/MissionFestivable';
+import EquipeFestivable from '@/components/Apropos/Equipe/EquipeFestivable'
 
 export default function Apropos() {
   return (
@@ -17,6 +17,8 @@ export default function Apropos() {
 
       <main className={styles.container}>
         <PresentationFestivable />
+        <MissionFestivable />
+        <EquipeFestivable/>
       </main>
     </>
   );

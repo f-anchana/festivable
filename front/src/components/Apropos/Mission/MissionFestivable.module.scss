@@ -1,0 +1,93 @@
+.container {
+  padding-top: 10rem;
+  background-color: #fff;
+  position: relative;
+
+}
+
+
+.decor3{
+    position: absolute;
+    top: 20 ;
+    right: 0;
+
+}
+
+.decor1{
+    position: absolute;
+    bottom: 530px;
+    left: 0;
+}
+
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.missionBox {
+  background: linear-gradient(to right, #ffaf47, #f58220);
+  padding: 5rem;
+  box-shadow: 20px 20px 0 #222;
+  transition: box-shadow 0.3s ease; 
+//   margin-bottom: 10rem;
+    margin:  auto;
+
+  max-width: 1200px;
+}
+
+
+.missionBox:hover{
+        box-shadow: 0px 0px 0 #222;
+
+}
+
+.missionBox ul {
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.bullet {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--dark-blue);
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+  top: 1px;
+}
+
+.italic {
+  margin-top: 1rem;
+}
+
+.recruitmentSection {
+ margin-top: 150px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageWrapper {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.textWrapper {
+  flex: 1 1 300px;
+}
+
+.textWrapper h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

@@ -1,15 +1,78 @@
+'use client';
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./PresentationFestivable.module.scss";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
+gsap.registerPlugin(ScrollTrigger);
 
 export default function PresentationFestivable() {
+  const aproposRef = useRef(null);
+  const collabRef = useRef(null);
+  const badgeRef = useRef(null);
+
+  useEffect(() => {
+    // Animation section À PROPOS
+    gsap.fromTo(
+      aproposRef.current.children,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: aproposRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Animation section Collaboration
+    gsap.fromTo(
+      collabRef.current.children,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: collabRef.current,
+          start: "top 80%",
+          toggleActions: "restart none none none",
+        },
+      }
+    );
+
+    // Animation du badge circulaire
+    gsap.fromTo(
+      badgeRef.current,
+      { opacity: 0, scale: 0.5, rotate: -15 },
+      {
+        opacity: 1,
+        scale: 1,
+        rotate: 0,
+        duration: 1,
+        ease: "elastic.out(1, 0.5)",
+        scrollTrigger: {
+          trigger: badgeRef.current,
+          start: "top 85%",
+          toggleActions: "restart none none none",
+        },
+      }
+    );
+  }, []);
+
   return (
     <main className={styles.presentationContainer}>
       {/* À propos */}
-      <section className={styles.aproposSection}>
+      <section className={styles.aproposSection} ref={aproposRef}>
         <div className={styles.aproposText}>
           <h1 className={styles.aproposTitle}>À PROPOS DE FESTIV’ABLE</h1>
           <h2 className={styles.subtitle}>Qui sommes-nous ?</h2>
@@ -33,7 +96,7 @@ export default function PresentationFestivable() {
       </section>
 
       {/* Collaboration */}
-      <section className={styles.collabSection}>
+      <section className={styles.collabSection} ref={collabRef}>
         <img
           src="/decor/apropos-2.svg"
           alt=""
@@ -49,15 +112,15 @@ export default function PresentationFestivable() {
           </p>
           <button className={styles.collabButton}>Découvrir APF France handicap</button>
         </div>
-       <div className={styles.circleContainer}>
-  <div className={styles.rotatingText}>
-    <Image src="/decor/apfbadge-text.svg" alt="" width={160} height={160}/>
-  </div>
-  <div className={styles.centerImage}>
-    <Image src="/decor/apfbadge-center.png" alt="" width={50} height={50}/>
-  </div>
-</div>
 
+        <div className={styles.circleContainer} ref={badgeRef}>
+          <div className={styles.rotatingText}>
+            <Image src="/decor/apfbadge-text.svg" alt="" width={160} height={160} />
+          </div>
+          <div className={styles.centerImage}>
+            <Image src="/decor/apfbadge-center.png" alt="" width={50} height={50} />
+          </div>
+        </div>
       </section>
     </main>
   );
