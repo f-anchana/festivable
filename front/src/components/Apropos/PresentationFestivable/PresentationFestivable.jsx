@@ -1,6 +1,8 @@
 
 import React from "react";
-import styles from "./PresentationFestivable.module.scss"
+import styles from "./PresentationFestivable.module.scss";
+import Image from "next/image";
+
 
 
 export default function PresentationFestivable() {
@@ -47,11 +49,15 @@ export default function PresentationFestivable() {
           </p>
           <button className={styles.collabButton}>Découvrir APF France handicap</button>
         </div>
-        <img
-          src="/decor/apfbadge.svg"
-          alt=""
-          className={styles.collabBadge}
-        />
+       <div className={styles.circleContainer}>
+  <div className={styles.rotatingText}>
+    <Image src="/decor/apfbadge-text.svg" alt="" width={160} height={160}/>
+  </div>
+  <div className={styles.centerImage}>
+    <Image src="/decor/apfbadge-center.png" alt="" width={50} height={50}/>
+  </div>
+</div>
+
       </section>
     </main>
   );
