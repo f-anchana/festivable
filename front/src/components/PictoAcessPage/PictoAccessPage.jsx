@@ -1,9 +1,32 @@
-import styles from '@/components/PictoAcessPage/PictoAccessPage.module.scss';
+'use client'
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
+import styles from '@/components/PictoAcessPage/PictoAccessPage.module.scss';
 import Head from 'next/head';
 import Image from 'next/image';
 
 export default function PictoAccessPage() {
+  const pageRef = useRef(null);
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const imageRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(titleRef.current, { opacity: 0, y: -30, duration: 0.8, ease: "power3.out" });
+      
+      gsap.from(subtitleRef.current, { opacity: 0, y: -30, duration: 0.8, delay: 0.2, ease: "power3.out" });
+
+      gsap.from(imageRef.current, { opacity: 0, scale: 0.9, duration: 1, delay: 0.4, ease: "power3.out" });
+
+      gsap.from(contentRef.current, { opacity: 0, y: 20, duration: 1, delay: 0.6, ease: "power3.out" });
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <Head>
@@ -14,28 +37,26 @@ export default function PictoAccessPage() {
         />
       </Head>
 
-  <div className={styles.page}>
-  <h1 className={`${styles.aproposTitle} ${styles.highlight}`}>
-    Picto Access :
-  </h1>
+      <div className={styles.page} ref={pageRef}>
+        <h1 className={`${styles.aproposTitle} ${styles.highlight}`} ref={titleRef}>
+          Picto Access :
+        </h1>
 
-  <h1 className={styles.aproposTitle}>
-    un partenaire <span className={styles.orange}>clé</span> pour l’accessibilité
-  </h1>
-</div>
-
+        <h1 className={styles.aproposTitle} ref={subtitleRef}>
+          un partenaire <span className={styles.orange}>clé</span> pour l’accessibilité
+        </h1>
 
         <div className={styles.container}>
-          <div className={styles.fixedImage}>
+          <div className={styles.fixedImage} ref={imageRef}>
             <Image
               src="/images/PictoAcessPage.svg"
               alt="Picto Access"
-               width={500}
-      height={500}
+              width={500}
+              height={500}
             />
           </div>
 
-          <div className={styles.scrollContent}>
+          <div className={styles.scrollContent} ref={contentRef}>
             <div className={styles.content}>
               <section>
                 <h2>Qu’est-ce que Picto Access ?</h2>
@@ -72,7 +93,7 @@ export default function PictoAccessPage() {
             </div>
           </div>
         </div>
-      
+      </div>
     </>
   );
 }
