@@ -2,6 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
+const transporter = require('../middlewares/emailTransporter');
+
 
 exports.getUsers = async (req, res) => {
     try {
@@ -46,6 +48,48 @@ exports.createUser = async (req, res) => {
         });
 
         await newUser.save();
+
+try {
+    // Envoi mail à l'utilisateur
+    await transporter.sendMail({
+        from: `"Festiv'able" <${process.env.MAIL_USER}>`,
+        to: email,
+        subject: "🎉 Bienvenue sur Festiv'able !",
+        text: `
+Salut ${pseudo} !
+
+Merci pour ton inscription sur Festiv'able.  
+Nous sommes ravis de t'accueillir dans notre communauté de festivaliers.
+
+Pour tester les liens dans ce mail, voici un petit lien sympa vers YouTube :  
+https://www.youtube.com/
+
+---
+
+À très vite,  
+L'équipe Festiv'able  
+contact@festivable.fr  
+https://festivable.fr
+        `.trim()
+    });
+    console.log(`✅ Mail envoyé à l'utilisateur : ${email}`);
+} catch (error) {
+    console.error("❌ Erreur lors de l'envoi du mail à l'utilisateur :", error);
+}
+
+try {
+    // Envoi mail notification à admin
+    await transporter.sendMail({
+        from: `"Festiv'able" <${process.env.MAIL_USER}>`,
+        to: process.env.MAIL_USER,
+        subject: "📥 Nouveau festivalier inscrit",
+        text: `Un nouvel utilisateur vient de créer un compte :\n\nNom : ${lastname}\nPrénom : ${firstname}\nEmail : ${email}`
+    });
+    console.log("✅ Mail de notification envoyé à contact@festivable.fr");
+} catch (error) {
+    console.error("❌ Erreur lors de l'envoi du mail à admin :", error);
+}
+
         res.status(201).json({ message: "User enregistré avec succès !" });
     } catch (err) {
         console.error("Erreur lors de l'enregistrement :", err);

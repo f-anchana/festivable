@@ -175,10 +175,6 @@ export default function OrganizerSignupForm() {
                                 <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
                             </button>
                         </div>
-                        {/* <div className={formStyles.inputContainerfile}>
-                        <input type="file" className={formStyles.inputfile} id="file-upload" required />
-                        <label htmlFor="file-upload" className={formStyles.label}>Joindre une image ou un PDF</label>
-                    </div> */}
                         <button type="button" onClick={nextStep}>Suivant</button>
                     </fieldset>
 

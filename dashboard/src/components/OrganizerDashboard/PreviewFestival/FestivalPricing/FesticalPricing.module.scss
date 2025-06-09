@@ -1,0 +1,49 @@
+.pricing {
+    margin: 20px;
+
+    @media (min-width: 768px) {
+      background-color: #F7F7F7;
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+  
+    &__title {
+      display: inline-block;
+      background-color: #1a1a1a;
+      color: white;
+      padding: 0.4rem 1.2rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      border-radius: 0.6rem;
+      transform: rotate(-2deg);
+      margin-bottom: 1rem;
+      font-family: 'Oswald';
+    }
+  
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th {
+        text-align: left;
+        font-weight: 700;
+        padding: 0.5rem 0;
+
+        &:nth-child(2) {
+          text-align: right;
+        }
+      }
+  
+      td {
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed #ccc;
+      }
+  
+      td:last-child {
+        text-align: right;
+        white-space: nowrap;
+      }
+    }
+  }
+  

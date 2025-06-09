@@ -51,7 +51,6 @@ exports.createImages = async (req, res) => {
     try {
       const organizerId = req.user.id;
       const { imageName } = req.params;
-      console.log("→ Suppression demandée pour :", imageName);
   
       const festival = await Festival.findOne({ organizer: organizerId });
       if (!festival) return res.status(404).json({ message: "Festival non trouvé" });
@@ -59,7 +58,6 @@ exports.createImages = async (req, res) => {
       const gallery = await Gallery.findOne({ festivalId: festival._id });
       if (!gallery) return res.status(404).json({ message: "Galerie non trouvée" });
   
-      console.log("→ Images en BDD :", gallery.images);
   
       const imagePathIndex = gallery.images.findIndex((img) =>
         img.includes(imageName)

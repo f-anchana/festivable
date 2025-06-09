@@ -57,19 +57,43 @@ exports.createOrganization = async (req, res) => {
 
         await newFestival.save();
 
-        // Envoi d'un email de confirmation
-        await transporter.sendMail({
-        from: `"Festivable" <${process.env.MAIL_HOST}>`,
-        to: email,
-        subject: "🎉 Bienvenue sur Festivable !",
-        text: `Bonjour ${name},\n\nVotre inscription à l'organisation "${organization_name}" a bien été prise en compte.\n\nÀ très vite sur Festivable !`
+transporter.sendMail({
+  from: `"Festiv'able" <${process.env.MAIL_USER}>`,
+  to: email,
+  subject: "🎉 Bienvenue sur Festiv'able !",
+  text: `
+Bonjour ${name},
+
+Votre inscription à l'organisation "${organization_name}" a bien été prise en compte.
+
+Pour tester les liens dans ce mail, voici un lien vers YouTube :  
+https://www.youtube.com/
+
+---
+
+Cordialement,  
+L'équipe Festiv'able  
+contact@festivable.fr  
+https://festivable.fr
+  `.trim()
+})
+.then(() => {
+  console.log(`Mail envoyé à l'utilisateur : ${email}`);
+})
+.catch(error => {
+  console.error("Erreur lors de l'envoi du mail à l'utilisateur :", error);
 });
 
-        await transporter.sendMail({
-        from: `"Festivable" <${process.env.MAIL_HOST}>`,
-        to: process.env.MAIL_HOST, // ton mail contact
-        subject: "📥 Nouvelle organisation inscrite",
-        text: `Une nouvelle organisation vient de créer un compte :\n\nNom de l'organisation : ${organization_name}\nNom : ${name}\nEmail : ${email}`
+
+transporter.sendMail({
+  from: `"Festiv'able" <${process.env.MAIL_USER}>`,
+  to: process.env.MAIL_USER,
+  subject: "📥 Nouvelle organisation inscrite",
+  text: `Une nouvelle organisation vient de créer un compte :\n\nNom : ${name}\nEmail : ${email}\nOrganisation : ${organization_name}`
+}).then(() => {
+  console.log("Mail de notification envoyé à contact@festivable.fr");
+}).catch(error => {
+  console.error("Erreur lors de l'envoi du mail à admin :", error);
 });
 
 
