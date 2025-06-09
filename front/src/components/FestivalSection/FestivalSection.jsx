@@ -190,23 +190,26 @@ export default function FestivalsSection() {
           {loading && <p>Chargement des festivals en cours...</p>}
           {error && <p style={{ color: '#8B0000' }}>Erreur : {error}</p>}
           {!loading && !error && festivals.length === 0 && <p>Aucun festival trouvé.</p>}
+{!loading &&
+  !error &&
+  festivals
+    .filter((festival) => festival.valid === true) // ne garde que les festivals validés
+    .slice(0, 4) 
+    .map((festival) => (
+      <FestivalCard
+        key={festival._id}
+        title={festival.title}
+        description={festival.description}
+        startDate={festival.start_date}
+        endDate={festival.end_date}
+        address={festival.address}
+        link={festival.link}
+        prices={festival.prices}
+        imageSrc={festival.image}
+        pictoaccess={festival.pictoaccess}
+      />
+    ))}
 
-          {!loading &&
-            !error &&
-            festivals.slice(0, 4).map((festival) => (
-              <FestivalCard
-                key={festival._id}
-                title={festival.title}
-                description={festival.description}
-                startDate={festival.start_date}
-                endDate={festival.end_date}
-                address={festival.address}
-                link={festival.link}
-                prices={festival.prices}
-                imageSrc={festival.image}
-                pictoaccess={festival.pictoaccess}
-              />
-            ))}
         </div>
       </div>
 

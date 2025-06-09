@@ -96,21 +96,24 @@ export default function AllFestivals() {
         {filteredFestivals.length === 0 && (
           <p>Aucun festival ne correspond aux filtres.</p>
         )}
+{filteredFestivals
+  .filter((festival) => festival.valid === true) 
+  .map((festival) => (
+    <FestivalCard
+      key={festival._id}
+      title={festival.title}
+      description={festival.description}
+      startDate={festival.start_date}
+      endDate={festival.end_date}
+      address={festival.address}
+      link={festival.link}
+      prices={festival.prices}
+      imageSrc={festival.image} 
+      pictoaccess={festival.pictoaccess}
+    />
+))}
 
-        {filteredFestivals.map((festival) => (
-          <FestivalCard
-            key={festival._id}
-            title={festival.title}
-            description={festival.description}
-            startDate={festival.start_date}
-            endDate={festival.end_date}
-            address={festival.address}
-            link={festival.link}
-            prices={festival.prices}
-            imageSrc={festival.image} 
-            pictoaccess={festival.pictoaccess}
-          />
-        ))}
+      
       </div>
     </div>
   );
