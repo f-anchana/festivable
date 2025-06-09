@@ -1,0 +1,80 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user {
+    background: var(--gradient-orange);
+}
+
+.organizer {
+    background: var(--gradient-light-blue);
+}
+
+.message {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.message h1 {
+    // background-color: black;
+    color: white;
+    background: rgb(0, 0, 0);
+    padding: 2px 8px;
+    display: inline;
+}
+
+.inline {
+    display: inline;
+    text-align: center;
+}
+
+.message span {
+    background: rgb(0, 0, 0);
+    padding: 2px 8px;
+}
+
+.message p {
+    width: 70%;
+    text-align: center;
+}
+
+.message a {
+    padding: 12px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    background-color: white;
+    color: #1D1D1D;
+    border: 2px solid transparent;
+}
+
+.message a:hover {
+    background-color: #FDB74C;
+    color: #1D1D1D;
+    border-color: #FDB74C;
+}
+
+@media (max-width: 767px) {
+    .message h1 {
+        font-size: 1.5rem;
+    }
+
+    .message p {
+        width: 100%;
+    }
+}

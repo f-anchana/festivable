@@ -1,21 +1,36 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import styles from './FestivalGallery.module.scss';
 
-const images = [
-  { src: '/images/image.png', alt: 'Grande scène de nuit' },
-  { src: '/images/image-1.png', alt: 'Concert avec foule' },
-  { src: '/images/image-2.png', alt: 'Drapeaux du festival' },
-  { src: '/images/image-3.png', alt: 'Affiches promotionnelles' },
-  { src: '/images/image-4.png', alt: 'Public assis au coucher du soleil' },
-];
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function FestivalGallery() {
+export default function FestivalGallery({ id }) {
+  const [images, setImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await fetch(`${API_URL}/gallery/${id}`);
+        const data = await res.json();
+        const urls = (data.images || []).map((img) => ({
+          src: `${API_URL}/${img.replace(/\\/g, '/')}`, // Windows fix
+          alt: 'Image du festival',
+        }));
+        setImages(urls);
+      } catch (err) {
+        console.error('Erreur chargement images:', err);
+      }
+    };
+
+    if (id) fetchImages();
+  }, [id]);
+
+  if (images.length === 0) return null;
 
   return (
     <section className={styles.gallery}>

@@ -1,11 +1,12 @@
 'use client';
 import { securePage } from "@/components/SecurePage/SecurePage";
 import FestivalTable from "@/components/AdminDashboard/FestivalTable/FestivalTable";
+import FestivalFilter from "@/components/AdminDashboard/FestivalFilter/FestivalFilter";
 
 function AdminDashboard() {
     return (
         <div>
-            <p>filtre</p>
+            <FestivalFilter></FestivalFilter>
             <FestivalTable></FestivalTable>
         </div>
     );

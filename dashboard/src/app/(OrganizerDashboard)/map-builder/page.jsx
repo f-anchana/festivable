@@ -7,7 +7,7 @@ import CoordinatesSearch from "../../../components/OrganizerDashboard/MapBuilder
 import MapCanvas from "../../../components/OrganizerDashboard/MapBuilder/MapCanvasWrapper/MapCanvasWrapper";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import IconPalette from "../../../components/OrganizerDashboard/IconPalette/IconPalette";
+import IconPalette from "../../../components/OrganizerDashboard/MapBuilder/IconPalette/IconPalette";
 import styles from "./MapBuilder.module.scss";
 
 export default function MapSetupPage() {

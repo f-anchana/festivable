@@ -2,7 +2,7 @@
   &__main {
     img {
       width: 100%;
-      height: auto;
+      height: 300px;
       object-fit: cover;
       cursor: pointer;
     }
@@ -25,7 +25,7 @@
     
     img {
       width: 100%;
-      height: auto;
+      height: 100px;
       object-fit: cover;
       cursor: pointer;
       transition: transform 0.2s ease;
