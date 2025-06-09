@@ -17,8 +17,8 @@ export default function SidebarAdmin() {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Supprime le token JWT
-    router.push("/"); // Redirige vers la page d'accueil ou de login
+    localStorage.removeItem("token");
+    router.push("/");
   };
 
   return (
