@@ -93,7 +93,7 @@ transporter.sendMail({
 }).then(() => {
   console.log("Mail de notification envoyé à contact@festivable.fr");
 }).catch(error => {
-  console.error("Erreur lors de l'envoi du mail à soi-même :", error);
+  console.error("Erreur lors de l'envoi du mail à admin :", error);
 });
 
 
