@@ -49,26 +49,26 @@ export default function FestivalsSection() {
 
         <div className={styles.cardsWrapper}>
           {loading && <p>Chargement des festivals en cours...</p>}
-          {error && <p style={{ color: 'red' }}>Erreur : {error}</p>}
+          {error && <p style={{ color: '#8B0000' }}>Erreur : {error}</p>}
           {!loading && !error && festivals.length === 0 && <p>Aucun festival trouvé.</p>}
 
           {!loading &&
-            !error &&
-            festivals.map((festival) => (
-<FestivalCard
-  key={festival._id}
-  title={festival.title}
-  description={festival.description}
-  startDate={festival.start_date}
-  endDate={festival.end_date}
-  address={festival.address}
-  link={festival.link}
-  prices={festival.prices}
-  imageSrc={festival.image}
-  pictoaccess={festival.pictoaccess}
-/>
-
-            ))}
+  !error &&
+  festivals.slice(0, 4).map((festival) => (
+    <FestivalCard
+      key={festival._id}
+      title={festival.title}
+      description={festival.description}
+      startDate={festival.start_date}
+      endDate={festival.end_date}
+      address={festival.address}
+      link={festival.link}
+      prices={festival.prices}
+      imageSrc={festival.image}
+      pictoaccess={festival.pictoaccess}
+    />
+  ))
+}
         </div>
       </div>
 
@@ -90,7 +90,7 @@ export default function FestivalsSection() {
               src="/images/engagement-info-photo.svg"
               alt=" "
               className={styles.image}
-              width={400} // ajouter une largeur/hauteur pour Next.js Image
+              width={400} 
               height={300}
               priority
             />
@@ -110,7 +110,7 @@ export default function FestivalsSection() {
               <span>POUR UNE ACCESSIBILITÉ TOTALE</span>
             </h2>
             <p className={styles.paragraph}>
-              Chez Festivable, nous avons une mission : rendre chaque festival accessible à tous,
+              Chez Festiv'able, nous avons une mission : rendre chaque festival accessible à tous,
               sans exception !
               <br />
               <br />
@@ -195,7 +195,7 @@ export default function FestivalsSection() {
             </div>
 
             <p>
-              Avec Festivable, les organisateurs ont la possibilité d’inclure directement leurs
+              Avec Festiv'able, les organisateurs ont la possibilité d’inclure directement leurs
               besoins en recrutement lors de l’inscription de leur événement.
             </p>
             <p>
@@ -204,7 +204,6 @@ export default function FestivalsSection() {
               conditions éventuelles (rémunération, missions). Ces informations seront mises en
               avant pour faciliter la mise en relation avec les personnes intéressées.
             </p>
-            <button className={styles.button}>S'inscrire </button>
           </div>
 
           <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}>
@@ -223,7 +222,7 @@ export default function FestivalsSection() {
         <div className={styles.partenaireContent}>
           <h2 className={styles.title}>NOS PARTENAIRES</h2>
           <p>
-            Chez Festivable, nous sommes fiers de collaborer avec des acteurs majeurs engagés dans
+            Chez Festiv'able, nous sommes fiers de collaborer avec des acteurs majeurs engagés dans
             l’accessibilité et la culture.
             <br />
             Le Ministère de la Culture et l’association APF France handicap nous font confiance
@@ -242,6 +241,9 @@ export default function FestivalsSection() {
             </div>
             <div className={styles.partenaireImage}>
               <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
+            </div>
+            <div className={styles.partenaireImage}>
+              <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
             </div>
           </div>
         </div>

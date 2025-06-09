@@ -44,7 +44,9 @@ export default function AllFestivals() {
             address={festival.address}
             link={festival.link}
             prices={festival.prices}
-            imageSrc={festival.image} // adapte selon tes données
+            imageSrc={festival.image} 
+            pictoaccess={festival.pictoaccess}
+
           />
         ))}
       </div>

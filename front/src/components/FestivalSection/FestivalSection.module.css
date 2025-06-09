@@ -310,7 +310,7 @@ background-color: #FDB74C;
 /* RECRUIT SECTION  */
 
 .recruitSection {
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
   padding: 70px 10px;
   margin-top: 100px;
 }
@@ -321,7 +321,7 @@ background-color: #FDB74C;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  align-items: center;
+    align-items: center;
 }
 
 @media (min-width: 900px) {
@@ -344,6 +344,11 @@ background-color: #FDB74C;
 .recruitText {
   flex: 1;
   text-align: left;
+    background-color: #f8f8f8;
+      padding: 40px 10px;
+      width: 400px;
+
+
 }
 
 .recruitTitle {

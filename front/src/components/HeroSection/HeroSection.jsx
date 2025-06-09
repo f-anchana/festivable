@@ -10,11 +10,11 @@ const HeroSection = () => {
 
 
      
-  <Image src="decor/apfbadge.svg" alt="" width={170} height={170} className={styles.decor2}/>
+  <Image src="decor/apfbadge.svg" alt="" width={160} height={160} className={styles.decor2}/>
 
 
 
-  <Image src="/decor/homepage-deco1.png" alt="" width={200} height={200} className={styles.decor3}/>
+  <Image src="/decor/homepage-deco1.png" alt="" width={150} height={150} className={styles.decor3}/>
 
 
       <div className={styles.content}>
@@ -24,7 +24,7 @@ const HeroSection = () => {
           </h1>
           <div className={styles.titleContainer}>
   <h2 className={styles.titleBox}>CÉLÉBRONS LA RICHESSE DES FESTIVALS</h2>
-  <h2 className={styles.titleBox}>EN FRANCE.</h2>
+  <h2 className={styles.titleBox}>EN FRANCE</h2>
 </div>
 
           <p className={styles.description}>

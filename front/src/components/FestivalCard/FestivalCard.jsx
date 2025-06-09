@@ -40,11 +40,7 @@ export default function FestivalCard({ title, description, startDate, endDate, a
             {prices?.length ? `${prices[0].amount},00 €` : 'Gratuit'}
           </span>
         </div>
-        <div className={styles.tags}>
-          <span className={styles.tag}>SOUL</span>
-          <span className={styles.tag}>FUNK</span>
-          <span className={styles.tag}>DISCO</span>
-        </div>
+       
       </div>
     </div>
   );

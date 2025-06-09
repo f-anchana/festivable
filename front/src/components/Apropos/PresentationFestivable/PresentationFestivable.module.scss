@@ -1,10 +1,11 @@
-.presentationContainer {
-  padding: 4rem 2rem;
-  // max-width: 1200px;
-  color: #1d1d1d;
-}
+// .presentationContainer {
+//   color: #1d1d1d;
+// }
+
+
 
 /* Section : À propos */
+
 .aproposSection {
   display: flex;
   flex-wrap: wrap;
@@ -100,7 +101,7 @@
   position: absolute;
   top: -40px;   
   right: -40px;
-  width: 180px;
+  width: 160px;
   height: auto;
   z-index: 2;
 animation: slowRotate 20s linear infinite;
@@ -119,10 +120,9 @@ animation: slowRotate 20s linear infinite;
 
 /* Responsive */
 @media screen and (max-width: 768px) {
-  .aproposSection,
-  .collabSection {
-    flex-direction: column;
-  }
+  .aproposIllustration {
+    width: 300px
+    }
 
   .collabBadge {
     position: static;
