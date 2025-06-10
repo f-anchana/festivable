@@ -31,10 +31,18 @@ export default function FestivalFullInfo(
     } = festival;
 
     const [isModalOpen, setModalOpen] = useState(false);
+    const [modalAction, setModalAction] = useState(null);
 
     const handleValidateClick = (e) => {
         e.preventDefault();
-        setModalOpen(true); // ouvre la modal
+        setModalAction('validate');
+        setModalOpen(true);
+    };
+
+    const handleRefuseClick = (e) => {
+        e.preventDefault();
+        setModalAction('refuse');
+        setModalOpen(true);
     };
 
     const handleValidation = async (valid) => {
@@ -77,14 +85,21 @@ export default function FestivalFullInfo(
 
                     <div className={styles.infos}>
                         <h2>{title}</h2>
-                        <p>{organizer?.organization_name || "Organisateur inconnu"}</p>
+                        <p><strong>{organizer?.organization_name || "Organisateur inconnu"}</strong></p>
+                        <p>Organisateur ID: <strong>{organizer?._id || "Organisateur inconnu"}</strong></p>
                         <div>
                             <ImageGallery festivalId={_id} />
                         </div>
                         <p>{pictoaccess ? "Certifié Pictoaccess" : "Non certifié Pictoaccess"}</p>
                         <p>Dates: <strong>{start_date ? formatDate(start_date) : "Date inconnue"} - {end_date ? formatDate(end_date) : "Date inconnue"}</strong></p>
                         <p>Addresse: <strong>{address || "adresse inconue"}</strong></p>
-                        <p>Lien: <strong>{link || 'lien inconnu'}</strong></p>
+                        <p>
+                            Lien: <strong>
+                                {link
+                                    ? <a href={link.startsWith('http') ? link : `https://${link}`} target="_blank" rel="noopener noreferrer">{link}</a>
+                                    : 'Pas de lien'}
+                            </strong>
+                        </p>
                         <PriceList
                             prices={prices}
                         />
@@ -96,15 +111,19 @@ export default function FestivalFullInfo(
 
                 </div>
                 <form className={styles.actions}>
-                    <button className={styles.refuse}>REFUSER LE FESTIVAL</button>
+                    <button className={styles.refuse} onClick={handleRefuseClick}>REFUSER LE FESTIVAL</button>
                     <button className={styles.validate} onClick={handleValidateClick}>VALIDER LE FESTIVAL</button>
                 </form>
+
                 <ConfirmAction
                     isOpen={isModalOpen}
-                    onClose={handleCancel}
-                    onConfirm={() => handleValidation(true)}
-                    message="Es-tu sûr·e de vouloir valider le festival ?"
+                    onClose={() => setModalOpen(false)}
+                    onConfirm={() => handleValidation(modalAction === 'validate')}
+                    message={modalAction === 'validate'
+                        ? "Es-tu sûr·e de vouloir valider le festival ?"
+                        : "Es-tu sûr·e de vouloir refuser le festival ? (Si vous voulez supprimer le festival compétement il faut supprimer le compte de l'oganisateur)"}
                 />
+
             </div>
 
         </div>

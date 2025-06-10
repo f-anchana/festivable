@@ -59,6 +59,14 @@
     color: #4000FF;
     text-align: center;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.container button:hover,
+.container select:hover,
+.container option:hover {
+    background-color: #4000FF;
+    color: white;
 }
 
 // .container button img {

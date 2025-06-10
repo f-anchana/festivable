@@ -59,6 +59,7 @@ export default function FestivalTable({ filter }) {
                             state={festival.valid ?? "État inconnu"}
                             link={festival.link || "Lien inconnu"}
                             pictoaccess={festival.pictoaccess || "Non spécifié"}
+                            _id={festival._id}
                             onManageClick={() => setSelectedFestivalId(festival._id)}
                         />
                     ))}

@@ -23,6 +23,7 @@ router.post('/festival',verifyToken, festivalController.createFestival);
 router.get('/my-festival', verifyToken, festivalController.getFestivalByOrganizerId);
 router.put('/my-festival/update', verifyToken, festivalController.updateFestival);
 router.post('/festival/:id/set-validation', verifyAdmin, festivalController.validateFestival);
+router.post('/festival/:id/set-pictoaccess', verifyAdmin, festivalController.pictoaccessFestival);
 
 // Routes pour la gestion du tableau de bord
 router.get('/dashboards',verifyToken, dashboardController.getDashboards);
