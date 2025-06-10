@@ -1,0 +1,103 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.468);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: white;
+    width: 90%;
+    height: 80%;
+    border-radius: 25px;
+    border: solid 1px var(--light-gray);
+    padding: 25px;
+    position: relative;
+}
+
+.container p {
+    color: var(--dark-gray);
+}
+.container strong {
+    color: black;
+    font-weight: 400;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    color: var(--dark-gray);
+}
+
+.flex {
+    display: flex;
+    gap: 20px;
+    height: 95%;
+}
+
+.infos {
+    width: 50%;
+    overflow-y: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.description {
+    width: 50%;
+    overflow-y: scroll;
+    max-height: 100%;
+    margin-bottom: 24px;
+}
+
+.description p {color: black;}
+
+.actions {
+    width: 100;
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.refuse, .validate {
+    border: 1px solid;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.refuse {
+    background-color: #FFD4DA;
+    color: #C30404;
+    border-color: #C30404;
+}
+
+.refuse:hover {
+    background-color: #C30404;
+    color: #FFD4DA;
+}
+
+.validate {
+    background-color: #CAFFF4;
+    color: #037420;
+    border-color: #037420;
+}
+.validate:hover {
+    color: #CAFFF4;
+    background-color: #037420;
+    border-color: #037420;
+}

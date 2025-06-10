@@ -115,3 +115,28 @@ exports.updateFestival = async (req, res) => {
         res.status(500).json({ error: "Erreur lors de la mise à jour du festival." });
     }
 };
+
+exports.validateFestival = async (req, res) => {
+    try {
+        const festivalId = req.params.id;
+        const { valid } = req.body; // true ou false attendu
+
+        if (typeof valid !== 'boolean') {
+            return res.status(400).json({ message: "Le champ 'valid' doit être un booléen." });
+        }
+
+        const festival = await Festival.findById(festivalId);
+
+        if (!festival) {
+            return res.status(404).json({ message: "Festival non trouvé" });
+        }
+
+        festival.valid = valid;
+        await festival.save();
+
+        res.status(200).json({ message: `Festival ${valid ? "validé" : "invalidé"} avec succès !` });
+    } catch (err) {
+        console.error("Erreur lors de la mise à jour de la validation :", err);
+        res.status(500).json({ error: "Erreur serveur lors de la mise à jour de la validation." });
+    }
+};

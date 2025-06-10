@@ -8,6 +8,7 @@ function AdminDashboard() {
         <div>
             <FestivalFilter></FestivalFilter>
             <FestivalTable></FestivalTable>
+
         </div>
     );
 }
