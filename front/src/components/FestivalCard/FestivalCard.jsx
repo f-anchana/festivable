@@ -8,7 +8,7 @@ export default function FestivalCard({ title, description, startDate, endDate, a
   return (
     <div className={styles.card}>
       {pictoaccess && (
-        <div className={styles.accessibilityIndicator} title="Festival non accessible">
+        <div className={styles.accessibilityIndicator} title="Festival accessible">
           <span />
         </div>
       )}

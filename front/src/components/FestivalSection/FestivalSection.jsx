@@ -12,12 +12,151 @@ gsap.registerPlugin(ScrollTrigger);
 export default function FestivalsSection() {
   const [festivals, setFestivals] = useState([]);
   const sectionRef = useRef(null);
+  const textRecruitRef = useRef(null);
+  const imageRecruitRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     FestivalSectionAnimation(sectionRef);
 
+    // Animation de base sur le titre et sous-titre
+    gsap.fromTo(
+      `.${styles.titleWrapper}`,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: `.${styles.titleWrapper}`,
+          start: 'top 80%',
+        },
+      }
+    );
+
+    // Animation sur les cards festivals
+    gsap.fromTo(
+      `.${styles.cardsWrapper} > *`,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: `.${styles.cardsWrapper}`,
+          start: 'top 80%',
+        },
+      }
+    );
+
+    // Animation sur "Voir tous nos festivals"
+    gsap.fromTo(
+      `.${styles.viewAll}`,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: `.${styles.viewAll}`,
+          start: 'top 90%',
+        },
+      }
+    );
+
+    // Animation sur la section accessibilitySection
+    gsap.fromTo(
+      `.${styles.accessibilitySection} .${styles.container}`,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: `.${styles.accessibilitySection}`,
+          start: 'top 80%',
+        },
+      }
+    );
+
+    // Animation sur la section sectionAction titre
+    gsap.fromTo(
+      `.${styles.sectionAction} .${styles.title1}`,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: `.${styles.sectionAction} .${styles.title1}`,
+          start: 'top 80%',
+        },
+      }
+    );
+
+    // Animation sur les cards de sectionAction
+    gsap.fromTo(
+      `.${styles.cardContainer} > .${styles.card}`,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: `.${styles.cardContainer}`,
+          start: 'top 80%',
+        },
+      }
+    );
+
+    // Ne pas toucher aux parties partenaire et recruit (conformément à ta demande)
+
+    // Animation GSAP pour le texte de recruit au scroll
+    gsap.fromTo(
+      textRecruitRef.current,
+      { x: -100, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: textRecruitRef.current,
+          start: 'top 80%',
+          end: 'bottom 60%',
+          toggleActions: 'restart none none none',
+        },
+      }
+    );
+
+    // Animation GSAP pour l'image de recruit au scroll
+    gsap.fromTo(
+      imageRecruitRef.current,
+      { x: 100, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: imageRecruitRef.current,
+          start: 'top 80%',
+          end: 'bottom 60%',
+          toggleActions: 'restart none none none',
+        },
+      }
+    );
+
+    // Fetch festivals
     async function fetchFestivals() {
       setLoading(true);
       setError(null);
@@ -51,24 +190,26 @@ export default function FestivalsSection() {
           {loading && <p>Chargement des festivals en cours...</p>}
           {error && <p style={{ color: '#8B0000' }}>Erreur : {error}</p>}
           {!loading && !error && festivals.length === 0 && <p>Aucun festival trouvé.</p>}
-
-          {!loading &&
+{!loading &&
   !error &&
-  festivals.slice(0, 4).map((festival) => (
-    <FestivalCard
-      key={festival._id}
-      title={festival.title}
-      description={festival.description}
-      startDate={festival.start_date}
-      endDate={festival.end_date}
-      address={festival.address}
-      link={festival.link}
-      prices={festival.prices}
-      imageSrc={festival.image}
-      pictoaccess={festival.pictoaccess}
-    />
-  ))
-}
+  festivals
+    .filter((festival) => festival.valid === true) // ne garde que les festivals validés
+    .slice(0, 4) 
+    .map((festival) => (
+      <FestivalCard
+        key={festival._id}
+        title={festival.title}
+        description={festival.description}
+        startDate={festival.start_date}
+        endDate={festival.end_date}
+        address={festival.address}
+        link={festival.link}
+        prices={festival.prices}
+        imageSrc={festival.image}
+        pictoaccess={festival.pictoaccess}
+      />
+    ))}
+
         </div>
       </div>
 
@@ -85,7 +226,7 @@ export default function FestivalsSection() {
 
       <div className={styles.accessibilitySection}>
         <div className={styles.container}>
-          <div className={styles.imageWrapper}>
+          <div className={styles.imageWrapper} >
             <Image
               src="/images/engagement-info-photo.svg"
               alt=" "
@@ -177,14 +318,14 @@ export default function FestivalsSection() {
 
       <div className={styles.recruitSection}>
         <div className={styles.recruitContent}>
-          <div className={styles.recruitText}>
+        <div className={styles.recruitText} ref={textRecruitRef}>
             <h2 className={styles.recruitTitle}>
               <span>FACILITEZ LE RECRUTEMENT</span>
               <br />
               <span>POUR VOTRE FESTIVAL</span>
             </h2>
 
-            <div className={`${styles.recruitImageWrapper} ${styles.mobileOnly}`}>
+            <div className={`${styles.recruitImageWrapper} ${styles.mobileOnly} `} >
               <Image
                 src="/images/recruitment.svg"
                 alt=""
@@ -206,7 +347,7 @@ export default function FestivalsSection() {
             </p>
           </div>
 
-          <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}>
+          <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}ref={imageRecruitRef}  >
             <Image
               src="/images/recruitment.svg"
               alt=""
@@ -218,36 +359,62 @@ export default function FestivalsSection() {
         </div>
       </div>
 
-      <div className={styles.sectionPartenaire}>
-        <div className={styles.partenaireContent}>
-          <h2 className={styles.title}>NOS PARTENAIRES</h2>
-          <p>
-            Chez Festiv'able, nous sommes fiers de collaborer avec des acteurs majeurs engagés dans
-            l’accessibilité et la culture.
-            <br />
-            Le Ministère de la Culture et l’association APF France handicap nous font confiance
-            pour porter une vision commune : rendre les festivals véritablement accessibles à toutes
-            et tous.
-          </p>
-          <div className={styles.partenaireImages}>
-            <div className={styles.partenaireImage}>
-              <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
-            </div>
-            <div className={styles.partenaireImage}>
-              <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
-            </div>
-            <div className={styles.partenaireImage}>
-              <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
-            </div>
-            <div className={styles.partenaireImage}>
-              <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
-            </div>
-            <div className={styles.partenaireImage}>
-              <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
-            </div>
+
+      
+<div className={styles.sectionPartenaire}>
+  <div className={styles.partenaireContent}>
+    <h2 className={styles.title}>NOS PARTENAIRES</h2>
+    <p>
+      Chez Festiv'able, nous sommes fiers de collaborer avec des acteurs majeurs engagés dans
+      l’accessibilité et la culture.
+      <br />
+      Le Ministère de la Culture et l’association APF France handicap nous font confiance
+      pour porter une vision commune : rendre les festivals véritablement accessibles à toutes
+      et tous.
+    </p>
+
+    <div className={styles.partenaireImagesWrapper}>
+      <div className={styles.partenaireImagesTrack}>
+        <div className={styles.partenaireImages}>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
+          </div>
+
+          {/* duplication pour boucle fluide */}
+          <div className={styles.partenaireImage}>
+            <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
+          </div>
+          <div className={styles.partenaireImage}>
+            <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
           </div>
         </div>
       </div>
+    </div>
+
+  </div>
+</div>
+
     </section>
   );
 }
