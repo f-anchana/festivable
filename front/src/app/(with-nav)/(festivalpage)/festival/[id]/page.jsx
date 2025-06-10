@@ -6,26 +6,29 @@ import FestivalPricing from "../../../../../components/FestivalPage/FestivalPric
 import FestivalLocation from "../../../../../components/FestivalPage/FestivalLocation/FestivalLocation";
 import FestivalVolunteer from "../../../../../components/FestivalPage/FestivalVolunteer/FestivalVolunteer";
 
-export default function FestivalPage({ params }) {
+export default async function FestivalPage({ params }) {
   const { id } = params;
+
+  const res = await fetch(`http://localhost:3000/festival/${id}`);
+  if (!res.ok) throw new Error('Festival non trouvé');
+
+  const festival = await res.json();
 
   return (
     <div className={styles.festivalGrid}>
       <div className={styles.mobile}>
-        <FestivalGallery id={id} />
+        <FestivalGallery festival={festival}/>
       </div>
       <div className={styles.left}>
-        <FestivalHeader id={id} />
-        <FestivalDescription id={id} />
+        <FestivalHeader festival={festival} />
+        <FestivalDescription festival={festival} />
       </div>
-
       <div className={styles.right}>
         <div className={styles.pc}>
-          <FestivalGallery id={id}/>
+<FestivalGallery id={id} />
         </div>
-        <FestivalPricing id={id} />
+<FestivalPricing pricing={festival.prices} />
       </div>
-
       <div className={styles.fullWidth}>
         <FestivalLocation id={id} />
         <FestivalVolunteer id={id} />

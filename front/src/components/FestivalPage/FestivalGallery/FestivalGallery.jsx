@@ -12,26 +12,7 @@ export default function FestivalGallery({ id }) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await fetch(`${API_URL}/gallery/${id}`);
-        const data = await res.json();
-        const urls = (data.images || []).map((img) => ({
-          src: `${API_URL}/${img.replace(/\\/g, '/')}`, // Windows fix
-          alt: 'Image du festival',
-        }));
-        setImages(urls);
-      } catch (err) {
-        console.error('Erreur chargement images:', err);
-      }
-    };
-
-    if (id) fetchImages();
-  }, [id]);
-
-  if (images.length === 0) return null;
-
+  
   return (
     <section className={styles.gallery}>
       <div className={styles.gallery__main}>

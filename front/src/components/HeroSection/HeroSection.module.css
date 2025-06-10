@@ -169,6 +169,7 @@
 .image img {
   max-width: 106%;
   height: auto;
+  opacity: 0;
 }
 
 

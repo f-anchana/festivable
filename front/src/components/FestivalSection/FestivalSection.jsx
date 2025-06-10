@@ -198,6 +198,7 @@ export default function FestivalsSection() {
     .map((festival) => (
       <FestivalCard
         key={festival._id}
+        _id={festival._id} 
         title={festival.title}
         description={festival.description}
         startDate={festival.start_date}

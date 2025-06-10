@@ -15,48 +15,65 @@ const HeroSection = () => {
     }
   };
 
-  useEffect(() => {
-    const tl = gsap.timeline();
+ useEffect(() => {
+  const tl = gsap.timeline();
 
-    tl.fromTo(
-      [titleRef.current, ...subtitleRefs.current],
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.2,
-        ease: "power2.out",
-        stagger: 0.3,
-      }
-    );
+  // 1. Animation titre + sous-titres + image ensemble
+  tl.fromTo(
+    [titleRef.current, ...subtitleRefs.current, `.${styles.image} img`],
+    { opacity: 0, y: 20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      stagger: 0.2,
+    }
+  );
 
-   tl.to(
-  titleRef.current.querySelector("span.highlight"),
-  {
-    opacity: 1,
-    duration: 0.1,
-    ease: "power1.out",
-    scale: 1.1,
-  }
-);
+  // 2. Animation du span.highlight (optionnel, sinon tu peux le déplacer dans le stagger ci-dessus)
+  tl.to(
+    titleRef.current.querySelector("span.highlight"),
+    {
+      opacity: 1,
+      duration: 0.1,
+      ease: "power1.out",
+      scale: 1.1,
+    },
+    "-=0.3" // pour que ça arrive pendant la fin du titre
+  );
 
+  // 3. Animation descriptions + boutons
+  const description = gsap.utils.toArray(`.${styles.description}`);
+  const boutons = gsap.utils.toArray(`.${styles.boutons_homepage}`);
 
-    const description = gsap.utils.toArray(`.${styles.description}`);
-    const boutons = gsap.utils.toArray(`.${styles.boutons_homepage}`);
+  tl.fromTo(
+    [...description, ...boutons],
+    { opacity: 0, y: 20 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      stagger: 0.2,
+    },
+    "+=0.2" // petite pause après le titre + image
+  );
 
-    tl.fromTo(
-      [...description, ...boutons],
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        stagger: 0.2,
-      },
-      "+=0.2"
-    );
-  }, []);
+  // 4. Animation finale du badge (circleContainer → pop)
+  tl.fromTo(
+    `.${styles.circleContainer}`,
+    { opacity: 0, scale: 0.5 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.8,
+      ease: "back.out(1.7)",
+    },
+    "+=0.3" // attendre un peu après description + boutons
+  );
+}, []);
+
 
   const titleText = "FESTIV'";
 
