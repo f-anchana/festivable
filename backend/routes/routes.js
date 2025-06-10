@@ -8,6 +8,7 @@ const accessibilityController = require('../controllers/accessibilityController'
 const recruitmentController = require('../controllers/recruitmentController');
 const galleryController = require('../controllers/galleryController');
 const verifyToken = require('../middlewares/verifyToken');
+const verifyAdmin = require('../middlewares/verifyAdmin');
 const upload = require('../middlewares/uploadImages');
 
 // Routes pour la gestion des utilisateurs
@@ -21,6 +22,8 @@ router.get('/festival/:id', festivalController.getFestivalById);
 router.post('/festival',verifyToken, festivalController.createFestival);
 router.get('/my-festival', verifyToken, festivalController.getFestivalByOrganizerId);
 router.put('/my-festival/update', verifyToken, festivalController.updateFestival);
+router.post('/festival/:id/set-validation', verifyAdmin, festivalController.validateFestival);
+router.post('/festival/:id/set-pictoaccess', verifyAdmin, festivalController.pictoaccessFestival);
 
 // Routes pour la gestion du tableau de bord
 router.get('/dashboards',verifyToken, dashboardController.getDashboards);

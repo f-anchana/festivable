@@ -19,6 +19,9 @@
   --gradient-orange: linear-gradient(90deg, rgba(253, 178, 70, 1) 0%, rgba(254, 111, 2, 1) 100%);
   --gradient-dark-blue: linear-gradient(180deg, rgba(17, 85, 107, 1) 0%, rgba(0, 109, 145, 1) 100%);
   --gradient-light-blue: linear-gradient(215deg, rgba(41, 156, 193, 1) 0%, rgba(155, 229, 253, 1) 100%);
+
+  --dark-gray: #6D6F96;
+  --light-gray: #CAC3DF;
 }
 
 html,

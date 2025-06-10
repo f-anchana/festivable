@@ -28,12 +28,12 @@
 }
 
 .organizer {
-    color: #686988;
+    color: var(--dark-gray);
 }
 
 .active {
     background-color: #CAFFF4;
-    color: #038D25;
+    color: #037420;
     border-radius: 15px;
     padding: 2px 8px;
     text-align: center;
@@ -41,8 +41,8 @@
 }
 
 .inactive {
-    background-color: #FFC0C9;
-    color: #FF0000;
+    background-color: #FFD4DA;
+    color: #C30404;
     border-radius: 15px;
     padding: 2px 8px;
     text-align: center;
@@ -59,6 +59,14 @@
     color: #4000FF;
     text-align: center;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.container button:hover,
+.container select:hover,
+.container option:hover {
+    background-color: #4000FF;
+    color: white;
 }
 
 // .container button img {

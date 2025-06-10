@@ -1,6 +1,9 @@
 'use client';
 import styles from "./FestivalTable.module.scss";
 import FestivalRow from "../FestivalRow/FestivalRow";
+import FestivalFullInfo from "@/components/AdminDashboard/FestivalFullInfo/FestivalFullInfo";
+
+import { formatDate } from "@/utils/formatDate";
 
 import { useState, useEffect } from "react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -8,6 +11,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function FestivalTable({ filter }) {
 
     const [festivals, setFestivals] = useState([]);
+    const [selectedFestivalId, setSelectedFestivalId] = useState(null);
 
     useEffect(() => {
         const fetchFestival = async () => {
@@ -20,8 +24,8 @@ export default function FestivalTable({ filter }) {
                     return true;
                 });
 
-                // const data = await res.json();
-                // setFestivals(data);
+                const data = await res.json();
+                setFestivals(data);
             } catch (err) {
                 console.error(err);
             }
@@ -30,41 +34,44 @@ export default function FestivalTable({ filter }) {
         fetchFestival();
     }, []);
 
-    function formatDate(isoDate) {
-        const date = new Date(isoDate);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-    }
-
     return (
-        <table className={styles.container}>
-            <thead className={styles.head}>
-                <tr>
-                    <th>Nom</th>
-                    <th>Organisation</th>
-                    <th>Etat</th>
-                    <th>Date début</th>
-                    <th>Date fin</th>
-                    <th>Lien</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {festivals.map((festival) => (
-                    <FestivalRow
-                        key={festival._id}
-                        title={festival.title}
-                        organizer={festival.organizer.organization_name}
-                        start_date={formatDate(festival.start_date)}
-                        end_date={formatDate(festival.end_date)}
-                        state={festival.valid}
-                        link={festival.link}
-                        pictoaccess={festival.pictoaccess}
-                    />
-                ))}
-            </tbody>
-        </table >
+        <>
+            <table className={styles.container}>
+                <thead className={styles.head}>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Organisation</th>
+                        <th>Etat</th>
+                        <th>Date début</th>
+                        <th>Date fin</th>
+                        <th>Lien</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {festivals.map((festival) => (
+                        <FestivalRow
+                            key={festival._id}
+                            title={festival.title || "Titre inconnu"}
+                            organizer={festival.organizer?.organization_name || "Organisateur inconnu"}
+                            start_date={festival.start_date ? formatDate(festival.start_date) : "Date inconnue"}
+                            end_date={festival.end_date ? formatDate(festival.end_date) : "Date inconnue"}
+                            state={festival.valid ?? "État inconnu"}
+                            link={festival.link || "Lien inconnu"}
+                            pictoaccess={festival.pictoaccess || "Non spécifié"}
+                            _id={festival._id}
+                            onManageClick={() => setSelectedFestivalId(festival._id)}
+                        />
+                    ))}
+                </tbody>
+            </table >
+
+            {selectedFestivalId && (
+                <FestivalFullInfo
+                    festival={festivals.find(f => f._id === selectedFestivalId)}
+                    onClose={() => setSelectedFestivalId(null)}
+                />
+            )}
+        </>
     );
 }
