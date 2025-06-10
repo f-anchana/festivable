@@ -3,9 +3,9 @@ import Sidebar from "@/components/OrganizerDashboard/Sidebar/Sidebar";
 
 export default function Layout({ children }) {
   return (
-    <div style={{ display: "flex" }}>
+    <div className="layout-wrapper">
       <Sidebar />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main className="layout-content">{children}</main>
     </div>
   );
 }

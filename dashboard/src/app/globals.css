@@ -79,6 +79,15 @@ button {
   cursor: pointer;
 }
 
+/*Layout*/
+
+.layout-content {
+  padding-left: 20vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
 /* MapBuilder bugs */
 
 .polygon-label{

@@ -7,8 +7,7 @@ import styles from "./SidebarAdmin.module.scss";
 const navItems = [
   { label: "Tableau de bord", href: "/admin-dashboard" },
   { label: "Gestion des festivals", href: "/festival-management" },
-  { label: "Gestion des organisateurs", href: "/admin/organisateurs" },
-  { label: "Rôles et permissions", href: "/admin/roles" },
+  { label: "Gestion des comptes", href: "/admin/organisateurs" }
 ];
 
 export default function SidebarAdmin() {

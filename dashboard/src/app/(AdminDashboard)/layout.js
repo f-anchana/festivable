@@ -3,9 +3,11 @@ import SidebarAdmin from "@/components/AdminDashboard/SidebarAdmin/SidebarAdmin"
 
 export default function Layout({ children }) {
   return (
-    <div style={{ display: "flex" }}>
+    <div className="layout-wrapper">
       <SidebarAdmin />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main className="layout-content">
+        {children}
+      </main>
     </div>
   );
 }

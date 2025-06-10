@@ -1,17 +1,18 @@
 .sidebar {
   background: var(--dark-blue);
   color: white;
-  width: 350px;
+  width: 20vw;
   height: auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: fixed;
 
   &__top {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     border-bottom: 1px solid #ffffff38;
     padding: 2rem;
 
@@ -31,7 +32,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      padding: 1.2rem;
+      padding: 1rem;
       border-radius: 10px;
       font-weight: 500;
       color: white;
@@ -41,7 +42,7 @@
       div {
         height: fit-content;
         display: flex;
-        margin-bottom: 2px;
+        margin-bottom: px;
       }
 
       &:hover {
@@ -95,7 +96,7 @@
   &__preview {
     border-bottom: 1px solid #ffffff38;
     border-top: 1px solid #ffffff38;
-    margin: 2rem 0;
+    margin-top: 1rem;
 
     .sidebar__link {
       padding: 1.4rem 2.2rem;

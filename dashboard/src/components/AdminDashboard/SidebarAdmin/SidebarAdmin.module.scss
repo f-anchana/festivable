@@ -1,12 +1,13 @@
 .sidebar {
   background: #1d1d1d;
   color: white;
-  width: 350px;
+  width: 20vw;
   height: auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: fixed;
 
   &__top {
     display: flex;
