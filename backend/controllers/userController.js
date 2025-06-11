@@ -49,13 +49,13 @@ exports.createUser = async (req, res) => {
 
         await newUser.save();
 
-try {
-    // Envoi mail à l'utilisateur
-    await transporter.sendMail({
-        from: `"Festiv'able" <${process.env.MAIL_USER}>`,
-        to: email,
-        subject: "🎉 Bienvenue sur Festiv'able !",
-        text: `
+        try {
+            // Envoi mail à l'utilisateur
+            await transporter.sendMail({
+                from: `"Festiv'able" <${process.env.MAIL_USER}>`,
+                to: email,
+                subject: "🎉 Bienvenue sur Festiv'able !",
+                text: `
 Salut ${pseudo} !
 
 Merci pour ton inscription sur Festiv'able.  
@@ -71,24 +71,24 @@ L'équipe Festiv'able
 contact@festivable.fr  
 https://festivable.fr
         `.trim()
-    });
-    console.log(`✅ Mail envoyé à l'utilisateur : ${email}`);
-} catch (error) {
-    console.error("❌ Erreur lors de l'envoi du mail à l'utilisateur :", error);
-}
+            });
+            console.log(`✅ Mail envoyé à l'utilisateur : ${email}`);
+        } catch (error) {
+            console.error("❌ Erreur lors de l'envoi du mail à l'utilisateur :", error);
+        }
 
-try {
-    // Envoi mail notification à admin
-    await transporter.sendMail({
-        from: `"Festiv'able" <${process.env.MAIL_USER}>`,
-        to: process.env.MAIL_USER,
-        subject: "📥 Nouveau festivalier inscrit",
-        text: `Un nouvel utilisateur vient de créer un compte :\n\nNom : ${lastname}\nPrénom : ${firstname}\nEmail : ${email}`
-    });
-    console.log("✅ Mail de notification envoyé à contact@festivable.fr");
-} catch (error) {
-    console.error("❌ Erreur lors de l'envoi du mail à admin :", error);
-}
+        try {
+            // Envoi mail notification à admin
+            await transporter.sendMail({
+                from: `"Festiv'able" <${process.env.MAIL_USER}>`,
+                to: process.env.MAIL_USER,
+                subject: "📥 Nouveau festivalier inscrit",
+                text: `Un nouvel utilisateur vient de créer un compte :\n\nNom : ${lastname}\nPrénom : ${firstname}\nEmail : ${email}`
+            });
+            console.log("✅ Mail de notification envoyé à contact@festivable.fr");
+        } catch (error) {
+            console.error("❌ Erreur lors de l'envoi du mail à admin :", error);
+        }
 
         res.status(201).json({ message: "User enregistré avec succès !" });
     } catch (err) {
@@ -119,4 +119,17 @@ exports.loginUser = async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: "Erreur serveur", error: err });
     }
+};
+
+exports.deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await User.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Utilisateur supprimé avec succès." });
+  } catch (err) {
+    console.error("Erreur lors de la suppression :", err);
+    res.status(500).json({ message: "Erreur lors de la suppression de l'utilisteur." });
+  }
 };
