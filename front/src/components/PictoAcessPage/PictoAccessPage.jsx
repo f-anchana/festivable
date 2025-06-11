@@ -89,7 +89,7 @@ export default function PictoAccessPage() {
                 </p>
               </section>
 
-              <button className={styles.button}>Accéder à la page Picto Access →</button>
+              <button className={styles.button}>Accéder à la page Picto Access</button>
             </div>
           </div>
         </div>

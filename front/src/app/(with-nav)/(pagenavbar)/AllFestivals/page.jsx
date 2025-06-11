@@ -12,24 +12,55 @@ export default function AllFestivals() {
   const [dateFilter, setDateFilter] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
 
-  useEffect(() => {
-    async function fetchFestivals() {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch('http://localhost:3000/festivals');
-        if (!response.ok) throw new Error('Erreur réseau');
-        const data = await response.json();
-        setFestivals(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
+ useEffect(() => {
+  async function fetchFestivals() {
+    setLoading(true);
+    setError(null);
 
-    fetchFestivals();
-  }, []);
+    try {
+      const response = await fetch('http://localhost:3000/festivals');
+      if (!response.ok) throw new Error('Erreur réseau');
+      const data = await response.json();
+
+      const festivalsWithCovers = await Promise.all(
+        data.map(async (festival) => {
+          try {
+            const galleryRes = await fetch(`http://localhost:3000/gallery/${festival._id}`);
+
+            if (galleryRes.status === 404) {
+              // Pas de galerie pour ce festival
+              return { ...festival, image: null };
+            }
+
+            if (!galleryRes.ok) throw new Error('Erreur galerie');
+
+            const galleryData = await galleryRes.json();
+            const firstImagePath = galleryData.images?.[0];
+
+            return {
+              ...festival,
+              image: firstImagePath
+                ? `http://localhost:3000/${firstImagePath.replace(/\\/g, '/')}`
+                : null,
+            };
+          } catch (err) {
+            console.error(`Erreur pour la galerie du festival ${festival._id}:`, err);
+            return { ...festival, image: null };
+          }
+        })
+      );
+
+      setFestivals(festivalsWithCovers);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  fetchFestivals();
+}, []);
+
 
   // Fonction de filtrage
   const filteredFestivals = festivals.filter((festival) => {
@@ -52,44 +83,81 @@ export default function AllFestivals() {
       <h1 className={styles.title}>NOS FESTIVALS</h1>
 
       {/* FILTRES */}
-      <div className={styles.filters} style={{ marginBottom: '20px' }}>
-        <label style={{ marginRight: '10px' }}>
-          Filtrer par date (à partir de) :
-          <input
-            type="date"
-            value={dateFilter}
-            onChange={(e) => setDateFilter(e.target.value)}
-            style={{ marginLeft: '8px' }}
-          />
-        </label>
+     <div
+  className={styles.filters}
+  style={{
+    marginBottom: '30px',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '12px',
+    alignItems: 'center',
+  }}
+>
+  {/* FILTRE DATE */}
+  <div style={{ position: 'relative' }}>
+    <input
+      type="date"
+      value={dateFilter}
+      onChange={(e) => setDateFilter(e.target.value)}
+      style={{
+        appearance: 'none',
+        padding: '10px 14px',
+        borderRadius: '9999px',
+        border: 'none',
+        backgroundColor: '#f4f4f4',
+        fontWeight: 600,
+        fontSize: '0.95rem',
+        color: '#111',
+        cursor: 'pointer',
+        boxShadow: 'inset 0 0 0 1px #ddd',
+      }}
+    />
+  </div>
 
-        <label style={{ marginRight: '10px' }}>
-          Filtrer par lieu :
-          <input
-            type="text"
-            placeholder="Entrez un lieu"
-            value={locationFilter}
-            onChange={(e) => setLocationFilter(e.target.value)}
-            style={{ marginLeft: '8px' }}
-          />
-        </label>
+  {/* FILTRE LIEU */}
+  <div style={{ position: 'relative' }}>
+    <input
+      type="text"
+      placeholder="Lieu"
+      value={locationFilter}
+      onChange={(e) => setLocationFilter(e.target.value)}
+      style={{
+        padding: '10px 14px',
+        borderRadius: '9999px',
+        border: 'none',
+        backgroundColor: '#f4f4f4',
+        fontWeight: 600,
+        fontSize: '0.95rem',
+        color: '#111',
+        cursor: 'text',
+        boxShadow: 'inset 0 0 0 1px #ddd',
+      }}
+    />
+  </div>
 
-        <button
-          onClick={() => {
-            setDateFilter('');
-            setLocationFilter('');
-          }}
-          style={{
-            marginLeft: '10px',
-            padding: '5px 10px',
-            backgroundColor: '#eee',
-            border: '1px solid #ccc',
-            cursor: 'pointer',
-          }}
-        >
-          Réinitialiser filtres
-        </button>
-      </div>
+  {/* BOUTON RESET */}
+  <button
+    onClick={() => {
+      setDateFilter('');
+      setLocationFilter('');
+    }}
+    style={{
+      padding: '10px 16px',
+      borderRadius: '9999px',
+      backgroundColor: '#f4f4f4',
+      fontWeight: 600,
+      fontSize: '0.95rem',
+      border: 'none',
+      cursor: 'pointer',
+      boxShadow: 'inset 0 0 0 1px #ddd',
+      transition: 'background-color 0.2s',
+    }}
+    onMouseEnter={(e) => (e.target.style.backgroundColor = '#eaeaea')}
+    onMouseLeave={(e) => (e.target.style.backgroundColor = '#f4f4f4')}
+  >
+    Réinitialiser
+  </button>
+</div>
 
       {/* LISTE FESTIVALS */}
       <div className={styles.grid}>

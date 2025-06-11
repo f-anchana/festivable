@@ -25,7 +25,7 @@ export default function FestivalHeader({ festival }) {
           </div>
 
   <div className={s.festival__infoItem}>
-  <Image src="/icones/info.svg" alt="Accessibilité" width={40} height={30} />
+  <Image src="/icones/info.svg" alt="Accessibilité" width={20} height={30} />
   <p>
   {festival.pictoaccess ? 'Certifié PictoAccess' : 'Non certifié PictoAccess'}
 </p>

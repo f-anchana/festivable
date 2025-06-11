@@ -21,16 +21,18 @@ export default function FestivalCard({ _id, title, description, startDate, endDa
       )}
 
       {imageSrc && (
-        <div className={styles.imageWrapper}>
-          <Image
-            src={imageSrc}
-            alt={title}
-            layout="fill"
-            className={styles.image}
-            priority
-          />
-        </div>
-      )}
+  <div className={styles.imageWrapper}>
+    <Image
+  src={imageSrc}
+  alt={title}
+  fill
+  className={styles.image}
+  priority
+/>
+
+  </div>
+)}
+
 
       <div className={styles.info}>
         <h4 className={styles.title}>{title}</h4>

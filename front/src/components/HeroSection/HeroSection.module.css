@@ -54,6 +54,7 @@
 }
 
 
+
 .decor3 {
   position: absolute;
   bottom: 0;
@@ -152,10 +153,12 @@
   color: #ffffff;
 }
 
-.boutons_homepage a:hover {
+.boutons_homepage a:hover,
+.boutons_homepage a:focus {
   background-color: #FDB74C;
   color: #1D1D1D;
   border-color: #FDB74C;
+  outline: none; 
 }
 
 .image {
@@ -172,6 +175,24 @@
   opacity: 0;
 }
 
+@media (max-width: 768px) {
+  .circleContainer {
+    width: 100px;
+    height: 100px;
+    bottom: 5px;
+    right: 10px;
+  }
+
+  .badgeImage {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .centerBadgeImage {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
 
 
 
@@ -188,6 +209,7 @@
   text-align: center;
   margin-bottom: 50px;
 }
+
 
 .titleBox {
   display: inline-block;

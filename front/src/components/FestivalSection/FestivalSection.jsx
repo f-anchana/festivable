@@ -20,7 +20,7 @@ export default function FestivalsSection() {
   useEffect(() => {
     FestivalSectionAnimation(sectionRef);
 
-    // Animation de base sur le titre et sous-titre
+    // Animations avec GSAP
     gsap.fromTo(
       `.${styles.titleWrapper}`,
       { opacity: 0, y: 50 },
@@ -36,7 +36,6 @@ export default function FestivalsSection() {
       }
     );
 
-    // Animation sur les cards festivals
     gsap.fromTo(
       `.${styles.cardsWrapper} > *`,
       { opacity: 0, y: 50 },
@@ -53,7 +52,6 @@ export default function FestivalsSection() {
       }
     );
 
-    // Animation sur "Voir tous nos festivals"
     gsap.fromTo(
       `.${styles.viewAll}`,
       { opacity: 0, y: 30 },
@@ -69,7 +67,6 @@ export default function FestivalsSection() {
       }
     );
 
-    // Animation sur la section accessibilitySection
     gsap.fromTo(
       `.${styles.accessibilitySection} .${styles.container}`,
       { opacity: 0, y: 50 },
@@ -85,7 +82,6 @@ export default function FestivalsSection() {
       }
     );
 
-    // Animation sur la section sectionAction titre
     gsap.fromTo(
       `.${styles.sectionAction} .${styles.title1}`,
       { opacity: 0, y: 40 },
@@ -101,7 +97,6 @@ export default function FestivalsSection() {
       }
     );
 
-    // Animation sur les cards de sectionAction
     gsap.fromTo(
       `.${styles.cardContainer} > .${styles.card}`,
       { opacity: 0, y: 50 },
@@ -118,9 +113,7 @@ export default function FestivalsSection() {
       }
     );
 
-    // Ne pas toucher aux parties partenaire et recruit (conformément à ta demande)
-
-    // Animation GSAP pour le texte de recruit au scroll
+    // Recrutement : texte et image
     gsap.fromTo(
       textRecruitRef.current,
       { x: -100, opacity: 0 },
@@ -138,7 +131,6 @@ export default function FestivalsSection() {
       }
     );
 
-    // Animation GSAP pour l'image de recruit au scroll
     gsap.fromTo(
       imageRecruitRef.current,
       { x: 100, opacity: 0 },
@@ -156,24 +148,54 @@ export default function FestivalsSection() {
       }
     );
 
-    // Fetch festivals
-    async function fetchFestivals() {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch('http://localhost:3000/festivals');
-        if (!response.ok) throw new Error('Erreur réseau');
-        const data = await response.json();
-        setFestivals(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
+  async function fetchFestivals() {
+    setLoading(true);
+    setError(null);
 
-    fetchFestivals();
-  }, []);
+    try {
+      const response = await fetch('http://localhost:3000/festivals');
+      if (!response.ok) throw new Error('Erreur réseau');
+      const data = await response.json();
+
+      const festivalsWithCovers = await Promise.all(
+        data.map(async (festival) => {
+          try {
+            const galleryRes = await fetch(`http://localhost:3000/gallery/${festival._id}`);
+
+            if (galleryRes.status === 404) {
+              // Pas de galerie pour ce festival
+              return { ...festival, image: null };
+            }
+
+            if (!galleryRes.ok) throw new Error('Erreur galerie');
+
+            const galleryData = await galleryRes.json();
+            const firstImagePath = galleryData.images?.[0];
+
+            return {
+              ...festival,
+              image: firstImagePath
+                ? `http://localhost:3000/${firstImagePath.replace(/\\/g, '/')}`
+                : null,
+            };
+          } catch (err) {
+            console.error(`Erreur pour la galerie du festival ${festival._id}:`, err);
+            return { ...festival, image: null };
+          }
+        })
+      );
+
+      setFestivals(festivalsWithCovers);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  fetchFestivals();
+}, []);
+
 
   return (
     <section id="festival-section" className={styles.festivalsSection} ref={sectionRef}>
@@ -350,9 +372,9 @@ export default function FestivalsSection() {
 
           <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}ref={imageRecruitRef}  >
             <Image
-              src="/images/recruitment.svg"
+              src="/images/recrutement.svg"
               alt=""
-              width={600}
+              width={500}
               height={600}
               priority
             />

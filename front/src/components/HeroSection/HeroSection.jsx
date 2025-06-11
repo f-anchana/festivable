@@ -31,7 +31,6 @@ const HeroSection = () => {
     }
   );
 
-  // 2. Animation du span.highlight (optionnel, sinon tu peux le déplacer dans le stagger ci-dessus)
   tl.to(
     titleRef.current.querySelector("span.highlight"),
     {
@@ -40,10 +39,9 @@ const HeroSection = () => {
       ease: "power1.out",
       scale: 1.1,
     },
-    "-=0.3" // pour que ça arrive pendant la fin du titre
+    "-=0.3" 
   );
 
-  // 3. Animation descriptions + boutons
   const description = gsap.utils.toArray(`.${styles.description}`);
   const boutons = gsap.utils.toArray(`.${styles.boutons_homepage}`);
 
@@ -57,10 +55,10 @@ const HeroSection = () => {
       ease: "power2.out",
       stagger: 0.2,
     },
-    "+=0.2" // petite pause après le titre + image
+    "+=0.2" 
   );
 
-  // 4. Animation finale du badge (circleContainer → pop)
+
   tl.fromTo(
     `.${styles.circleContainer}`,
     { opacity: 0, scale: 0.5 },
@@ -70,7 +68,7 @@ const HeroSection = () => {
       duration: 0.8,
       ease: "back.out(1.7)",
     },
-    "+=0.3" // attendre un peu après description + boutons
+    "+=0.3" 
   );
 }, []);
 
@@ -89,10 +87,12 @@ const HeroSection = () => {
 
       <div className={styles.circleContainer}>
         <div className={styles.rotatingText}>
-          <Image src="/decor/apfbadge-text.svg" alt="" width={160} height={160} />
+          <Image   className={styles.badgeImage}
+ src="/decor/apfbadge-text.svg" alt="" width={160} height={160} />
         </div>
         <div className={styles.centerImage}>
-          <Image src="/decor/apfbadge-center.png" alt="" width={50} height={50} />
+          <Image   className={styles.centerBadgeImage}
+src="/decor/apfbadge-center.png" alt="" width={50} height={50} />
         </div>
       </div>
 

@@ -85,11 +85,11 @@ margin-left: 30px;
 /* partie engagement */
 
 .accessibilitySection {
-  padding: 4rem 2rem;
   background-color: #fff;
   position: relative;
-  top: 50px;
+  top: 100px;
   overflow: hidden;
+
   
 }
 
@@ -161,7 +161,8 @@ margin-left: 30px;
   transition: background 0.3s;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
 background-color: #FDB74C;
   color: #1D1D1D;
   border-color: #FDB74C;}
@@ -222,11 +223,18 @@ background-color: #FDB74C;
       display: none;
 
   }
+  
+.decor4{
+  display: none;
+}
+.festivalIntro{
+margin-left: 0px;
+}
 }
 
 
 .sectionAction {
-  margin-top: 100px;
+  margin-top: 200px;
   text-align: center;
   position: relative;
   
@@ -380,6 +388,12 @@ background-color: #FDB74C;
   position: relative;
   display: flex;
   justify-content: center;
+    /* box-shadow: 1px 1px 0 #222;
+      border-radius: 5px;
+
+    width: 300px;
+    height: 500px; */
+
 }
 
 .mobileOnly {
