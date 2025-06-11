@@ -1,0 +1,79 @@
+.container {
+    width: 100%;
+    outline: solid 1px #CAC3DF;
+    border-radius: 15px;
+    padding: 6px 24px;
+    gap: 24px;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container td {
+    text-align: start;
+    font-size: 14px;
+    padding: 15px;
+}
+
+.container a {
+   text-decoration: underline;
+}
+
+.organizer {
+    color: var(--dark-gray);
+}
+
+.active {
+    background-color: #CAFFF4;
+    color: #037420;
+    border-radius: 15px;
+    padding: 2px 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.inactive {
+    background-color: #FFD4DA;
+    color: #C30404;
+    border-radius: 15px;
+    padding: 2px 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.container button,
+.container select,
+.container option {
+    background-color: white;
+    border: solid 1px #CAC3DF;
+    padding: 4px 8px;
+    border-radius: 15px;
+    color: #4000FF;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.container button:hover,
+.container select:hover,
+.container option:hover {
+    background-color: #4000FF;
+    color: white;
+}
+
+.delete {
+    color: #d20000!important;
+}
+
+.delete:hover {
+    background-color: #d20000!important;
+    color: white!important;
+}

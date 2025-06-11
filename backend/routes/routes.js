@@ -15,6 +15,7 @@ const upload = require('../middlewares/uploadImages');
 router.get('/users', userController.getUsers);
 router.post('/user', userController.createUser);
 router.post('/login-user', userController.loginUser);
+router.delete("/user/:id", verifyAdmin, userController.deleteUser);
 
 // Routes pour la gestion des festivals
 router.get('/festivals', festivalController.getFestivals);
@@ -26,9 +27,10 @@ router.post('/festival/:id/set-validation', verifyAdmin, festivalController.vali
 router.post('/festival/:id/set-pictoaccess', verifyAdmin, festivalController.pictoaccessFestival);
 
 // Routes pour la gestion du tableau de bord
-router.get('/dashboards',verifyToken, dashboardController.getDashboards);
+router.get('/dashboards',verifyAdmin, dashboardController.getDashboards);
 router.post('/organization', dashboardController.createOrganization);
 router.post('/login-dashboard', dashboardController.loginDashboard);
+router.delete("/organizer/:id", verifyAdmin, dashboardController.deleteOrganizer);
 
 // Routes pour la gestion des cartes
 router.get('/maps', mapController.getMaps);

@@ -1,15 +1,18 @@
 'use client';
 import { securePage } from "@/components/SecurePage/SecurePage";
-import FestivalTable from "@/components/AdminDashboard/FestivalTable/FestivalTable";
-import FestivalFilter from "@/components/AdminDashboard/FestivalFilter/FestivalFilter";
-import styles from "./management.module.scss";
+import FestivalTable from "@/components/AdminDashboard/FestivalManagment/FestivalTable/FestivalTable";
+import FestivalFilter from "@/components/AdminDashboard/FestivalManagment/FestivalFilter/FestivalFilter";
+import styles from "./festivalManagement.module.scss";
+import { useState } from "react";
 
-function AdminDashboard() {
+function FestivalManagement() {
+    const [filter, setFilter] = useState("all");
+
     return (
         <div className={styles.container}>
-            <FestivalFilter></FestivalFilter>
-            <FestivalTable></FestivalTable>
+            <FestivalFilter filter={filter} setFilter={setFilter} />
+            <FestivalTable filter={filter} />
         </div>
     );
 }
-export default (AdminDashboard);
+export default (FestivalManagement);
