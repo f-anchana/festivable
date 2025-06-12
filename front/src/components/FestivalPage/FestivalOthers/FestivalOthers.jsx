@@ -1,8 +1,10 @@
 import FestivalCard from '../../FestivalCard/FestivalCard';
 import styles from './FestivalOthers.module.scss';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default async function FestivalOthers({ currentFestivalId }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/festivals`, {
+  const res = await fetch(`${API_URL}/festivals`, {
     cache: 'no-store',
   });
 
@@ -15,7 +17,31 @@ export default async function FestivalOthers({ currentFestivalId }) {
   }
 
   const allFestivals = await res.json();
-  const otherFestivals = allFestivals.filter(f => f._id !== currentFestivalId && f.valid);
+  const filteredFestivals = allFestivals.filter(f => f._id !== currentFestivalId && f.valid);
+
+  // 🧠 Enrichir les festivals avec leurs images
+  const enrichedFestivals = await Promise.all(
+    filteredFestivals.map(async (festival) => {
+      try {
+        const galleryRes = await fetch(`${API_URL}/gallery/${festival._id}`);
+
+        if (galleryRes.status === 404) return { ...festival, image: null };
+
+        const galleryData = await galleryRes.json();
+        const firstImagePath = galleryData.images?.[0];
+
+        return {
+          ...festival,
+          image: firstImagePath
+            ? `${API_URL}/${firstImagePath.replace(/\\/g, '/')}`
+            : null,
+        };
+      } catch (err) {
+        console.error(`Erreur galerie pour le festival ${festival._id}`, err);
+        return { ...festival, image: null };
+      }
+    })
+  );
 
   return (
     <section className={styles.festivalsSection}>
@@ -25,8 +51,8 @@ export default async function FestivalOthers({ currentFestivalId }) {
         </div>
 
         <div className={styles.cardsWrapper}>
-          {otherFestivals.length === 0 && <p>Aucun festival trouvé.</p>}
-          {otherFestivals.slice(0, 4).map((festival) => (
+          {enrichedFestivals.length === 0 && <p>Aucun festival trouvé.</p>}
+          {enrichedFestivals.slice(0, 4).map((festival) => (
             <FestivalCard
               key={festival._id}
               _id={festival._id}

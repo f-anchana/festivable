@@ -16,9 +16,18 @@
     border-bottom: 1px solid #ffffff38;
     padding: 2rem;
 
+    div{
+      display: flex;
+
+      a{
+            margin-top: 2px;
+      }
+    }
+
     h2 {
       font-size: 1.1rem;
       font-weight: 800;
+      margin-left: 10px;
     }
   }
 

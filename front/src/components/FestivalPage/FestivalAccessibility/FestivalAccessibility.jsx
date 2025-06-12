@@ -53,7 +53,7 @@ const allPictograms = [
   },
   {
     title: 'Accompagnateur',
-    pictogram: '/pictograms/active/accompagnateur.png',
+    pictogram: '/pictograms/active/help.png',
     conditions: ['supportDevices'],
   },
   {
@@ -68,7 +68,7 @@ const allPictograms = [
   },
   {
     title: 'Enfant en bas âge',
-    pictogram: '/pictograms/active/kid.svg',
+    pictogram: '/pictograms/active/kid.png',
     conditions: ['calmSpaces'],
   },
   {
@@ -78,7 +78,7 @@ const allPictograms = [
   },
   {
     title: 'Zone bruyante',
-    pictogram: '/pictograms/active/sit.svg',
+    pictogram: '/pictograms/active/noisy.png',
     conditions: ['sensitiveAreasSigns'],
   },
 ];

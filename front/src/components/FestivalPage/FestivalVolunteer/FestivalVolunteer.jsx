@@ -60,7 +60,7 @@ export default function FestivalVolunteer({ festivalId }) {
         {recruitments.map((r, i) => (
           <div
             key={i}
-            className={`${s.volunteer} ${s[`volunteer--blue`]}`}
+className={`${s.volunteer} ${s[`volunteer--${i === 0 ? 'blue' : i === 1 ? 'orange' : 'yellow'}`]}`}
             role="listitem"
           >
             <h2 className={s.volunteer__title}>{r.position}</h2>

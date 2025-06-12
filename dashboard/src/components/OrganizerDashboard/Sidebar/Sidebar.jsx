@@ -92,8 +92,8 @@ export default function Sidebar() {
               priority
             />
           </Link>
+          <h2>Mon festival</h2>
         </div>
-        <h2>Mon festival</h2>
       </div>
 
       <nav className={styles.sidebar__nav}>

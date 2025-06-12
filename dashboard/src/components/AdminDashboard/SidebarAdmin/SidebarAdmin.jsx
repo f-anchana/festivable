@@ -5,9 +5,8 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "./SidebarAdmin.module.scss";
 
 const navItems = [
-  { label: "Tableau de bord", href: "/admin-dashboard" },
   { label: "Gestion des festivals", href: "/festival-management" },
-  { label: "Gestion des comptes", href: "/admin/organisateurs" }
+  { label: "Gestion des comptes", href: "/account-management" }
 ];
 
 export default function SidebarAdmin() {

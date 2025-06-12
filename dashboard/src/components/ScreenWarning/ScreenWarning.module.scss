@@ -36,3 +36,23 @@ display: inline-block;
   font-size: 1.4rem;
   color: #000;
 }
+
+.triangleTop {
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  transform: translateX(40%);
+  opacity: 0.4;
+  width: 100px;
+  height: auto;
+}
+
+.triangleBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+    transform: translateY(40%) translateX(-40%);
+  opacity: 0.4;
+  width: 270px;
+  height: auto;
+}
