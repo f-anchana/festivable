@@ -74,16 +74,3 @@ export default function FestivalVolunteer() {
 }
 
 
-// 'use client';
-
-// export default function FestivalVolunteer({ volunteer }) {
-//   if (!volunteer) return <p>Informations bénévoles non disponibles.</p>;
-
-//   return (
-//     <section aria-labelledby="volunteer-title">
-//       <h2 id="volunteer-title">Devenir bénévole</h2>
-//       <p>{volunteer.description}</p>
-//       {/* Ajoute un formulaire ou autres infos */}
-//     </section>
-//   );
-// }

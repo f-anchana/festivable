@@ -5,11 +5,12 @@ import FestivalDescription from "../../../../../components/FestivalPage/Festival
 import FestivalPricing from "../../../../../components/FestivalPage/FestivalPricing/FestivalPricing";
 import FestivalLocation from "../../../../../components/FestivalPage/FestivalLocation/FestivalLocation";
 import FestivalVolunteer from "../../../../../components/FestivalPage/FestivalVolunteer/FestivalVolunteer";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default async function FestivalPage({ params }) {
   const { id } = params;
 
-  const res = await fetch(`http://localhost:3000/festival/${id}`);
+  const res = await fetch(`${API_URL}/festival/${id}`);
   if (!res.ok) throw new Error('Festival non trouvé');
 
   const festival = await res.json();
