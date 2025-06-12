@@ -1,6 +1,18 @@
-import "../../../../dashboard/src/app/globals.css";
+import "../globals.css";
 import Sidebar from "@/components/OrganizerDashboard/Sidebar/Sidebar";
+import { Poppins, Oswald } from "next/font/google";
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-poppins",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["300", "400", "700"],
+  variable: "--font-oswald",
+});
 
 export const metadata = {
   title: "Dashboard - Festivable",

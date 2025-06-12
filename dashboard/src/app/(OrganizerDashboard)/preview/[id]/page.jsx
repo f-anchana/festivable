@@ -5,9 +5,16 @@ import FestivalDescription from "../../../../components/OrganizerDashboard/Previ
 import FestivalPricing from "../../../../components/OrganizerDashboard/PreviewFestival/FestivalPricing/FestivalPricing";
 import FestivalLocation from "../../../../components/OrganizerDashboard/PreviewFestival/FestivalLocation/FestivalLocation";
 import FestivalVolunteer from "../../../../components/OrganizerDashboard/PreviewFestival/FestivalVolunteer/FestivalVolunteer";
+import FestivalAccessibility from "../../../../components/OrganizerDashboard/PreviewFestival/FestivalAccessibility/FestivalAccessibility";
 
-export default function FestivalPage({ params }) {
+export default async function FestivalPage({ params }) {
   const { id } = params;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/festival/${id}`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) throw new Error('Festival non trouvé');
+  const festival = await res.json();
 
   return (
     <div className={styles.festivalGrid}>
@@ -15,20 +22,19 @@ export default function FestivalPage({ params }) {
         <FestivalGallery id={id} />
       </div>
       <div className={styles.left}>
-        <FestivalHeader id={id} />
-        <FestivalDescription id={id} />
+        <FestivalHeader festival={festival} />
+        <FestivalDescription festival={festival} />
+        <FestivalAccessibility answers={festival.accessibility} />
       </div>
-
       <div className={styles.right}>
         <div className={styles.pc}>
-          <FestivalGallery id={id}/>
+          <FestivalGallery id={id} />
         </div>
-        <FestivalPricing id={id} />
+        <FestivalPricing pricing={festival.prices} />
       </div>
-
       <div className={styles.fullWidth}>
         <FestivalLocation id={id} />
-        <FestivalVolunteer id={id} />
+        <FestivalVolunteer festivalId={festival._id} />
       </div>
     </div>
   );

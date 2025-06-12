@@ -1,0 +1,50 @@
+.accessibility {
+  padding: 2rem;
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .card {
+
+    span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 500;
+      font-size: 12px;
+      text-align: center;
+      width: 100px;
+    }
+  }
+
+  .active {
+    background: #2196f3;
+    color: white;
+
+    span {
+      color: white;
+    }
+  }
+
+  .imageWrapper {
+    display: flex;
+    justify-content: center;
+    background: #f4f4f4;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    transition: background 0.3s ease;
+    border: 1px solid #ddd;    
+    align-items: center;
+
+  }
+}

@@ -4,18 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import s from "./FestivalHeader.module.scss";
 
-export default function FestivalHeader({ id }) {
-  const [festival, setFestival] = useState(null);
-
-  useEffect(() => {
-    if (!id) return;
-
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/festival/${id}`)
-      .then(res => res.json())
-      .then(data => setFestival(data))
-      .catch(err => console.error("Erreur lors du fetch:", err));
-  }, [id]);
-
+export default function FestivalHeader({ festival }) {
   if (!festival) return <p>Chargement...</p>;
 
   return (
@@ -26,20 +15,21 @@ export default function FestivalHeader({ id }) {
         <div className={s.festival__info}>
           <div className={s.festival__infoItem}>
             <Image src="/icones/calendar.svg" alt="Calendrier" width={20} height={30} />
-            <p>Date : {new Date(festival.start_date).toLocaleDateString()} – {new Date(festival.end_date).toLocaleDateString()}</p>
-          </div>
+<p>
+  Date : {new Date(festival.start_date).toISOString().slice(0, 10)} – {new Date(festival.end_date).toISOString().slice(0, 10)}
+</p>          </div>
 
           <div className={s.festival__infoItem}>
             <Image src="/icones/house.svg" alt="Lieu" width={20} height={30} />
             <p>Lieu : {festival.address}</p>
           </div>
 
-          <div className={s.festival__infoItem}>
-            <Image src="/icones/info.svg" alt="Accessibilité" width={20} height={30} />
-            <div className={s.festival__infoBadges}>
-              {festival.accessibility?.wheelchair_accessible && <span className={s.festival__infoBadge}>Accessible en fauteuil</span>}
-              {festival.accessibility?.disabled_parking_available && <span className={s.festival__infoBadge}>Parking PMR</span>}
-            </div>
+  <div className={s.festival__infoItem}>
+  <Image src="/icones/info.svg" alt="Accessibilité" width={20} height={30} />
+  <p>
+  {festival.pictoaccess ? 'Certifié PictoAccess' : 'Non certifié PictoAccess'}
+</p>
+
           </div>
         </div>
       </div>
