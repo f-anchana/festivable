@@ -1,3 +1,4 @@
+
 'use client';
 
 import s from './FestivalLocation.module.scss';

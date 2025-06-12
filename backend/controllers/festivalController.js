@@ -13,7 +13,7 @@ exports.getFestivals = async (req, res) => {
 exports.getFestivalById = async (req, res) => {
     try {
         const id = req.params.id; // récupère l'id depuis l'URL (ex: /festivals/:id)
-        const festival = await Festival.findById(id);
+        const festival = await Festival.findById(id).populate('organizer', 'organization_name');
 
         if (!festival) {
             return res.status(404).json({ message: "Festival non trouvé" });
@@ -61,22 +61,22 @@ exports.createFestival = async (req, res) => {
 };
 
 exports.getFestivalByOrganizerId = async (req, res) => {
-  try {
-    // L'id de l'organisateur est dans req.user.id (voir middleware verifyToken)
-    const organizerId = req.user.id;
+    try {
+        // L'id de l'organisateur est dans req.user.id (voir middleware verifyToken)
+        const organizerId = req.user.id;
 
-    // Recherche le festival lié à cet organisateur
-    const festival = await Festival.findOne({ organizer: organizerId });
+        // Recherche le festival lié à cet organisateur
+        const festival = await Festival.findOne({ organizer: organizerId });
 
-    if (!festival) {
-      return res.status(404).json({ message: "Aucun festival trouvé pour cet organisateur" });
+        if (!festival) {
+            return res.status(404).json({ message: "Aucun festival trouvé pour cet organisateur" });
+        }
+
+        res.json(festival);
+    } catch (err) {
+        console.error("Erreur lors de la récupération du festival :", err);
+        res.status(500).json({ error: "Erreur serveur" });
     }
-
-    res.json(festival);
-  } catch (err) {
-    console.error("Erreur lors de la récupération du festival :", err);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
 };
 
 exports.updateFestival = async (req, res) => {

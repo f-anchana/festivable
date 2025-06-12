@@ -30,14 +30,6 @@ export default function FestivalHeader({ festival }) {
   {festival.pictoaccess ? 'Certifié PictoAccess' : 'Non certifié PictoAccess'}
 </p>
 
-
-
-
-
-            <div className={s.festival__infoBadges}>
-              {festival.accessibility?.wheelchair_accessible && <span className={s.festival__infoBadge}>Accessible en fauteuil</span>}
-              {festival.accessibility?.disabled_parking_available && <span className={s.festival__infoBadge}>Parking PMR</span>}
-            </div>
           </div>
         </div>
       </div>
