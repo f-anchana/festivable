@@ -1,5 +1,5 @@
 'use client';
-import styles from './recrutement.module.scss'; 
+import styles from './Recrutement.module.scss'; 
 import RecrutementPage from '@/components/OrganizerDashboard/RecrutementPage/RecrutementPage'
 
 
