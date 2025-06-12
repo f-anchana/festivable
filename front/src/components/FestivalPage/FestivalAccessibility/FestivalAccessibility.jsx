@@ -33,12 +33,12 @@ const allPictograms = [
   },
   {
     title: 'Handicap auditif / LSR',
-    pictogram: '/pictograms/active/LSR.svg',
+    pictogram: '/pictograms/active/LSR.png',
     conditions: ['signLanguageInterpreters', 'safetyBarriers'],
   },
   {
     title: 'Malentendants',
-    pictogram: '/pictograms/active/Deaf.png',
+    pictogram: '/pictograms/active/Deaf.svg',
     conditions: ['signLanguageInterpreters'],
   },
   {
@@ -48,17 +48,17 @@ const allPictograms = [
   },
   {
     title: 'Accompagnement',
-    pictogram: '/pictograms/active/acompgnament.svg',
+    pictogram: '/pictograms/active/accompagnateur.png',
     conditions: ['supportDevices'],
   },
   {
     title: 'Accompagnateur',
-    pictogram: '/pictograms/active/acompgnament.png',
+    pictogram: '/pictograms/active/accompagnateur.png',
     conditions: ['supportDevices'],
   },
   {
     title: 'Texte simplifié - FALC',
-    pictogram: '/pictograms/active/FALC.svg',
+    pictogram: '/pictograms/active/falc.png',
     conditions: ['supportDevices'],
   },
   {

@@ -1,5 +1,6 @@
 import "../../../../dashboard/src/app/globals.css";
 import SidebarAdmin from "@/components/AdminDashboard/SidebarAdmin/SidebarAdmin";
+import ScreenWarning from "@/components/ScreenWarning/ScreenWarning";
 
 export const metadata = {
   title: "AdminDashboard - Festivable",
@@ -11,11 +12,12 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <div className="layout-wrapper">
-      <SidebarAdmin />
-      <main className="layout-content">
-        {children}
-      </main>
-    </div>
+    <>
+      <ScreenWarning />
+      <div className="layout-wrapper">
+        <SidebarAdmin />
+        <main className="layout-content">{children}</main>
+      </div>
+    </>
   );
 }
