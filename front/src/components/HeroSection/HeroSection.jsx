@@ -145,7 +145,7 @@ src="/decor/apfbadge-center.png" alt="" width={50} height={50} />
             Explorez, découvrez et partagez la culture dans toutes ses formes.
           </p>
           <div className={styles.boutons_homepage} style={{ opacity: 0 }}>
-            <a href="">Découvrir la programmation culturelle </a>
+            <a href="/AllFestivals">Découvrir la programmation culturelle </a>
             <a href="/PictoAccess">Faire certifier mon festival </a>
           </div>
         </div>

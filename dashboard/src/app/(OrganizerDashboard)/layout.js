@@ -1,5 +1,6 @@
 import "../globals.css";
 import Sidebar from "@/components/OrganizerDashboard/Sidebar/Sidebar";
+import ScreenWarning from "@/components/ScreenWarning/ScreenWarning";
 import { Poppins, Oswald } from "next/font/google";
 
 const poppins = Poppins({
@@ -24,9 +25,12 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <div className="layout-wrapper">
-      <Sidebar />
-      <main className="layout-content">{children}</main>
-    </div>
+    <>
+      <ScreenWarning />
+      <div className="layout-wrapper">
+        <Sidebar />
+        <main className="layout-content">{children}</main>
+      </div>
+    </>
   );
 }

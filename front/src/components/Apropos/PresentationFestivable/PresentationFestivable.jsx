@@ -110,7 +110,7 @@ export default function PresentationFestivable() {
             Leur soutien et leurs conseils nous ont permis de mieux comprendre les enjeux concrets du terrain
             et d’imaginer des outils utiles, simples et efficaces pour tous.
           </p>
-          <button className={styles.collabButton}>Découvrir APF France handicap</button>
+          <a href="https://www.apf-francehandicap.org/" ><button className={styles.collabButton}>Découvrir APF France handicap</button></a>
         </div>
 
         <div className={styles.circleContainer} ref={badgeRef}>

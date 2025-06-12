@@ -7,6 +7,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useState, useRef, useEffect } from 'react';
 import { FestivalSectionAnimation } from './FestivalSectionAnimation';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function FestivalsSection() {
@@ -153,14 +155,14 @@ export default function FestivalsSection() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/festivals');
+      const response = await fetch(`${API_URL}/festivals`);
       if (!response.ok) throw new Error('Erreur réseau');
       const data = await response.json();
 
       const festivalsWithCovers = await Promise.all(
         data.map(async (festival) => {
           try {
-            const galleryRes = await fetch(`http://localhost:3000/gallery/${festival._id}`);
+            const galleryRes = await fetch(`${API_URL}/gallery/${festival._id}`);
 
             if (galleryRes.status === 404) {
               // Pas de galerie pour ce festival
@@ -175,7 +177,7 @@ export default function FestivalsSection() {
             return {
               ...festival,
               image: firstImagePath
-                ? `http://localhost:3000/${firstImagePath.replace(/\\/g, '/')}`
+                ? `${API_URL}/${firstImagePath.replace(/\\/g, '/')}`
                 : null,
             };
           } catch (err) {
@@ -285,7 +287,7 @@ export default function FestivalsSection() {
               Ensemble, nous œuvrons pour que chaque événement soit une expérience inclusive et
               inoubliable !
             </p>
-            <button className={styles.button}>En savoir plus </button>
+<a href="/Apropos" className={styles.button}> En savoir plus</a>
           </div>
           <div className={styles.triangle}></div>
         </div>

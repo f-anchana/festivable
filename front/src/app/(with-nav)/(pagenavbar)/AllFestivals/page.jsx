@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import FestivalCard from '@/components/FestivalCard/FestivalCard';
 import styles from '@/app/(with-nav)/Homepage.module.css';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AllFestivals() {
   const [festivals, setFestivals] = useState([]);
@@ -18,14 +19,14 @@ export default function AllFestivals() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/festivals');
+      const response = await fetch(`${API_URL}/festivals`);
       if (!response.ok) throw new Error('Erreur réseau');
       const data = await response.json();
 
       const festivalsWithCovers = await Promise.all(
         data.map(async (festival) => {
           try {
-            const galleryRes = await fetch(`http://localhost:3000/gallery/${festival._id}`);
+            const galleryRes = await fetch(`${API_URL}/gallery/${festival._id}`);
 
             if (galleryRes.status === 404) {
               // Pas de galerie pour ce festival
@@ -40,7 +41,7 @@ export default function AllFestivals() {
             return {
               ...festival,
               image: firstImagePath
-                ? `http://localhost:3000/${firstImagePath.replace(/\\/g, '/')}`
+                ? `${API_URL}/${firstImagePath.replace(/\\/g, '/')}`
                 : null,
             };
           } catch (err) {
