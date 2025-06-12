@@ -42,7 +42,20 @@ export default function RecrutementPage() {
           },
         });
 
-        if (!res.ok) throw new Error("Erreur lors de la récupération des postes");
+if (!res.ok) {
+  // Ici on considère qu'il n'y a pas de données, on met un poste vide dans le state
+  setPostes([{
+    id: generateId(),
+    position: "",
+    start_date: "",
+    end_date: "",
+    contact_email: "",
+    paid: "",
+    description: "",
+  }]);
+  setLoading(false);
+  return; // On stoppe la fonction ici, pas besoin de continuer
+}
 
         const data = await res.json();
 
