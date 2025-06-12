@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Poppins, Oswald } from "next/font/google";
-import ScreenWarning from "@/components/ScreenWarning/ScreenWarning";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,7 +26,6 @@ export default function Layout({ children }) {
   return (
     <html lang="fr">
       <body className={`${poppins.variable} ${oswald.variable}`}>
-              <ScreenWarning />
         <div style={{ display: "flex" }}>
           <main style={{ flex: 1 }}>{children}</main>
         </div>
