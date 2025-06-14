@@ -17,6 +17,7 @@ router.get('/users', userController.getUsers);
 router.post('/user', userController.createUser);
 router.post('/login-user', userController.loginUser);
 router.delete("/user/:id", verifyAdmin, userController.deleteUser);
+router.post('/user-avatar',verifyToken, upload('profile').single('image'), userController.uploadProfilePhoto);
 
 // Routes pour la gestion des festivals
 router.get('/festivals', festivalController.getFestivals);
@@ -54,7 +55,7 @@ router.get('/my-recruitments',verifyToken, recruitmentController.getRecruitement
 
 // Routes pour la gestion de la galerie
 router.get('/gallery', galleryController.getImages);
-router.post('/gallery',verifyToken, upload.array('images'), galleryController.createImages);
+router.post('/gallery',verifyToken, upload('festival').array('images'), galleryController.createImages);
 router.patch('/gallery/reorder', verifyToken, galleryController.reorderImages);
 router.delete('/gallery/:imageName', verifyToken, galleryController.deleteImage);
 router.get('/gallery/:id', galleryController.getGalleryByFestivalId); //Pour afficher les réponses sur le site

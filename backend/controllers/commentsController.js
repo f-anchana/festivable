@@ -3,7 +3,7 @@ const Comment = require('../models/Comments');
 exports.getAllComments = async (req, res) => {
     try {
         const comments = await Comment.find()
-            .populate('userId', 'pseudo')
+            .populate('userId', 'pseudo profile_picture')
 
         res.status(200).json(comments);
     } catch (error) {
@@ -46,7 +46,7 @@ exports.getCommentsByFestivalId = async (req, res) => {
     }
 
     const comments = await Comment.find({ festivalId })
-      .populate('userId', 'pseudo')
+      .populate('userId', 'pseudo profile_picture')
       .sort({ date: -1 });
 
     res.status(200).json(comments);
