@@ -7,6 +7,7 @@ const mapController = require('../controllers/mapController');
 const accessibilityController = require('../controllers/accessibilityController');
 const recruitmentController = require('../controllers/recruitmentController');
 const galleryController = require('../controllers/galleryController');
+const commentsController = require ('../controllers/commentsController');
 const verifyToken = require('../middlewares/verifyToken');
 const verifyAdmin = require('../middlewares/verifyAdmin');
 const upload = require('../middlewares/uploadImages');
@@ -58,5 +59,9 @@ router.patch('/gallery/reorder', verifyToken, galleryController.reorderImages);
 router.delete('/gallery/:imageName', verifyToken, galleryController.deleteImage);
 router.get('/gallery/:id', galleryController.getGalleryByFestivalId); //Pour afficher les réponses sur le site
 router.get('/my-gallery',verifyToken, galleryController.getGalleryByOrganizer); //Pour afficher les réponses dans le dashboard
+
+router.get('/comments', commentsController.getAllComments);
+router.post('/comment/:festivalId', verifyToken, commentsController.createComment); // Un user qui envoie un commentaire
+router.get('/comments/:festivalId', commentsController.getCommentsByFestivalId);
 
 module.exports = router;

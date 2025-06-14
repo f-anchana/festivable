@@ -23,7 +23,6 @@ exports.createUser = async (req, res) => {
             password,
             disability,
             type_user,
-            pictoacess,
             firstname,
             lastname
         } = req.body;
@@ -42,7 +41,6 @@ exports.createUser = async (req, res) => {
             password: hashedPassword,
             disability,
             type_user,
-            pictoacess,
             firstname,
             lastname
         });

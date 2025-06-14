@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   password: String,
   disability: String,
   type_user: String,
-  pictoacess: Boolean,
   firstname: String,
   lastname: String
 });
