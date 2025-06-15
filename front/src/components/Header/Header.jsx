@@ -98,10 +98,7 @@ export default function Header() {
           </li>
 
           <li><Link href="/AllFestivals">Festivals</Link></li>
-
-           <li><Link href='/Apropos'>À propos</Link></li>
-
-
+          <li><Link href="/Apropos">À propos</Link></li>
         </ul>
 
         <div className={styles.authButtons}>
@@ -116,7 +113,10 @@ export default function Header() {
 
         <ul className={styles.mobileNavLinks}>
           <li>
-            <button className={styles.mobileDropdownToggle} onClick={() => setIsMobileAccessibilityOpen(prev => !prev)}>
+            <button
+              className={styles.mobileDropdownToggle}
+              onClick={() => setIsMobileAccessibilityOpen(prev => !prev)}
+            >
               Accessibilité
               <Image
                 src="/icones/menu-roll.svg"
@@ -128,21 +128,20 @@ export default function Header() {
             </button>
             {isMobileAccessibilityOpen && (
               <ul className={styles.mobileDropdownMenu}>
-                <li><Link href="/PictoAccess">PictoAccess</Link></li>
-                <li><Link href="#">Référentiel</Link></li>
+                <li><Link href="/PictoAccess" onClick={() => setIsMenuOpen(false)}>PictoAccess</Link></li>
+                <li><Link href="#" onClick={() => setIsMenuOpen(false)}>Référentiel</Link></li>
               </ul>
             )}
           </li>
 
-          <li><Link href="/AllFestivals">Festivals</Link></li>
-
-          <li><Link href='/Apropos'>À propos</Link></li>
-          
-
+          <li><Link href="/AllFestivals" onClick={() => setIsMenuOpen(false)}>Festivals</Link></li>
+          <li><Link href="/Apropos" onClick={() => setIsMenuOpen(false)}>À propos</Link></li>
         </ul>
 
         <div className={styles.mobileAuthButtons}>
-          <Link href="/form" className={styles.btnBlack}>S'authentifier</Link>
+          <Link href="/form" className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>
+            S'authentifier
+          </Link>
         </div>
       </div>
     </nav>
