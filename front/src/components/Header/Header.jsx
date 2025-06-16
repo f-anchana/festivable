@@ -11,9 +11,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMobileAccessibilityOpen, setIsMobileAccessibilityOpen] = useState(false);
-  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [user, setUser] = useState(null); // 👈 état utilisateur
+
   const accessibilityRef = useRef(null);
   const aboutRef = useRef(null);
   const navbarRef = useRef(null);
@@ -22,39 +22,20 @@ export default function Header() {
     const navbar = navbarRef.current;
     if (!navbar) return;
 
-    const scrollTriggerInstance = ScrollTrigger.create({
+    ScrollTrigger.create({
       trigger: "#festivalSection",
       start: "top top",
       end: "bottom top",
-      onEnter: () => {
-        gsap.to(navbar, {
-          backgroundColor: "#ffffff",
-          duration: 0.4,
-          ease: "power2.out"
-        });
-      },
-      onLeaveBack: () => {
-        gsap.to(navbar, {
-          backgroundColor: "transparent",
-          duration: 0.4,
-          ease: "power2.out"
-        });
-      }
+      onEnter: () => gsap.to(navbar, { backgroundColor: "#ffffff", duration: 0.4, ease: "power2.out" }),
+      onLeaveBack: () => gsap.to(navbar, { backgroundColor: "transparent", duration: 0.4, ease: "power2.out" }),
     });
 
     const handleClickOutside = (event) => {
-      if (
-        accessibilityRef.current &&
-        !accessibilityRef.current.contains(event.target)
-      ) {
+      if (accessibilityRef.current && !accessibilityRef.current.contains(event.target)) {
         setIsAccessibilityOpen(false);
       }
-
-      if (
-        aboutRef.current &&
-        !aboutRef.current.contains(event.target)
-      ) {
-        setIsAboutOpen(false);
+      if (aboutRef.current && !aboutRef.current.contains(event.target)) {
+        setIsAccessibilityOpen(false);
       }
     };
 
@@ -64,6 +45,28 @@ export default function Header() {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, []);
+
+
+
+  // ✅ Récupérer les infos utilisateur à partir du token
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      try {
+        const res = await fetch ('http://localhost:3000/users', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(res.data.user || res.data); // s'adapte selon ta réponse
+      } catch (err) {
+        console.error("Erreur lors de la récupération de l'utilisateur :", err);
+        localStorage.removeItem('token');
+      }
+    };
+
+    fetchUser();
   }, []);
 
   return (
@@ -96,16 +99,30 @@ export default function Header() {
               </ul>
             </div>
           </li>
-
           <li><Link href="/AllFestivals">Festivals</Link></li>
           <li><Link href="/Apropos">À propos</Link></li>
         </ul>
 
+        {/* ✅ Auth : Affiche le pseudo ou le bouton */}
         <div className={styles.authButtons}>
-          <Link href="/form" className={styles.btnBlack}>S'authentifier</Link>
+          {user ? (
+            <div className={styles.userInfo}>
+              <Image
+                src={`/${user.profile_picture || 'icones/default-avatar.svg'}`}
+                alt="Avatar"
+                width={30}
+                height={30}
+                className={styles.avatar}
+              />
+              <span>{user.pseudo}</span>
+            </div>
+          ) : (
+            <Link href="/form" className={styles.btnBlack}>S'authentifier</Link>
+          )}
         </div>
       </div>
 
+      {/* ✅ MENU MOBILE */}
       <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.show : ''}`}>
         <button className={styles.closeButton} onClick={() => setIsMenuOpen(false)}>
           <Image src="/icones/close-btn-menu.svg" alt="Fermer" width={24} height={24} />
@@ -139,9 +156,22 @@ export default function Header() {
         </ul>
 
         <div className={styles.mobileAuthButtons}>
-          <Link href="/form" className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>
-            S'authentifier
-          </Link>
+          {user ? (
+            <div className={styles.userInfo}>
+              <Image
+                src={`/${user.profile_picture || 'icones/default-avatar.svg'}`}
+                alt="Avatar"
+                width={30}
+                height={30}
+                className={styles.avatar}
+              />
+              <span>{user.pseudo}</span>
+            </div>
+          ) : (
+            <Link href="/form" className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>
+              S'authentifier
+            </Link>
+          )}
         </div>
       </div>
     </nav>
