@@ -14,6 +14,7 @@ const upload = require('../middlewares/uploadImages');
 
 // Routes pour la gestion des utilisateurs
 router.get('/users', userController.getUsers);
+router.get('/user-profile', verifyToken, userController.getUserFromToken); // récupérer le user avec le token
 router.post('/user', userController.createUser);
 router.post('/login-user', userController.loginUser);
 router.delete('/user/:id', verifyAdmin, userController.deleteUser);

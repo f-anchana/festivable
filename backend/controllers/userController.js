@@ -16,6 +16,31 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+exports.getUserFromToken = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: 'Token manquant ou mal formé' });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Erreur lors de la récupération :", err);
+    res.status(401).json({ message: 'Token invalide ou expiré' });
+  }
+};
+
 exports.createUser = async (req, res) => {
   try {
     const {
