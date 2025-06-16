@@ -8,7 +8,7 @@ import { formatDate } from "@/utils/formatDate";
 import { useState, useEffect } from "react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function FestivalTable({ filter }) {
+export default function FestivalTable({ filter, searchTerm }) {
 
     const [festivals, setFestivals] = useState([]);
     const [selectedFestivalId, setSelectedFestivalId] = useState(null);
@@ -28,10 +28,19 @@ export default function FestivalTable({ filter }) {
         fetchFestival();
     }, []);
 
-        const filteredFestivals = festivals.filter(festival => {
-        if (filter === "valid") return festival.valid === true;
-        if (filter === "invalid") return festival.valid === false;
-        return true;
+    const filteredFestivals = festivals.filter(festival => {
+        // 1. Filtre selon valid ou invalid
+        if (filter === "valid" && festival.valid !== true) return false;
+        if (filter === "invalid" && festival.valid !== false) return false;
+
+        // 2. Recherche dans le titre OU dans l'id (adapté à tes champs)
+        if (searchTerm.trim() === "") return true; // pas de recherche = on garde tout
+
+        const lowerSearch = searchTerm.toLowerCase();
+        const titleMatch = festival.title?.toLowerCase().includes(lowerSearch);
+        const idMatch = festival._id?.toLowerCase().includes(lowerSearch);
+
+        return titleMatch || idMatch;
     });
 
     return (

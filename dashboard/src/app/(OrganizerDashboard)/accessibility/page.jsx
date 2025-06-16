@@ -1,4 +1,5 @@
 'use client';
+import { securePage } from "@/components/SecurePage/SecurePage";
 import styles from "./accessibility.module.scss";
 import RadioSection from "@/components/OrganizerDashboard/RadioSection/RadioSection";
 import AccessibilityFeatures from "@/components/OrganizerDashboard/AccessibilityFeatures/AccessibilityFeatures";
@@ -126,4 +127,4 @@ function Accessibility() {
     );
 }
 
-export default Accessibility;
+export default securePage(Accessibility, ["organizer"]);

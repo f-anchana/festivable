@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { securePage } from "@/components/SecurePage/SecurePage";
 import AddressSearch from "../../../components/OrganizerDashboard/MapBuilder/AddressSearch/AddressSearch";
 import CoordinatesSearch from "../../../components/OrganizerDashboard/MapBuilder/CoordinatesSearch/CoordinatesSearch";
 import MapCanvas from "../../../components/OrganizerDashboard/MapBuilder/MapCanvasWrapper/MapCanvasWrapper";
@@ -10,7 +11,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import IconPalette from "../../../components/OrganizerDashboard/MapBuilder/IconPalette/IconPalette";
 import styles from "./MapBuilder.module.scss";
 
-export default function MapSetupPage() {
+function MapSetupPage() {
   const [center, setCenter] = useState(null);
   const [polygonStyle, setPolygonStyle] = useState({
     color: "#1e88e5",
@@ -113,3 +114,5 @@ export default function MapSetupPage() {
     </div>
   );
 }
+
+export default securePage(MapSetupPage, ["organizer"]);

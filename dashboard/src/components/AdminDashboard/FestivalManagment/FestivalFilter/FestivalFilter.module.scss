@@ -1,8 +1,4 @@
-.container {
-    padding: 24px;
-}
-
-.switchButtons button {
+.container button {
   all: unset;
   cursor: pointer;
   font-weight: 700;
@@ -10,11 +6,12 @@
   color: black; /* couleur par défaut */
   transition: 0.2s;
 }
-.switchButtons button:hover {
+
+.container button:hover {
   color: var(--dark-blue); /* couleur par défaut */
 }
 
-.switchButtons button.active {
+.container button.active {
   color: var(--dark-blue);
   border-bottom: solid 3px var(--dark-blue);
 }

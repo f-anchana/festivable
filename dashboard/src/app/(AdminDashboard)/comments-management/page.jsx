@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
+import { securePage } from "@/components/SecurePage/SecurePage";
 
 import CommentsTable from "@/components/AdminDashboard/CommentsManagement/CommentsTable/CommentsTable";
 import styles from "./commentsManagement.module.scss";
@@ -45,7 +46,6 @@ function CommentsManagement() {
 
     return (
         <div className={styles.container}>
-            <label htmlFor="festivalSelect">Choisir un festival : </label>
             <select
                 id="festivalSelect"
                 value={selectedFestival}
@@ -62,4 +62,4 @@ function CommentsManagement() {
     )
 }
 
-export default (CommentsManagement);
+export default securePage(CommentsManagement, ["admin"]);

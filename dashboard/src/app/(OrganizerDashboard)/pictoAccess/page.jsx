@@ -1,5 +1,7 @@
+'use client';
 import styles from './PictoAccess.module.scss'; 
 import PictoAccessPage from '@/components/OrganizerDashboard/PictoAccessPage/PictoAccessPage';
+import { securePage } from '@/components/SecurePage/SecurePage';
 
 function PictoAccess() {
   return (
@@ -9,5 +11,4 @@ function PictoAccess() {
   );
 }
 
-
-export default PictoAccess;
+export default securePage(PictoAccess, ["organizer"]);

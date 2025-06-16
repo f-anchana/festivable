@@ -6,7 +6,7 @@ import AccountRow from "@/components/AdminDashboard/AccountManagement/AccountRow
 import { useState, useEffect } from "react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function OrganizerTable() {
+export default function OrganizerTable({searchTerm}) {
 
     const [organizations, setOrganizations] = useState([]);
 
@@ -37,6 +37,13 @@ export default function OrganizerTable() {
         fetchOrganizer();
     }, []);
 
+        const filteredOrganizations = organizations.filter(org => {
+        const lowerSearch = searchTerm.toLowerCase();
+        const nameMatch = org.organization_name?.toLowerCase().includes(lowerSearch);
+        const idMatch = org._id?.toLowerCase().includes(lowerSearch);
+        return nameMatch || idMatch;
+    });
+
     return (
         <>
             <table className={styles.container}>
@@ -51,7 +58,7 @@ export default function OrganizerTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {organizations.map((organization) => (
+                    {filteredOrganizations.map((organization) => (
                         <AccountRow
                             type="organizer"
                             key={organization._id}

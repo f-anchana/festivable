@@ -6,7 +6,7 @@ import AccountRow from "@/components/AdminDashboard/AccountManagement/AccountRow
 import { useState, useEffect } from "react";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function UserTable() {
+export default function UserTable({ searchTerm }) {
 
     const [users, setUsers] = useState([]);
 
@@ -34,6 +34,13 @@ export default function UserTable() {
         fetchUser();
     }, []);
 
+    const filteredUsers = users.filter(user => {
+        const lowerSearch = searchTerm.toLowerCase();
+        const nameMatch = user.pseudo?.toLowerCase().includes(lowerSearch);
+        const idMatch = user._id?.toLowerCase().includes(lowerSearch);
+        return nameMatch || idMatch;
+    });
+
     return (
         <>
             <table className={styles.container}>
@@ -49,7 +56,7 @@ export default function UserTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {filteredUsers.map((user) => (
                         <AccountRow
                             type="user"
                             key={user._id}

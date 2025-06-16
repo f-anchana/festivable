@@ -88,4 +88,11 @@
     width: 35%;
 }
 
-
+.successMessage {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin: 8px;
+    color: var(--dark-blue);
+    font-weight: 600;
+}

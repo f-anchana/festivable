@@ -1,3 +1,16 @@
 .container {
     padding: 24px;
 }
+
+.container select {
+    color: var(--dark-blue);
+    font-weight: 700;
+    border: solid 1px #CAC3DF;
+    border-radius: 10px;
+    padding: 6px 24px;
+    transition: 0.2s;
+}
+
+.container select:hover {
+      border-color: var(--dark-blue);
+}

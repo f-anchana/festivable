@@ -1,7 +1,7 @@
 'use client';
 import ClassicInput from "@/components/OrganizerDashboard/ClassicInput/ClassicInput";
 import PriceInput from "@/components/OrganizerDashboard/PriceInput/PriceInput";
-import ClassicTextarea from "@/components/OrganizerDashboard/classicTextarea/ClassicTextarea";
+import ClassicTextarea from "@/components/OrganizerDashboard/ClassicTextarea/ClassicTextarea";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 import styles from "@/styles/OrganizerDashboard.module.scss";
@@ -14,6 +14,7 @@ export default function MyFestivalForm() {
         { id: 1, id_price: "price1" }
     ]);
     const [festival, setFestival] = useState(null);
+    const [message, setMessage] = useState("");
 
     const handleAddInput = () => {
         if (priceInputs.length >= 5) return;
@@ -87,8 +88,7 @@ export default function MyFestivalForm() {
     }, []);
 
     const handleSubmit = async (e) => {
-        // e.preventDefault(); // Empêche le rechargement de la page
-
+        e.preventDefault();
         // Prépare les données à envoyer
         const payload = {
             ...festival,
@@ -114,11 +114,13 @@ export default function MyFestivalForm() {
             }
 
             const updatedFestival = await res.json();
-            setFestival(updatedFestival); // met à jour avec les données renvoyées
+            setFestival(prev => ({ ...prev, ...updatedFestival }));
+            // met à jour avec les données renvoyées
 
-            alert("Festival mis à jour avec succès !\n\nRequête envoyée :\n" + JSON.stringify(payload, null, 2));
+            setMessage("Festival mis à jour avec succès !");
         } catch (error) {
             console.error(error);
+            setMessage("Erreur lors de la mise à jour, veuillez réessayer.");
             alert("Erreur lors de la mise à jour, veuillez réessayer.");
         }
     };
@@ -126,16 +128,15 @@ export default function MyFestivalForm() {
     if (!festival) {
         return (
             <div className={styles.errorContainer}>
-                <h2>Festival introuvable</h2>
+                <h2>Votre session a expiré</h2>
                 <p>
-                    Il semble que votre compte ne soit associé à aucun festival pour le moment.
-                    <br />
-                    Si vous pensez qu’il s’agit d’une erreur, veuillez nous contacter à l’adresse : <strong>contact@festivable.fr</strong>.
+                    Veuillez vous reconnecter pour continuer.<br />
+                    Si le problème persiste, contactez-nous à l'adresse : <strong>support@monfestival.com</strong>.
                 </p>
             </div>
+
         );
     }
-
 
     return (
         <div>
@@ -234,6 +235,11 @@ export default function MyFestivalForm() {
                     </div>
                 </div>
                 <input type="submit" name="Valider" value="Valider" id="" />
+                {message && (
+                    <span className={styles.successMessage}>
+                        {message}
+                    </span>
+                )}
             </form>
         </div>
     )

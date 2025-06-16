@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import styles from './gallery.module.scss';
+import { securePage } from '@/components/SecurePage/SecurePage';
 
 import ImageInput from '@/components/OrganizerDashboard/ImageInput/ImageInput';
 import GalleryPreview from '@/components/OrganizerDashboard/GalleryPreview/GalleryPreview';
 
-export default function GalleryPage() {
+function GalleryPage() {
   const [images, setImages] = useState([]);
   const totalSlots = 17;
 
@@ -46,18 +47,18 @@ export default function GalleryPage() {
     fetchGallery();
   }, [API_URL]);
 
-// 📤 Upload depuis ImageInput
-const handleImageUpload = async (imagePath) => {
-  if (!imagePath) return;
+  // 📤 Upload depuis ImageInput
+  const handleImageUpload = async (imagePath) => {
+    if (!imagePath) return;
 
-  if (images.length >= totalSlots) {
-    console.warn('Nombre maximal d’images atteint');
-    return;
-  }
+    if (images.length >= totalSlots) {
+      console.warn('Nombre maximal d’images atteint');
+      return;
+    }
 
-  // Ajoute l’image envoyée depuis le backend
-  setImages((prev) => [...prev, imagePath]);
-};
+    // Ajoute l’image envoyée depuis le backend
+    setImages((prev) => [...prev, imagePath]);
+  };
 
 
   return (
@@ -79,3 +80,5 @@ const handleImageUpload = async (imagePath) => {
     </div>
   );
 }
+
+export default securePage(GalleryPage, ["organizer"]);
