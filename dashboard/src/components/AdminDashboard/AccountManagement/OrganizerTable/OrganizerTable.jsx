@@ -42,11 +42,11 @@ export default function OrganizerTable() {
             <table className={styles.container}>
                 <thead className={styles.head}>
                     <tr>
-                        <th>ID</th>
                         <th>Organisation</th>
                         <th>Nom</th>
                         <th>Email</th>
                         <th>Numéro</th>
+                        <th>ID</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

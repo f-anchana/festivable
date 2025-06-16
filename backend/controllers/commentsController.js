@@ -54,3 +54,42 @@ exports.getCommentsByFestivalId = async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur lors de la récupération des commentaires', error });
   }
 };
+
+exports.deleteMyComment = async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const userId = req.user.id; // récupéré depuis le token
+
+    // Vérifie que le commentaire existe et appartient à l'utilisateur connecté
+    const comment = await Comment.findOne({ _id: commentId, userId });
+
+    if (!comment) {
+      return res.status(404).json({ message: "Commentaire non trouvé ou accès interdit." });
+    }
+
+    await Comment.findByIdAndDelete(commentId);
+
+    res.status(200).json({ message: "Commentaire supprimé avec succès." });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur serveur lors de la suppression du commentaire", error });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+
+    // Vérifie que le commentaire existe (pas besoin de vérifier l'userId ici)
+    const comment = await Comment.findById(commentId);
+
+    if (!comment) {
+      return res.status(404).json({ message: "Commentaire non trouvé." });
+    }
+
+    await Comment.findByIdAndDelete(commentId);
+
+    res.status(200).json({ message: "Commentaire supprimé avec succès." });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur serveur lors de la suppression du commentaire", error });
+  }
+};

@@ -6,7 +6,8 @@ import styles from "./SidebarAdmin.module.scss";
 
 const navItems = [
   { label: "Gestion des festivals", href: "/festival-management" },
-  { label: "Gestion des comptes", href: "/account-management" }
+  { label: "Gestion des comptes", href: "/account-management" },
+  { label: "Gestion des commentaires", href: "/comments-management" }
 ];
 
 export default function SidebarAdmin() {

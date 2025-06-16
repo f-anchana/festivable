@@ -8,6 +8,7 @@ export default function AccountRow({
     pseudo,
     lastname,
     prenom,
+    profile_picture,
     organization_name,
     name,
     email,
@@ -41,7 +42,6 @@ export default function AccountRow({
 
     return (
         <tr className={styles.container}>
-            <td>{_id}</td>
 
             {type === "organizer" ? (
                 <>
@@ -52,12 +52,14 @@ export default function AccountRow({
                 </>
             ) : (
                 <>
+                    <td><img src={`${API_URL}/${profile_picture}`} alt="Photo de profil" /></td>
                     <td>{pseudo || "N/A"}</td>
                     <td>{lastname || "N/A"}</td>
                     <td>{prenom || "N/A"}</td>
                     <td>{email || "N/A"}</td>
                 </>
             )}
+                        <td>{_id}</td>
 
             <td className={styles.actions}>
                 <button className={styles.delete} onClick={handleDelete}>Supprimer</button>

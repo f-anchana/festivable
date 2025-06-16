@@ -16,8 +16,10 @@ const upload = require('../middlewares/uploadImages');
 router.get('/users', userController.getUsers);
 router.post('/user', userController.createUser);
 router.post('/login-user', userController.loginUser);
-router.delete("/user/:id", verifyAdmin, userController.deleteUser);
-router.post('/user-avatar',verifyToken, upload('profile').single('image'), userController.uploadProfilePhoto);
+router.delete('/user/:id', verifyAdmin, userController.deleteUser);
+router.post('/user-avatar',verifyToken, upload('profile').single('image'), userController.uploadProfilePhoto);//changer sa photo de profil
+router.put('/user', verifyToken, userController.updateUser);//modifier les informations
+router.put('/user-password', verifyToken, userController.updatePassword); //modifier le mot de passe
 
 // Routes pour la gestion des festivals
 router.get('/festivals', festivalController.getFestivals);
@@ -64,5 +66,7 @@ router.get('/my-gallery',verifyToken, galleryController.getGalleryByOrganizer); 
 router.get('/comments', commentsController.getAllComments);
 router.post('/comment/:festivalId', verifyToken, commentsController.createComment); // Un user qui envoie un commentaire
 router.get('/comments/:festivalId', commentsController.getCommentsByFestivalId);
+router.delete('/comment/:commentId', verifyAdmin, commentsController.deleteComment);//supprimer le commentaire en tant qu'admin
+router.delete('/my-comment/:commentId', verifyToken, commentsController.deleteMyComment); //supprimer son propre commentaire
 
 module.exports = router;

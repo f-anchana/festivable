@@ -39,11 +39,12 @@ export default function UserTable() {
             <table className={styles.container}>
                 <thead className={styles.head}>
                     <tr>
-                        <th>ID</th>
+                        <th>Avatar</th>
                         <th>Pseudo</th>
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>Email</th>
+                        <th>ID</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -57,6 +58,7 @@ export default function UserTable() {
                             prenom={user.firstname}
                             email={user.email}
                             _id={user._id}
+                            profile_picture={user.profile_picture}
                         />
                     ))}
                 </tbody>

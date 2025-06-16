@@ -139,8 +139,7 @@ exports.uploadProfilePhoto = async (req, res) => {
       return res.status(400).json({ error: "Aucune image uploadée." });
     }
 
-    const userId = req.user.id; // si tu utilises un middleware pour vérifier le token et mettre req.user
-    // const photoPath = req.file.path; // chemin relatif vers la photo
+    const userId = req.user.id; 
     const photoPath = req.file.path.split(path.sep).join('/');
 
 
@@ -161,5 +160,69 @@ exports.uploadProfilePhoto = async (req, res) => {
   } catch (err) {
     console.error("Erreur lors de l'upload photo de profil :", err);
     res.status(500).json({ error: "Erreur serveur lors de l'upload de la photo." });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  const userId = req.user.id;
+  const {
+    pseudo,
+    email,
+    firstname,
+    lastname
+  } = req.body;
+
+  try {
+    const updatedFields = {
+      ...(pseudo && { pseudo }),
+      ...(email && { email }),
+      ...(firstname && { firstname }),
+      ...(lastname && { lastname })
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      updatedFields,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    res.json({ message: "Utilisateur mis à jour avec succès.", user: updatedUser });
+  } catch (err) {
+    console.error("Erreur lors de la mise à jour :", err);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+};
+
+exports.updatePassword = async (req, res) => {
+  const userId = req.user.id;
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ message: "Ancien et nouveau mot de passe requis." });
+  }
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "Utilisateur non trouvé." });
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Mot de passe actuel incorrect." });
+    }
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    res.json({ message: "Mot de passe mis à jour avec succès." });
+  } catch (err) {
+    console.error("Erreur lors de la mise à jour du mot de passe :", err);
+    res.status(500).json({ message: "Erreur serveur." });
   }
 };

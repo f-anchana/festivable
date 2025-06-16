@@ -8,7 +8,6 @@ import { useState } from "react";
 function AccountManagement() {
     const [activeTable, setActiveTable] = useState("organizer");
 
-
     return (
         <div className={styles.container}>
             <div className={styles.switchButtons}>

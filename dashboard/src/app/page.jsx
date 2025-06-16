@@ -36,7 +36,7 @@ export default function Login() {
                 if (decodedToken.role === 'organizer') {
                     window.location.href = "/myfestival";
                 } else if (decodedToken.role === 'admin') {
-                    window.location.href = "/admin-dashboard";
+                    window.location.href = "/festival-management";
                 }
             } else {
                 alert("Identifiants incorrects");
