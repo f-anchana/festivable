@@ -7,18 +7,16 @@ import FestivalLocation from "../../../../../components/FestivalPage/FestivalLoc
 import FestivalVolunteer from "../../../../../components/FestivalPage/FestivalVolunteer/FestivalVolunteer";
 import FestivalAccessibility from "../../../../../components/FestivalPage/FestivalAccessibility/FestivalAccessibility";
 import FestivalOthers from "../../../../../components/FestivalPage/FestivalOthers/FestivalOthers";
+import FestivalReviews from "../../../../../components/FestivalPage/FestivalReview/FestivalReview";
 
 export default async function FestivalPage({ params }) {
   const { id } = params;
 
-  const res = await fetch(`http://localhost:3000/festival/${id}`);
-  if (!res.ok) throw new Error('Festival non trouvé');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/festival/${id}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Festival non trouvé");
   const festival = await res.json();
-
-  const resOthers = await fetch(`http://localhost:3000/festivals`);
-  const allFestivals = await resOthers.json();
-
-  const otherFestivals = allFestivals.filter(f => f._id !== id);
 
   return (
     <div className={styles.festivalGrid}>
@@ -39,7 +37,8 @@ export default async function FestivalPage({ params }) {
       <div className={styles.fullWidth}>
         <FestivalLocation id={id} />
         <FestivalVolunteer festivalId={festival._id} />
-        <FestivalOthers festivals={otherFestivals} />
+        <FestivalReviews festivalId={id} />
+        <FestivalOthers currentFestivalId={festival._id} />
       </div>
     </div>
   );

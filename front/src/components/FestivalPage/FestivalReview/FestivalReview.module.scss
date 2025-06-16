@@ -1,0 +1,160 @@
+/*          Section principale                */
+.accessibilitySection {
+  padding: 40px 20px;
+
+  h2 {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 0.4rem 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+    font-family: "Oswald";
+  }
+
+  .description {
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  /*          Carte commentaire            */
+  .commentCard {
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .commentContent {
+      flex: 1;
+
+      .commentMeta {    
+        span {
+          color: #000;
+        }
+
+        .pseudo {
+          font-weight: bold;
+        }
+      }
+
+      .commentText {
+        margin-top: 8px;
+        color: #222;
+        font-style: italic;
+      }
+    }
+  }
+
+  /*              Pagination               */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    font-size: 18px;
+
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      color: #555;
+
+      &.active {
+        font-weight: bold;
+        color: #000;
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+    }
+  }
+}
+
+/* ——————————————————  Tablette  —————————————————— */
+@media (max-width: 991.98px) {
+  .accessibilitySection {
+    padding: 32px 16px;
+
+    h2 {
+      font-size: 28px;
+    }
+
+    .commentCard {
+      padding: 18px;
+      gap: 14px;
+
+      img {
+        width: 54px;
+        height: 54px;
+      }
+    }
+
+    .pagination {
+      font-size: 16px;
+      gap: 6px;
+    }
+  }
+}
+
+/* ——————————————————  Mobile  —————————————————— */
+@media (max-width: 599.98px) {
+  .accessibilitySection {
+    padding: 24px 12px;
+
+    h2 {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .description {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .commentCard {
+      flex-direction: column;
+      padding: 16px;
+      gap: 12px;
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .commentMeta {
+        font-size: 14px;
+      }
+
+      .commentText {
+        font-size: 14px;
+      }
+    }
+
+    .pagination {
+      font-size: 15px;
+      gap: 4px;
+      margin-top: 24px;
+
+      button {
+        padding: 2px 6px;
+      }
+    }
+  }
+}
