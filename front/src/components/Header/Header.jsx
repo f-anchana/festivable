@@ -6,68 +6,61 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from './Header.module.css';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
   const [isMobileAccessibilityOpen, setIsMobileAccessibilityOpen] = useState(false);
-  const [user, setUser] = useState(null); // 👈 état utilisateur
+  const [user, setUser] = useState(null);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [isMobileUserDropdownOpen, setIsMobileUserDropdownOpen] = useState(false);
 
   const accessibilityRef = useRef(null);
-  const aboutRef = useRef(null);
+  const userDropdownRef = useRef(null);
   const navbarRef = useRef(null);
 
   useEffect(() => {
-    const navbar = navbarRef.current;
-    if (!navbar) return;
+    const token = localStorage.getItem('token');
+    if (!token) return;
 
+    fetch(`${API_URL}/user-profile`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(res))
+      .then(setUser)
+      .catch(err => console.error('Erreur profil :', err));
+  }, []);
+
+  useEffect(() => {
     ScrollTrigger.create({
       trigger: "#festivalSection",
       start: "top top",
       end: "bottom top",
-      onEnter: () => gsap.to(navbar, { backgroundColor: "#ffffff", duration: 0.4, ease: "power2.out" }),
-      onLeaveBack: () => gsap.to(navbar, { backgroundColor: "transparent", duration: 0.4, ease: "power2.out" }),
+      onEnter: () => gsap.to(navbarRef.current, { backgroundColor: "#fff", duration: 0.4 }),
+      onLeaveBack: () => gsap.to(navbarRef.current, { backgroundColor: "transparent", duration: 0.4 })
     });
 
-    const handleClickOutside = (event) => {
-      if (accessibilityRef.current && !accessibilityRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (accessibilityRef.current && !accessibilityRef.current.contains(e.target)) {
         setIsAccessibilityOpen(false);
       }
-      if (aboutRef.current && !aboutRef.current.contains(event.target)) {
-        setIsAccessibilityOpen(false);
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target)) {
+        setIsUserDropdownOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-
-
-  // ✅ Récupérer les infos utilisateur à partir du token
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) return;
-
-      try {
-        const res = await fetch ('http://localhost:3000/users', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(res.data.user || res.data); // s'adapte selon ta réponse
-      } catch (err) {
-        console.error("Erreur lors de la récupération de l'utilisateur :", err);
-        localStorage.removeItem('token');
-      }
-    };
-
-    fetchUser();
-  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    window.location.href = '/';
+  };
 
   return (
     <nav ref={navbarRef} className={styles.navbar}>
@@ -84,13 +77,8 @@ export default function Header() {
           <li className={styles.dropdown} ref={accessibilityRef}>
             <button onClick={() => setIsAccessibilityOpen(prev => !prev)} className={styles.dropdownToggle}>
               Accessibilité
-              <Image
-                src="/icones/menu-roll.svg"
-                alt="Flèche"
-                width={12}
-                height={12}
-                className={`${styles.arrowIcon} ${isAccessibilityOpen ? styles.rotate : ''}`}
-              />
+              <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
+                className={`${styles.arrowIcon} ${isAccessibilityOpen ? styles.rotate : ''}`} />
             </button>
             <div className={`${styles.dropdownWrapper} ${isAccessibilityOpen ? styles.dropdownVisible : ''}`}>
               <ul className={styles.dropdownMenu}>
@@ -103,18 +91,28 @@ export default function Header() {
           <li><Link href="/Apropos">À propos</Link></li>
         </ul>
 
-        {/* ✅ Auth : Affiche le pseudo ou le bouton */}
         <div className={styles.authButtons}>
           {user ? (
-            <div className={styles.userInfo}>
-              <Image
-                src={`/${user.profile_picture || 'icones/default-avatar.svg'}`}
-                alt="Avatar"
-                width={30}
-                height={30}
-                className={styles.avatar}
-              />
-              <span>{user.pseudo}</span>
+            <div className={styles.userDropdown} ref={userDropdownRef}>
+              <button onClick={() => setIsUserDropdownOpen(prev => !prev)} className={styles.userToggle}>
+                {user.profile_picture && (
+                  <img
+                    src={`${API_URL}/${user.profile_picture}`}
+                    alt="Avatar"
+                    className={styles.avatar}
+                  />
+                )}
+                <span className={styles.pseudo}>{user.pseudo}</span>
+                <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
+                  className={`${styles.arrowIcon} ${isUserDropdownOpen ? styles.rotate : ''}`} />
+              </button>
+              {isUserDropdownOpen && (
+                <ul className={styles.dropdownMenu}>
+                  <li><button className={styles.logoutBtn} onClick={handleLogout}>Se déconnecter</button></li>
+                  <li><Link href=""> Profil </Link></li>
+
+                </ul>
+              )}
             </div>
           ) : (
             <Link href="/form" className={styles.btnBlack}>S'authentifier</Link>
@@ -122,7 +120,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ✅ MENU MOBILE */}
       <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.show : ''}`}>
         <button className={styles.closeButton} onClick={() => setIsMenuOpen(false)}>
           <Image src="/icones/close-btn-menu.svg" alt="Fermer" width={24} height={24} />
@@ -130,18 +127,10 @@ export default function Header() {
 
         <ul className={styles.mobileNavLinks}>
           <li>
-            <button
-              className={styles.mobileDropdownToggle}
-              onClick={() => setIsMobileAccessibilityOpen(prev => !prev)}
-            >
+            <button onClick={() => setIsMobileAccessibilityOpen(prev => !prev)} className={styles.mobileDropdownToggle}>
               Accessibilité
-              <Image
-                src="/icones/menu-roll.svg"
-                alt="Flèche"
-                width={12}
-                height={12}
-                className={`${styles.arrowIcon} ${isMobileAccessibilityOpen ? styles.rotate : ''}`}
-              />
+              <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
+                className={`${styles.arrowIcon} ${isMobileAccessibilityOpen ? styles.rotate : ''}`} />
             </button>
             {isMobileAccessibilityOpen && (
               <ul className={styles.mobileDropdownMenu}>
@@ -150,22 +139,31 @@ export default function Header() {
               </ul>
             )}
           </li>
-
           <li><Link href="/AllFestivals" onClick={() => setIsMenuOpen(false)}>Festivals</Link></li>
           <li><Link href="/Apropos" onClick={() => setIsMenuOpen(false)}>À propos</Link></li>
         </ul>
 
         <div className={styles.mobileAuthButtons}>
           {user ? (
-            <div className={styles.userInfo}>
-              <Image
-                src={`/${user.profile_picture || 'icones/default-avatar.svg'}`}
-                alt="Avatar"
-                width={30}
-                height={30}
-                className={styles.avatar}
-              />
-              <span>{user.pseudo}</span>
+            <div className={styles.userDropdown}>
+              <button onClick={() => setIsMobileUserDropdownOpen(prev => !prev)} className={styles.userToggle}>
+                {user.profile_picture && (
+                  <img src={`${API_URL}/${user.profile_picture}`} alt="Avatar" className={styles.avatar} />
+                )}
+                <span className={styles.pseudo}>{user.pseudo}</span>
+                <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
+                  className={`${styles.arrowIcon} ${isMobileUserDropdownOpen ? styles.rotate : ''}`} />
+              </button>
+              {isMobileUserDropdownOpen && (
+                <ul className={styles.mobileDropdownMenu}>
+                  <li>
+                    <button className={styles.logoutBtn} onClick={() => { handleLogout(); setIsMenuOpen(false); }}>
+                      Se déconnecter
+                    </button>
+                  </li>
+                  <li><Link href="">Profil</Link></li>
+                </ul>
+              )}
             </div>
           ) : (
             <Link href="/form" className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>
