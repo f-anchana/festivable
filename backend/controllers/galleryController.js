@@ -2,6 +2,7 @@ const Gallery = require("../models/Gallery");
 const Festival = require("../models/Festival");
 const fs = require("fs");
 const path = require("path");
+const sharp = require('sharp');
 
 exports.getImages = async (req, res) => {
   try {
@@ -14,75 +15,90 @@ exports.getImages = async (req, res) => {
 };
 
 exports.createImages = async (req, res) => {
-    try {
-      const organizerId = req.user.id;
-      if (!organizerId) {
-        return res.status(401).json({ message: "Non autorisé" });
-      }
-  
-      const festival = await Festival.findOne({ organizer: organizerId });
-      if (!festival) {
-        return res.status(404).json({ message: "Festival non trouvé" });
-      }
-  
-      const festivalId = festival._id;
-      let gallery = await Gallery.findOne({ festivalId });
-      if (!gallery) {
-        gallery = new Gallery({ festivalId, images: [] });
-      }
-  
-      const filePaths = req.files.map((file) => file.path.replace(/\\/g, "/"));
-      gallery.images.push(...filePaths);
-  
-      await gallery.save();
-  
-      res.status(201).json({
-        message: "Images enregistrées avec succès !",
-        paths: filePaths, // ✅ ajoute les chemins des fichiers dans la réponse
-      });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Erreur serveur" });
+  try {
+    const organizerId = req.user.id;
+    if (!organizerId) {
+      return res.status(401).json({ message: "Non autorisé" });
     }
-  };
-  
 
-  exports.deleteImage = async (req, res) => {
-    try {
-      const organizerId = req.user.id;
-      const { imageName } = req.params;
-  
-      const festival = await Festival.findOne({ organizer: organizerId });
-      if (!festival) return res.status(404).json({ message: "Festival non trouvé" });
-  
-      const gallery = await Gallery.findOne({ festivalId: festival._id });
-      if (!gallery) return res.status(404).json({ message: "Galerie non trouvée" });
-  
-  
-      const imagePathIndex = gallery.images.findIndex((img) =>
-        img.includes(imageName)
-      );
-      if (imagePathIndex === -1)
-        return res.status(404).json({ message: "Image non trouvée dans la galerie" });
-  
-      const imagePath = gallery.images[imagePathIndex];
-      const fullPath = path.join(__dirname, "..", imagePath);
-      console.log("→ Suppression fichier :", fullPath);
-  
-      fs.unlink(fullPath, (err) => {
-        if (err) console.error("Erreur suppression fichier physique :", err);
-      });
-  
-      gallery.images.splice(imagePathIndex, 1);
-      await gallery.save();
-  
-      res.status(200).json({ message: "Image supprimée avec succès" });
-    } catch (err) {
-      console.error("Erreur suppression image:", err);
-      res.status(500).json({ message: "Erreur serveur lors de la suppression" });
+    const festival = await Festival.findOne({ organizer: organizerId });
+    if (!festival) {
+      return res.status(404).json({ message: "Festival non trouvé" });
     }
-  };
-  
+
+    const festivalId = festival._id;
+    let gallery = await Gallery.findOne({ festivalId });
+    if (!gallery) {
+      gallery = new Gallery({ festivalId, images: [] });
+    }
+
+    const compressedPaths = [];
+
+    for (const file of req.files) {
+      const inputPath = file.path;
+      const outputPath = file.path.replace(/(\.\w+)$/, '_compressed$1'); // ajoute _compressed avant l'extension
+
+      await sharp(inputPath)
+        .resize({ width: 1280 }) // redimensionne si trop grand
+        .jpeg({ quality: 80 }) // ou .png({ quality: 80 }) selon ton format
+        .toFile(outputPath);
+
+      fs.unlinkSync(inputPath); // supprime l'original (optionnel)
+      compressedPaths.push(outputPath.replace(/\\/g, "/")); // chemins compatibles Windows/Linux
+    }
+
+    // const filePaths = req.files.map((file) => file.path.replace(/\\/g, "/"));
+    gallery.images.push(...compressedPaths);
+
+    await gallery.save();
+
+    res.status(201).json({
+      message: "Images enregistrées avec succès !",
+      paths: compressedPaths, // ✅ ajoute les chemins des fichiers dans la réponse
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+};
+
+
+exports.deleteImage = async (req, res) => {
+  try {
+    const organizerId = req.user.id;
+    const { imageName } = req.params;
+
+    const festival = await Festival.findOne({ organizer: organizerId });
+    if (!festival) return res.status(404).json({ message: "Festival non trouvé" });
+
+    const gallery = await Gallery.findOne({ festivalId: festival._id });
+    if (!gallery) return res.status(404).json({ message: "Galerie non trouvée" });
+
+
+    const imagePathIndex = gallery.images.findIndex((img) =>
+      img.includes(imageName)
+    );
+    if (imagePathIndex === -1)
+      return res.status(404).json({ message: "Image non trouvée dans la galerie" });
+
+    const imagePath = gallery.images[imagePathIndex];
+    const fullPath = path.join(__dirname, "..", imagePath);
+    console.log("→ Suppression fichier :", fullPath);
+
+    fs.unlink(fullPath, (err) => {
+      if (err) console.error("Erreur suppression fichier physique :", err);
+    });
+
+    gallery.images.splice(imagePathIndex, 1);
+    await gallery.save();
+
+    res.status(200).json({ message: "Image supprimée avec succès" });
+  } catch (err) {
+    console.error("Erreur suppression image:", err);
+    res.status(500).json({ message: "Erreur serveur lors de la suppression" });
+  }
+};
+
 
 exports.reorderImages = async (req, res) => {
   try {
