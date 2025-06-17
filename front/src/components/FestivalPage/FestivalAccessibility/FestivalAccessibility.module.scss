@@ -2,7 +2,7 @@
   padding: 2rem;
 
   .title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 1.5rem;
   }
 
@@ -13,12 +13,11 @@
   }
 
   .card {
-
     span {
       display: block;
-      margin-top: 0.5rem;
+      margin-top: .5rem;
       font-weight: 500;
-      font-size: 12px;
+      font-size: .75rem;
       text-align: center;
       width: 100px;
     }
@@ -26,25 +25,79 @@
 
   .active {
     background: #2196f3;
-    color: white;
+    color: #fff;
 
-    span {
-      color: white;
-    }
+    span { color: #fff; }
   }
 
   .imageWrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
     background: #f4f4f4;
+    border: 1px solid #ddd;
     border-radius: 12px;
     padding: 1rem;
     width: 100px;
     height: 100px;
     text-align: center;
-    transition: background 0.3s ease;
-    border: 1px solid #ddd;    
-    align-items: center;
+    transition: background .3s ease;
+  }
+}
 
+@media (max-width: 991px) {
+  .accessibility {
+    padding: 1.5rem;
+
+    .title { font-size: 1.25rem; }
+
+    .grid { gap: .8rem; }
+
+    .imageWrapper {
+      width: 90px;
+      height: 90px;
+      padding: .8rem;
+    }
+
+    .card span { width: 90px; }
+  }
+}
+
+@media (max-width: 767px) {
+  .accessibility {
+    padding: 1.25rem;
+
+    .title { font-size: 1.15rem; }
+
+    .grid { gap: .7rem; }
+
+    .imageWrapper {
+      width: 80px;
+      height: 80px;
+      padding: .7rem;
+    }
+
+    .card span { width: 80px; font-size: .7rem; }
+  }
+}
+
+@media (max-width: 479px) {
+  .accessibility {
+    padding: 1rem;
+
+    .title {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid { gap: .6rem; }
+
+    .imageWrapper {
+      width: 70px;
+      height: 70px;
+      padding: .6rem;
+    }
+
+    .card span { width: 70px; font-size: .65rem; }
   }
 }

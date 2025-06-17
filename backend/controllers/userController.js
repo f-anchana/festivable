@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 const transporter = require('../middlewares/emailTransporter');
 const path = require("path");
-
+const fs = require("fs");
+const sharp = require('sharp');
 
 exports.getUsers = async (req, res) => {
   try {
@@ -164,9 +165,19 @@ exports.uploadProfilePhoto = async (req, res) => {
       return res.status(400).json({ error: "Aucune image uploadée." });
     }
 
-    const userId = req.user.id; 
-    const photoPath = req.file.path.split(path.sep).join('/');
+    const userId = req.user.id;
+    const inputPath = req.file.path;
+    const ext = path.extname(inputPath);
+    const outputPath = inputPath.replace(ext, `_compressed${ext}`);
 
+    await sharp(inputPath)
+      .resize(300, 300) //taille du nouveau fichier
+      .jpeg({ quality: 80 })
+      .toFile(outputPath);
+
+    fs.unlinkSync(inputPath); // supprime l’image originale
+
+    const photoPath = outputPath.split(path.sep).join('/');
 
     // Mets à jour l'utilisateur avec le chemin de la photo
     const updatedUser = await User.findByIdAndUpdate(
