@@ -1,25 +1,48 @@
+$radius: 10px;
+
+/* ------------- Wrapper ------------- */
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    align-items: center;
-    width: fit-content;
-    max-width: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .45rem;
+  width: 80px;               /* taille uniforme */
+  max-width: 80px;
+  transition: transform .2s ease;
+
+  &:hover { transform: translateY(-3px); }
 }
 
+/* ------------- Pictogramme ------------- */
 .container img {
-    border: 1px solid #B2B2B2;
-    border-radius: 9px;
-    padding: 4px;
-    width: 75px;
+  width: 80px;
+  height: 80px;
+  padding: 6px;
+  border-radius: $radius;
+  border: 1px solid #b2b2b2;
+  background: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0 0 0 / .12);
 }
 
+/* ------------- État actif ------------- */
 .active {
-    background: var(--dark-blue);
+  background: var(--gradient-dark-blue) !important;
+  border-color: var(--dark-blue) !important;
 }
 
+/* ------------- Légende ------------- */
 .container p {
-    text-align: center;
-    max-width: 100px;
-    font-size: 0.6rem;
+  text-align: center;
+  font-size: .65rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #222;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 480px) {
+  .container,
+  .container img { width: 64px; max-width: 64px; height: 64px; }
+
+  .container p { font-size: .55rem; }
 }

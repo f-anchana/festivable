@@ -5,13 +5,13 @@
     display: inline-block;
     background-color: #1a1a1a;
     color: white;
-    padding: 0.4rem 1.2rem;
-    font-size: 1.5rem;
+    padding: 0.3rem 0.6rem;
     font-weight: 900;
     text-transform: uppercase;
-    border-radius: 0.6rem;
+    border-radius: 5px;
     margin-bottom: 1rem;
     font-family: "Oswald";
+    font-size: 2rem;
   }
 
   &__intro {
@@ -33,12 +33,16 @@
   color: #000;
   box-shadow: 10px 10px 0 #1a1a1a;
   border-radius: 5px;
-    transition: box-shadow 0.3s ease; 
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   @media (min-width: 1024px) {
-  max-width: 30vw;}
+    width: 27vw;
+  }
 
-  &:hover{
-        box-shadow: 0px 0px 0 #222;
+  &:hover {
+    box-shadow: 0px 0px 0 #222;
   }
 
   &--blue {
@@ -53,7 +57,7 @@
     background: linear-gradient(to right, #fce38a, #f9d423);
   }
 
-  h2{
+  h2 {
     margin-bottom: 0.5rem;
   }
 
@@ -72,6 +76,7 @@
     font-size: 0.9rem;
     font-weight: 500;
     margin-bottom: 1rem;
+    width: fit-content;
   }
 
   &__buttons {

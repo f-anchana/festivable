@@ -11,7 +11,8 @@ export default function FestivalHeader({ festival }) {
     <section className={`${s.festival} festival-header`} aria-labelledby="festival-title">
       <div className={`${s.festival__container} festival-header__container`}>
         <h1 id="festival-title" className={s.festival__title}>{festival.title}</h1>
-        <h2 className={s.festival__subtitle}>Présenté par <span>Nom de l'organisateur</span></h2>
+        <h2 className={s.festival__subtitle}>Présenté par <span>{festival.organizer?.organization_name || "Organisateur inconnu"}</span>
+</h2>
 
         <div className={s.festival__info}>
           <div className={s.festival__infoItem}>
@@ -27,7 +28,7 @@ export default function FestivalHeader({ festival }) {
           </div>
 
           {festival.pictoaccess && (
-            <div className={s.festival__infoItem}>
+            <div className={`${s.festival__infoItem} ${s.pictoaccess}`}>
               <Image src="/icones/info.svg" alt="Accessibilité" width={20} height={30} />
               <p>Certifié PictoAccess</p>
             </div>
