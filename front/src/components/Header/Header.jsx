@@ -6,8 +6,9 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from './Header.module.css';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
@@ -77,8 +78,13 @@ export default function Header() {
           <li className={styles.dropdown} ref={accessibilityRef}>
             <button onClick={() => setIsAccessibilityOpen(prev => !prev)} className={styles.dropdownToggle}>
               Accessibilité
-              <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
-                className={`${styles.arrowIcon} ${isAccessibilityOpen ? styles.rotate : ''}`} />
+              <Image
+                src="/icones/menu-roll.svg"
+                alt="Flèche"
+                width={12}
+                height={12}
+                className={`${styles.arrowIcon} ${isAccessibilityOpen ? styles.rotate : ''}`}
+              />
             </button>
             <div className={`${styles.dropdownWrapper} ${isAccessibilityOpen ? styles.dropdownVisible : ''}`}>
               <ul className={styles.dropdownMenu}>
@@ -91,26 +97,27 @@ export default function Header() {
           <li><Link href="/Apropos">À propos</Link></li>
         </ul>
 
-        <div className={styles.authButtons}>
+        <div className="auth-buttons">
           {user ? (
-            <div className={styles.userDropdown} ref={userDropdownRef}>
+            <div className={styles.userDropdown } ref={userDropdownRef}>
               <button onClick={() => setIsUserDropdownOpen(prev => !prev)} className={styles.userToggle}>
                 {user.profile_picture && (
-                  <img
-                    src={`${API_URL}/${user.profile_picture}`}
-                    alt="Avatar"
-                    className={styles.avatar}
-                  />
+                  <Image src={`${API_URL}/${user.profile_picture}`} alt="Avatar" width={40} height={40} className={styles.avatar} />
                 )}
                 <span className={styles.pseudo}>{user.pseudo}</span>
-                <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
-                  className={`${styles.arrowIcon} ${isUserDropdownOpen ? styles.rotate : ''}`} />
+                <img
+                  src="/icones/menu-roll.svg"
+                  alt="Flèche"
+      className={`${styles.arrowIcon} ${isUserDropdownOpen ? styles.rotate : ''}`}
+                  width={12}
+                  height={12}
+                />
               </button>
+
               {isUserDropdownOpen && (
                 <ul className={styles.dropdownMenu}>
-                  <li><button className={styles.logoutBtn} onClick={handleLogout}>Se déconnecter</button></li>
-                  <li><Link href=""> Profil </Link></li>
-
+                  <li><Link href="/Profil">Profil</Link></li>
+                  <li><button onClick={handleLogout} className={styles.logoutBtn}>Se déconnecter</button></li>
                 </ul>
               )}
             </div>
@@ -127,10 +134,18 @@ export default function Header() {
 
         <ul className={styles.mobileNavLinks}>
           <li>
-            <button onClick={() => setIsMobileAccessibilityOpen(prev => !prev)} className={styles.mobileDropdownToggle}>
+            <button
+              onClick={() => setIsMobileAccessibilityOpen(prev => !prev)}
+              className={styles.mobileDropdownToggle}
+            >
               Accessibilité
-              <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
-                className={`${styles.arrowIcon} ${isMobileAccessibilityOpen ? styles.rotate : ''}`} />
+              <Image
+                src="/icones/menu-roll.svg"
+                alt="Flèche"
+                width={12}
+                height={12}
+                className={`${styles.arrowIcon} ${isMobileAccessibilityOpen ? styles.rotate : ''}`}
+              />
             </button>
             {isMobileAccessibilityOpen && (
               <ul className={styles.mobileDropdownMenu}>
@@ -143,28 +158,30 @@ export default function Header() {
           <li><Link href="/Apropos" onClick={() => setIsMenuOpen(false)}>À propos</Link></li>
         </ul>
 
-        <div className={styles.mobileAuthButtons}>
+        <div className={styles.userDropdown} ref={userDropdownRef}>
           {user ? (
-            <div className={styles.userDropdown}>
+            <>
               <button onClick={() => setIsMobileUserDropdownOpen(prev => !prev)} className={styles.userToggle}>
                 {user.profile_picture && (
-                  <img src={`${API_URL}/${user.profile_picture}`} alt="Avatar" className={styles.avatar} />
+                  <Image src={`${API_URL}/${user.profile_picture}`} alt="Avatar" width={40} height={30} className={styles.avatar} />
                 )}
                 <span className={styles.pseudo}>{user.pseudo}</span>
-                <Image src="/icones/menu-roll.svg" alt="Flèche" width={12} height={12}
-                  className={`${styles.arrowIcon} ${isMobileUserDropdownOpen ? styles.rotate : ''}`} />
+                <img
+                  src="/icones/menu-roll.svg"
+                  alt="Flèche"
+                  className={`${styles.arrowIcon} ${isMobileUserDropdownOpen ? styles.rotate : ''}`}
+                  width={12}
+                  height={12}
+                />
               </button>
+
               {isMobileUserDropdownOpen && (
-                <ul className={styles.mobileDropdownMenu}>
-                  <li>
-                    <button className={styles.logoutBtn} onClick={() => { handleLogout(); setIsMenuOpen(false); }}>
-                      Se déconnecter
-                    </button>
-                  </li>
-                  <li><Link href="">Profil</Link></li>
+                <ul className={styles.dropdownMenu}>
+                  <li><Link href="/Profil">Profil</Link></li>
+                  <li><button onClick={handleLogout} className={styles.logoutBtn}>Se déconnecter</button></li>
                 </ul>
               )}
-            </div>
+            </>
           ) : (
             <Link href="/form" className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>
               S'authentifier

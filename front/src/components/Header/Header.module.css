@@ -236,8 +236,11 @@
   background-color: #ffcc80;
 }
 
+
 /* FLECHES DROPDOWN */
+
 .arrowIconDesktop {
+
   transition: transform 0.3s ease;
 }
 
@@ -254,7 +257,7 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 0.75rem 1rem;
   margin: 0 auto;
   cursor: pointer;
@@ -277,20 +280,72 @@
   padding: 0.5rem 0;
 }
 
-/* PROFIL UTILISATEUR */
-.userInfo {
+
+.userDropdown {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.pseudo {
-  font-weight: bold;
+.userToggle {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
+
+.pseudo {
+  font-size: 1rem;
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.dropdownMenu li {
+  list-style: none;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownMenu li:hover {
+  background-color: #f5f5f5;
+}
+
+.logoutBtn {
+  background: none;
+  border: none;
+  color: #d00;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+}
+
+
