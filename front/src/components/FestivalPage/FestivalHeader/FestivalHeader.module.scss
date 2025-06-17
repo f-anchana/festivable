@@ -6,7 +6,7 @@
     width: 90%;
 
     .festival__title {
-      font-size: 24px;
+      font-size: 32px;
       text-align: center;
       font-family: 'Oswald';
 
@@ -35,6 +35,12 @@
       flex-direction: column;
       gap: 15px;
 
+      .pictoaccess p{
+          border-top: 1px solid #b2b2b2;
+          padding-top: 10px;
+          width: 100%;
+      }
+
       .festival__infoItem {
         display: flex;
         gap: 10px;
@@ -42,8 +48,7 @@
 
         &:nth-child(2) p {
           width: 100%;
-          padding: 10px 0;
-          border-bottom: 1px solid #b2b2b2;
+          padding-top: 10px;
           border-top: 1px solid #b2b2b2;
           margin: 0;
         }

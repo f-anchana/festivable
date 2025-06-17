@@ -7,7 +7,7 @@ import FestivalLocation from "../../../../../components/FestivalPage/FestivalLoc
 import FestivalVolunteer from "../../../../../components/FestivalPage/FestivalVolunteer/FestivalVolunteer";
 import FestivalAccessibility from "../../../../../components/FestivalPage/FestivalAccessibility/FestivalAccessibility";
 import FestivalOthers from "../../../../../components/FestivalPage/FestivalOthers/FestivalOthers";
-import FestivalReviews from "../../../../../components/FestivalPage/FestivalReview/FestivalReview";
+import ReviewsSection from "../../../../../components/FestivalPage/ReviewsSection/ReviewsSection";
 
 export default async function FestivalPage({ params }) {
   const { id } = params;
@@ -37,7 +37,7 @@ export default async function FestivalPage({ params }) {
       <div className={styles.fullWidth}>
         <FestivalLocation id={id} />
         <FestivalVolunteer festivalId={festival._id} />
-        <FestivalReviews festivalId={id} />
+        <ReviewsSection festivalId={id} />
         <FestivalOthers currentFestivalId={festival._id} />
       </div>
     </div>

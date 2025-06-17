@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import s from "./FestivalReview.module.scss";
+import s from "./FestivalReviews.module.scss";
 
 const COMMENTS_PER_PAGE = 3;
 
