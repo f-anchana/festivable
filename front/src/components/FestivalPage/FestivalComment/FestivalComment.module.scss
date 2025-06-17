@@ -1,27 +1,68 @@
-$radius: 4px;
+$radius: 8px;
 
-/* ───────────── Container ───────────── */
+/* ───────── Container principal ───────── */
 .commentBox {
-  position: relative;
   background: var(--gradient-light-blue);
   border-radius: $radius;
   padding: 40px 26px;
-  color: #000;
   display: flex;
   flex-direction: column;
   gap: 22px;
   box-shadow: 10px 10px 0 #1a1a1a;
-  align-items: flex-start;
-  transition: box-shadow .3s ease;
-  margin-bottom: 3rem;
-
-  &:hover { box-shadow: 0 0 0 #222; }
+      align-items: flex-start;
 }
 
-/* ───────────── Profil ───────────── */
+/* ----------- État “non connecté” ----------- */
+.noAuth {
+  align-items: center;
+  gap: 2rem;
+
+  .needLogin {
+    font-family: var(--font-oswald);
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1.8rem;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .loginBtn {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 14px 64px;
+    border-radius: 48px;
+    font-weight: 600;
+    transition: transform 0.15s, box-shadow 0.15s;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0 0 0 / 0.2);
+    }
+  }
+}
+
+/* ----------- Message succès ----------- */
+.successBox {
+  align-items: center;
+}
+.successMsg {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--font-oswald);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ----------- Profil ----------- */
 .profile {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: 14px;
 
   .avatar {
@@ -30,14 +71,13 @@ $radius: 4px;
     border-radius: 50%;
     object-fit: cover;
   }
-
   .pseudo {
     font-weight: 700;
     font-size: 20px;
   }
 }
 
-/* ───────────── Champs ───────────── */
+/* ----------- Champs ----------- */
 .select,
 .textarea {
   width: 100%;
@@ -45,17 +85,17 @@ $radius: 4px;
   border-radius: $radius;
   font-family: inherit;
   font-size: 16px;
-  color: #333;
 }
 
 .select {
-    background-color: #85D7F3;
-  padding: 14px 22px;
-  cursor: pointer;
+  background: #85d7f3;
+  padding: 9px 22px;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='%23000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 8L0.803848 0.5L11.1962 0.5L6 8Z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 98% center;
+  border-radius: 30px;
+  width: 40%;
 }
 
 .textarea {
@@ -65,52 +105,39 @@ $radius: 4px;
   background: #fff;
 }
 
-/* ───────────── Bouton ───────────── */
+/* ----------- Bouton ----------- */
 .button {
+  align-self: flex-start;
   background: #111;
   color: #fff;
   padding: 10px 40px;
-  border-radius: 11px;
-  border: none;
-  cursor: pointer;
+  border-radius: $radius;
   font-weight: 600;
-  transition: opacity .2s;
-  align-self: flex-start;
+  transition: opacity 0.2s;
 
   &:disabled {
-    opacity: .4;
+    opacity: 0.4;
     cursor: default;
   }
 }
 
-/* ───────────── État “non connecté” ───────────── */
-.needLogin {
-  background: #1a1a1a;
-  color: #fff;
-  padding: .3rem .6rem;
-  font-size: 1.25rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  border-radius: 5px;
-  font-family: var(--font-oswald);
-  margin-bottom: 1rem;
-}
-
-.loginBtn {
-  background: #111;
-  color: #fff;
-  padding: 10px 40px;
-  border-radius: 26px;
-  text-align: center;
-  font-weight: 500;
-}
-
-/* ───────────── Responsive ───────────── */
+/* ----------- Responsive ----------- */
 @media (max-width: 768px) {
-  .commentBox { padding: 24px 20px; }
+  .commentBox {
+    padding: 24px 20px;
+  }
 
   .profile {
-    .avatar { width: 56px; height: 56px; }
-    .pseudo { font-size: 18px; }
+    .avatar {
+      width: 56px;
+      height: 56px;
+    }
+    .pseudo {
+      font-size: 18px;
+    }
+  }
+
+  .needLogin {
+    font-size: 1.4rem;
   }
 }
