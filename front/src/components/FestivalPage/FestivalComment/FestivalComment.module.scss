@@ -1,4 +1,4 @@
-$radius: 8px;
+$radius: 4px;
 
 /* ───────── Container principal ───────── */
 .commentBox {
@@ -16,6 +16,7 @@ $radius: 8px;
 .noAuth {
   align-items: center;
   gap: 2rem;
+  padding: 120px;
 
   .needLogin {
     font-family: var(--font-oswald);
