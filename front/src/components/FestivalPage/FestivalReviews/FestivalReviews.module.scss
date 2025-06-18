@@ -1,8 +1,12 @@
 /*          Section principale                */
 .accessibilitySection {
   padding: 40px 20px;
-  width: 70%;
   margin: auto;
+
+  @media (min-width: 1024px) {
+    width: 70%;
+  }
+
 
   h2 {
     display: inline-block;
@@ -115,10 +119,31 @@
   }
 }
 
+/* bouton X */
+.deleteBtn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #555;
+  transition: color .15s;
+
+  &:hover { color: #000; }
+}
+
+/* assure que la carte est positionnée en relatif pour le bouton */
+.commentCard { position: relative; }
+
+
 /* ——————————————————  Mobile  —————————————————— */
 @media (max-width: 599.98px) {
   .accessibilitySection {
     padding: 24px 12px;
+    width: 100%;
 
     h2 {
       font-size: 22px;
