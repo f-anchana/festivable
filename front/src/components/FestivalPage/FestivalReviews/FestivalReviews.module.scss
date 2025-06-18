@@ -115,6 +115,26 @@
   }
 }
 
+/* bouton X */
+.deleteBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #555;
+  transition: color .15s;
+
+  &:hover { color: #000; }
+}
+
+/* assure que la carte est positionnée en relatif pour le bouton */
+.commentCard { position: relative; }
+
+
 /* ——————————————————  Mobile  —————————————————— */
 @media (max-width: 599.98px) {
   .accessibilitySection {
