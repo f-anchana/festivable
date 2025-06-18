@@ -13,12 +13,12 @@
   --font-oswald: var(--font-oswald);
 
   --dark-blue: #155e75;
-  --orange: #fdba46;
-  --light-blue: #29a0c1;
+  --orange: #FDB74C;
+  --light-blue: #39A5C9;
 
-  --gradient-orange: linear-gradient(90deg, rgba(253, 178, 70, 1) 0%, rgba(254, 111, 2, 1) 100%);
+  --gradient-orange: linear-gradient(90deg,rgba(253, 178, 70, 1) 0%, rgba(255, 135, 43, 1) 100%);
   --gradient-dark-blue: linear-gradient(180deg, rgba(17, 85, 107, 1) 0%, rgba(0, 109, 145, 1) 100%);
-  --gradient-light-blue: linear-gradient(215deg, rgba(41, 156, 193, 1) 0%, rgba(155, 229, 253, 1) 100%);
+  --gradient-light-blue: linear-gradient(90215deg,rgba(27, 180, 231, 1) 0%, rgba(155, 229, 253, 1) 100%);
 }
 
 html,
