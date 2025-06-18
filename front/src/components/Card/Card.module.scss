@@ -1,0 +1,45 @@
+.card {
+    padding: 40px;
+    border-radius: 5px;
+    color: var(--foreground);
+    box-shadow: 20px 20px 0 #222;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 58px;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 0 #222;
+}
+
+
+.label {
+    background-color: var(--foreground);
+    color: #fff;
+    padding: 4px 8px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: fit-content;
+}
+
+.text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding-right: 5px;
+}
+
+.blue {
+    background: var(--gradient-light-blue);
+
+}
+
+.orange {
+    background: var(--gradient-orange);
+}
+
+.yellow {
+    background: #fcbf49;
+}

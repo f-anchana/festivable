@@ -91,3 +91,11 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
+
+@media (max-width: 900px) {
+
+    .missionBox {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
