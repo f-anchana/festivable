@@ -74,9 +74,9 @@ export default function mentionLegale() {
 
       <h2>Hébergeur</h2>
       <ul>
-        <li>Nom de l’hébergeur : [Nom de l’hébergeur]</li>
-        <li>Adresse : [Adresse complète de l’hébergeur]</li>
-        <li>Téléphone : [Numéro de téléphone de l’hébergeur]</li>
+        <li>Nom de l’hébergeur : O2Switch</li>
+        <li>Adresse : Chem. des Pardiaux, 63000 Clermont-Ferrand</li>
+        <li>Téléphone : 04 44 44 60 40</li>
       </ul>
 
       <br />
@@ -95,7 +95,7 @@ export default function mentionLegale() {
       <p>
         Vous disposez d’un droit d’accès, de rectification, de suppression et d’opposition
         concernant vos données personnelles. Vous pouvez exercer ce droit en contactant :
-        [Adresse email].
+        contact@festivable.com.
       </p>
     </main>
   );

@@ -10,6 +10,7 @@ const RecruitmentSchema = new Schema({
       end_date: Date,
       paid: Boolean,
       contact_email: String,
+      job_posting_url: String,
       description: String,
     }
   ],

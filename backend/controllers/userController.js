@@ -48,8 +48,7 @@ exports.createUser = async (req, res) => {
       pseudo,
       email,
       password,
-      disability,
-      type_user,
+      phone,
       firstname,
       lastname
     } = req.body;
@@ -66,8 +65,7 @@ exports.createUser = async (req, res) => {
       pseudo,
       email,
       password: hashedPassword,
-      disability,
-      type_user,
+      phone,
       firstname,
       lastname
     });
@@ -204,6 +202,7 @@ exports.updateUser = async (req, res) => {
   const {
     pseudo,
     email,
+    phone,
     firstname,
     lastname
   } = req.body;
@@ -212,6 +211,7 @@ exports.updateUser = async (req, res) => {
     const updatedFields = {
       ...(pseudo && { pseudo }),
       ...(email && { email }),
+      ...(phone && { phone }),
       ...(firstname && { firstname }),
       ...(lastname && { lastname })
     };

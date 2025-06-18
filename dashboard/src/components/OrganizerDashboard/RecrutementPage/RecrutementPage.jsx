@@ -16,6 +16,7 @@ const defaultPoste = () => ({
   start_date: "",
   end_date: "",
   contact_email: "",
+  job_posting_url: null,
   paid: "",
   description: "",
 });
@@ -42,20 +43,21 @@ export default function RecrutementPage() {
           },
         });
 
-if (!res.ok) {
-  // Ici on considère qu'il n'y a pas de données, on met un poste vide dans le state
-  setPostes([{
-    id: generateId(),
-    position: "",
-    start_date: "",
-    end_date: "",
-    contact_email: "",
-    paid: "",
-    description: "",
-  }]);
-  setLoading(false);
-  return; // On stoppe la fonction ici, pas besoin de continuer
-}
+        if (!res.ok) {
+          // Ici on considère qu'il n'y a pas de données, on met un poste vide dans le state
+          setPostes([{
+            id: generateId(),
+            position: "",
+            start_date: "",
+            end_date: "",
+            contact_email: "",
+            job_posting_url: null,
+            paid: "",
+            description: "",
+          }]);
+          setLoading(false);
+          return; // On stoppe la fonction ici, pas besoin de continuer
+        }
 
         const data = await res.json();
 
@@ -69,6 +71,7 @@ if (!res.ok) {
             start_date: poste.start_date?.substring(0, 10) || "",
             end_date: poste.end_date?.substring(0, 10) || "",
             contact_email: poste.contact_email || "",
+            job_posting_url: poste.job_posting_url || null,
             paid: poste.paid === true ? true : poste.paid === false ? false : "",
             description: poste.description || "",
           }));
@@ -239,6 +242,17 @@ if (!res.ok) {
                   <option value="false">Bénévole</option>
                 </select>
               </div>
+            </div>
+
+            <div className={styles.textareaBlock}>
+              <ClassicInput
+                id={`job_posting_url-${index}`}
+                label="Lien vers la fiche de poste (optionnel)"
+                type="text"
+                placeholder="lien.fr"
+                value={poste.job_posting_url}
+                onChange={(e) => handleChange(index, "job_posting_url", e.target.value)}
+              />
             </div>
 
             <div className={styles.textareaBlock}>

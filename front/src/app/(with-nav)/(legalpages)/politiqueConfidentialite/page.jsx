@@ -71,7 +71,7 @@ export default function politiqueConfidentialite() {
       </p>
       <ul>
         <li><strong>Responsable du traitement :</strong> Festiv'able – APF France handicap</li>
-        <li><strong>Contact :</strong> [adresse email de contact RGPD]</li>
+        <li><strong>Contact :</strong> contact@festivable.com</li>
       </ul>
 
  <br />
@@ -120,7 +120,7 @@ export default function politiqueConfidentialite() {
         <li>Droit de suppression</li>
         <li>Droit à la portabilité</li>
         <li>Droit d’opposition et limitation</li>
-        <li>Pour exercer ces droits : [adresse email de contact RGPD]</li>
+        <li>Pour exercer ces droits : contact@festivable.com</li>
       </ul>
             <br/>
 
