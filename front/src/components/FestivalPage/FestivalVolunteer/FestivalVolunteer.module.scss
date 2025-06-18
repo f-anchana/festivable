@@ -46,11 +46,11 @@
   }
 
   &--blue {
-    background: linear-gradient(to right, #89c4f4, #53a0e1);
+    background: var(--gradient-light-blue);
   }
 
   &--orange {
-    background: linear-gradient(to right, #f6a355, #f26b24);
+    background: var(--gradient-orange);
   }
 
   &--yellow {
