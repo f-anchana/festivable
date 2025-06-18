@@ -76,8 +76,15 @@ export default function AllFestivals() {
     return matchDate && matchLocation;
   });
 
-  if (loading) return <p>Chargement des festivals...</p>;
-  if (error) return <p style={{ color: 'red' }}>Erreur : {error}</p>;
+if (loading)
+    return (
+      <div className={styles.loaderOverlay}>
+        <div className={styles.loaderContainer}>
+          <div className={styles.spinner}></div>
+          <p>Chargement des festivals</p>
+        </div>
+      </div>
+    );  if (error) return <p style={{ color: 'red' }}>Erreur : {error}</p>;
 
   return (
     <div className={styles.wrapper}>
