@@ -150,7 +150,7 @@ src="/decor/apfbadge-center.png" alt="" width={50} height={50} />
         </div>
 
         <div className={styles.image}>
-          <img src="/decor/HeroSection_image.svg" alt="" />
+          <img src="/decor/Hero-section-image.svg" alt="" />
         </div>
       </div>
     </section>

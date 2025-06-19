@@ -19,6 +19,12 @@ export default function ProfilePage() {
   const [preview, setPreview] = useState(null);
   const fileInputRef = useRef(null);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [showPasswords, setShowPasswords] = useState({
+  current: false,
+  new: false,
+  confirm: false,
+});
+
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
@@ -175,6 +181,21 @@ export default function ProfilePage() {
 
   return (
     <main className={styles.main}>
+       <Image
+              src="/decor/homepage-deco1.png"
+              alt=""
+              width={150}
+              height={150}
+              className={styles.decor3}
+            />
+
+            <Image
+                    src="/decor/homepage-deco.png"
+                    alt=""
+                    width={80}
+                    height={80}
+                    className={styles.decor1}
+                  />
       <section className={styles.wrapper}>
         <header className={styles.header}>
           {showPasswordForm ? (
@@ -189,8 +210,8 @@ export default function ProfilePage() {
                   <Image
                     src={preview || '/default-avatar.png'}
                     alt="Photo de profil"
-                    width={100}
-                    height={100}
+                    width={140}
+                    height={140}
                     className={styles.avatar}
                     priority
                   />
@@ -200,7 +221,7 @@ export default function ProfilePage() {
                     onClick={() => fileInputRef.current.click()}
                     type="button"
                   >
-                    <Image src="/icones/edit-icon.svg" alt="Modifier" width={20} height={20} />
+                    <Image src="/icones/edit-icon.svg" alt="Modifier" width={50} height={50} />
                   </button>
                   <input
                     type="file"
@@ -223,50 +244,110 @@ export default function ProfilePage() {
 
         {showPasswordForm ? (
           <form className={styles.form} onSubmit={handlePasswordChange}>
-            <div className={styles.formRow}>
-              <div className={styles.field}>
-                <label htmlFor="currentPassword">Mot de passe actuel</label>
-                <input
-                  id="currentPassword"
-                  type="password"
-                  value={passwordData.currentPassword}
-                  onChange={(e) =>
-                    setPasswordData((prev) => ({ ...prev, currentPassword: e.target.value }))
-                  }
-                  required
-                />
-              </div>
-              <div className={styles.field}>
-                <label htmlFor="newPassword">Nouveau mot de passe</label>
-                <input
-                  id="newPassword"
-                  type="password"
-                  value={passwordData.newPassword}
-                  onChange={(e) =>
-                    setPasswordData((prev) => ({ ...prev, newPassword: e.target.value }))
-                  }
-                  required
-                />
-              </div>
-              <div className={styles.field}>
-                <label htmlFor="confirmPassword">Confirmer le nouveau mot de passe</label>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  value={passwordData.confirmPassword}
-                  onChange={(e) =>
-                    setPasswordData((prev) => ({ ...prev, confirmPassword: e.target.value }))
-                  }
-                  required
-                />
-              </div>
-            </div>
-            <div className={styles.buttons}>
-              <button type="submit" className={styles.saveBtn}>
-                Enregistrer le nouveau mot de passe
-              </button>
-            </div>
-          </form>
+  <div className={styles.formRow}>
+    
+    {/* Mot de passe actuel */}
+    <div className={styles.field} style={{ position: 'relative' }}>
+      <label htmlFor="currentPassword">Mot de passe actuel</label>
+      <input
+        id="currentPassword"
+        type={showPasswords.current ? "text" : "password"}
+        value={passwordData.currentPassword}
+        onChange={(e) =>
+          setPasswordData((prev) => ({ ...prev, currentPassword: e.target.value }))
+        }
+        required
+      />
+      <img
+        src={showPasswords.current ? "/icones/open-eye.svg" : "/icones/closed-eye.svg"}
+        alt="Afficher le mot de passe"
+        onClick={() =>
+          setShowPasswords((prev) => ({ ...prev, current: !prev.current }))
+        }
+        style={{
+          position: "absolute",
+          top: "65%",
+          right: "10px",
+          transform: "translateY(-50%)",
+          width: "20px",
+          height: "20px",
+          cursor: "pointer",
+          userSelect: "none"
+        }}
+      />
+    </div>
+
+    {/* Nouveau mot de passe */}
+    <div className={styles.field} style={{ position: 'relative' }}>
+      <label htmlFor="newPassword">Nouveau mot de passe</label>
+      <input
+        id="newPassword"
+        type={showPasswords.new ? "text" : "password"}
+        value={passwordData.newPassword}
+        onChange={(e) =>
+          setPasswordData((prev) => ({ ...prev, newPassword: e.target.value }))
+        }
+        required
+      />
+      <img
+        src={showPasswords.current ? "/icones/open-eye.svg" : "/icones/closed-eye.svg"}
+        alt="Afficher le mot de passe"
+        onClick={() =>
+          setShowPasswords((prev) => ({ ...prev, new: !prev.new }))
+        }
+        style={{
+          position: "absolute",
+          top: "65%",
+          right: "10px",
+          transform: "translateY(-50%)",
+          width: "20px",
+          height: "20px",
+          cursor: "pointer",
+          userSelect: "none"
+        }}
+      />
+    </div>
+
+    {/* Confirmation */}
+    <div className={styles.field} style={{ position: 'relative' }}>
+      <label htmlFor="confirmPassword">Confirmer le nouveau mot de passe</label>
+      <input
+        id="confirmPassword"
+        type={showPasswords.confirm ? "text" : "password"}
+        value={passwordData.confirmPassword}
+        onChange={(e) =>
+          setPasswordData((prev) => ({ ...prev, confirmPassword: e.target.value }))
+        }
+        required
+      />
+      <img
+        src={showPasswords.current ? "/icones/open-eye.svg" : "/icones/closed-eye.svg"}
+        alt="Afficher le mot de passe"
+        onClick={() =>
+          setShowPasswords((prev) => ({ ...prev, confirm: !prev.confirm }))
+        }
+        style={{
+          position: "absolute",
+          top: "65%",
+          right: "10px",
+          transform: "translateY(-50%)",
+          width: "20px",
+          height: "20px",
+          cursor: "pointer",
+          userSelect: "none"
+        }}
+      />
+    </div>
+
+  </div>
+
+  <div className={styles.buttons}>
+    <button type="submit" className={styles.saveBtn}>
+      Enregistrer le nouveau mot de passe
+    </button>
+  </div>
+</form>
+
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formRow}>
