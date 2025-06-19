@@ -210,20 +210,10 @@ export default function FestivalsSection() {
           </p>
         </div>
 
-              <div className={styles.button} >
-        <a href="/AllFestivals">Voir tous nos festivals</a>
-        <Image
-          src="/icones/menu-roll.svg"
-          alt=""
-          width={12}
-          height={12}
-          style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }}
-        />
-      </div>
+              
 
 
-
-        <div className={styles.cardsWrapper}>
+  <div className={styles.cardsWrapper}>
           {loading && <p>Chargement des festivals en cours...</p>}
           {error && <p style={{ color: '#8B0000' }}>Erreur : {error}</p>}
           {!loading && !error && festivals.length === 0 && <p>Aucun festival trouvé.</p>}
@@ -247,6 +237,18 @@ export default function FestivalsSection() {
         pictoaccess={festival.pictoaccess}
       />
     ))}
+
+    <div className={styles.button} >
+        <a href="/AllFestivals">Voir tous nos festivals</a>
+        <Image
+          src="/icones/menu-roll.svg"
+          alt=""
+          width={12}
+          height={12}
+          style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }}
+        />
+      </div>
+
 
         </div>
       </div>

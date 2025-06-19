@@ -10,6 +10,7 @@
   overflow: hidden;
 }
 
+
 .decor1 {
   position: absolute;
   top: 90px;
@@ -118,6 +119,7 @@
 
 .highlight {
   color: #FDB74C;
+  transform: none;
 }
 
 .description {
@@ -286,3 +288,4 @@
     display: none;
   }
 }
+

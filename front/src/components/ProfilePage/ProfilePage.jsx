@@ -36,7 +36,7 @@ export default function ProfilePage() {
       if (res.ok) {
         const data = await res.json();
         setUser(data);
-        setPreview(`${API_URL}/${data.profile_picture}`);
+        setPreview(data.profile_picture ? `${API_URL}/${data.profile_picture}` : null);
         setFormData({
           lastname: data.lastname || '',
           firstname: data.firstname || '',
@@ -118,7 +118,7 @@ export default function ProfilePage() {
     } catch (err) {
       alert('Erreur upload photo');
       console.error(err);
-      setPreview(`${API_URL}/${user?.profile_picture}`);
+      setPreview(user?.profile_picture ? `${API_URL}/${user.profile_picture}` : null);
     } finally {
       setUploading(false);
     }

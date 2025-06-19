@@ -37,7 +37,7 @@ const HeroSection = () => {
       opacity: 1,
       duration: 0.1,
       ease: "power1.out",
-      scale: 1.1,
+      // scale: 1.1,
     },
     "-=0.3" 
   );

@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./FestivalCard.module.css";
-import { useRouter } from "next/navigation"; // pour Next.js App Router
+import { useRouter } from "next/navigation";
 
 export default function FestivalCard({
   _id,
@@ -23,12 +23,22 @@ export default function FestivalCard({
     router.push(`/festival/${_id}`);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault(); // pour éviter le scroll avec Space
+      handleClick();
+    }
+  };
+
   if (!title) return <div>Chargement...</div>;
 
   return (
     <div
       className={styles.card}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="link"
       style={{ cursor: "pointer" }}
     >
       {pictoaccess && (
