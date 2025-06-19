@@ -10,10 +10,34 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function OrganizerSignupForm() {
     const formRef = useRef(null);
+    const stepOneRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(1);
     const [showPassword, setShowPassword] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
+    const [isStepOneValid, setIsStepOneValid] = useState(false);
+
+    // Fonction de validation
+    const validateStepOne = () => {
+        if (!stepOneRef.current) return;
+        const requiredInputs = stepOneRef.current.querySelectorAll("input[required]");
+        const allFilled = Array.from(requiredInputs).every(input => input.value.trim() !== "");
+        setIsStepOneValid(allFilled);
+    };
+
+    // Vérifie à chaque changement d’input
+    useEffect(() => {
+        const form = formRef.current;
+        if (!form) return;
+
+        const inputs = form.querySelectorAll("input[required]");
+        inputs.forEach(input => input.addEventListener("input", validateStepOne));
+
+        // Nettoyage
+        return () => {
+            inputs.forEach(input => input.removeEventListener("input", validateStepOne));
+        };
+    }, []);
 
     const togglePassword = () => {
         setShowPassword(prev => !prev);
@@ -148,8 +172,9 @@ export default function OrganizerSignupForm() {
                     role="organizer"
                 />
             ) : (
-                <form onSubmit={handleSubmit} className={`${formStyles.form} organizer-signup-form`}>
-                    <fieldset className="step-one" style={{ visibility: currentStep === 1 ? "visible" : "hidden" }}>
+                <form onSubmit={handleSubmit}
+                    className={`${formStyles.form} organizer-signup-form`}>
+                    <fieldset ref={stepOneRef} className="step-one" style={{ visibility: currentStep === 1 ? "visible" : "hidden" }}>
                         <div className={styles.flex}>
                             <div className={formStyles.inputContainer}>
                                 <input name="organization_name" type="text" className={formStyles.input} id="organisme" placeholder=" " required />
@@ -175,7 +200,16 @@ export default function OrganizerSignupForm() {
                                 <img src={showPassword ? "/icones/closed-eye.svg" : "/icones/open-eye.svg"} alt="" />
                             </button>
                         </div>
-                        <button type="button" onClick={nextStep}>Suivant</button>
+                        {!isStepOneValid && (
+                            <p style={{ color: "red", marginTop: "0.5rem" }}>
+                                Veuillez remplir tous les champs.
+                            </p>
+                        )}
+                        <button type="button" onClick={nextStep} disabled={!isStepOneValid} style={{ backgroundColor: !isStepOneValid ? "#626262" : undefined,  color: !isStepOneValid ? "white" : undefined }}
+                        >
+                            Suivant
+                        </button>
+
                     </fieldset>
 
                     <fieldset className={styles.stepTwo} style={{ visibility: currentStep === 2 ? "visible" : "hidden" }}>

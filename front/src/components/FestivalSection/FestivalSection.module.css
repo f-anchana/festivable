@@ -1,15 +1,15 @@
-.festivalsSection{
-    background-color: rgb(255, 255, 255);
-    padding: 50px;
-    border-radius: 35px;
-    position: relative;
-    z-index: 20;
-    margin-top: -30px;
+.festivalsSection {
+  background-color: rgb(255, 255, 255);
+  padding: 50px;
+  border-radius: 35px;
+  position: relative;
+  z-index: 20;
+  margin-top: -30px;
 }
 
 
-.festivalIntro{
-margin-left: 30px;
+.festivalIntro {
+  margin-left: 30px;
 }
 
 .cardsWrapper {
@@ -18,17 +18,18 @@ margin-left: 30px;
   flex-wrap: nowrap;
   overflow-x: auto;
   padding-bottom: 10px;
-  scroll-snap-type: x mandatory; 
+  scroll-snap-type: x mandatory;
 
 }
+
 .cardsWrapper::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
-.cardsWrapper > * {
+.cardsWrapper>* {
   flex: 0 0 auto;
   width: 280px;
-  scroll-snap-align: start; 
+  scroll-snap-align: start;
 }
 
 /* Desktop : revenir à la grille classique */
@@ -40,44 +41,44 @@ margin-left: 30px;
     overflow-x: visible;
   }
 
-  .cardsWrapper > * {
+  .cardsWrapper>* {
     width: 30%;
     max-width: 300px;
     scroll-snap-align: unset;
   }
 
-  
-}
-
-
-@media(max-width:900px){
-  .titleWrapper{
-  margin-left: 0px;
-}
 
 }
 
 
-.title{
-    font-size: 2.2rem;
-    background-color: var(--foreground);
-    color: var(--background);
-    display: inline-block;
-    padding: 5px;
-    border-radius: 4px;
-    margin-top:60px;
+@media(max-width:900px) {
+  .titleWrapper {
+    margin-left: 0px;
+  }
 
 }
 
-.subtitle{
-    margin-top: 30px;
-    margin-bottom: 30px;
+
+.title {
+  font-size: 2.2rem;
+  background-color: var(--foreground);
+  color: var(--background);
+  display: inline-block;
+  padding: 5px;
+  border-radius: 4px;
+  margin-top: 60px;
+
 }
 
-.viewAll{
-    text-align: center;
-    margin-top: 50px;
-    text-decoration: underline;
+.subtitle {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.viewAll {
+  text-align: center;
+  margin-top: 50px;
+  text-decoration: underline;
 }
 
 
@@ -90,10 +91,10 @@ margin-left: 30px;
   top: 100px;
   overflow: hidden;
 
-  
+
 }
 
-.accessibilitySection span{
+.accessibilitySection span {
   border-radius: 4px;
   text-align: left;
 }
@@ -137,7 +138,7 @@ margin-left: 30px;
 }
 
 .heading span {
-  background-color:var(--foreground);
+  background-color: var(--foreground);
   color: #fff;
   display: inline-block;
   padding: 0.3rem 0.6rem;
@@ -165,9 +166,10 @@ margin-left: 30px;
 
 .button:hover,
 .button:focus {
-background-color: #FDB74C;
+  background-color: #FDB74C;
   color: #1D1D1D;
-  border-color: #FDB74C;}
+  border-color: #FDB74C;
+}
 
 
 .decor,
@@ -181,6 +183,7 @@ background-color: #FDB74C;
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -189,7 +192,7 @@ background-color: #FDB74C;
 
 .decor {
   top: 40px;
-  right:40px;
+  right: 40px;
 }
 
 
@@ -208,7 +211,7 @@ background-color: #FDB74C;
     max-width: 100%;
   }
 
-  
+
   .imageWrapper {
     margin-bottom: 1rem;
   }
@@ -217,21 +220,24 @@ background-color: #FDB74C;
     display: none;
   }
 
-  .imageWrapper{
-      display: none;
+  .imageWrapper {
+    display: none;
 
   }
-  .image,.decor{
-      display: none;
+
+  .image,
+  .decor {
+    display: none;
 
   }
-  
-.decor4{
-  display: none;
-}
-.festivalIntro{
-margin-left: 0px;
-}
+
+  .decor4 {
+    display: none;
+  }
+
+  .festivalIntro {
+    margin-left: 0px;
+  }
 }
 
 
@@ -239,7 +245,7 @@ margin-left: 0px;
   margin-top: 200px;
   text-align: center;
   position: relative;
-  
+
 }
 
 .title1 {
@@ -264,12 +270,12 @@ margin-left: 0px;
   color: var(--foreground);
   box-shadow: 20px 20px 0 #222;
   position: relative;
-  transition: box-shadow 0.3s ease; 
+  transition: box-shadow 0.3s ease;
   text-align: left;
 }
 
-.card:hover{
-    box-shadow: 0px 0px 0 #222;
+.card:hover {
+  box-shadow: 0px 0px 0 #222;
 
 }
 
@@ -291,25 +297,25 @@ margin-left: 0px;
   bottom: 15px;
   position: absolute;
   line-height: 1.5;
-  padding-right:5px ;
- 
+  padding-right: 5px;
+
 }
 
 
 /* decor */
 
-.decor4{
+.decor4 {
   left: 0;
 }
 
-.decor5{
+.decor5 {
   position: absolute;
   right: 0;
 }
 
 /* Card colors */
 .blue {
-    background: var(--gradient-light-blue);
+  background: var(--gradient-light-blue);
 
 }
 
@@ -327,7 +333,7 @@ margin-left: 0px;
 /* .................. */
 
 .recruitSection {
-  padding-top: 70px;  
+  padding-top: 70px;
   margin-top: 100px;
 }
 
@@ -346,10 +352,10 @@ margin-left: 0px;
     align-items: flex-start;
   }
 
-  
+
 }
 
-@media(max-width:900px){
+@media(max-width:900px) {
   .recruitImageWrapper.desktopOnly {
     width: 400px;
     height: 400px;
@@ -360,9 +366,9 @@ margin-left: 0px;
 .recruitText {
   flex: 1;
   text-align: left;
-    background-color: #f8f8f8;
-      padding: 40px 40px;
-      width: 350px;
+  background-color: #f8f8f8;
+  padding: 40px 40px;
+  width: 350px;
 
 
 }
@@ -394,7 +400,7 @@ margin-left: 0px;
   position: relative;
   display: flex;
   justify-content: center;
-    /* box-shadow: 1px 1px 0 #222;
+  /* box-shadow: 1px 1px 0 #222;
       border-radius: 5px;
 
     width: 300px;
@@ -409,24 +415,24 @@ margin-left: 0px;
 @media (max-width: 899px) {
   .mobileOnly {
     display: block;
-    text-align: left; 
+    text-align: left;
   }
 
 
 
   .recruitSection {
-  background-color: transparent;
+    background-color: transparent;
 
-  
-}
 
-.mobileOnly img {
-  width: 100%; 
-  max-width: 600px; 
-  height: auto; 
-  object-fit: contain; 
-  border-radius: 8px;
-}
+  }
+
+  .mobileOnly img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+  }
 }
 
 
@@ -441,7 +447,7 @@ margin-left: 0px;
 .sectionPartenaire {
   background-color: #fff;
   padding-bottom: 100px;
-  
+
 }
 
 .partenaireContent {
@@ -475,7 +481,8 @@ margin-left: 0px;
 
 .partenaireImages {
   display: flex;
-  flex-wrap: nowrap; /* ne pas wrap sinon bug d'animation */
+  flex-wrap: nowrap;
+  /* ne pas wrap sinon bug d'animation */
 }
 
 .partenaireImage {
@@ -498,6 +505,7 @@ margin-left: 0px;
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -529,5 +537,3 @@ margin-left: 0px;
     height: auto;
   }
 }
-
-

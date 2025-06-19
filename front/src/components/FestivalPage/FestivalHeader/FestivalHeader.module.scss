@@ -8,7 +8,8 @@
     .festival__title {
       font-size: 32px;
       text-align: center;
-      font-family: 'Oswald';
+      font-family: var(--font-poppins);
+      text-transform: none;
 
       @media (min-width: 1024px) {
         text-align: left;
@@ -16,17 +17,20 @@
     }
 
     .festival__subtitle {
+      font-family: var(--font-poppins);
+      font-weight: 400;
       font-size: 16px;
       text-align: center;
       margin: 10px 0px;
       color: #8F8F8F;
       text-transform: math-auto;
+
       @media (min-width: 1024px) {
         text-align: left;
       }
 
-      span{
-        color: var(--orange);
+      span {
+        color: var(--dark-blue);
       }
     }
 
@@ -35,10 +39,10 @@
       flex-direction: column;
       gap: 15px;
 
-      .pictoaccess p{
-          border-top: 1px solid #b2b2b2;
-          padding-top: 10px;
-          width: 100%;
+      .pictoaccess p {
+        border-top: 1px solid #b2b2b2;
+        padding-top: 10px;
+        width: 100%;
       }
 
       .festival__infoItem {
@@ -54,12 +58,12 @@
         }
 
         .festival__infoBadges {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
 
           .festival__infoBadge {
-            border:1px solid #B2B2B2;
+            border: 1px solid #B2B2B2;
             padding: 0.4rem 0.8rem;
             border-radius: 999px;
             font-size: 0.8rem;
@@ -76,21 +80,19 @@
 .festival__cta {
   display: inline-block;
   margin-top: 24px;
-  background: var(--gradient-orange);
+  background: black;
   color: #fff;
-  padding: 12px 32px;
+  padding: 8px 22px;
   border-radius: 999px;
   font-family: var(--font-poppins);
-  font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
-  transition: transform .15s ease, box-shadow .15s ease;
-  box-shadow: 0 4px 8px rgba(0 0 0 / .15);
+  transition: 0.2s;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0 0 0 / .18);
-  }
+  &:hover, &:focus {
+    background-color: #FDB74C;
+    color: #1D1D1D;
+    border-color: #FDB74C;
+  } 
 }
 
 /* responsive : centrage sur mobile */
@@ -100,4 +102,3 @@
     margin-right: auto;
   }
 }
-

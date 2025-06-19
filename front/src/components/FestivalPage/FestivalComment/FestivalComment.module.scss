@@ -40,9 +40,13 @@ $radius: 4px;
     font-weight: 600;
     transition: transform 0.15s, box-shadow 0.15s;
 
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0 0 0 / 0.2);
+    &:hover,
+    &:focus {
+      // transform: translateY(-2px);
+      // box-shadow: 0 6px 12px rgba(0 0 0 / .18);
+      background-color: #FDB74C;
+      color: #1D1D1D;
+      border-color: #FDB74C;
     }
   }
 }
