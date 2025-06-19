@@ -1,7 +1,7 @@
 'use client';
 import ClassicInput from "@/components/OrganizerDashboard/ClassicInput/ClassicInput";
 import PriceInput from "@/components/OrganizerDashboard/PriceInput/PriceInput";
-import ClassicTextarea from "@/components/OrganizerDashboard/ClassicTextarea/ClassicTextarea";
+import ClassicTextarea from "../classicTextarea/ClassicTextarea";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 import styles from "@/styles/OrganizerDashboard.module.scss";

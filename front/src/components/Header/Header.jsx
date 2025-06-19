@@ -89,7 +89,7 @@ export default function Header() {
             <div className={`${styles.dropdownWrapper} ${isAccessibilityOpen ? styles.dropdownVisible : ''}`}>
               <ul className={styles.dropdownMenu}>
                 <li><Link href="/PictoAccess">PictoAccess</Link></li>
-                <li><Link href="#">Référentiel</Link></li>
+                <li><Link href="/referenciel">Référentiel</Link></li>
               </ul>
             </div>
           </li>
