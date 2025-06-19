@@ -90,6 +90,8 @@ if (loading)
     <div className={styles.wrapper}>
       <h1 className={styles.title}>NOS FESTIVALS</h1>
 
+
+
       {/* FILTRES */}
      <div
   className={styles.filters}
@@ -99,6 +101,8 @@ if (loading)
     flexWrap: 'wrap',
     gap: '12px',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+    border: 'none',
   }}
 >
   {/* FILTRE DATE */}
