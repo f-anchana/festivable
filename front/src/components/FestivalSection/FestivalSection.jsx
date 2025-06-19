@@ -210,6 +210,19 @@ export default function FestivalsSection() {
           </p>
         </div>
 
+              <div className={styles.button} >
+        <a href="/AllFestivals">Voir tous nos festivals</a>
+        <Image
+          src="/icones/menu-roll.svg"
+          alt=""
+          width={12}
+          height={12}
+          style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }}
+        />
+      </div>
+
+
+
         <div className={styles.cardsWrapper}>
           {loading && <p>Chargement des festivals en cours...</p>}
           {error && <p style={{ color: '#8B0000' }}>Erreur : {error}</p>}
@@ -236,17 +249,6 @@ export default function FestivalsSection() {
     ))}
 
         </div>
-      </div>
-
-      <div className={styles.viewAll}>
-        <a href="/AllFestivals">Voir tous nos festivals</a>
-        <Image
-          src="/icones/menu-roll.svg"
-          alt=""
-          width={12}
-          height={12}
-          style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }}
-        />
       </div>
 
       <div className={styles.accessibilitySection}>
@@ -315,15 +317,15 @@ export default function FestivalsSection() {
 
         <div className={styles.cardContainer}>
           <div className={`${styles.card} ${styles.blue}`}>
-            <div className={styles.label}>ACCÈS ET MOBILITÉ</div>
+            <div className={styles.label}>Accès et mobilité</div>
             <p className={styles.text}>
               Rampes d’accès, chemins stabilisés, places de parking réservées et navettes adaptées.
             </p>
           </div>
 
           <div className={`${styles.card} ${styles.orange}`}>
-            <div className={styles.label}>ACCOMPAGNEMENT</div>
-            <div className={styles.label}>ET ASSISTANCE SENSORIELLE</div>
+            <div className={styles.label}>Accompagnement</div>
+            <div className={styles.label}>et assistance sensorielle</div>
             <p className={styles.text}>
               Bénévoles formés à l’accueil des personnes en situation de handicap, aides humaines
               pour l’orientation et l’accompagnement.
@@ -331,8 +333,8 @@ export default function FestivalsSection() {
           </div>
 
           <div className={`${styles.card} ${styles.yellow}`}>
-            <div className={styles.label}>BILLETTERIE</div>
-            <div className={styles.label}>ET SERVICES ADAPTÉS</div>
+            <div className={styles.label}>Billeterie</div><br />
+            <div className={styles.label}>et services adaptés</div>
             <p className={styles.text}>
               Tarification spécifique, réservations prioritaires et informations claires sur les
               dispositifs disponibles.
