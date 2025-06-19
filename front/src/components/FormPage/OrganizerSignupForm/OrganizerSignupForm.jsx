@@ -3,6 +3,8 @@ import styles from "./OrganizerSignupForm.module.css";
 import formStyles from "@/styles/Form.module.css";
 import Image from "next/image";
 import InscriptionSuccess from "../InscriptionSuccess/InscriptionSuccess";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 import { fadeInForm, nextStepAnimation, centerForm } from "@/utils/AnimatedForm";
 
@@ -16,6 +18,7 @@ export default function OrganizerSignupForm() {
     const [errorMsg, setErrorMsg] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
     const [isStepOneValid, setIsStepOneValid] = useState(false);
+    const [phone, setPhone] = useState('');
 
     // Fonction de validation
     const validateStepOne = () => {
@@ -189,9 +192,25 @@ export default function OrganizerSignupForm() {
                             <input name="email" type="email" className={formStyles.input} id="email" placeholder=" " required />
                             <label htmlFor="email" className={formStyles.label}>E-mail</label>
                         </div>
-                        <div className={formStyles.inputContainer}>
-                            <input name="phone_number" type="number" className={formStyles.input} id="telephone" placeholder=" " required />
-                            <label htmlFor="telephone" className={formStyles.label}>Numéro de téléphone</label>
+                        <div className={formStyles.inputContainer} style={{ display: "flex", padding: "5px 5px" }}>
+                            <PhoneInput
+                                country={'fr'}
+                                value={phone}
+                                onChange={setPhone}
+                                inputProps={{
+                                    name: 'telephone',
+                                    required: true,
+                                }}
+                                inputStyle={{
+                                    border: 'none',
+                                    fontSize: '1rem',
+                                }}
+                                buttonStyle={{
+                                    border: 'none',
+                                    backgroundColor: 'transparent',
+                                    boxShadow: 'none',
+                                }}
+                            />
                         </div>
                         <div className={formStyles.inputContainer}>
                             <input name="password" type={showPassword ? "text" : "password"} className={formStyles.input} id="password" placeholder=" " required />
@@ -205,7 +224,7 @@ export default function OrganizerSignupForm() {
                                 Veuillez remplir tous les champs.
                             </p>
                         )}
-                        <button type="button" onClick={nextStep} disabled={!isStepOneValid} style={{ backgroundColor: !isStepOneValid ? "#626262" : undefined,  color: !isStepOneValid ? "white" : undefined }}
+                        <button type="button" onClick={nextStep} disabled={!isStepOneValid} style={{ backgroundColor: !isStepOneValid ? "#626262" : undefined, color: !isStepOneValid ? "white" : undefined }}
                         >
                             Suivant
                         </button>
