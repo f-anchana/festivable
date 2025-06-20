@@ -94,7 +94,7 @@ Héberger </h2>      <ul>
     textTransform: "capitalize",
   }}
 >
-Propriété intelectuelle</h2>      <p>
+Propriété intellectuelle</h2>      <p>
         L’ensemble des contenus présents sur ce site (textes, images, logos, vidéos, sons, etc.)
         sont protégés par le droit d’auteur. Toute reproduction, représentation, modification,
         publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou
