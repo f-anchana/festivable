@@ -63,7 +63,7 @@ export default function FestivalHeader({ festival }) {
             rel="noopener noreferrer"
             className={s.festival__cta}
           >
-            Site officiel 🡥
+            Site officiel
           </a>
         )}
       </div>
