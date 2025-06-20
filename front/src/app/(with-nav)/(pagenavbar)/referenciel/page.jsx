@@ -31,7 +31,7 @@ export default function Referenciel() {
                         color="orange"
                     />
                     <Card
-                        title="FESTIVABLE"
+                        title="FESTIV'ABLE"
                         text="Se concentre sur la mise en relation des festivals avec des outils et services, notamment par la visibilité offerte via des pictogrammes accessibles et une cartographie des événements référencés partout en France respectant des normes d’accessibilité."
                         color="blue"
                     />

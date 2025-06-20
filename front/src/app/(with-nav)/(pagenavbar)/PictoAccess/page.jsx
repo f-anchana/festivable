@@ -6,7 +6,7 @@ export default function PictoAccess() {
    return (
     <>
       <Head>
-        <title> PictoAccess | Festivable</title>
+        <title> PictoAccess | Festiv'able</title>
         <meta
           name="description"
           content="presentation de Picto Access "

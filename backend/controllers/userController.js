@@ -83,9 +83,9 @@ Salut ${pseudo} !
 
 Merci pour ton inscription sur Festiv'able.  
 Nous sommes ravis de t'accueillir dans notre communauté de festivaliers.
+Tu peux dès à présent te connecter à ton compte et commencer à explorer les festivals disponibles.
 
-Pour tester les liens dans ce mail, voici un petit lien sympa vers YouTube :  
-https://www.youtube.com/
+Pour toute question complémentaire, nous reste à votre disposition.
 
 ---
 

@@ -62,12 +62,12 @@ export default function mentionLegale() {
       >Éditeur du site</h2>
       <ul>
         <li>Nom du site : Festiv'able</li>
-        <li>Éditeur : [Nom de la personne ou de la société]</li>
-        <li>Adresse : [Adresse complète]</li>
-        <li>Téléphone : [Numéro de téléphone]</li>
-        <li>Email : [Adresse email de contact]</li>
-        <li>Numéro SIRET : [Numéro SIRET si applicable]</li>
-        <li>Directeur de la publication : [Nom du directeur de la publication]</li>
+        <li>Éditeur : APF France handicap</li>
+        <li>Adresse : 17 Bd Auguste Blanqui, 75013 Paris</li>
+        <li>Téléphone : 01 40 78 69 00</li>
+        <li>Email : contact@festivable.fr</li>
+        <li>Numéro SIRET : 775 688 732 09930</li>
+        <li>Directeur de la publication : APF France handicap</li>
       </ul>
 
       <br />
@@ -95,7 +95,7 @@ export default function mentionLegale() {
       <p>
         Vous disposez d’un droit d’accès, de rectification, de suppression et d’opposition
         concernant vos données personnelles. Vous pouvez exercer ce droit en contactant :
-        contact@festivable.com.
+        contact@festivable.fr.
       </p>
     </main>
   );
