@@ -66,8 +66,10 @@ Bonjour ${name},
 
 Votre inscription à l'organisation "${organization_name}" a bien été prise en compte.
 
-Pour tester les liens dans ce mail, voici un lien vers YouTube :  
-https://www.youtube.com/
+Voici votre lien pour vous permettre de vous connecter à votre espace organisateur :
+https://www.dashboard.festivable.fr/
+
+Pour toute question complémentaire, nous reste à votre disposition.
 
 ---
 

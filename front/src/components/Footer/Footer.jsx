@@ -35,14 +35,14 @@ export default function Footer() {
           <div className={styles.contact}>
             <h2>NOUS CONTACTER</h2>
             <p><a href="mailto:contact@festivable.com">contact@festivable.com</a></p>
-            <p>+ 01 44 50 75 01</p>
-            <p>+ 01 44 50 75 01</p>
+            <p>+33 1 40 78 69 00</p>
+            <p>+33 6 07 26 65 50</p>
           </div>
         </div>
       </div>
 
       <div className={styles.bottom}>
-        <p>©2025 Festivable</p>
+        <p>©2025 Festiv'able</p>
         <p><Link href="/mentionLegale">Mentions légales</Link></p>
         <p><Link href="/politiqueConfidentialite">Politique de confidentialité</Link></p>
       </div>
