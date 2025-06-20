@@ -18,9 +18,7 @@ export default function Footer() {
           <div className={styles.socials}>
             <h2>NOS RÉSEAUX</h2>
             <div className={styles.icons}>
-              <a href="#"><img src="/icones/insta-icon.svg" alt="Instagram" /></a>
-              <a href="#"><img src="/icones/tiktok-icon.svg" alt="TikTok" /></a>
-              <a href="#"><img src="/icones/facebook-icon.svg" alt="Facebook" /></a>
+              <a href="https://www.instagram.com/festiv_able?utm_source=ig_web_button_share_sheet&igsh=MWIwYmo5b2VqOXRpZA=="><img src="/icones/insta-icon.svg" alt="Instagram" /></a>
             </div>
           </div>
         </div>
