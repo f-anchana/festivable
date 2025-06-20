@@ -52,14 +52,15 @@ export default function mentionLegale() {
       >
         Mentions Légales
       </h1>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Éditeur du site
+</h2>
 
-      <h2
-      // style={{
-      //   fontFamily:"Poppins",
-      // }}
-      
-      
-      >Éditeur du site</h2>
       <ul>
         <li>Nom du site : Festiv'able</li>
         <li>Éditeur : [Nom de la personne ou de la société]</li>
@@ -72,8 +73,14 @@ export default function mentionLegale() {
 
       <br />
 
-      <h2>Hébergeur</h2>
-      <ul>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+
+Héberger </h2>      <ul>
         <li>Nom de l’hébergeur : O2Switch</li>
         <li>Adresse : Chem. des Pardiaux, 63000 Clermont-Ferrand</li>
         <li>Téléphone : 04 44 44 60 40</li>
@@ -81,8 +88,13 @@ export default function mentionLegale() {
 
       <br />
 
-      <h2>Propriété intellectuelle</h2>
-      <p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+Propriété intelectuelle</h2>      <p>
         L’ensemble des contenus présents sur ce site (textes, images, logos, vidéos, sons, etc.)
         sont protégés par le droit d’auteur. Toute reproduction, représentation, modification,
         publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou
@@ -91,8 +103,14 @@ export default function mentionLegale() {
 
       <br />
 
-      <h2>Données personnelles</h2>
-      <p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Données personnelles
+</h2>      <p>
         Vous disposez d’un droit d’accès, de rectification, de suppression et d’opposition
         concernant vos données personnelles. Vous pouvez exercer ce droit en contactant :
         contact@festivable.com.

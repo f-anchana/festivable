@@ -64,8 +64,14 @@ export default function politiqueConfidentialite() {
 
       <br/>
 
-      <h2>Qui sommes-nous ?</h2>
-      <p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Qui sommes-nous?
+</h2>      <p>
         Festiv'able est une plateforme qui recense des festivals accessibles aux personnes en situation de handicap,
         et facilite la mise en relation entre festivaliers, organisateurs et partenaires.
       </p>
@@ -75,8 +81,14 @@ export default function politiqueConfidentialite() {
       </ul>
 
  <br />
-      <h2>Quelles données collectons-nous ?</h2>
-      <p>Selon votre utilisation du site, nous pouvons collecter les données suivantes :</p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Quelles données collectons-nous?
+</h2>      <p>Selon votre utilisation du site, nous pouvons collecter les données suivantes :</p>
       <ul>
         <li>Nom et prénom</li>
         <li>Adresse email</li>
@@ -87,8 +99,14 @@ export default function politiqueConfidentialite() {
 
       <br/>
 
-      <h2>Comment utilisons-nous vos données ?</h2>
-      <p>Nous utilisons vos données uniquement dans les cas suivants :</p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Comment utilisons-nous vos données?
+</h2>      <p>Nous utilisons vos données uniquement dans les cas suivants :</p>
       <ul>
         <li>Gestion de vos inscriptions (festivaliers et organisateurs)</li>
         <li>Publication et modération des festivals sur la plateforme</li>
@@ -99,8 +117,14 @@ export default function politiqueConfidentialite() {
             <br/>
 
 
-      <h2>Cookies</h2>
-      <p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Cookies
+</h2>      <p>
         Nous utilisons des cookies à des fins de statistiques et d’amélioration de l’expérience utilisateur.
         Vous pouvez à tout moment refuser ou gérer leur utilisation via les paramètres de votre navigateur.
       </p>
@@ -113,8 +137,14 @@ export default function politiqueConfidentialite() {
             <br/>
 
 
-      <h2>Vos droits</h2>
-      <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+Vos droits
+</h2>      <p>Conformément au RGPD, vous disposez des droits suivants :</p>
       <ul>
         <li>Droit d’accès et de rectification</li>
         <li>Droit de suppression</li>
@@ -125,12 +155,24 @@ export default function politiqueConfidentialite() {
             <br/>
 
 
-      <h2>Sécurité</h2>
-      <p>Nous mettons en place toutes les mesures techniques et organisationnelles nécessaires pour garantir la sécurité de vos données personnelles.</p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  sécurité
+</h2>      <p>Nous mettons en place toutes les mesures techniques et organisationnelles nécessaires pour garantir la sécurité de vos données personnelles.</p>
        <br/>
 
-      <h2>Modifications</h2>
-      <p>Nous nous réservons le droit de modifier cette politique. Toute modification sera affichée sur cette page avec la date de mise à jour.</p>
+<h2
+  style={{
+    fontFamily: "Poppins, sans-serif",
+    textTransform: "capitalize",
+  }}
+>
+  Modifications
+</h2>      <p>Nous nous réservons le droit de modifier cette politique. Toute modification sera affichée sur cette page avec la date de mise à jour.</p>
     </main>
 
 
