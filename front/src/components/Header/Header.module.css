@@ -6,7 +6,7 @@
   background-color: transparent;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 100000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -71,6 +71,7 @@
   display: flex;
   gap: 15px;
 }
+
 
 /* BOUTON GLOBAL */
 .btnBlack {

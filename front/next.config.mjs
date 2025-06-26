@@ -6,9 +6,8 @@ const domain = new URL(url).hostname;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['festivable-2.onrender.com'],
+    domains: ['festivable-2.onrender.com', domain],
   },
 };
 
-
-export default nextConfig; // ✅ bonne syntaxe pour .mjs
+export default nextConfig;

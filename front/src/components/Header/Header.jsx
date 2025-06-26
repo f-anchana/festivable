@@ -6,8 +6,6 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import styles from './Header.module.css';
 
-
-
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,20 +95,21 @@ export default function Header() {
           <li><Link href="/Apropos">À propos</Link></li>
         </ul>
 
-        <div className="auth-buttons">
+        {/* AUTH ZONE POUR DESKTOP */}
+        <div className={`${styles.authButtons} ${styles.desktopOnly}`}>
           {user ? (
-            <div className={styles.userDropdown } ref={userDropdownRef}>
+            <div className={styles.userDropdown} ref={userDropdownRef}>
               <button onClick={() => setIsUserDropdownOpen(prev => !prev)} className={styles.userToggle}>
                 {user.profile_picture && (
                   <Image src={`${API_URL}/${user.profile_picture}`} alt="Avatar" width={40} height={40} className={styles.avatar} />
                 )}
                 <span className={styles.pseudo}>{user.pseudo}</span>
-                <img
+                <Image
                   src="/icones/menu-roll.svg"
                   alt="Flèche"
-      className={`${styles.arrowIcon} ${isUserDropdownOpen ? styles.rotate : ''}`}
                   width={12}
                   height={12}
+                  className={`${styles.arrowIcon} ${isUserDropdownOpen ? styles.rotate : ''}`}
                 />
               </button>
 
@@ -127,6 +126,7 @@ export default function Header() {
         </div>
       </div>
 
+      {/* MENU MOBILE */}
       <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.show : ''}`}>
         <button className={styles.closeButton} onClick={() => setIsMenuOpen(false)}>
           <Image src="/icones/close-btn-menu.svg" alt="Fermer" width={24} height={24} />
@@ -150,7 +150,7 @@ export default function Header() {
             {isMobileAccessibilityOpen && (
               <ul className={styles.mobileDropdownMenu}>
                 <li><Link href="/PictoAccess" onClick={() => setIsMenuOpen(false)}>PictoAccess</Link></li>
-                <li><Link href="#" onClick={() => setIsMenuOpen(false)}>Référentiel</Link></li>
+                <li><Link href="/referenciel" onClick={() => setIsMenuOpen(false)}>Référentiel</Link></li>
               </ul>
             )}
           </li>
@@ -158,36 +158,26 @@ export default function Header() {
           <li><Link href="/Apropos" onClick={() => setIsMenuOpen(false)}>À propos</Link></li>
         </ul>
 
-        <div className={styles.userDropdown} ref={userDropdownRef}>
-          {user ? (
-            <>
-              <button onClick={() => setIsMobileUserDropdownOpen(prev => !prev)} className={styles.userToggle}>
-                {user.profile_picture && (
-                  <Image src={`${API_URL}/${user.profile_picture}`} alt="Avatar" width={40} height={30} className={styles.avatar} />
-                )}
-                <span className={styles.pseudo}>{user.pseudo}</span>
-                <img
-                  src="/icones/menu-roll.svg"
-                  alt="Flèche"
-                  className={`${styles.arrowIcon} ${isMobileUserDropdownOpen ? styles.rotate : ''}`}
-                  width={12}
-                  height={12}
-                />
-              </button>
+       {/* AUTH ZONE POUR MOBILE */}
+<ul className={`${styles.mobileNavLinks} ${styles.mobileOnly}`}>
+  {user ? (
+    <>
+      <li>
+        <Link href="/Profil" onClick={() => setIsMenuOpen(false)}>Profil</Link>
+      </li>
+      <li>
+        <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className={styles.logoutBtn}>
+          Se déconnecter
+        </button>
+      </li>
+    </>
+  ) : (
+    <li>
+      <Link href="/form"  className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>S'authentifier</Link>
+    </li>
+  )}
+</ul>
 
-              {isMobileUserDropdownOpen && (
-                <ul className={styles.dropdownMenu}>
-                  <li><Link href="/Profil">Profil</Link></li>
-                  <li><button onClick={handleLogout} className={styles.logoutBtn}>Se déconnecter</button></li>
-                </ul>
-              )}
-            </>
-          ) : (
-            <Link href="/form" className={styles.btnBlack} onClick={() => setIsMenuOpen(false)}>
-              S'authentifier
-            </Link>
-          )}
-        </div>
       </div>
     </nav>
   );
