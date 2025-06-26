@@ -90,8 +90,6 @@
   background-color: #fff;
   position: relative;
   top: 100px;
-  overflow: hidden;
-
 
 }
 
@@ -162,7 +160,7 @@
   font-size: 0.9rem;
   transition: background 0.3s;
   width: fit-content;
-  margin-left: auto;
+  margin-bottom: 24px;
 }
 
 .button:hover,

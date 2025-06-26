@@ -150,53 +150,53 @@ export default function FestivalsSection() {
       }
     );
 
-  async function fetchFestivals() {
-    setLoading(true);
-    setError(null);
+    async function fetchFestivals() {
+      setLoading(true);
+      setError(null);
 
-    try {
-      const response = await fetch(`${API_URL}/festivals`);
-      if (!response.ok) throw new Error('Erreur réseau');
-      const data = await response.json();
+      try {
+        const response = await fetch(`${API_URL}/festivals`);
+        if (!response.ok) throw new Error('Erreur réseau');
+        const data = await response.json();
 
-      const festivalsWithCovers = await Promise.all(
-        data.map(async (festival) => {
-          try {
-            const galleryRes = await fetch(`${API_URL}/gallery/${festival._id}`);
+        const festivalsWithCovers = await Promise.all(
+          data.map(async (festival) => {
+            try {
+              const galleryRes = await fetch(`${API_URL}/gallery/${festival._id}`);
 
-            if (galleryRes.status === 404) {
-              // Pas de galerie pour ce festival
+              if (galleryRes.status === 404) {
+                // Pas de galerie pour ce festival
+                return { ...festival, image: null };
+              }
+
+              if (!galleryRes.ok) throw new Error('Erreur galerie');
+
+              const galleryData = await galleryRes.json();
+              const firstImagePath = galleryData.images?.[0];
+
+              return {
+                ...festival,
+                image: firstImagePath
+                  ? `${API_URL}/${firstImagePath.replace(/\\/g, '/')}`
+                  : null,
+              };
+            } catch (err) {
+              console.error(`Erreur pour la galerie du festival ${festival._id}:`, err);
               return { ...festival, image: null };
             }
+          })
+        );
 
-            if (!galleryRes.ok) throw new Error('Erreur galerie');
-
-            const galleryData = await galleryRes.json();
-            const firstImagePath = galleryData.images?.[0];
-
-            return {
-              ...festival,
-              image: firstImagePath
-                ? `${API_URL}/${firstImagePath.replace(/\\/g, '/')}`
-                : null,
-            };
-          } catch (err) {
-            console.error(`Erreur pour la galerie du festival ${festival._id}:`, err);
-            return { ...festival, image: null };
-          }
-        })
-      );
-
-      setFestivals(festivalsWithCovers);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        setFestivals(festivalsWithCovers);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  fetchFestivals();
-}, []);
+    fetchFestivals();
+  }, []);
 
 
   return (
@@ -210,46 +210,42 @@ export default function FestivalsSection() {
           </p>
         </div>
 
-              
+        <div className={styles.button} >
+          <a href="/AllFestivals">Voir tous nos festivals</a>
+          <Image
+            src="/icones/menu-roll.svg"
+            alt=""
+            width={12}
+            height={12}
+            style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }}
+          />
+        </div>
 
 
-  <div className={styles.cardsWrapper}>
+        <div className={styles.cardsWrapper}>
           {loading && <p>Chargement des festivals en cours...</p>}
           {error && <p style={{ color: '#8B0000' }}>Erreur : {error}</p>}
           {!loading && !error && festivals.length === 0 && <p>Aucun festival trouvé.</p>}
-{!loading &&
-  !error &&
-  festivals
-    .filter((festival) => festival.valid === true) // ne garde que les festivals validés
-    .slice(0, 4) 
-    .map((festival) => (
-      <FestivalCard
-        key={festival._id}
-        _id={festival._id} 
-        title={festival.title}
-        description={festival.description}
-        startDate={festival.start_date}
-        endDate={festival.end_date}
-        address={festival.address}
-        link={festival.link}
-        prices={festival.prices}
-        imageSrc={festival.image}
-        pictoaccess={festival.pictoaccess}
-      />
-    ))}
-
-    <div className={styles.button} >
-        <a href="/AllFestivals">Voir tous nos festivals</a>
-        <Image
-          src="/icones/menu-roll.svg"
-          alt=""
-          width={12}
-          height={12}
-          style={{ transform: 'rotate(-90deg)', marginLeft: '8px' }}
-        />
-      </div>
-
-
+          {!loading &&
+            !error &&
+            festivals
+              .filter((festival) => festival.valid === true) // ne garde que les festivals validés
+              .slice(0, 4)
+              .map((festival) => (
+                <FestivalCard
+                  key={festival._id}
+                  _id={festival._id}
+                  title={festival.title}
+                  description={festival.description}
+                  startDate={festival.start_date}
+                  endDate={festival.end_date}
+                  address={festival.address}
+                  link={festival.link}
+                  prices={festival.prices}
+                  imageSrc={festival.image}
+                  pictoaccess={festival.pictoaccess}
+                />
+              ))}
         </div>
       </div>
 
@@ -260,7 +256,7 @@ export default function FestivalsSection() {
               src="/images/engagement-info-photo.svg"
               alt=" "
               className={styles.image}
-              width={400} 
+              width={400}
               height={300}
               priority
             />
@@ -291,7 +287,7 @@ export default function FestivalsSection() {
               Ensemble, nous œuvrons pour que chaque événement soit une expérience inclusive et
               inoubliable !
             </p>
-<a href="/Apropos" className={styles.button}> En savoir plus</a>
+            <a href="/Apropos" className={styles.button}> En savoir plus</a>
           </div>
           <div className={styles.triangle}></div>
         </div>
@@ -347,7 +343,7 @@ export default function FestivalsSection() {
 
       <div className={styles.recruitSection}>
         <div className={styles.recruitContent}>
-        <div className={styles.recruitText} ref={textRecruitRef}>
+          <div className={styles.recruitText} ref={textRecruitRef}>
             <h2 className={styles.recruitTitle}>
               <span>FACILITEZ LE RECRUTEMENT</span>
               <br />
@@ -376,7 +372,7 @@ export default function FestivalsSection() {
             </p>
           </div>
 
-          <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`}ref={imageRecruitRef}  >
+          <div className={`${styles.recruitImageWrapper} ${styles.desktopOnly}`} ref={imageRecruitRef}  >
             <Image
               src="/images/recrutement.svg"
               alt=""
@@ -389,60 +385,60 @@ export default function FestivalsSection() {
       </div>
 
 
-      
-<div className={styles.sectionPartenaire}>
-  <div className={styles.partenaireContent}>
-    <h2 className={styles.title}>NOS PARTENAIRES</h2>
-    <p>
-      Chez Festiv'able, nous sommes fiers de collaborer avec des acteurs majeurs engagés dans
-      l’accessibilité et la culture.
-      <br />
-      Le Ministère de la Culture et l’association APF France handicap nous font confiance
-      pour porter une vision commune : rendre les festivals véritablement accessibles à toutes
-      et tous.
-    </p>
 
-    <div className={styles.partenaireImagesWrapper}>
-      <div className={styles.partenaireImagesTrack}>
-        <div className={styles.partenaireImages}>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
+      <div className={styles.sectionPartenaire}>
+        <div className={styles.partenaireContent}>
+          <h2 className={styles.title}>NOS PARTENAIRES</h2>
+          <p>
+            Chez Festiv'able, nous sommes fiers de collaborer avec des acteurs majeurs engagés dans
+            l’accessibilité et la culture.
+            <br />
+            Le Ministère de la Culture et l’association APF France handicap nous font confiance
+            pour porter une vision commune : rendre les festivals véritablement accessibles à toutes
+            et tous.
+          </p>
+
+          <div className={styles.partenaireImagesWrapper}>
+            <div className={styles.partenaireImagesTrack}>
+              <div className={styles.partenaireImages}>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
+                </div>
+
+                {/* duplication pour boucle fluide */}
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
+                </div>
+                <div className={styles.partenaireImage}>
+                  <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* duplication pour boucle fluide */}
-          <div className={styles.partenaireImage}>
-            <Image src="/images/ministere.svg" alt="Ministère" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/printempsBourges.svg" alt="Printemps de Bourges" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/APF.svg" alt="APF" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/rockEnSeine.svg" alt="Rock en Seine" width={200} height={200} priority />
-          </div>
-          <div className={styles.partenaireImage}>
-            <Image src="/images/pictoaccess.jpg" alt="Picto Access" width={200} height={200} priority />
-          </div>
         </div>
       </div>
-    </div>
-
-  </div>
-</div>
 
     </section>
   );
