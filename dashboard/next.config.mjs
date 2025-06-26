@@ -6,7 +6,7 @@ const domain = new URL(url).hostname;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [domain],
+    domains: ['festivable-2.onrender.com'],
   },
 };
 
