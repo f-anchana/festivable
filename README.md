@@ -1,3 +1,7 @@
+- Lien vers l'API : https://festivable-2.onrender.com/
+- Lien vers le front : 
+- Lien vers le dashboard admin 
+
 # Hébergement du projet Festivable
 Portabilité du site web pour APF France handicap
 Ce projet est composé de quatres parties distinctes :
@@ -25,13 +29,13 @@ Important : Le Front et le Dashboard doivent être hébergés séparément (deux
 5. S’assurer que les chemins sont corrects (basePath, images statiques, etc.).
 
 # API (Node + Express)
-Déploiement temporaire sur Railway
+Déploiement temporaire sur Render
 
 1. Mettre l’API sur GitHub.
-2. Se connecter à Railway et lier son compte GitHub.
-3. Créer un nouveau projet → importer le repo de l’API.
-4. Configurer les variables d’environnement (.env) dans Railway.
-5. Railway génère une URL publique pour accéder à l’API.
+2. Se connecter à Render et lier son compte GitHub.
+3. Créer un nouveau service Web → importer le repo de l’API.
+4. Configurer les variables d’environnement (.env) dans Render (onglet Environment).
+5. Render génère une URL publique pour accéder à l’API.
 
 
 ## Mise en production sur o2switch
@@ -76,4 +80,10 @@ mongorestore --uri="mongodb+srv://<nouveauUser>:<nouveauMdp>@<nouveauCluster>.mo
 
 
 # Conseils supplémentaires
-- Ne pas oublier de sécuriser l'API (modifier le CORS)
+- Sécuriser l'API (modifier le CORS)
+
+### Pour lancer le projet en local
+
+- API : node server.js
+- front : npm run dev
+- dashboard : npm run dev
