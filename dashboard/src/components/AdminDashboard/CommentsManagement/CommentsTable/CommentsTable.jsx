@@ -13,7 +13,7 @@ export default function CommentsTable({ festivalId }) {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const res = await fetch(`${API_URL}/comments/${festivalId}`, { 
+                const res = await fetch(`${API_URL}/comments/${festivalId}`, {
                     headers: {
                         "Content-Type": "application/json"
                     }
@@ -47,13 +47,13 @@ export default function CommentsTable({ festivalId }) {
                 <tbody>
                     {comments.map((comment) => (
                         <CommentRow
-                            key={comment._id}
-                            _id={comment._id}
-                            profile_picture={comment.userId.profile_picture}
-                            pseudo={comment.userId.pseudo}
-                            disability={comment.disability}
-                            date={comment.date}
-                            comment={comment.comment}
+                            key={comment?._id || ''}
+                            _id={comment?._id || ''}
+                            profile_picture={comment?.userId?.profile_picture || ''}
+                            pseudo={comment?.userId?.pseudo || 'Anonyme'}
+                            disability={comment?.disability || ''}
+                            date={comment?.date || ''}
+                            comment={comment?.comment || ''}
                         />
                     ))}
                 </tbody>
