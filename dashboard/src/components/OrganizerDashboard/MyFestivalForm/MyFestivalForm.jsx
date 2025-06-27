@@ -131,7 +131,7 @@ export default function MyFestivalForm() {
                 <h2>Votre session a expiré</h2>
                 <p>
                     Veuillez vous reconnecter pour continuer.<br />
-                    Si le problème persiste, contactez-nous à l'adresse : <strong>support@monfestival.com</strong>.
+                    Si le problème persiste, contactez-nous à l'adresse : <strong>contact@festivable.fr</strong>.
                 </p>
             </div>
 
