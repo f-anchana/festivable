@@ -1,6 +1,6 @@
 - Lien vers l'API : https://festivable-2.onrender.com/
-- Lien vers le front : 
-- Lien vers le dashboard admin 
+- Lien vers le front : https://festivable.fr/
+- Lien vers le dashboard et admin : https://dashboard.festivable.fr/
 
 # Hébergement du projet Festivable
 Portabilité du site web pour APF France handicap
